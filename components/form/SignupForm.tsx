@@ -8,33 +8,37 @@ import { Button } from '@/components/ui/button';
 import {
   Form,
   FormControl,
+  FormDescription,
   FormField,
   FormItem,
   FormLabel,
   FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
-import { userSchema } from '@/schemas';
+import { signUpSchema } from '@/schemas';
 import Link from 'next/link';
 import { FormError } from './FormError';
 import GoogleLogin from './GoogleLogin';
 import { useState } from 'react';
 
 const SignupForm = () => {
-  const [success, setSuccess] = useState('');
-  const [error, setError] = useState('');
+  const [password, setPassword] = useState<string>('');
 
-  const form = useForm<z.infer<typeof userSchema>>({
-    resolver: zodResolver(userSchema),
+  const form = useForm<z.infer<typeof signUpSchema>>({
+    resolver: zodResolver(signUpSchema),
     defaultValues: {
       identifier: '',
       password: '',
     },
   });
 
-  function onSubmit(values: z.infer<typeof userSchema>) {
+  function onSubmit(values: z.infer<typeof signUpSchema>) {
     console.log(values);
   }
+
+  const hasMinLength = password.length >= 8;
+  const hasUpperCase = /[A-Z]/.test(password);
+  const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/.test(password);
 
   return (
     <div className="flex h-full w-full items-center justify-center">
@@ -49,6 +53,8 @@ const SignupForm = () => {
         <Form {...form}>
           <div className="flex flex-col gap-4">
             <FormError message="No account found with this email/ phone number" />
+
+            <FormError message="Incorrect Password" />
           </div>
 
           <form
@@ -56,59 +62,88 @@ const SignupForm = () => {
             className="mt-4 space-y-4"
           >
             <div className="space-y-4">
-              {!success && !error && (
-                <FormField
-                  control={form.control}
-                  name="identifier"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>
-                        <p className="text-neutrals-600 font-semibold">
-                          Email/ Phone Number*
-                        </p>
-                      </FormLabel>
-                      <FormControl>
-                        <Input
-                          className="mt-1"
-                          placeholder="Email/ Phone Number"
-                          {...field}
-                        />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-              )}
-              {success && (
-                <FormField
-                  control={form.control}
-                  name="password"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>
-                        <div className="flex justify-between">
-                          <p className="text-neutrals-600 font-semibold">
-                            Password
-                          </p>
-                          <p className="text-primary">(Required*)</p>
-                        </div>
-                      </FormLabel>
-                      <FormControl>
-                        <Input
-                          className="mt-1"
-                          type="password"
-                          placeholder="Enter your password"
-                          {...field}
-                        />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-              )}
+              <FormField
+                control={form.control}
+                name="identifier"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>
+                      <p className="text-neutrals-600 font-semibold">
+                        Email/ Phone Number*
+                      </p>
+                    </FormLabel>
+                    <FormControl>
+                      <Input
+                        className="mt-1"
+                        placeholder="Email/ Phone Number"
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              <FormField
+                control={form.control}
+                name="password"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>
+                      <p className="text-neutrals-600 font-semibold">
+                        Password*
+                      </p>
+                    </FormLabel>
+                    <FormControl>
+                      <Input
+                        className="mt-1"
+                        type="password"
+                        placeholder="Enter your password"
+                        {...field}
+                        onChange={(e) => {
+                          field.onChange(e);
+                          setPassword(e.target.value);
+                        }}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                    <FormDescription>
+                      <span
+                        className={`text-sm ${
+                          hasMinLength
+                            ? 'text-success-300'
+                            : 'text-neutrals-500'
+                        }`}
+                      >
+                        ✓ Atleast 8 characters
+                      </span>
+                      <br />
+                      <span
+                        className={`text-sm ${
+                          hasSpecialChar
+                            ? 'text-success-300'
+                            : 'text-neutrals-500'
+                        }`}
+                      >
+                        ✓ Use at least 1 special character
+                      </span>
+                      <br />
+                      <span
+                        className={`text-sm ${
+                          hasUpperCase
+                            ? 'text-success-300'
+                            : 'text-neutrals-500'
+                        }`}
+                      >
+                        ✓ Use at least 1 uppercase letter
+                      </span>
+                    </FormDescription>
+                  </FormItem>
+                )}
+              />
             </div>
             <Button className="w-full rounded-full font-semibold" type="submit">
-              Continue
+              Create Account
             </Button>
           </form>
         </Form>
@@ -118,7 +153,7 @@ const SignupForm = () => {
         <div className="flex justify-center mt-6 gap-2">
           <p>Already have an account?</p>
           <Link className="text-primary hover:underline font-semibold" href="#">
-            Login
+            Log In
           </Link>
         </div>
       </div>
