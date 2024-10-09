@@ -21,6 +21,8 @@ import { FormError } from './FormError';
 import GoogleLogin from './GoogleLogin';
 import { useState } from 'react';
 
+import { CheckIcon } from '@radix-ui/react-icons';
+
 const SignupForm = () => {
   const [password, setPassword] = useState<string>('');
 
@@ -42,7 +44,7 @@ const SignupForm = () => {
 
   return (
     <div className="flex h-full w-full items-center justify-center">
-      <div className="md:w-[540px] w-[320px] border border-neutrals-400 p-8 rounded-xl">
+      <div className="lg:w-[540px] w-[320px]">
         <div className="mb-8">
           <h1 className="text-xl font-semibold text-center">Sign Up</h1>
           <p className="text-sm text-neutrals-600 text-center">
@@ -111,31 +113,34 @@ const SignupForm = () => {
                       <span
                         className={`text-sm ${
                           hasMinLength
-                            ? 'text-success-300'
+                            ? 'text-success-200'
                             : 'text-neutrals-500'
                         }`}
                       >
-                        ✓ Atleast 8 characters
+                        <CheckIcon className="w-4 h-4 inline mr-1" />
+                        Atleast 8 characters
                       </span>
                       <br />
                       <span
                         className={`text-sm ${
                           hasSpecialChar
-                            ? 'text-success-300'
+                            ? 'text-success-200'
                             : 'text-neutrals-500'
                         }`}
                       >
-                        ✓ Use at least 1 special character
+                        <CheckIcon className="w-4 h-4 inline mr-1" />
+                        Use at least 1 special character
                       </span>
                       <br />
                       <span
                         className={`text-sm ${
                           hasUpperCase
-                            ? 'text-success-300'
+                            ? 'text-success-200'
                             : 'text-neutrals-500'
                         }`}
                       >
-                        ✓ Use at least 1 uppercase letter
+                        <CheckIcon className="w-4 h-4 inline mr-1" />
+                        Use at least 1 uppercase letter
                       </span>
                     </FormDescription>
                   </FormItem>

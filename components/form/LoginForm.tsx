@@ -34,7 +34,7 @@ const LoginForm = () => {
 
   return (
     <div className="flex h-full w-full items-center justify-center">
-      <div className="md:w-[540px] w-[320px] border border-neutrals-400 p-8 rounded-xl">
+      <div className="lg:w-[540px] w-[320px]">
         <div className="mb-8">
           <h1 className="text-xl font-semibold text-center">Log In</h1>
           <p className="text-sm text-neutrals-600 text-center">
