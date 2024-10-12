@@ -1,6 +1,9 @@
 import type { Metadata } from 'next';
 import localFont from 'next/font/local';
 import './globals.css';
+import BreakpointIndicator from '@/components/breakpoint-indicator';
+import Navbar from '@/components/navigation/navbar';
+import BottomBar from '@/components/navigation/bottom-bar';
 
 const geistSans = localFont({
   src: './fonts/GeistVF.woff',
@@ -26,9 +29,17 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased h-screen w-screen`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <div className="flex flex-col h-full w-full">{children}</div>
+        <BreakpointIndicator />
+        <div className="flex flex-col h-full w-full px-4 pt-4 pb-24 md:py-4 lg:px-10">
+          <Navbar />
+          <main className="mt-8">
+            
+            {children}
+          </main>
+          <BottomBar />
+        </div>
       </body>
     </html>
   );
