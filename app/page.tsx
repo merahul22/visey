@@ -9,8 +9,8 @@ export default function Home() {
     <div className="flex h-full w-full">
       <div className="bg-primary lg:w-[555px]"></div>
       <div className="flex-1">
-        {/* <SignupForm /> */}
-        {/* <LoginForm /> */}
+        <SignupForm />
+        <LoginForm />
         {/* <AccountTypeForm /> */}
       </div>
     </div>

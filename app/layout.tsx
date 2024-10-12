@@ -32,13 +32,13 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <BreakpointIndicator />
-        <div className="flex flex-col h-full w-full px-4 pt-4 pb-24 md:py-4 lg:px-10">
+        <div className="flex flex-col -h-full w-full px-4 pt-4 pb-24 md:py-4 lg:px-10">
           <Navbar />
           <main className="mt-8">
             
             {children}
           </main>
-          {/* <BottomBar /> */}
+          <BottomBar />
         </div>
       </body>
     </html>
