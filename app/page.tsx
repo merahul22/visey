@@ -1,6 +1,8 @@
 // import LoginForm from '@/components/form/LoginForm';
 // import SignupForm from '@/components/form/SignupForm';
 import AccountTypeForm from '@/components/form/AccountTypeForm';
+import LoginForm from '@/components/form/LoginForm';
+import SignupForm from '@/components/form/SignupForm';
 
 export default function Home() {
   return (
@@ -9,7 +11,7 @@ export default function Home() {
       <div className="flex-1">
         {/* <SignupForm /> */}
         {/* <LoginForm /> */}
-        <AccountTypeForm />
+        {/* <AccountTypeForm /> */}
       </div>
     </div>
   );
