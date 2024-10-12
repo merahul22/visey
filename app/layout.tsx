@@ -4,6 +4,7 @@ import './globals.css';
 import BreakpointIndicator from '@/components/breakpoint-indicator';
 import Navbar from '@/components/navigation/navbar';
 import BottomBar from '@/components/navigation/bottom-bar';
+import Sidebar from '@/components/navigation/sidebar';
 
 const geistSans = localFont({
   src: './fonts/GeistVF.woff',
@@ -29,14 +30,18 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased text-base-black`}
       >
         <BreakpointIndicator />
-        <div className="flex flex-col h-full w-full px-4 pt-4 pb-24 md:py-4 lg:px-10">
+        <div className="flex flex-col min-h-screen w-full">
           <Navbar />
-          <main className="mt-8">
-            
-            {children}
+          <main>
+            <Sidebar  />
+            <div className='p-4 md:p-6 md:ml-52'>
+              <div className='max-w-screen-2xl mx-auto'>
+                {children}
+              </div>
+            </div>
           </main>
           <BottomBar />
         </div>
