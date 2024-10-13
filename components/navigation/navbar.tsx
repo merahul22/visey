@@ -11,7 +11,7 @@ import { Input } from "@/components/ui/input";
 import { ExitIcon, GearIcon, MagnifyingGlassIcon } from "@radix-ui/react-icons";
 import Image from "next/image";
 
-function Navbar() {
+export function Navbar() {
   return (
     <header className="sticky top-0 z-30 bg-white px-4 py-2.5 shadow-[0_4px_6px_-1px_rgba(0,0,0,0.1)] w-full">
       <nav className="flex items-center justify-between">
@@ -81,4 +81,3 @@ function Navbar() {
     </header>
   );
 }
-export default Navbar;
