@@ -25,7 +25,7 @@ const sidebarItems = [
   },
 ];
 
-function Sidebar() {
+export function Sidebar() {
   const pathname = usePathname();
 
   return (
@@ -52,4 +52,3 @@ function Sidebar() {
     </aside>
   );
 }
-export default Sidebar;
