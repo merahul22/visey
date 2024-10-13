@@ -1,4 +1,4 @@
-import { BusinessCard } from "../../../../components/cards/business-card";
+import { BusinessCard } from "@/components/cards/business-card";
 
 export function BusinessCardList() {
   return (

@@ -4,7 +4,7 @@ import { HeartStraight, MapPin } from "@phosphor-icons/react/dist/ssr";
 
 export function FundingCard() {
   return (
-    <div className="rounded-xl border p-4 space-y-4" >
+    <div className="rounded-xl border p-4 space-y-4">
       <div className="h-40 bg-neutral-400"></div>
       <div className="flex flex-col gap-y-2">
         <div className="flex gap-x-6 justify-between items-start">
@@ -30,12 +30,7 @@ export function FundingCard() {
         </div>
         <div className="flex gap-x-3 items-center ml-auto">
           <HeartStraight className="pointer" size={30} />
-          <Button
-            size="lg"
-            className="bg-secondary-200 rounded-full text-base-black"
-          >
-            Apply
-          </Button>
+          <Button variant={"secondary"}>Apply</Button>
         </div>
       </div>
     </div>

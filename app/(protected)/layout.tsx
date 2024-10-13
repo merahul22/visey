@@ -2,7 +2,7 @@ import { Navbar } from "@/components/navigation/navbar";
 import { BottomBar } from "@/components/navigation/bottom-bar";
 import { Sidebar } from "@/components/navigation/sidebar";
 
-export default function RootLayout({
+export default function ProtectedLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;

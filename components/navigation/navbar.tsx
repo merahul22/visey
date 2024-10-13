@@ -10,6 +10,7 @@ import { Input } from "@/components/ui/input";
 
 import { ExitIcon, GearIcon, MagnifyingGlassIcon } from "@radix-ui/react-icons";
 import Image from "next/image";
+import { Button } from "../ui/button";
 
 export function Navbar() {
   return (
@@ -34,12 +35,19 @@ export function Navbar() {
           </div>
         </div>
         <div className="flex gap-x-6 items-center">
-          <button className="hidden md:block font-semibold text-sm border rounded-full px-4 py-2">
+          <Button
+            variant="outline"
+            size="sm"
+            className="hidden md:block">
             Promote
-          </button>
-          <button className="hidden md:block font-semibold text-sm border rounded-full px-4 py-2">
+          </Button>
+          <Button 
+            variant="outline"
+            size="sm"
+            className="hidden md:block"
+           >
             List Buisness Free
-          </button>
+          </Button>
           <DropdownMenu>
             <DropdownMenuTrigger>
               <Avatar>

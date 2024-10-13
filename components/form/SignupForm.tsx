@@ -147,7 +147,7 @@ const SignupForm = () => {
                 )}
               />
             </div>
-            <Button className="w-full rounded-full font-semibold" type="submit">
+            <Button variant="outline" type="submit">
               Create Account
             </Button>
           </form>
@@ -157,7 +157,7 @@ const SignupForm = () => {
         </div>
         <div className="flex justify-center mt-6 gap-2">
           <p>Already have an account?</p>
-          <Link className="text-primary hover:underline font-semibold" href="#">
+          <Link className="text-primary hover:underline font-semibold" href="/login">
             Log In
           </Link>
         </div>
