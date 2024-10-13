@@ -5,6 +5,7 @@ const GoogleLogin = () => {
         <div className="border border-neutrals-300 rounded-full px-4 py-1">
           <div className="flex items-center gap-2">
             <div className="w-4 h-4">
+              {/* Google Logo */}
               <svg viewBox="0 0 128 128">
                 <path
                   fill="#fff"

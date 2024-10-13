@@ -14,27 +14,27 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
-import { userSchema } from '@/schemas';
+import { loginSchema } from '@/schemas';
 import Link from 'next/link';
 import { FormError } from './FormError';
 import GoogleLogin from './GoogleLogin';
 
 const LoginForm = () => {
-  const form = useForm<z.infer<typeof userSchema>>({
-    resolver: zodResolver(userSchema),
+  const form = useForm<z.infer<typeof loginSchema>>({
+    resolver: zodResolver(loginSchema),
     defaultValues: {
       identifier: '',
       password: '',
     },
   });
 
-  function onSubmit(values: z.infer<typeof userSchema>) {
+  function onSubmit(values: z.infer<typeof loginSchema>) {
     console.log(values);
   }
 
   return (
     <div className="flex h-full w-full items-center justify-center">
-      <div className="md:w-[540px] w-[320px] border border-neutrals-400 p-8 rounded-xl">
+      <div className="lg:w-[540px] w-[320px]">
         <div className="mb-8">
           <h1 className="text-xl font-semibold text-center">Log In</h1>
           <p className="text-sm text-neutrals-600 text-center">
