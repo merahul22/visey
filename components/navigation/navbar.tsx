@@ -13,7 +13,7 @@ import Image from "next/image";
 
 function Navbar() {
   return (
-    <header className="sticky top-0 z-50 bg-white px-4 py-2.5 shadow-[0_4px_6px_-1px_rgba(0,0,0,0.1)] w-full">
+    <header className="sticky top-0 z-30 bg-white px-4 py-2.5 shadow-[0_4px_6px_-1px_rgba(0,0,0,0.1)] w-full">
       <nav className="flex items-center justify-between">
         <div className="shrink-0 lg:w-48">
           <Image src="/logo-black.png" width={71} height={32} alt="visey logo" />
@@ -34,10 +34,10 @@ function Navbar() {
           </div>
         </div>
         <div className="flex gap-x-6 items-center">
-          <button className="hidden md:block font-bold text-sm border rounded-full px-4 py-2">
+          <button className="hidden md:block font-semibold text-sm border rounded-full px-4 py-2">
             Promote
           </button>
-          <button className="hidden md:block font-bold text-sm border rounded-full px-4 py-2">
+          <button className="hidden md:block font-semibold text-sm border rounded-full px-4 py-2">
             List Buisness Free
           </button>
           <DropdownMenu>

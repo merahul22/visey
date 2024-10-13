@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { MapPin, Heart } from "@phosphor-icons/react/dist/ssr";
+import { MapPin, HeartStraight } from "@phosphor-icons/react/dist/ssr";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@radix-ui/react-avatar";
 
@@ -7,7 +7,7 @@ function HomePage() {
   return (
     <div className="space-y-10">
       <section className="space-y-4">
-        <h2 className="text-xl md:text-2xl font-bold">Search For</h2>
+        <h2 className="text-xl md:text-2xl font-semibold">Search For</h2>
         <div className="hidden overflow-x-auto md:flex gap-x-4">
           {Array.from({ length: 5 }).map((_, idx) => (
             <article
@@ -40,7 +40,7 @@ function HomePage() {
       </section>
       <section className="space-y-4">
         <span className="space-y-3">
-          <h2 className="text-xl md:text-2xl font-bold">Recommended</h2>
+          <h2 className="text-xl md:text-2xl font-semibold">Recommended</h2>
           <p>Business Category Name</p>
         </span>
         <div className="space-y-4 sm:grid sm:grid-cols-2 sm:space-y-0 sm:gap-x-4 sm:gap-y-8 xl:grid-cols-3">
@@ -97,7 +97,7 @@ function HomePage() {
       </section>
 
       <section className="space-y-4">
-        <h2 className="text-xl md:text-2xl font-bold">Funding Opportunities</h2>
+        <h2 className="text-xl md:text-2xl font-semibold">Funding Opportunities</h2>
         <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3 ">
           {Array.from({ length: 5 }).map((item, idx) => (
             <div className="rounded-xl border p-4 space-y-4" key={idx}>
@@ -110,11 +110,11 @@ function HomePage() {
                   </p>
                 </div>
                 <div className="flex gap-x-2 items-center">
-                  <Avatar className="w-10 h-10 rounded-full overflow-hidden">
+                  <Avatar className="w-8 h-8 rounded-full overflow-hidden">
                     <AvatarImage src="https://picsum.photos/100" />
                     <AvatarFallback>CN</AvatarFallback>
                   </Avatar>
-                  <p>Buissness name</p>
+                  <p className="text-sm">Buissness name</p>
                 </div>
                 <p className="flex gap-x-2">
                   <span>Apply By: </span>
@@ -125,7 +125,7 @@ function HomePage() {
                   <span>Delhi, India</span>
                 </div>
                 <div className="flex gap-x-3 items-center ml-auto">
-                  <Heart className="pointer" size={30} />
+                  <HeartStraight className="pointer" size={30} />
                   <Button size="lg" className="bg-secondary-200 rounded-full text-base-black">
                     Apply
                   </Button>

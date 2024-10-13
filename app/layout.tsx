@@ -1,21 +1,9 @@
 import type { Metadata } from 'next';
-import localFont from 'next/font/local';
 import './globals.css';
 import BreakpointIndicator from '@/components/breakpoint-indicator';
 import Navbar from '@/components/navigation/navbar';
 import BottomBar from '@/components/navigation/bottom-bar';
 import Sidebar from '@/components/navigation/sidebar';
-
-const geistSans = localFont({
-  src: './fonts/GeistVF.woff',
-  variable: '--font-geist-sans',
-  weight: '100 900',
-});
-const geistMono = localFont({
-  src: './fonts/GeistMonoVF.woff',
-  variable: '--font-geist-mono',
-  weight: '100 900',
-});
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -30,12 +18,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased text-base-black`}
+        className={`font-inter antialiased text-base-black`}
       >
         <BreakpointIndicator />
-        <div className="flex flex-col min-h-screen w-full">
+        <div className="flex flex-col min-h-screen w-full pb-24 md:pb-0">
           <Navbar />
-          <main>
+          <main className='flex-grow'>
             <Sidebar  />
             <div className='p-4 md:p-6 md:ml-52'>
               <div className='max-w-screen-2xl mx-auto'>
