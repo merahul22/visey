@@ -32,7 +32,7 @@ export function Sidebar() {
     <aside className="hidden h-[calc(100vh-4rem)] pt-24 pb-4 flex-grow md:flex flex-col justify-between z-10 shrink-0 w-52 border-r fixed bg-base-white px-4">
       <div className="flex flex-col gap-y-4">
         {sidebarItems.map((item) => (
-          <Button size={"lg"} key={item.route} variant="dropdown" asChild>
+          <Button key={item.route}  variant="ghost" className="justify-start" asChild>
             <Link
               href={item.route}
               className={cn(

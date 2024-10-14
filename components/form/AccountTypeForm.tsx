@@ -84,7 +84,7 @@ const AccountTypeForm = () => {
           </div>
         </div>
 
-        <Button className="w-full rounded-full mt-8">Continue</Button>
+        <Button className="w-full mt-8">Continue</Button>
       </div>
     </div>
   );

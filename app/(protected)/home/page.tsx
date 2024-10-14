@@ -31,7 +31,6 @@ function HomePage() {
         <BusinessCardList  />
         <span className="block text-center">
           <Button variant="link" className="">
-            {" "}
             View all
           </Button>
         </span>
@@ -46,7 +45,6 @@ function HomePage() {
         </div>
         <span className="block text-center">
           <Button variant="link" className="">
-            {" "}
             View all
           </Button>
         </span>

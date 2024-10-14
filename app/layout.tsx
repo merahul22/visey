@@ -17,9 +17,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={`font-inter antialiased text-base-black`}>
         <BreakpointIndicator />
-        <div className="flex flex-col min-h-screen w-full pb-24 md:pb-0">
-          {children}
-        </div>
+        {children}
       </body>
     </html>
   );

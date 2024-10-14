@@ -19,7 +19,9 @@ export default function SlidePanel() {
       <div className="h-44 bg-neutral-400"></div>
       <div className="p-4 space-y-2">
         <div className="flex gap-x-6 justify-between items-start">
-          <h2 className="font-semibold text-xl md:text-2xl">Opportunity name</h2>
+          <h2 className="font-semibold text-xl md:text-2xl">
+            Opportunity name
+          </h2>
           <p className="text-sm px-4 py-0.5 bg-secondary-200 rounded-full">
             Promoted
           </p>
@@ -42,36 +44,38 @@ export default function SlidePanel() {
           </div>
         </div>
         <div className="flex flex-wrap gap-x-3">
-          <button className="text-sm border rounded-full px-6 py-2">
+          <Button variant="outline" size="md">
             Tag 1
-          </button>
-          <button className="text-sm border rounded-full px-6 py-2">
+          </Button>
+          <Button variant="outline" size="md">
             Tag 2
-          </button>
-          <button className="text-sm border rounded-full px-6 py-2">
+          </Button>
+          <Button variant="outline" size="md">
             Tag 3
-          </button>
+          </Button>
         </div>
         <Separator />
         <div className="py-3 sm:flex justify-between items-center">
           <div className="flex items-center justify-between  sm:justify-normal sm:gap-x-4">
-            <button className="shrink-0 border flex items-center gap-x-2 text-sm sm:text-base border-neutral-200 rounded-full px-6 py-2">
+            <Button
+              variant="outline"
+              size="md"
+              className="shrink-0 border flex items-center gap-x-2 font-normal sm:py-3"
+            >
               <PhoneCall size={20} />
               <span>Show contact Details</span>
-            </button>
+            </Button>
 
-            <button className="rounded-full p-2 hover:bg-neutral-100">
+            <Button variant="ghost" size="icon">
               <HeartStraight size={24} />
-            </button>
+            </Button>
 
-            <button className="rounded-full p-2 hover:bg-neutral-100">
+            <Button variant="ghost" size="icon">
               <ShareFat size={24} />
-            </button>
+            </Button>
           </div>
           <div className="flex justify-center pt-2 sm:pt-0">
-            <Button size="lg" className="rounded-full font-semibold">
-              Apply
-            </Button>
+            <Button>Apply</Button>
           </div>
         </div>
         <Separator />
@@ -120,11 +124,13 @@ export default function SlidePanel() {
         <Separator />
 
         <div className="space-y-4 py-3">
-          <h1 className="text-xl md:text-2xl font-semibold">Eligibility Criteria</h1>
+          <h1 className="text-xl md:text-2xl font-semibold">
+            Eligibility Criteria
+          </h1>
           <div className="space-y-4 sm:flex sm:space-y-0 justify-between items-start gap-x-10">
-            <button className="shrink-0 border border-neutral-200 rounded-full font-semibold bg-neutrals-100 text-neutrals-900 py-2 px-6 ">
+            <p className="shrink-0 border border-neutral-200 rounded-full font-semibold bg-neutrals-100 text-neutrals-900 py-2 px-6 ">
               Women Founders Preferred
-            </button>
+            </p>
             <div className="flex gap-x-2 items-start">
               <Info className="shrink-0 text-neutrals-700" size={28} />
               <div className="border p-2 rounded-xl">
@@ -180,22 +186,22 @@ export default function SlidePanel() {
           <h1 className="text-xl md:text-2xl font-semibold">Have Queries?</h1>
           <p>Get in Touch with organizers</p>
           <div className="flex gap-x-2">
-            <button className="shrink-0 border flex items-center gap-x-2 text-sm sm:text-base border-neutral-200 rounded-full px-6 py-2">
+            <Button
+              variant="outline"
+              size="md"
+              className="shrink-0 border flex items-center gap-x-2 font-normal sm:py-3"
+            >
               <PhoneCall size={20} />
               <span>Show contact Details</span>
-            </button>
-            <Button size="lg" className="rounded-full text-base-black bg-primary-200">
-              Message
             </Button>
+            <Button variant={"secondary"}>Message</Button>
           </div>
         </div>
 
         <Separator />
 
         <div className="py-6 flex justify-center">
-          <Button size="lg" className="rounded-full text-base font-semibold">
-              Apply
-          </Button>
+          <Button>Apply</Button>
         </div>
       </div>
     </section>
