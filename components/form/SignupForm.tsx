@@ -147,7 +147,7 @@ const SignupForm = () => {
                 )}
               />
             </div>
-            <Button variant="outline" type="submit">
+            <Button className="w-full" type="submit">
               Create Account
             </Button>
           </form>
