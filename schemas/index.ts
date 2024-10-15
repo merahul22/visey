@@ -25,3 +25,33 @@ export const signUpSchema = z.object({
       message: 'Password must contain at least one special character',
     }),
 });
+
+export const listBusinessFirstStepSchema = z.object({
+  businessName: z.string().min(1, 'Business name is required'),
+  registeredName: z
+    .string()
+    .optional()
+    .refine((val) => !val || val.length >= 2, {
+      message: 'Minimum 2 characters',
+    }),
+  websiteUrl: z
+    .string()
+    .optional()
+    .refine((val) => !val || /^https?:\/\/[^\s$.?#].[^\s]*$/.test(val), {
+      message: 'Enter a valid URL',
+    }),
+});
+
+export const listBusinessSecondStepSchema = z.object({
+  category: z.string().min(1, { message: 'This field cannot be left empty' }),
+  tags: z.optional(z.string()),
+  stdCode: z.string(),
+  contactNumber: z
+    .string()
+    .regex(/^[6-9]\d{9}$/, 'Enter a valid mobile number'),
+  location: z.string().min(1, { message: 'This field cannot be left empty' }),
+});
+
+export const listBusinessSchema = listBusinessFirstStepSchema.merge(
+  listBusinessSecondStepSchema
+);
