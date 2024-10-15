@@ -121,7 +121,7 @@ const ListBusinessForm = () => {
     <div className="flex h-full w-full items-center justify-center">
       <div className="lg:w-[540px] w-[320px]">
         <div className="mb-8 mt-2">
-          <Stepper currentStep={1} numberOfSteps={2} />
+          <Stepper currentStep={currentStep} numberOfSteps={2} />
         </div>
         <div className="mb-8">
           <h1 className="text-xl font-semibold text-center">List Business</h1>
