@@ -18,6 +18,7 @@ import { loginSchema } from '@/schemas';
 import Link from 'next/link';
 import { FormError } from './FormError';
 import GoogleLogin from './GoogleLogin';
+import Required from '../Required';
 
 const LoginForm = () => {
   const form = useForm<z.infer<typeof loginSchema>>({
@@ -63,7 +64,7 @@ const LoginForm = () => {
                         <p className="text-neutrals-600 font-semibold">
                           Email/ Phone Number
                         </p>
-                        <p className="text-primary">(Required*)</p>
+                        <Required />
                       </div>
                     </FormLabel>
                     <FormControl>
@@ -87,7 +88,7 @@ const LoginForm = () => {
                         <p className="text-neutrals-600 font-semibold">
                           Password
                         </p>
-                        <p className="text-primary">(Required*)</p>
+                        <Required />
                       </div>
                     </FormLabel>
                     <FormControl>
@@ -116,7 +117,10 @@ const LoginForm = () => {
         </div>
         <div className="flex justify-center mt-6 gap-2">
           <p>Don&apos;t have an account?</p>
-          <Link className="text-primary hover:underline font-semibold" href="/register">
+          <Link
+            className="text-primary hover:underline font-semibold"
+            href="/register"
+          >
             Register
           </Link>
         </div>
