@@ -10,6 +10,7 @@ export const loginSchema = z.object({
 });
 
 export const signUpSchema = z.object({
+  type: z.enum(['STARTUP', 'BUSINESS']),
   identifier: z
     .string()
     .refine((value) => /\S+@\S+\.\S+/.test(value) || /^\d{10}$/.test(value), {
@@ -24,6 +25,7 @@ export const signUpSchema = z.object({
     .refine((value) => /[!@#$%^&*(),.?":{}|<>]/.test(value), {
       message: 'Password must contain at least one special character',
     }),
+  verificationCode: z.optional(z.string()),
 });
 
 export const listBusinessFirstStepSchema = z.object({

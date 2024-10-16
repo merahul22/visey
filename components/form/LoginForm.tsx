@@ -16,7 +16,6 @@ import {
 import { Input } from '@/components/ui/input';
 import { loginSchema } from '@/schemas';
 import Link from 'next/link';
-import { FormError } from './FormError';
 import GoogleLogin from './GoogleLogin';
 import Required from '../Required';
 
@@ -44,10 +43,7 @@ const LoginForm = () => {
         </div>
 
         <Form {...form}>
-          <div className="flex flex-col gap-4">
-            <FormError message="No account found with this email/ phone number" />
-            <FormError message="Incorrect Password" />
-          </div>
+          <div className="flex flex-col gap-4"></div>
 
           <form
             onSubmit={form.handleSubmit(onSubmit)}
