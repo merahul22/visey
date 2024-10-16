@@ -12,3 +12,98 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model User {
+  id          String  @id @default(uuid())
+  email       String  @unique
+  phoneNumber String?
+  password    String?
+  type        String
+
+  startup  Startup?
+  business Business?
+}
+
+model Startup {
+  id               String  @id @default(uuid())
+  userId           String  @unique
+  name             String
+  registeredName   String?
+  websiteUrl       String?
+  contactEmail     String?
+  contactNumber    String
+  location         String
+  industry         String
+  sector           String
+  trlLevel         String
+  logoUrl          String?
+  description      String?
+  progressStage    String?
+  fundingStage     String?
+  idea             String?
+  problemStatement String?
+  potentialMarket  String?
+  dpitRecognized   Boolean?
+  majorCompetitor  String?
+  demoVideoUrl     String?
+  pitchDeckUrl     String?
+  foundersName     String?
+  teamSize         Int?
+  fteEmployee      Int?
+  pteEmployee      Int?
+
+  user        User         @relation(fields: [userId], references: [id])
+  competitors Competitor[]
+
+  @@map("startup")
+}
+
+model Competitor {
+  id          String @id @default(uuid())
+  name        String
+  description String
+  startupId   String
+
+  startup Startup @relation(fields: [startupId], references: [id])
+
+  @@map("competitor")
+}
+
+model Business {
+  id             String   @id @default(uuid())
+  userId         String   @unique
+  name           String
+  registeredName String?
+  websiteUrl     String?
+  contactNumber  String
+  location       String
+  categoryId     String
+  categoryTags   String[]
+
+  user User @relation(fields: [userId], references: [id])
+
+  @@map("business")
+}
+
+model Opportunity {
+  id                 String    @id @default(uuid())
+  imageUrl           String?
+  type               String
+  subtype            String?
+  title              String
+  websiteUrl         String?
+  fundingAmount      String?
+  targetIndustry     String?
+  targetSector       String?
+  targetWomenFounder Boolean?
+  targetProductStage String?
+  targetFundingStage String?
+  description        String?
+  eligibility        String?
+  bannerUrl          String?
+  startDatetime      DateTime
+  endDatetime        DateTime?
+  noOfRegistrations  Int?
+
+  @@map("opportunity")
+}
