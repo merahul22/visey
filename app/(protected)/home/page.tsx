@@ -13,7 +13,7 @@ function HomePage() {
         <h2 className="text-xl md:text-2xl font-semibold">Search For</h2>
         <div className="hidden overflow-x-auto md:flex gap-x-4">
           {Array.from({ length: 5 }).map((_, idx) => (
-            <CategoryCardBig key={idx}/>
+            <CategoryCardBig key={idx} />
           ))}
         </div>
 
@@ -28,7 +28,7 @@ function HomePage() {
           <h2 className="text-xl md:text-2xl font-semibold">Recommended</h2>
           <p>Business Category Name</p>
         </span>
-        <BusinessCardList  />
+        <BusinessCardList />
         <span className="block text-center">
           <Button variant="link" className="">
             View all
@@ -37,7 +37,9 @@ function HomePage() {
       </section>
 
       <section className="space-y-4">
-        <h2 className="text-xl md:text-2xl font-semibold">Funding Opportunities</h2>
+        <h2 className="text-xl md:text-2xl font-semibold">
+          Funding Opportunities
+        </h2>
         <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3 ">
           {Array.from({ length: 5 }).map((item, idx) => (
             <FundingCard key={idx} />
@@ -51,7 +53,9 @@ function HomePage() {
       </section>
 
       <div className="flex flex-col justify-center items-center gap-y-4 h-44 bg-secondary-800 rounded-3xl">
-        <p className="text-white">Copyright © 2024 Visey.co.in - All rights reserved</p>
+        <p className="text-white">
+          Copyright © 2024 Visey.co.in - All rights reserved
+        </p>
         <Image src="/logo-white.png" width={71} height={32} alt="visey logo" />
       </div>
     </div>
