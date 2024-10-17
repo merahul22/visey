@@ -59,13 +59,7 @@ const SignupForm = () => {
       }
 
       if (res.success) {
-        setSuccess(res.success);
-
-        if (currentType === 'BUSINESS') {
-          router.push('/list-business');
-        } else {
-          router.push('/startup');
-        }
+        router.push('/login');
       }
     });
   };
