@@ -18,8 +18,16 @@ import { loginSchema } from '@/schemas';
 import Link from 'next/link';
 import GoogleLogin from './GoogleLogin';
 import Required from '../Required';
+import { signin } from '@/actions/signin';
+import { useTransition, useState } from 'react';
+import { FormError } from './FormError';
+import { FormSuccess } from './FormSuccess';
 
 const LoginForm = () => {
+  const [loading, startTransition] = useTransition();
+  const [error, setError] = useState<string | undefined>('');
+  const [success, setSuccess] = useState<string | undefined>('');
+
   const form = useForm<z.infer<typeof loginSchema>>({
     resolver: zodResolver(loginSchema),
     defaultValues: {
@@ -28,9 +36,22 @@ const LoginForm = () => {
     },
   });
 
-  function onSubmit(values: z.infer<typeof loginSchema>) {
-    console.log(values);
-  }
+  const onSubmit = (values: z.infer<typeof loginSchema>) => {
+    setError('');
+    setSuccess('');
+
+    startTransition(async () => {
+      const res = await signin(values);
+
+      if (res.error) {
+        setError(res.error);
+      }
+
+      if (res.success) {
+        setSuccess(res.success);
+      }
+    });
+  };
 
   return (
     <div className="flex h-full w-full items-center justify-center">
@@ -43,7 +64,10 @@ const LoginForm = () => {
         </div>
 
         <Form {...form}>
-          <div className="flex flex-col gap-4"></div>
+          <div className="flex flex-col gap-4">
+            <FormError message={error} />
+            <FormSuccess message={success} />
+          </div>
 
           <form
             onSubmit={form.handleSubmit(onSubmit)}
@@ -68,6 +92,7 @@ const LoginForm = () => {
                         className="mt-1"
                         placeholder="Email/ Phone Number"
                         {...field}
+                        disabled={loading}
                       />
                     </FormControl>
                     <FormMessage />
@@ -93,6 +118,7 @@ const LoginForm = () => {
                         type="password"
                         placeholder="Enter your password"
                         {...field}
+                        disabled={loading}
                       />
                     </FormControl>
                     <FormMessage />
@@ -103,7 +129,11 @@ const LoginForm = () => {
                 )}
               />
             </div>
-            <Button className="w-full rounded-full font-semibold" type="submit">
+            <Button
+              className="w-full rounded-full font-semibold"
+              type="submit"
+              disabled={loading}
+            >
               Log In
             </Button>
           </form>
