@@ -2,6 +2,7 @@
 
 import { signIn } from '@/auth';
 import prisma from '@/lib/db';
+import { DEFAULT_LOGIN_REDIRECT } from '@/routes';
 import { loginSchema } from '@/schemas';
 import { compare } from 'bcryptjs';
 import { AuthError } from 'next-auth';
@@ -43,7 +44,7 @@ export const signin = async (values: z.infer<typeof loginSchema>) => {
     await signIn('credentials', {
       identifier,
       password,
-      redirectTo: '/home',
+      redirectTo: DEFAULT_LOGIN_REDIRECT,
     });
 
     return { success: 'Logged in successfully!' };
