@@ -11,6 +11,7 @@ export const loginSchema = z.object({
 
 export const signUpSchema = z.object({
   type: z.enum(['STARTUP', 'BUSINESS']),
+  name: z.string().min(1, 'Name is required'),
   identifier: z
     .string()
     .refine((value) => /\S+@\S+\.\S+/.test(value) || /^\d{10}$/.test(value), {
@@ -47,6 +48,7 @@ export const listBusinessFirstStepSchema = z.object({
 export const listBusinessSecondStepSchema = z.object({
   category: z.string().min(1, { message: 'This field cannot be left empty' }),
   tags: z.optional(z.string()),
+  tagsList: z.optional(z.array(z.string())),
   stdCode: z.string(),
   contactNumber: z
     .string()

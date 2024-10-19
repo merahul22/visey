@@ -1,12 +1,12 @@
-import Image from "next/image";
-import { Button } from "@/components/ui/button";
+import Image from 'next/image';
+import { Button } from '@/components/ui/button';
 
-import { CategoryCardBig } from "./_components/category-card-big";
-import { CategoryCardSmall } from "./_components/category-card-small";
-import { FundingCard } from "../../../components/cards/funding-card";
-import { BusinessCardList } from "./_components/buisiness";
+import { CategoryCardBig } from './_components/category-card-big';
+import { CategoryCardSmall } from './_components/category-card-small';
+import { FundingCard } from '../../../components/cards/funding-card';
+import { BusinessCardList } from './_components/buisiness';
 
-function HomePage() {
+async function HomePage() {
   return (
     <div className="space-y-10">
       <section className="space-y-4">

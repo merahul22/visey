@@ -1,9 +1,10 @@
-import ListBusinessForm from '@/components/form/ListBusinessForm';
+import SelectPreferences from '@/components/form/SelectPreferences';
+import React from 'react';
 
 const page = () => {
   return (
     <div className="flex items-center justify-start">
-      <ListBusinessForm />
+      <SelectPreferences />
     </div>
   );
 };

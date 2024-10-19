@@ -27,8 +27,6 @@ export default {
           where: isEmail ? { email: identifier } : { phoneNumber: identifier },
         });
 
-        console.log(user);
-
         if (!user || !user.password) {
           return null;
         }
