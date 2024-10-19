@@ -2,7 +2,6 @@
 
 import { signIn } from '@/auth';
 import prisma from '@/lib/db';
-import { DEFAULT_LOGIN_REDIRECT } from '@/routes';
 import { loginSchema } from '@/schemas';
 import { compare } from 'bcryptjs';
 import { AuthError } from 'next-auth';
@@ -27,6 +26,10 @@ export const signin = async (values: z.infer<typeof loginSchema>) => {
   try {
     const user = await prisma.user.findUnique({
       where: isEmail ? { email: identifier } : { phoneNumber: identifier },
+      include: {
+        business: true,
+        startup: true,
+      },
     });
 
     if (!user || !user.password) {
@@ -36,20 +39,17 @@ export const signin = async (values: z.infer<typeof loginSchema>) => {
     const passwordMatch = await compare(password, user.password);
 
     if (!passwordMatch) {
-      return { error: 'Invalid credientials!' };
+      return { error: 'Invalid credentials!' };
     }
-
-    console.log(user);
 
     await signIn('credentials', {
       identifier,
       password,
-      redirectTo: DEFAULT_LOGIN_REDIRECT,
+      redirect: false,
     });
 
-    return { success: 'Logged in successfully!' };
+    return { success: 'Logged in successfully!', user };
   } catch (err) {
-    // console.log(err);
     if (err instanceof AuthError) {
       switch (err.type) {
         case 'CredentialsSignin':

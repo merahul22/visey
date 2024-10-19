@@ -4,6 +4,7 @@ import prisma from '@/lib/db';
 import { signUpSchema } from '@/schemas';
 import * as z from 'zod';
 import { hash } from 'bcryptjs';
+import { signin } from './signin';
 
 export const register = async (values: z.infer<typeof signUpSchema>) => {
   const validatedFields = signUpSchema.safeParse(values);
@@ -12,7 +13,7 @@ export const register = async (values: z.infer<typeof signUpSchema>) => {
     return { error: 'Invalid fields!' };
   }
 
-  const { identifier, password, type } = validatedFields.data;
+  const { identifier, password, type, name } = validatedFields.data;
 
   const isEmail = /\S+@\S+\.\S+/.test(identifier);
   const isPhoneNumber = /^\d{10}$/.test(identifier);
@@ -32,16 +33,19 @@ export const register = async (values: z.infer<typeof signUpSchema>) => {
 
     const hashedPassword = await hash(password, 10);
 
-    await prisma.user.create({
+    const user = await prisma.user.create({
       data: {
         email: isEmail ? identifier : undefined,
         phoneNumber: isPhoneNumber ? identifier : undefined,
+        name,
         password: hashedPassword,
         type,
       },
     });
 
-    return { success: 'User created successfully!' };
+    await signin({ identifier, password });
+
+    return { success: 'User created successfully!', userId: user.id };
   } catch (err) {
     console.log(err);
     return { error: 'Something went wrong' };

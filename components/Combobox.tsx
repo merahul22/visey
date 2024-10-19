@@ -23,6 +23,7 @@ interface ComboboxProps {
   noResultText: string;
   sizeLarge?: number;
   sizeSmall?: number;
+  disabled?: boolean;
   onChange: (value: string) => void;
 }
 
@@ -34,6 +35,7 @@ export function Combobox({
   onChange,
   sizeLarge = 540,
   sizeSmall = 320,
+  disabled,
 }: ComboboxProps) {
   const [open, setOpen] = React.useState(false);
 
@@ -41,6 +43,7 @@ export function Combobox({
     <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger asChild>
         <Button
+          disabled={disabled}
           variant="outline"
           size="sm"
           role="combobox"

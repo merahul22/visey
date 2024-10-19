@@ -1,10 +1,10 @@
 import NextAuth, { DefaultSession } from 'next-auth';
 import { PrismaAdapter } from '@auth/prisma-adapter';
-import prisma from './lib/db';
+import { PrismaClient } from '@prisma/client';
 import authConfig from './auth.config';
-import { parseCookies } from 'nookies';
 
 import {} from 'next-auth/jwt';
+import { Business, Startup } from '@prisma/client';
 
 declare module 'next-auth/jwt' {
   interface JWT {
@@ -13,6 +13,9 @@ declare module 'next-auth/jwt' {
     hasPassword: boolean;
     email?: string | null;
     phoneNumber?: string | null;
+    business: Business | null;
+    startup: Startup | null;
+    name: string;
   }
 }
 
@@ -24,9 +27,14 @@ declare module 'next-auth' {
       hasPassword: boolean;
       email: string;
       phoneNumber: string;
+      business: Business | null;
+      startup: Startup | null;
+      name: string;
     } & DefaultSession['user'];
   }
 }
+
+const prisma = new PrismaClient();
 
 export const { handlers, auth, signIn, signOut } = NextAuth({
   adapter: PrismaAdapter(prisma),
@@ -38,7 +46,6 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
   callbacks: {
     async jwt({ token }) {
       if (!token.sub) return token;
-      const cookies = parseCookies();
 
       const existingUser = await prisma.user.findUnique({
         where: {
@@ -56,15 +63,25 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         },
       });
 
-      if (cookies.type) {
-        token.type = cookies.type;
-      } else {
-        token.type = existingUser.type;
-      }
+      const business = await prisma.business.findFirst({
+        where: {
+          userId: token.sub,
+        },
+      });
+
+      const startup = await prisma.startup.findFirst({
+        where: {
+          userId: token.sub,
+        },
+      });
+
       token.isOAuth = !!existingAccount;
       token.hasPassword = !!existingUser.password;
       token.email = existingUser.email;
       token.phoneNumber = existingUser.phoneNumber;
+      token.type = existingUser.type;
+      token.business = business;
+      token.startup = startup;
 
       return token;
     },
@@ -90,6 +107,14 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
 
       if (token.hasPassword && session.user) {
         session.user.hasPassword = token.hasPassword;
+      }
+
+      if (token.business && session.user) {
+        session.user.business = token.business;
+      }
+
+      if (token.startup && session.user) {
+        session.user.startup = token.startup;
       }
 
       return session;

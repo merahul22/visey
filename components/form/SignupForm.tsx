@@ -44,6 +44,7 @@ const SignupForm = () => {
       identifier: '',
       password: '',
       verificationCode: '',
+      name: '',
     },
   });
 
@@ -59,7 +60,11 @@ const SignupForm = () => {
       }
 
       if (res.success) {
-        router.push('/login');
+        if (currentType === 'BUSINESS') {
+          router.push('/list-business');
+        } else {
+          router.push('/list-preferences');
+        }
       }
     });
   };
@@ -189,6 +194,28 @@ const SignupForm = () => {
                 className="mt-4 space-y-4"
               >
                 <div className="space-y-4">
+                  <FormField
+                    control={form.control}
+                    name="name"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>
+                          <p className="text-neutrals-600 font-semibold">
+                            Name*
+                          </p>
+                        </FormLabel>
+                        <FormControl>
+                          <Input
+                            className="mt-1"
+                            placeholder="Name"
+                            {...field}
+                            disabled={loading}
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
                   <FormField
                     control={form.control}
                     name="identifier"

@@ -20,10 +20,12 @@ enum UserType {
 
 model User {
   id          String  @id @default(uuid())
+  name        String
   email       String?  @unique
   phoneNumber String?  @unique
   password    String?
-  image       String?
+  image       String  @default("https://res.cloudinary.com/dlriuadjv/image/upload/v1729353205/xbbb0zw6js60dxnq64qj.png")
+  preferences String[]
   accounts    Account[]
 
   type        UserType
@@ -118,7 +120,8 @@ model Business {
   websiteUrl     String?
   contactNumber  String
   location       String
-  categoryId     String
+  stdCode        String
+  category     String
   categoryTags   String[]
 
   user User @relation(fields: [userId], references: [id])

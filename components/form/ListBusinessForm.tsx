@@ -20,7 +20,7 @@ import {
   listBusinessSecondStepSchema,
   listBusinessSchema,
 } from '@/schemas';
-import { useState } from 'react';
+import { useState, useTransition } from 'react';
 import { Combobox } from '../Combobox';
 import {
   tags as tagsList,
@@ -31,6 +31,9 @@ import {
 import Tag from '../Tag';
 import { Stepper } from '../Stepper';
 import Required from '../Required';
+import { listBusiness } from '@/actions/list-business';
+import { useRouter } from 'next/navigation';
+import { DEFAULT_LOGIN_REDIRECT } from '@/routes';
 
 function splitAndCapitalize(inputString: string) {
   const words = inputString.split('-');
@@ -43,6 +46,9 @@ function splitAndCapitalize(inputString: string) {
 const ListBusinessForm = () => {
   const [categoryTagList, setCategoryTagList] = useState<string[]>([]);
   const [currentStep, setCurrentStep] = useState<number>(1);
+  const [loading, startTransition] = useTransition();
+  const router = useRouter();
+
   const [formValues, setFormValues] = useState<
     z.infer<typeof listBusinessSchema>
   >({
@@ -51,6 +57,7 @@ const ListBusinessForm = () => {
     websiteUrl: '',
     category: '',
     tags: '',
+    tagsList: [],
     stdCode: '',
     contactNumber: '',
     location: '',
@@ -71,6 +78,7 @@ const ListBusinessForm = () => {
       : {
           category: '',
           tags: '',
+          tagsList: [],
           stdCode: '',
           contactNumber: '',
           location: '',
@@ -98,10 +106,20 @@ const ListBusinessForm = () => {
       const backendData = {
         ...formValues,
         ...values,
-        tags: categoryTagList,
+        tagsList: categoryTagList,
       };
 
-      console.log(backendData);
+      startTransition(async () => {
+        const res = await listBusiness(backendData);
+
+        if (res.error) {
+          console.log(res.error);
+        }
+
+        if (res.success) {
+          router.push(DEFAULT_LOGIN_REDIRECT);
+        }
+      });
     }
   }
 
@@ -152,11 +170,10 @@ const ListBusinessForm = () => {
                           <p className="text-neutrals-600 font-semibold">
                             Business Name*
                           </p>
-                          <Required />
                         </div>
                       </FormLabel>
                       <FormControl>
-                        <Input className="mt-1" {...field} />
+                        <Input className="mt-1" {...field} disabled={loading} />
                       </FormControl>
                       <FormMessage />
                       <FormDescription className="text-neutrals-500">
@@ -178,7 +195,7 @@ const ListBusinessForm = () => {
                         </div>
                       </FormLabel>
                       <FormControl>
-                        <Input className="mt-1" {...field} />
+                        <Input className="mt-1" {...field} disabled={loading} />
                       </FormControl>
                       <FormMessage />
                       <FormDescription className="text-neutrals-500">
@@ -205,7 +222,7 @@ const ListBusinessForm = () => {
                         </div>
                       </FormLabel>
                       <FormControl>
-                        <Input className="mt-1" {...field} />
+                        <Input className="mt-1" {...field} disabled={loading} />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -242,7 +259,6 @@ const ListBusinessForm = () => {
                           <p className="text-neutrals-600 font-semibold">
                             Business Category*
                           </p>
-                          <Required />
                         </div>
                       </FormLabel>
                       <FormControl>
@@ -253,6 +269,7 @@ const ListBusinessForm = () => {
                             placeHolder="Select Category"
                             noResultText="No category found"
                             onChange={(value) => field.onChange(value)}
+                            disabled={loading}
                           />
                         </div>
                       </FormControl>
@@ -274,7 +291,6 @@ const ListBusinessForm = () => {
                           <p className="text-neutrals-600 font-semibold">
                             Add Category tags*
                           </p>
-                          <Required />
                         </div>
                       </FormLabel>
                       <FormControl>
@@ -285,6 +301,7 @@ const ListBusinessForm = () => {
                             noResultText="No tag found"
                             data={tagsList}
                             onChange={handleTagChange}
+                            disabled={loading}
                           />
                         </div>
                       </FormControl>
@@ -326,6 +343,7 @@ const ListBusinessForm = () => {
                               sizeSmall={100}
                               data={countryCodesList}
                               onChange={(value) => field.onChange(value)}
+                              disabled={loading}
                             />
                           </div>
                         </FormControl>
@@ -352,6 +370,7 @@ const ListBusinessForm = () => {
                               className="mt-1"
                               {...field}
                               value={field.value ?? ''}
+                              disabled={loading}
                             />
                           </div>
                         </FormControl>
@@ -370,7 +389,6 @@ const ListBusinessForm = () => {
                           <p className="text-neutrals-600 font-semibold">
                             Location*
                           </p>
-                          <Required />
                         </div>
                       </FormLabel>
                       <FormControl>
@@ -381,6 +399,7 @@ const ListBusinessForm = () => {
                             noResultText="No location found"
                             data={locationsList}
                             onChange={(value) => field.onChange(value)}
+                            disabled={loading}
                           />
                         </div>
                       </FormControl>
@@ -392,6 +411,7 @@ const ListBusinessForm = () => {
               <Button
                 className="w-full rounded-full font-semibold mb-2"
                 type="submit"
+                disabled={loading}
               >
                 List Business
               </Button>
