@@ -76,6 +76,9 @@ const SignupForm = () => {
 
     form.setValue('type', currentType);
 
+    // add type queries to navbar
+    router.push(`?type=${currentType}`);
+
     setCurrentStep(2);
   };
 
@@ -171,6 +174,10 @@ const SignupForm = () => {
             <Button className="w-full mt-8" onClick={handleSelectType}>
               Continue
             </Button>
+
+            <div className="mt-8">
+              <GoogleLogin />
+            </div>
           </div>
         )}
 
@@ -306,9 +313,6 @@ const SignupForm = () => {
                 </Button>
               </form>
             </Form>
-            <div className="mt-8">
-              <GoogleLogin />
-            </div>
           </div>
         )}
 

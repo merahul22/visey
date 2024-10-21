@@ -56,6 +56,7 @@ export function UserDropdown({ user }: UserDropdownProps) {
               alt="Profile Photo"
               width={72}
               height={72}
+              className="rounded-full"
             />
           </div>
           <div className="flex flex-col">
@@ -66,7 +67,10 @@ export function UserDropdown({ user }: UserDropdownProps) {
               </p>
             </div>
 
-            <Link href="/profile" className="flex items-center gap-x-2">
+            <Link
+              href={`/profile/${user?.type?.toLowerCase()}`}
+              className="flex items-center gap-x-2"
+            >
               View Profile
               <div>
                 <CaretRight />
@@ -83,7 +87,9 @@ export function UserDropdown({ user }: UserDropdownProps) {
               className="bg-white border-2 mt-2 border-neutrals-200"
               variant="outline"
             >
-              Complete Profile
+              <Link href={`/profile/${user?.type?.toLowerCase()}`}>
+                Complete Profile
+              </Link>
             </Button>
           </div>
         )}
