@@ -2,13 +2,12 @@ import NextAuth, { DefaultSession } from 'next-auth';
 import { PrismaAdapter } from '@auth/prisma-adapter';
 import { PrismaClient } from '@prisma/client';
 import authConfig from './auth.config';
-
 import {} from 'next-auth/jwt';
 import { Business, Startup } from '@prisma/client';
 
 declare module 'next-auth/jwt' {
   interface JWT {
-    type: string;
+    type?: string | null;
     isOAuth: boolean;
     hasPassword: boolean;
     email?: string | null;
@@ -16,10 +15,16 @@ declare module 'next-auth/jwt' {
     business: Business | null;
     startup: Startup | null;
     name: string;
+    preferences: string[];
+    createdAt: Date;
   }
 }
 
 declare module 'next-auth' {
+  interface User {
+    type?: 'BUSINESS' | 'STARTUP' | null;
+  }
+
   interface Session {
     user: {
       type: string;
@@ -30,7 +35,15 @@ declare module 'next-auth' {
       business: Business | null;
       startup: Startup | null;
       name: string;
+      preferences: string[];
+      createdAt: Date;
     } & DefaultSession['user'];
+  }
+}
+
+declare module '@auth/core/adapters' {
+  interface AdapterUser {
+    type?: 'BUSINESS' | 'STARTUP' | null;
   }
 }
 
@@ -82,6 +95,8 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
       token.type = existingUser.type;
       token.business = business;
       token.startup = startup;
+      token.preferences = existingUser.preferences;
+      token.createdAt = existingUser.createdAt;
 
       return token;
     },
@@ -90,7 +105,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         session.user.id = token.sub;
       }
       if (token.type && session.user) {
-        session.user.type = token.type;
+        session.user.type = token.type as 'BUSINESS' | 'STARTUP';
       }
 
       if (token.email && session.user) {
@@ -117,7 +132,43 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         session.user.startup = token.startup;
       }
 
+      if (token.preferences && session.user) {
+        session.user.preferences = token.preferences;
+      }
+
+      if (token.createdAt && session.user) {
+        session.user.createdAt = token.createdAt;
+      }
+
       return session;
+    },
+    async signIn({ user, account }) {
+      if (account?.provider === 'google') {
+        const existingUser = await prisma.user.findUnique({
+          where: { email: user.email! },
+          select: { id: true, type: true },
+        });
+
+        if (existingUser?.type) {
+          user.type = existingUser.type;
+          return true;
+        }
+      }
+      return true;
+    },
+  },
+  events: {
+    async linkAccount({ user }) {
+      const existingUser = await prisma.user.findUnique({
+        where: { id: user.id },
+        select: { type: true },
+      });
+
+      if (!existingUser?.type) {
+        user.type = null;
+      } else {
+        user.type = existingUser.type;
+      }
     },
   },
 });

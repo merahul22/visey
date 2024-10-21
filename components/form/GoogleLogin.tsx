@@ -1,7 +1,11 @@
+'use client';
+
+import { signIn } from 'next-auth/react';
+
 const GoogleLogin = () => {
   return (
     <div className="flex justify-center">
-      <button>
+      <button onClick={() => signIn('google')}>
         <div className="border border-neutrals-300 rounded-full px-4 py-1">
           <div className="flex items-center gap-2">
             <div className="w-4 h-4">

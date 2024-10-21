@@ -32,8 +32,12 @@ export const signin = async (values: z.infer<typeof loginSchema>) => {
       },
     });
 
-    if (!user || !user.password) {
+    if (!user) {
       return { error: 'User not found!' };
+    }
+
+    if (!user.password) {
+      return { error: 'User does not have a password!' };
     }
 
     const passwordMatch = await compare(password, user.password);

@@ -27,6 +27,8 @@ export const register = async (values: z.infer<typeof signUpSchema>) => {
       where: isEmail ? { email: identifier } : { phoneNumber: identifier },
     });
 
+    console.log(existingUser);
+
     if (existingUser) {
       return { error: 'User already exists!' };
     }

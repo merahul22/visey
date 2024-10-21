@@ -26,9 +26,12 @@ model User {
   password    String?
   image       String  @default("https://res.cloudinary.com/dlriuadjv/image/upload/v1729353205/xbbb0zw6js60dxnq64qj.png")
   preferences String[]
-  accounts    Account[]
 
-  type        UserType
+  accounts    Account[]
+  sessions    Session[]
+
+  emailVerified DateTime?
+  type        UserType?
 
   startup  Startup?
   business Business?
@@ -57,6 +60,14 @@ model Account {
 
   @@unique([provider, providerAccountId])
   @@map("accounts")
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model Otp {

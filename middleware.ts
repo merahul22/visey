@@ -13,7 +13,7 @@ import {
 
 // 2. Wrapped middleware option
 const { auth } = NextAuth(authConfig);
-export default auth((req) => {
+export default auth(async (req) => {
   // Your custom middleware logic goes here
   const { nextUrl } = req;
   const isLoggedIn = !!req.auth;

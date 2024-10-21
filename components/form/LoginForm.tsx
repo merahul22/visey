@@ -17,7 +17,6 @@ import { Input } from '@/components/ui/input';
 import { loginSchema } from '@/schemas';
 import Link from 'next/link';
 import GoogleLogin from './GoogleLogin';
-import Required from '../Required';
 import { signin } from '@/actions/signin';
 import { useTransition, useState } from 'react';
 import { FormError } from './FormError';
@@ -97,7 +96,6 @@ const LoginForm = () => {
                         <p className="text-neutrals-600 font-semibold">
                           Email/ Phone Number
                         </p>
-                        <Required />
                       </div>
                     </FormLabel>
                     <FormControl>
@@ -122,7 +120,6 @@ const LoginForm = () => {
                         <p className="text-neutrals-600 font-semibold">
                           Password
                         </p>
-                        <Required />
                       </div>
                     </FormLabel>
                     <FormControl>
