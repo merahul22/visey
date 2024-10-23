@@ -18,7 +18,7 @@ import {
 
 interface ComboboxProps {
   value: string | undefined;
-  data: { value: string; label: string }[];
+  data: { value: string }[];
   placeHolder: string;
   noResultText: string;
   sizeLarge?: number;
@@ -50,7 +50,7 @@ export function Combobox({
           aria-expanded={open}
           className="w-full justify-between rounded-lg px-4 font-normal"
         >
-          {value ? data.find((el) => el.value === value)?.label : placeHolder}
+          {value ? data.find((el) => el.value === value)?.value : placeHolder}
           <CaretSortIcon className="ml-2 h-4 w-4 shrink-0 opacity-50" />
         </Button>
       </PopoverTrigger>
@@ -71,7 +71,7 @@ export function Combobox({
                     setOpen(false);
                   }}
                 >
-                  {el.label}
+                  {el.value}
                   <CheckIcon
                     className={cn(
                       'ml-auto h-4 w-4',

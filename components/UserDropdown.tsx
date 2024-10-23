@@ -44,7 +44,9 @@ export function UserDropdown({ user }: UserDropdownProps) {
         <Avatar>
           <AvatarImage src={user?.image || ''} />
           <AvatarFallback>
-            <div></div>
+            <div>
+              <p>{user?.name?.charAt(0).toUpperCase()}</p>
+            </div>
           </AvatarFallback>
         </Avatar>
       </DropdownMenuTrigger>
@@ -118,7 +120,7 @@ export function UserDropdown({ user }: UserDropdownProps) {
             </>
           )}
 
-          {user?.type === 'STARTUP' && !user?.startup && (
+          {user?.type === 'STARTUP' && (
             <>
               <DropdownMenuItem className="cursor-pointer">
                 <span className="flex gap-x-2 items-center">
