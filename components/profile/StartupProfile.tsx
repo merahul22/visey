@@ -108,7 +108,9 @@ const StartupProfile = ({ user }) => {
         </div>
         <div className="mt-10">
           <div className="flex items-center gap-2 justify-end">
-            <ShareNetwork />
+            <div className="cursor-pointer">
+              <ShareNetwork />
+            </div>
             <Button
               className="bg-secondary-100 text-neutrals-1000 border-2 border-neutrals-200 shadow-none hover:shadow-md hover:bg-secondary-100"
               size="sm"
