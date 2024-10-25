@@ -8,7 +8,7 @@ import { useRouter } from 'next/navigation';
 
 import { categories } from '@/constants';
 
-const preferencesList = categories.map((category) => category.label);
+const preferencesList = categories.map((category) => category.value);
 
 preferencesList.pop(); // Remove 'Others' from the list
 

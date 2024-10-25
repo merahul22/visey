@@ -4,7 +4,7 @@ import React, { useState, useTransition } from 'react';
 import {
   basicStartupFirstStepSchema,
   basicStartupSecondStepSchema,
-  startupDetailsSchema,
+  basicStartupDetailsSchema,
 } from '@/schemas';
 
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -34,12 +34,14 @@ import { Stepper } from '../Stepper';
 import { startupdetails } from '@/actions/startup-details';
 
 import { redirect } from 'next/navigation';
+import { useSession } from 'next-auth/react';
 
 const StartupDetailsBasicForm = () => {
+  const { update } = useSession();
   const [currentStep, setCurrentStep] = useState<number>(1);
   const [loading, startTransition] = useTransition();
   const [formValues, setFormValues] = useState<
-    z.infer<typeof startupDetailsSchema>
+    z.infer<typeof basicStartupDetailsSchema>
   >({
     name: '',
     registeredName: '',
@@ -93,6 +95,7 @@ const StartupDetailsBasicForm = () => {
         const res = await startupdetails(finalValues);
 
         if (res.success) {
+          update();
           redirect('/home');
         }
       });

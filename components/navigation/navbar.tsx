@@ -37,7 +37,7 @@ export async function Navbar() {
         <div className="flex-1 px-8 flex justify-center">
           {user?.type === 'BUSINESS' && !user.business && (
             <Link
-              href="/startup-details"
+              href="/list-business"
               className="text-center text-linkBlue md:hidden"
             >
               List Business Free
@@ -48,7 +48,7 @@ export async function Navbar() {
           )}
           {user?.type === 'STARTUP' && !user.startup && (
             <Link
-              href="/startup-details"
+              href="/basic-startup-details"
               className="text-center text-linkBlue md:hidden"
             >
               Add Startup Details
@@ -71,28 +71,30 @@ export async function Navbar() {
 
         <div className="flex gap-x-6 items-center">
           {user?.type === 'STARTUP' && !user.startup && (
-            <Link href="/startup-details">
+            <Link href="/basic-startup-details">
               <Button variant="outline" size="sm" className="hidden md:block">
                 Add Startup Details
               </Button>
             </Link>
           )}
           {user?.type === 'BUSINESS' && (
-            <Link href="/startup-details">
+            <Link href="/promote">
               <Button variant="outline" size="sm" className="hidden md:block">
                 Promote
               </Button>
             </Link>
           )}
           {user?.type === 'BUSINESS' && !user?.business && (
-            <Link href="/startup-details">
+            <Link href="/list-business">
               <Button variant="outline" size="sm" className="hidden md:block">
                 List Business Free
               </Button>
             </Link>
           )}
 
-          <UserDropdown user={userDropDownProps} />
+          <div>
+            <UserDropdown user={userDropDownProps} />
+          </div>
         </div>
       </nav>
 
