@@ -1,4 +1,3 @@
-import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 
 import { CategoryCardBig } from './_components/category-card-big';
@@ -7,6 +6,7 @@ import { FundingCard } from '../../../components/cards/funding-card';
 import { BusinessCardList } from './_components/buisiness';
 import { auth } from '@/auth';
 import { redirect } from 'next/navigation';
+import Footer from '@/components/Footer';
 
 async function HomePage() {
   const session = await auth();
@@ -60,12 +60,7 @@ async function HomePage() {
         </span>
       </section>
 
-      <div className="flex flex-col justify-center items-center gap-y-4 h-44 bg-secondary-800 rounded-3xl">
-        <p className="text-white">
-          Copyright © 2024 Visey.co.in - All rights reserved
-        </p>
-        <Image src="/logo-white.png" width={71} height={32} alt="visey logo" />
-      </div>
+      <Footer />
     </div>
   );
 }
