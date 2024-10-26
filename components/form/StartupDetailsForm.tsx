@@ -86,14 +86,19 @@ const StartupDetailsForm = () => {
               >
                 <div className="space-y-4">
                   <h2 className="font-semibold mt-8">Basic Details</h2>
-                  <div className="flex justify-center border rounded-lg">
-                    <Image
-                      src={user?.startup?.image || ''}
-                      alt="Startup Logo"
-                      width={150}
-                      height={150}
-                      className="cursor-pointer"
-                    />
+                  <div className="flex justify-center border rounded-lg py-2">
+                    {session.status === 'loading' && (
+                      <div className="w-[150px] h-[150px] rounded-full animate-pulse bg-neutrals-300"></div>
+                    )}
+                    {session.status === 'authenticated' && (
+                      <Image
+                        src={user?.startup?.image || ''}
+                        alt="Startup Logo"
+                        width={150}
+                        height={150}
+                        className="cursor-pointer rounded-full"
+                      />
+                    )}
                   </div>
                   <FormField
                     control={form.control}
