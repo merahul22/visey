@@ -19,7 +19,7 @@ const StartupProfile = ({ user }) => {
   })}, ${date.getFullYear()}`;
 
   return (
-    <div>
+    <div className="">
       <div className="text-lg">My Profile</div>
       <div className="flex gap-2 items-center mt-2">
         <div className="cursor-pointer">
@@ -121,7 +121,9 @@ const StartupProfile = ({ user }) => {
               Edit
             </Button>
           </div>
-          <StartupResume />
+          <div className="flex flex-col items-center">
+            <StartupResume />
+          </div>
         </div>
       </div>
     </div>

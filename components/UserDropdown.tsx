@@ -141,7 +141,9 @@ export function UserDropdown({ user }: UserDropdownProps) {
           <DropdownMenuItem className="cursor-pointer">
             <span className="flex gap-x-2 items-center">
               <GearIcon className="" />
-              <span>Settings</span>
+              <Link href={`/settings/${user?.type?.toLowerCase()}`}>
+                <span>Settings</span>
+              </Link>
             </span>
           </DropdownMenuItem>
 
