@@ -108,7 +108,7 @@ model Startup {
   fteEmployee      Int?
   pteEmployee      Int?
 
-  user        User         @relation(fields: [userId], references: [id])
+  user        User         @relation(fields: [userId], references: [id], onDelete: Cascade)
   competitors Competitor[]
 
   @@map("startup")
@@ -137,7 +137,7 @@ model Business {
   category     String
   categoryTags   String[]
 
-  user User @relation(fields: [userId], references: [id])
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@map("business")
 }

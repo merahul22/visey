@@ -155,7 +155,7 @@ export const startupDetailsSchema = z.object({
     .refine((val) => !val || val.length >= 2, {
       message: 'Minimum 2 characters',
     }),
-  registrationDate: z.string().optional(),
+  registrationDate: z.date().optional(),
   dpiitRecognized: z.boolean(),
   websiteUrl: z
     .string()
@@ -201,4 +201,65 @@ export const startupDetailsSchema = z.object({
   noOfFte: z.string().min(1, 'This field cannot be left empty'),
   noOfInterns: z.string().min(1, 'This field cannot be left empty'),
   email: z.string().email('Enter a valid email'),
+});
+
+export const fundingOpportunitySchema = z.object({
+  imageUrl: z.string().optional(),
+  type: z.string().min(1, 'This field cannot be left empty'),
+  subtype: z.string().min(1, 'This field cannot be left empty'),
+  title: z
+    .string()
+    .min(2, 'Minimum 2 characters')
+    .max(190, 'Maximum 190 characters'),
+  websiteUrl: z
+    .string()
+    .optional()
+    .refine((val) => !val || /^https?:\/\/[^\s$.?#].[^\s]*$/.test(val), {
+      message: 'Enter a valid URL',
+    }),
+  fundingAmount: z.number(),
+  targetIndustry: z.string().min(1, 'This field cannot be left empty'),
+  targetSector: z.string().min(1, 'This field cannot be left empty'),
+  targetWomenFounder: z.boolean(),
+  targetProductStage: z.optional(z.string()),
+  targetFundingStage: z.optional(z.string()),
+  description: z.string().min(2, 'Minimum 2 characters'),
+  eligibilityCriteria: z.string().min(2, 'Minimum 2 characters'),
+  registrationOnVisey: z.boolean(),
+  startDate: z.optional(z.date()),
+  endDate: z.optional(z.date()),
+  noOfRegistrationsAllowed: z.optional(z.number()),
+  registrationFormLink: z.optional(z.string()),
+});
+
+export const resetPasswordSchema = z
+  .object({
+    currentPassword: z
+      .string()
+      .optional()
+      .refine((val) => !val || val.length >= 1, {
+        message: 'This field cannot be left empty',
+      }),
+    password: z
+      .string()
+      .min(8, 'Password must be at least 8 characters')
+      .refine((value) => /[A-Z]/.test(value), {
+        message: 'Password must contain at least one uppercase letter',
+      })
+      .refine((value) => /[!@#$%^&*(),.?":{}|<>]/.test(value), {
+        message: 'Password must contain at least one special character',
+      }),
+    confirmPassword: z.string(),
+  })
+  .refine((data) => data.password === data.confirmPassword, {
+    message: 'Passwords do not match',
+    path: ['confirmPassword'], // Points to confirmPassword field for error message
+  });
+
+export const identifierChangeSchema = z.object({
+  identifier: z
+    .string()
+    .refine((value) => /\S+@\S+\.\S+/.test(value) || /^\d{10}$/.test(value), {
+      message: 'Must be a valid email or phone number (10 digits)',
+    }),
 });
