@@ -72,21 +72,33 @@ export async function Navbar() {
         <div className="flex gap-x-6 items-center">
           {user?.type === 'STARTUP' && !user.startup && (
             <Link href="/basic-startup-details">
-              <Button variant="outline" size="sm" className="hidden md:block">
+              <Button
+                variant="outline"
+                size="sm"
+                className="hidden md:block rounded-full"
+              >
                 Add Startup Details
               </Button>
             </Link>
           )}
           {user?.type === 'BUSINESS' && (
             <Link href="/promote">
-              <Button variant="outline" size="sm" className="hidden md:block">
+              <Button
+                variant="outline"
+                size="sm"
+                className="hidden md:block rounded-full"
+              >
                 Promote
               </Button>
             </Link>
           )}
           {user?.type === 'BUSINESS' && !user?.business && (
             <Link href="/list-business">
-              <Button variant="outline" size="sm" className="hidden md:block">
+              <Button
+                variant="outline"
+                size="sm"
+                className="hidden md:block rounded-full"
+              >
                 List Business Free
               </Button>
             </Link>

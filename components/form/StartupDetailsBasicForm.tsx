@@ -33,7 +33,7 @@ import {
 import { Stepper } from '../Stepper';
 import { startupdetails } from '@/actions/startup-details';
 
-import { redirect } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import { useSession } from 'next-auth/react';
 
 const StartupDetailsBasicForm = () => {
@@ -54,6 +54,8 @@ const StartupDetailsBasicForm = () => {
     sectorOthers: '',
     trlLevel: '',
   });
+
+  const router = useRouter();
 
   const schema =
     currentStep === 1
@@ -96,7 +98,7 @@ const StartupDetailsBasicForm = () => {
 
         if (res.success) {
           update();
-          redirect('/home');
+          router.push('/home');
         }
       });
     }
