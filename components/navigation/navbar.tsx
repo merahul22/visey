@@ -5,6 +5,7 @@ import { MagnifyingGlassIcon } from '@radix-ui/react-icons';
 import { auth } from '@/auth';
 import { UserDropdown } from '@/components/UserDropdown';
 import Link from 'next/link';
+import { Business, Startup } from '@prisma/client';
 
 export async function Navbar() {
   const session = await auth();
@@ -13,8 +14,8 @@ export async function Navbar() {
   const userDropDownProps = {
     type: user?.type as 'BUSINESS' | 'STARTUP',
     image: user?.image,
-    business: !!user?.business,
-    startup: !!user?.startup,
+    business: user?.business as Business,
+    startup: user?.startup as Startup,
     email: user?.email,
     phoneNumber: user?.phoneNumber,
     name: user?.name,
@@ -72,21 +73,33 @@ export async function Navbar() {
         <div className="flex gap-x-6 items-center">
           {user?.type === 'STARTUP' && !user.startup && (
             <Link href="/basic-startup-details">
-              <Button variant="outline" size="sm" className="hidden md:block">
+              <Button
+                variant="outline"
+                size="sm"
+                className="hidden md:block rounded-full"
+              >
                 Add Startup Details
               </Button>
             </Link>
           )}
           {user?.type === 'BUSINESS' && (
             <Link href="/promote">
-              <Button variant="outline" size="sm" className="hidden md:block">
+              <Button
+                variant="outline"
+                size="sm"
+                className="hidden md:block rounded-full"
+              >
                 Promote
               </Button>
             </Link>
           )}
           {user?.type === 'BUSINESS' && !user?.business && (
             <Link href="/list-business">
-              <Button variant="outline" size="sm" className="hidden md:block">
+              <Button
+                variant="outline"
+                size="sm"
+                className="hidden md:block rounded-full"
+              >
                 List Business Free
               </Button>
             </Link>

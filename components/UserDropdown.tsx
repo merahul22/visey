@@ -22,12 +22,13 @@ import { signOut } from 'next-auth/react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Button } from './ui/button';
+import { Business, Startup } from '@prisma/client';
 
 interface User {
   type?: 'BUSINESS' | 'STARTUP';
   image?: string | null;
-  business?: boolean;
-  startup?: boolean;
+  business?: Business;
+  startup?: Startup;
   email?: string;
   phoneNumber?: string;
   name?: string;
@@ -38,6 +39,8 @@ interface UserDropdownProps {
 }
 
 export function UserDropdown({ user }: UserDropdownProps) {
+  const isComplete = !!user?.startup?.idea;
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger>
@@ -81,17 +84,15 @@ export function UserDropdown({ user }: UserDropdownProps) {
           </div>
         </div>
 
-        {user?.type === 'STARTUP' && (
+        {user?.type === 'STARTUP' && !isComplete && (
           <div className="bg-neutrals-100 px-6 py-2 rounded-lg">
             <p className="text-xl font-semibold">You&apos;re missing out</p>
             <p>on recommendations</p>
             <Button
-              className="bg-white border-2 mt-2 border-neutrals-200"
+              className="bg-white border-2 mt-2 border-neutrals-200 rounded-full"
               variant="outline"
             >
-              <Link href={`/profile/${user?.type?.toLowerCase()}`}>
-                Complete Profile
-              </Link>
+              <Link href={`/startup-details`}>Complete Profile</Link>
             </Button>
           </div>
         )}

@@ -1,5 +1,3 @@
-'use client';
-
 import React from 'react';
 import { Check, ShieldCheck } from '@phosphor-icons/react/dist/ssr';
 import { Button } from '@/components/ui/button';

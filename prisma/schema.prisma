@@ -20,19 +20,19 @@ enum UserType {
 }
 
 model User {
-  id          String  @id @default(uuid())
+  id          String   @id @default(uuid())
   name        String
   email       String?  @unique
   phoneNumber String?  @unique
   password    String?
-  image       String  @default("https://res.cloudinary.com/dlriuadjv/image/upload/v1729353205/xbbb0zw6js60dxnq64qj.png")
+  image       String   @default("https://res.cloudinary.com/dlriuadjv/image/upload/v1729353205/xbbb0zw6js60dxnq64qj.png")
   preferences String[]
 
-  accounts    Account[]
-  sessions    Session[]
+  accounts Account[]
+  sessions Session[]
 
   emailVerified DateTime?
-  type        UserType?
+  type          UserType?
 
   startup  Startup?
   business Business?
@@ -44,18 +44,18 @@ model User {
 }
 
 model Account {
-  id                 String  @id @default(uuid())
-  userId             String  @map("user_id")
-  type               String
-  provider           String
-  providerAccountId  String  @map("provider_account_id")
-  refresh_token      String? @db.Text
-  access_token       String? @db.Text
-  expires_at         Int?
-  token_type         String?
-  scope              String?
-  id_token           String? @db.Text
-  session_state      String?
+  id                String  @id @default(uuid())
+  userId            String  @map("user_id")
+  type              String
+  provider          String
+  providerAccountId String  @map("provider_account_id")
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.Text
+  session_state     String?
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
@@ -72,41 +72,42 @@ model Session {
 }
 
 model Otp {
-  id        String  @id @default(uuid())
-  email     String?
+  id          String   @id @default(uuid())
+  email       String?
   phoneNumber String?
-  otp       String
-  expiry    DateTime
+  otp         String
+  expiry      DateTime
 }
 
 model Startup {
-  id               String  @id @default(uuid())
-  userId           String  @unique
-  name             String
-  image            String  @default("https://res.cloudinary.com/dlriuadjv/image/upload/v1729353205/xbbb0zw6js60dxnq64qj.png")
-  registeredName   String?
-  websiteUrl       String?
-  contactEmail     String?
-  contactNumber    String
-  location         String
-  industry         String
-  sector           String
-  trlLevel         String
-  logoUrl          String?
-  description      String?
-  progressStage    String?
-  fundingStage     String?
-  idea             String?
-  problemStatement String?
-  potentialMarket  String?
-  dpitRecognized   Boolean?
-  majorCompetitor  String?
-  demoVideoUrl     String?
-  pitchDeckUrl     String?
-  foundersName     String?
-  teamSize         Int?
-  fteEmployee      Int?
-  pteEmployee      Int?
+  id                  String    @id @default(uuid())
+  userId              String    @unique
+  name                String
+  image               String    @default("https://res.cloudinary.com/dlriuadjv/image/upload/v1729353205/xbbb0zw6js60dxnq64qj.png")
+  registeredName      String?
+  registrationDate    DateTime?
+  websiteUrl          String?
+  email               String?
+  contactNumber       String
+  location            String
+  industry            String
+  sector              String
+  trlLevel            String
+  logoUrl             String?
+  description         String?
+  productStage        String?
+  fundingStage        String?
+  idea                String?
+  problem             String?
+  marketSize          String?
+  dpiitRecognized     Boolean?
+  twoMajorCompetitors String?
+  demoVideoUrl        String?
+  pitchDeckUrl        String?
+  foundersDetail      String?
+  teamSize            String?
+  noOfFte             String?
+  noOfInterns         String?
 
   user        User         @relation(fields: [userId], references: [id], onDelete: Cascade)
   competitors Competitor[]
@@ -134,7 +135,7 @@ model Business {
   contactNumber  String
   location       String
   stdCode        String
-  category     String
+  category       String
   categoryTags   String[]
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)

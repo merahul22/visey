@@ -142,66 +142,95 @@ export const basicStartupDetailsSchema = z.object({
   trlLevel: z.string().min(1, 'This field cannot be left empty'),
 });
 
-export const startupDetailsSchema = z.object({
-  name: z.string().min(2, 'Minimum 2 characters'),
-  image: z.string().optional(),
-  description: z
-    .string()
-    .min(1, 'This field cannot be left empty')
-    .max(50, 'Maximum 50 characters'),
-  registeredName: z
-    .string()
-    .optional()
-    .refine((val) => !val || val.length >= 2, {
-      message: 'Minimum 2 characters',
-    }),
-  registrationDate: z.date().optional(),
-  dpiitRecognized: z.boolean(),
-  websiteUrl: z
-    .string()
-    .optional()
-    .refine((val) => !val || /^https?:\/\/[^\s$.?#].[^\s]*$/.test(val), {
-      message: 'Enter a valid URL',
-    }),
-  contactNumber: z
-    .string()
-    .regex(/^[6-9]\d{9}$/, 'Enter a valid mobile number'),
-  location: z.string().min(1, 'This field cannot be left empty'),
-  industry: z.string().min(1, 'This field cannot be left empty'),
-  industryOthers: z.string().optional(),
-  sector: z.string().min(1, 'This field cannot be left empty'),
-  sectorOthers: z.string().optional(),
-  trlLevel: z.string().min(1, 'This field cannot be left empty'),
-  productStage: z.string().min(1, 'This field cannot be left empty'),
-  fundingStage: z.string().min(1, 'This field cannot be left empty'),
-  idea: z
-    .string()
-    .min(1, 'This field cannot be left empty')
-    .max(150, 'Maximum 150 characters'),
-  problem: z
-    .string()
-    .min(1, 'This field cannot be left empty')
-    .max(300, 'Maximum 300 characters'),
-  marketSize: z.string().min(1, 'This field cannot be left empty'),
-  twoMajorCompetitors: z.string().min(1, 'This field cannot be left empty'),
-  demoVideoUrl: z
-    .string()
-    .optional()
-    .refine((val) => !val || /^https?:\/\/[^\s$.?#].[^\s]*$/.test(val), {
-      message: 'Enter a valid URL',
-    }),
-  pitchDeckUrl: z
-    .string()
-    .optional()
-    .refine((val) => !val || /^https?:\/\/[^\s$.?#].[^\s]*$/.test(val), {
-      message: 'Enter a valid URL',
-    }),
-  foundersDetail: z.string().min(1, 'This field cannot be left empty'),
-  teamSize: z.string().min(1, 'This field cannot be left empty'),
-  noOfFte: z.string().min(1, 'This field cannot be left empty'),
-  noOfInterns: z.string().min(1, 'This field cannot be left empty'),
-  email: z.string().email('Enter a valid email'),
-});
+export const startupDetailsSchema = z
+  .object({
+    name: z.string().min(2, 'Minimum 2 characters'),
+    image: z.string().optional(),
+    description: z
+      .string()
+      .min(1, 'This field cannot be left empty')
+      .max(50, 'Maximum 50 characters'),
+    registeredName: z
+      .string()
+      .optional()
+      .refine((val) => !val || val.length >= 2, {
+        message: 'Minimum 2 characters',
+      }),
+    registrationDate: z.date().optional(),
+    dpiitRecognized: z.boolean(),
+    websiteUrl: z
+      .string()
+      .optional()
+      .refine((val) => !val || /^https?:\/\/[^\s$.?#].[^\s]*$/.test(val), {
+        message: 'Enter a valid URL',
+      }),
+    contactNumber: z
+      .string()
+      .regex(/^[6-9]\d{9}$/, 'Enter a valid mobile number'),
+    location: z.string().min(1, 'This field cannot be left empty'),
+    industry: z.string().min(1, 'This field cannot be left empty'),
+    industryOthers: z.string().optional(),
+    sector: z.string().min(1, 'This field cannot be left empty'),
+    sectorOthers: z.string().optional(),
+    trlLevel: z.string().min(1, 'This field cannot be left empty'),
+    productStage: z.string().min(1, 'This field cannot be left empty'),
+    fundingStage: z.string().min(1, 'This field cannot be left empty'),
+    idea: z
+      .string()
+      .min(1, 'This field cannot be left empty')
+      .max(150, 'Maximum 150 characters'),
+    problem: z
+      .string()
+      .min(1, 'This field cannot be left empty')
+      .max(300, 'Maximum 300 characters'),
+    marketSize: z.string().min(1, 'This field cannot be left empty'),
+    twoMajorCompetitors: z.string().min(1, 'This field cannot be left empty'),
+    demoVideoUrl: z
+      .string()
+      .optional()
+      .refine((val) => !val || /^https?:\/\/[^\s$.?#].[^\s]*$/.test(val), {
+        message: 'Enter a valid URL',
+      }),
+    pitchDeckUrl: z
+      .string()
+      .optional()
+      .refine((val) => !val || /^https?:\/\/[^\s$.?#].[^\s]*$/.test(val), {
+        message: 'Enter a valid URL',
+      }),
+    foundersDetail: z.string().min(1, 'This field cannot be left empty'),
+    teamSize: z.string().regex(/^\d+$/, { message: 'Must be a valid number' }),
+    noOfFte: z.string().regex(/^\d+$/, { message: 'Must be a valid number' }),
+    noOfInterns: z
+      .string()
+      .regex(/^\d+$/, { message: 'Must be a valid number' }),
+    email: z.string().email('Enter a valid email'),
+  })
+  .refine(
+    (data) => {
+      // Make industryOthers required if industry is 'others'
+      if (data.industry === 'Others') {
+        return data.industryOthers && data.industryOthers.trim().length > 0;
+      }
+      return true;
+    },
+    {
+      message: 'This cannot be left empty when "Others" is selected',
+      path: ['industryOthers'], // Error path for industryOthers
+    }
+  )
+  .refine(
+    (data) => {
+      // Make sectorOthers required if sector is 'others'
+      if (data.sector === 'Others') {
+        return data.sectorOthers && data.sectorOthers.trim().length > 0;
+      }
+      return true;
+    },
+    {
+      message: 'This cannot be left empty when "Others" is selected',
+      path: ['sectorOthers'], // Error path for sectorOthers
+    }
+  );
 
 export const fundingOpportunitySchema = z.object({
   imageUrl: z.string().optional(),

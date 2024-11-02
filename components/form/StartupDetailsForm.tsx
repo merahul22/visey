@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useState, useTransition } from 'react';
 import { startupDetailsSchema } from '@/schemas';
 
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -30,28 +30,62 @@ import { Combobox } from '../Combobox';
 import {
   industries as industriesList,
   trlLevels as trlLevelsList,
+  locations as locationsList,
+  sectors as sectorsList,
 } from '@/constants';
 import Image from 'next/image';
 import { cn } from '@/lib/utils';
 import { CalendarIcon } from 'lucide-react';
 import { Calendar } from '@/components/ui/calendar';
 import { format } from 'date-fns';
+import { Textarea } from '../ui/textarea';
+import { Startup } from '@prisma/client';
+import { completeStartupDetails } from '@/actions/complete-startup-details';
 
-const StartupDetailsForm = () => {
+import { useRouter } from 'next/navigation';
+import { FormError } from './FormError';
+import { FormSuccess } from './FormSuccess';
+
+interface StartupDetailsFormProps {
+  startup?: Startup;
+}
+
+const StartupDetailsForm = ({ startup }: StartupDetailsFormProps) => {
+  const [error, setError] = useState<string | undefined>('');
+  const [success, setSuccess] = useState<string | undefined>('');
+  const [loading, startTransition] = useTransition();
+
+  const router = useRouter();
+
   const onSubmit = (values: z.infer<typeof startupDetailsSchema>) => {
     console.log(values);
+    setError('');
+    setSuccess('');
+
+    startTransition(async () => {
+      const res = await completeStartupDetails(values);
+
+      if (res.error) {
+        setError(res.error);
+      }
+
+      if (res.success) {
+        setSuccess(res.success);
+        router.push(`/profile/startup`);
+      }
+    });
   };
 
   const form = useForm<z.infer<typeof startupDetailsSchema>>({
     resolver: zodResolver(startupDetailsSchema),
     defaultValues: {
-      name: '',
-      image: '',
+      name: startup?.name,
+      image: startup?.image,
       description: '',
-      registeredName: '',
+      registeredName: startup?.registeredName as string,
       registrationDate: new Date(Date.now()),
       dpiitRecognized: false,
-      websiteUrl: '',
+      websiteUrl: startup?.websiteUrl as string,
       productStage: '',
       fundingStage: '',
       idea: '',
@@ -61,13 +95,13 @@ const StartupDetailsForm = () => {
       demoVideoUrl: '',
       pitchDeckUrl: '',
       foundersDetail: '',
-      teamSize: '',
-      noOfFte: '',
-      noOfInterns: '',
-      contactNumber: '',
-      industry: '',
+      contactNumber: startup?.contactNumber as string,
+      industry: startup?.industry as string,
       industryOthers: '',
-      trlLevel: '',
+      sector: startup?.sector as string,
+      sectorOthers: '',
+      location: startup?.location as string,
+      trlLevel: startup?.trlLevel as string,
       email: '',
     },
   });
@@ -84,6 +118,10 @@ const StartupDetailsForm = () => {
 
       <div className="mt-4">
         <Form {...form}>
+          <div className="mb-4">
+            <FormError message={error} />
+            <FormSuccess message={success} />
+          </div>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
             <div className="space-y-4">
               <h2 className="font-semibold mt-8">Basic Details</h2>
@@ -111,6 +149,7 @@ const StartupDetailsForm = () => {
                         className="text-neutrals-700 mt-1"
                         placeholder=""
                         {...field}
+                        disabled={loading}
                       />
                     </FormControl>
                     <FormMessage />
@@ -130,6 +169,7 @@ const StartupDetailsForm = () => {
                         className="text-neutrals-700 mt-1"
                         placeholder=""
                         {...field}
+                        disabled={loading}
                       />
                     </FormControl>
                     <FormMessage />
@@ -149,6 +189,7 @@ const StartupDetailsForm = () => {
                         className="text-neutrals-700 mt-1"
                         placeholder=""
                         {...field}
+                        disabled={loading}
                       />
                     </FormControl>
                     <FormMessage />
@@ -174,6 +215,7 @@ const StartupDetailsForm = () => {
                                 'w-[240px] pl-3 text-left font-normal',
                                 !field.value && 'text-muted-foreground'
                               )}
+                              disabled={loading}
                             >
                               {field.value ? (
                                 format(field.value, 'PPP')
@@ -220,6 +262,7 @@ const StartupDetailsForm = () => {
                         <Switch
                           checked={field.value}
                           onCheckedChange={field.onChange}
+                          disabled={loading}
                         />
                       </FormControl>
                     </div>
@@ -243,8 +286,69 @@ const StartupDetailsForm = () => {
                           placeHolder="Select Category"
                           noResultText="No category found"
                           onChange={(value) => field.onChange(value)}
+                          disabled={loading}
                         />
                       </div>
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="industryOthers"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormControl>
+                      <Input
+                        placeholder="If others, please specify"
+                        {...field}
+                        disabled={loading}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="sector"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>
+                      <div className="flex justify-between">
+                        <p className="text-neutrals-600 font-semibold">
+                          Sector*
+                        </p>
+                      </div>
+                    </FormLabel>
+                    <FormControl>
+                      <div className="mt-1">
+                        <Combobox
+                          value={field.value}
+                          placeHolder="Select Tag"
+                          noResultText="No tag found"
+                          data={sectorsList}
+                          onChange={(value) => field.onChange(value)}
+                          disabled={loading}
+                        />
+                      </div>
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="sectorOthers"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormControl>
+                      <Input
+                        placeholder="If others, please specify"
+                        {...field}
+                        disabled={loading}
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -259,7 +363,11 @@ const StartupDetailsForm = () => {
                       Website URL
                     </FormLabel>
                     <FormControl>
-                      <Input className="text-neutrals-700 mt-1" {...field} />
+                      <Input
+                        className="text-neutrals-700 mt-1"
+                        {...field}
+                        disabled={loading}
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -278,7 +386,11 @@ const StartupDetailsForm = () => {
                         Startup Funding Stage*
                       </FormLabel>
                       <FormControl>
-                        <Input className="text-neutrals-700 mt-1" {...field} />
+                        <Input
+                          className="text-neutrals-700 mt-1"
+                          {...field}
+                          disabled={loading}
+                        />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -293,7 +405,11 @@ const StartupDetailsForm = () => {
                         Startup Product Stage*
                       </FormLabel>
                       <FormControl>
-                        <Input className="text-neutrals-700 mt-1" {...field} />
+                        <Input
+                          className="text-neutrals-700 mt-1"
+                          {...field}
+                          disabled={loading}
+                        />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -315,6 +431,7 @@ const StartupDetailsForm = () => {
                             noResultText="No TRL level found"
                             data={trlLevelsList}
                             onChange={(value) => field.onChange(value)}
+                            disabled={loading}
                           />
                         </div>
                       </FormControl>
@@ -336,7 +453,11 @@ const StartupDetailsForm = () => {
                         Idea (Max 100-150 words)*
                       </FormLabel>
                       <FormControl>
-                        <Input className="text-neutrals-700 mt-1" {...field} />
+                        <Textarea
+                          className="text-neutrals-700 mt-1"
+                          {...field}
+                          disabled={loading}
+                        />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -352,10 +473,10 @@ const StartupDetailsForm = () => {
                         200-300 words)*
                       </FormLabel>
                       <FormControl>
-                        <Input
+                        <Textarea
                           className="text-neutrals-700 mt-1"
-                          placeholder=""
                           {...field}
+                          disabled={loading}
                         />
                       </FormControl>
                       <FormMessage />
@@ -375,6 +496,7 @@ const StartupDetailsForm = () => {
                           className="text-neutrals-700 mt-1"
                           placeholder=""
                           {...field}
+                          disabled={loading}
                         />
                       </FormControl>
                       <FormMessage />
@@ -390,7 +512,11 @@ const StartupDetailsForm = () => {
                         2 Major Competitors (Name, Description in 2 sentences)*
                       </FormLabel>
                       <FormControl>
-                        <Input className="text-neutrals-700 mt-1" {...field} />
+                        <Textarea
+                          className="text-neutrals-700 mt-1"
+                          {...field}
+                          disabled={loading}
+                        />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -405,7 +531,11 @@ const StartupDetailsForm = () => {
                         Demo Video
                       </FormLabel>
                       <FormControl>
-                        <Input className="text-neutrals-700 mt-1" {...field} />
+                        <Input
+                          className="text-neutrals-700 mt-1"
+                          {...field}
+                          disabled={loading}
+                        />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -420,7 +550,11 @@ const StartupDetailsForm = () => {
                         Pitch Deck
                       </FormLabel>
                       <FormControl>
-                        <Input className="text-neutrals-700 mt-1" {...field} />
+                        <Input
+                          className="text-neutrals-700 mt-1"
+                          {...field}
+                          disabled={loading}
+                        />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -433,7 +567,7 @@ const StartupDetailsForm = () => {
               <div className="space-y-4">
                 <FormField
                   control={form.control}
-                  name="websiteUrl"
+                  name="foundersDetail"
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel className="text-neutrals-700">
@@ -441,7 +575,11 @@ const StartupDetailsForm = () => {
                         URL)*
                       </FormLabel>
                       <FormControl>
-                        <Input className="text-neutrals-700 mt-1" {...field} />
+                        <Textarea
+                          className="text-neutrals-700 mt-1"
+                          {...field}
+                          disabled={loading}
+                        />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -456,7 +594,11 @@ const StartupDetailsForm = () => {
                         Team Size (including both part-time and full-time)*
                       </FormLabel>
                       <FormControl>
-                        <Input className="text-neutrals-700 mt-1" {...field} />
+                        <Input
+                          className="text-neutrals-700 mt-1"
+                          {...field}
+                          disabled={loading}
+                        />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -471,7 +613,11 @@ const StartupDetailsForm = () => {
                         Number of full-time members*
                       </FormLabel>
                       <FormControl>
-                        <Input className="text-neutrals-700 mt-1" {...field} />
+                        <Input
+                          className="text-neutrals-700 mt-1"
+                          {...field}
+                          disabled={loading}
+                        />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -486,7 +632,11 @@ const StartupDetailsForm = () => {
                         Number of part-time members (write 0 if not applicable)*
                       </FormLabel>
                       <FormControl>
-                        <Input className="text-neutrals-700 mt-1" {...field} />
+                        <Input
+                          className="text-neutrals-700 mt-1"
+                          {...field}
+                          disabled={loading}
+                        />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -499,6 +649,34 @@ const StartupDetailsForm = () => {
               <div className="space-y-4">
                 <FormField
                   control={form.control}
+                  name="location"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>
+                        <div className="flex justify-between">
+                          <p className="text-neutrals-600 font-semibold">
+                            Location*
+                          </p>
+                        </div>
+                      </FormLabel>
+                      <FormControl>
+                        <div className="mt-1">
+                          <Combobox
+                            value={field.value}
+                            placeHolder="Select Location"
+                            noResultText="No location found"
+                            data={locationsList}
+                            onChange={(value) => field.onChange(value)}
+                            disabled={loading}
+                          />
+                        </div>
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
                   name="contactNumber"
                   render={({ field }) => (
                     <FormItem>
@@ -506,7 +684,11 @@ const StartupDetailsForm = () => {
                         Contact Number*
                       </FormLabel>
                       <FormControl>
-                        <Input className="text-neutrals-700 mt-1" {...field} />
+                        <Input
+                          className="text-neutrals-700 mt-1"
+                          {...field}
+                          disabled={loading}
+                        />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -521,7 +703,11 @@ const StartupDetailsForm = () => {
                         Contact Email Id*
                       </FormLabel>
                       <FormControl>
-                        <Input className="text-neutrals-700 mt-1" {...field} />
+                        <Input
+                          className="text-neutrals-700 mt-1"
+                          {...field}
+                          disabled={loading}
+                        />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -529,8 +715,10 @@ const StartupDetailsForm = () => {
                 />
               </div>
             </div>
-            <div className="flex justify-center">
-              <Button type="submit">Save Changes</Button>
+            <div className="flex justify-center mt-8">
+              <Button type="submit" className="rounded-full" disabled={loading}>
+                Save Changes
+              </Button>
             </div>
           </form>
         </Form>
