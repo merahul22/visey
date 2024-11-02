@@ -5,6 +5,7 @@ import { MagnifyingGlassIcon } from '@radix-ui/react-icons';
 import { auth } from '@/auth';
 import { UserDropdown } from '@/components/UserDropdown';
 import Link from 'next/link';
+import { Business, Startup } from '@prisma/client';
 
 export async function Navbar() {
   const session = await auth();
@@ -13,8 +14,8 @@ export async function Navbar() {
   const userDropDownProps = {
     type: user?.type as 'BUSINESS' | 'STARTUP',
     image: user?.image,
-    business: !!user?.business,
-    startup: !!user?.startup,
+    business: user?.business as Business,
+    startup: user?.startup as Startup,
     email: user?.email,
     phoneNumber: user?.phoneNumber,
     name: user?.name,
