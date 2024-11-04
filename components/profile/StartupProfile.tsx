@@ -10,6 +10,7 @@ import Image from 'next/image';
 import { Cross2Icon } from '@radix-ui/react-icons';
 import CreateStartupResume from '../popups/CreateStartupResume';
 import StartupResume from '../StartupResume';
+import Link from 'next/link';
 
 const StartupProfile = ({ user }) => {
   const date = new Date(user.createdAt);
@@ -26,12 +27,16 @@ const StartupProfile = ({ user }) => {
           <ShareNetwork />
         </div>
         <Button
-          className="bg-secondary-100 text-neutrals-1000 border-2 border-neutrals-200 shadow-none hover:shadow-md hover:bg-secondary-100"
+          className="bg-secondary-100 text-neutrals-1000 border-2 border-neutrals-200 shadow-none hover:shadow-md hover:bg-secondary-100 rounded-full"
           size="sm"
         >
           Promote
         </Button>
-        <Button className="text-neutrals-1000" variant="link" size="sm">
+        <Button
+          className="text-neutrals-1000 hover:bg-neutrals-100 rounded-full"
+          variant="outline"
+          size="sm"
+        >
           Edit
         </Button>
       </div>
@@ -50,7 +55,7 @@ const StartupProfile = ({ user }) => {
             <p className="font-semibold">{user.name}</p>
             <div className="flex gap-x-2 items-center">
               <MapPin />
-              <p>Location</p>
+              <p>{user.startup.location || 'Location'}</p>
             </div>
           </div>
         </div>
@@ -92,7 +97,7 @@ const StartupProfile = ({ user }) => {
                 Add Preferences to get personalized recommendations
               </p>
             </div>
-            <Button size="sm" variant="outline">
+            <Button size="sm" variant="outline" className="rounded-full">
               Add Preferences
             </Button>
           </div>
@@ -112,16 +117,20 @@ const StartupProfile = ({ user }) => {
               <ShareNetwork />
             </div>
             <Button
-              className="bg-secondary-100 text-neutrals-1000 border-2 border-neutrals-200 shadow-none hover:shadow-md hover:bg-secondary-100"
+              className="bg-secondary-100 text-neutrals-1000 border-2 border-neutrals-200 shadow-none hover:shadow-md hover:bg-secondary-100 rounded-full"
               size="sm"
             >
               Download
             </Button>
-            <Button className="text-neutrals-1000" variant="link" size="sm">
-              Edit
+            <Button
+              className="text-neutrals-1000 hover:bg-neutrals-100 rounded-full"
+              variant="outline"
+              size="sm"
+            >
+              <Link href="/startup-details">Edit</Link>
             </Button>
           </div>
-          <div className="flex flex-col items-center">
+          <div className="">
             <StartupResume />
           </div>
         </div>
