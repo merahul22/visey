@@ -49,7 +49,6 @@ export const listBusinessSecondStepSchema = z.object({
   category: z.string().min(1, 'This field cannot be left empty'),
   tags: z.optional(z.string()),
   tagsList: z.optional(z.array(z.string())),
-  stdCode: z.string(),
   contactNumber: z
     .string()
     .regex(/^[6-9]\d{9}$/, 'Enter a valid mobile number'),
@@ -232,35 +231,6 @@ export const startupDetailsSchema = z
     }
   );
 
-export const fundingOpportunitySchema = z.object({
-  imageUrl: z.string().optional(),
-  type: z.string().min(1, 'This field cannot be left empty'),
-  subtype: z.string().min(1, 'This field cannot be left empty'),
-  title: z
-    .string()
-    .min(2, 'Minimum 2 characters')
-    .max(190, 'Maximum 190 characters'),
-  websiteUrl: z
-    .string()
-    .optional()
-    .refine((val) => !val || /^https?:\/\/[^\s$.?#].[^\s]*$/.test(val), {
-      message: 'Enter a valid URL',
-    }),
-  fundingAmount: z.number(),
-  targetIndustry: z.string().min(1, 'This field cannot be left empty'),
-  targetSector: z.string().min(1, 'This field cannot be left empty'),
-  targetWomenFounder: z.boolean(),
-  targetProductStage: z.optional(z.string()),
-  targetFundingStage: z.optional(z.string()),
-  description: z.string().min(2, 'Minimum 2 characters'),
-  eligibilityCriteria: z.string().min(2, 'Minimum 2 characters'),
-  registrationOnVisey: z.boolean(),
-  startDate: z.optional(z.date()),
-  endDate: z.optional(z.date()),
-  noOfRegistrationsAllowed: z.optional(z.number()),
-  registrationFormLink: z.optional(z.string()),
-});
-
 export const resetPasswordSchema = z
   .object({
     currentPassword: z
@@ -290,5 +260,90 @@ export const identifierChangeSchema = z.object({
     .string()
     .refine((value) => /\S+@\S+\.\S+/.test(value) || /^\d{10}$/.test(value), {
       message: 'Must be a valid email or phone number (10 digits)',
+    }),
+});
+
+export const fundingOpportunityFirstStepSchema = z.object({
+  imageUrl: z.string().optional(),
+  type: z.string().min(1, 'This field cannot be left empty'),
+  subtype: z.string().min(1, 'This field cannot be left empty'),
+  title: z
+    .string()
+    .min(2, 'Minimum 2 characters')
+    .max(190, 'Maximum 190 characters'),
+  websiteUrl: z
+    .string()
+    .optional()
+    .refine((val) => !val || /^https?:\/\/[^\s$.?#].[^\s]*$/.test(val), {
+      message: 'Enter a valid URL',
+    }),
+  fundingAmount: z
+    .string()
+    .regex(/^\d+$/, { message: 'Must be a valid number' }),
+  targetIndustry: z.string().min(1, 'This field cannot be left empty'),
+  targetSector: z.string().min(1, 'This field cannot be left empty'),
+  targetWomenFounder: z.boolean(),
+  targetProductStage: z.optional(z.string()),
+  targetFundingStage: z.optional(z.string()),
+  description: z.string().min(2, 'Minimum 2 characters'),
+  eligibilityCriteria: z.string().min(2, 'Minimum 2 characters'),
+});
+
+export const fundingOpportunitySecondStepSchema = z.object({
+  startDate: z.optional(z.date()),
+  endDate: z.optional(z.date()),
+  noOfRegistrationsAllowed: z
+    .string()
+    .optional()
+    .refine((val) => !val || /^\d+$/, {
+      message: 'Must be a valid number',
+    }),
+  registration: z.string(),
+  registrationFormLink: z
+    .string()
+    .optional()
+    .refine((val) => !val || /^https?:\/\/[^\s$.?#].[^\s]*$/.test(val), {
+      message: 'Enter a valid URL',
+    }),
+});
+
+export const fundingOpportunitySchema = z.object({
+  imageUrl: z.string().optional(),
+  type: z.string().min(1, 'This field cannot be left empty'),
+  subtype: z.string().min(1, 'This field cannot be left empty'),
+  title: z
+    .string()
+    .min(2, 'Minimum 2 characters')
+    .max(190, 'Maximum 190 characters'),
+  websiteUrl: z
+    .string()
+    .optional()
+    .refine((val) => !val || /^https?:\/\/[^\s$.?#].[^\s]*$/.test(val), {
+      message: 'Enter a valid URL',
+    }),
+  fundingAmount: z
+    .string()
+    .regex(/^\d+$/, { message: 'Must be a valid number' }),
+  targetIndustry: z.string().min(1, 'This field cannot be left empty'),
+  targetSector: z.string().min(1, 'This field cannot be left empty'),
+  targetWomenFounder: z.boolean(),
+  targetProductStage: z.optional(z.string()),
+  targetFundingStage: z.optional(z.string()),
+  description: z.string().min(2, 'Minimum 2 characters'),
+  eligibilityCriteria: z.string().min(2, 'Minimum 2 characters'),
+  startDate: z.optional(z.date()),
+  endDate: z.optional(z.date()),
+  noOfRegistrationsAllowed: z
+    .string()
+    .optional()
+    .refine((val) => !val || /^\d+$/, {
+      message: 'Must be a valid number',
+    }),
+  registration: z.string(),
+  registrationFormLink: z
+    .string()
+    .optional()
+    .refine((val) => !val || /^https?:\/\/[^\s$.?#].[^\s]*$/.test(val), {
+      message: 'Enter a valid URL',
     }),
 });

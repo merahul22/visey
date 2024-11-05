@@ -12,8 +12,10 @@ const page = async () => {
   }
 
   return (
-    <div className="flex flex-col items-center">
-      <PostFundingOpportunity />
+    <div className="flex justify-center mt-8">
+      <div className="xl:min-w-[700px]">
+        <PostFundingOpportunity />
+      </div>
     </div>
   );
 };

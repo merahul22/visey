@@ -51,11 +51,19 @@ const StartupResume = async () => {
               <p className="text-sm">{startup?.description}</p>
             </div>
             <div className="flex gap-x-2">
-              <Button variant="outline" size="sm" className="py-1.5">
-                Industry
+              <Button
+                variant="outline"
+                size="sm"
+                className="py-1.5 rounded-full"
+              >
+                {startup?.industry}
               </Button>
-              <Button variant="outline" size="sm" className="py-1.5">
-                Sector
+              <Button
+                variant="outline"
+                size="sm"
+                className="py-1.5 rounded-full"
+              >
+                {startup?.sector}
               </Button>
             </div>
           </div>

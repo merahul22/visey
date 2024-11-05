@@ -1,10 +1,10 @@
-"use client";
+'use client';
 
-import React, { useState } from "react";
-import { Button } from "./ui/button";
-import { PhoneCall } from "@phosphor-icons/react/dist/ssr";
-import { Cross2Icon } from "@radix-ui/react-icons";
-import Link from "next/link";
+import React, { useState } from 'react';
+import { Button } from './ui/button';
+import { PhoneCall } from '@phosphor-icons/react/dist/ssr';
+import { Cross2Icon } from '@radix-ui/react-icons';
+import Link from 'next/link';
 
 const ContactOverlay = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -22,7 +22,7 @@ const ContactOverlay = () => {
       >
         <div className="flex gap-x-4">
           <PhoneCall size={20} />
-          <span>Show contact Details</span>
+          <span className="font-normal">Show contact Details</span>
         </div>
       </Button>
       {isOpen && (
@@ -52,8 +52,8 @@ const ContactOverlay = () => {
               </div>
             </div>
 
-            <Button variant="outline">
-              <Cross2Icon className="w-4 h-4" onClick={closeOverlay} />
+            <Button variant="outline" onClick={closeOverlay}>
+              <Cross2Icon className="w-4 h-4" />
             </Button>
           </div>
         </div>

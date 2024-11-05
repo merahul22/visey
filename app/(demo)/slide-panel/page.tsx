@@ -1,6 +1,6 @@
-import { Separator } from "@/components/ui/separator";
+import { Separator } from '@/components/ui/separator';
 
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import {
   MapPin,
   PhoneCall,
@@ -9,9 +9,10 @@ import {
   Eye,
   ClockCountdown,
   Info,
-} from "@phosphor-icons/react/dist/ssr";
-import { Button } from "@/components/ui/button";
-import Link from "next/link";
+} from '@phosphor-icons/react/dist/ssr';
+import { Button } from '@/components/ui/button';
+import Link from 'next/link';
+import ContactOverlay from '@/components/ContactDetails';
 
 export default function SlidePanel() {
   return (
@@ -44,27 +45,32 @@ export default function SlidePanel() {
           </div>
         </div>
         <div className="flex flex-wrap gap-x-3">
-          <Button variant="outline" size="md">
+          <Button
+            variant="outline"
+            size="sm"
+            className="rounded-full shadow-none"
+          >
             Tag 1
           </Button>
-          <Button variant="outline" size="md">
+          <Button
+            variant="outline"
+            size="sm"
+            className="rounded-full shadow-none"
+          >
             Tag 2
           </Button>
-          <Button variant="outline" size="md">
+          <Button
+            variant="outline"
+            size="sm"
+            className="rounded-full shadow-none"
+          >
             Tag 3
           </Button>
         </div>
         <Separator />
         <div className="py-3 sm:flex justify-between items-center">
           <div className="flex items-center justify-between  sm:justify-normal sm:gap-x-4">
-            <Button
-              variant="outline"
-              size="md"
-              className="shrink-0 border flex items-center gap-x-2 font-normal sm:py-3"
-            >
-              <PhoneCall size={20} />
-              <span>Show contact Details</span>
-            </Button>
+            <ContactOverlay />
 
             <Button variant="ghost" size="icon">
               <HeartStraight size={24} />
@@ -188,13 +194,13 @@ export default function SlidePanel() {
           <div className="flex gap-x-2">
             <Button
               variant="outline"
-              size="md"
-              className="shrink-0 border flex items-center gap-x-2 font-normal sm:py-3"
+              size="sm"
+              className="shrink-0 border flex items-center gap-x-2 font-normal sm:py-3 rounded-full"
             >
               <PhoneCall size={20} />
               <span>Show contact Details</span>
             </Button>
-            <Button variant={"secondary"}>Message</Button>
+            <Button variant={'secondary'}>Message</Button>
           </div>
         </div>
 
