@@ -25,7 +25,6 @@ export const listBusiness = async (
     websiteUrl,
     category,
     tagsList,
-    stdCode,
     contactNumber,
     location,
   } = validatedFields.data;
@@ -38,7 +37,6 @@ export const listBusiness = async (
         websiteUrl,
         category,
         categoryTags: tagsList,
-        stdCode,
         contactNumber,
         location,
         userId,
