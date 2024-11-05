@@ -10,6 +10,15 @@ const StartupResume = async () => {
 
   const user = session?.user;
 
+  const startup = user?.startup;
+
+  const date = new Date(startup?.registrationDate as Date);
+  const formattedDate = date.toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  });
+
   return (
     <div className="p-6">
       <div className="">
@@ -28,7 +37,7 @@ const StartupResume = async () => {
           <div className="flex flex-col gap-y-4 items-start">
             <div className="flex flex-col items-start">
               <h3 className="flex justify-center gap-x-2 ">
-                <span>Startup Name</span>
+                <span>{startup?.name}</span>
                 <Image
                   src="/img/badge.png"
                   height={24}
@@ -36,8 +45,10 @@ const StartupResume = async () => {
                   alt="badge"
                 />
               </h3>
-              <p className="text-linkBlue text-sm">Company Registered Name</p>
-              <p className="text-sm">We make home decor from old clothes</p>
+              <p className="text-linkBlue text-sm">
+                {startup?.registeredName || ''}
+              </p>
+              <p className="text-sm">{startup?.description}</p>
             </div>
             <div className="flex gap-x-2">
               <Button variant="outline" size="sm" className="py-1.5">
@@ -57,7 +68,7 @@ const StartupResume = async () => {
         <div className="space-y-2">
           <h3 className="font-semibold">Website</h3>
           <Link href="www.visey.dtu.ac.in" className="text-linkBlue text-sm">
-            www.visey.dtu.ac.in
+            {startup?.websiteUrl}
           </Link>
         </div>
         <div className="space-y-2">
@@ -65,15 +76,15 @@ const StartupResume = async () => {
 
           <div className="">
             <h3 className="font-semibold">Startup Product Stage*</h3>
-            <p className="text-sm ">Ideation</p>
+            <p className="text-sm ">{startup?.productStage}</p>
           </div>
           <div className="">
             <h3 className="font-semibold">Startup Funding Stage*</h3>
-            <p className="text-sm ">Ideation</p>
+            <p className="text-sm ">{startup?.fundingStage}</p>
           </div>
           <div className="">
             <h3 className="font-semibold">TRL Level*</h3>
-            <p className="text-sm ">Ideation</p>
+            <p className="text-sm ">{startup?.trlLevel}</p>
           </div>
         </div>
       </article>
@@ -85,19 +96,19 @@ const StartupResume = async () => {
 
         <div className="space-y-2">
           <h3 className="font-semibold">Idea (Max 100-150 words)*</h3>
-          <p className="text-sm ">Ideation</p>
+          <p className="text-sm ">{startup?.idea}</p>
         </div>
         <div className="">
           <h3 className="font-semibold">
             What is the problem you are trying to solve? (Max 200-300 words)*
           </h3>
-          <p className="text-sm ">Pre-Seed</p>
+          <p className="text-sm ">{startup?.problem}</p>
         </div>
         <div className="">
           <h3 className="font-semibold">
             Market Size/Potential Market Opportunity
           </h3>
-          <p className="text-sm ">200 Million</p>
+          <p className="text-sm ">{startup?.marketSize}</p>
         </div>
         <div className="">
           <h3 className="font-semibold">
@@ -117,7 +128,7 @@ const StartupResume = async () => {
             href="https://google.drive.com"
             className="text-linkBlue text-sm"
           >
-            https://google.drive.com
+            {startup?.demoVideoUrl}
           </Link>
         </div>
         <div className="">
@@ -126,7 +137,7 @@ const StartupResume = async () => {
             href="https://google.drive.com"
             className="text-linkBlue text-sm"
           >
-            https://google.drive.com
+            {startup?.pitchDeckUrl}
           </Link>
         </div>
       </article>
@@ -155,18 +166,18 @@ const StartupResume = async () => {
           <h3 className="font-semibold">
             Team Size (including both part-time and full-time)*
           </h3>
-          <p className="text-sm">3</p>
+          <p className="text-sm">{startup?.teamSize}</p>
         </div>
         <div className="sapce-y-2">
           <h3 className="font-semibold">Number of full-time members*</h3>
-          <p className="text-sm">3</p>
+          <p className="text-sm">{startup?.noOfFte}</p>
         </div>
 
         <div className="space-y-2">
           <h3 className="font-semibold">
             Number of part-time members (write 0 if not applicable)*
           </h3>
-          <p className="text-sm">0</p>
+          <p className="text-sm">{startup?.noOfInterns}</p>
         </div>
       </article>
 
@@ -183,7 +194,7 @@ const StartupResume = async () => {
           <h3 className="font-semibold">
             Company Registration Date (If applicable)
           </h3>
-          <p className="text-sm">11/09/2024</p>
+          <p className="text-sm">{formattedDate}</p>
         </div>
       </article>
 
@@ -194,11 +205,11 @@ const StartupResume = async () => {
 
         <div className="">
           <h3 className="font-semibold">Contact Number*</h3>
-          <p className="text-sm">+91 123456789</p>
+          <p className="text-sm">{startup?.contactNumber}</p>
         </div>
         <div className="">
           <h3 className="font-semibold">Contact Email Id*</h3>
-          <p className="text-sm">contact@gmail.com</p>
+          <p className="text-sm">{startup?.email}</p>
         </div>
       </article>
     </div>

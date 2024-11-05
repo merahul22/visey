@@ -1,7 +1,8 @@
-import type { Metadata } from "next";
-import "./globals.css";
-import BreakpointIndicator from "@/components/breakpoint-indicator";
-import Provider from "@/components/Provider";
+import type { Metadata } from 'next';
+import './globals.css';
+import BreakpointIndicator from '@/components/breakpoint-indicator';
+import Provider from '@/components/Provider';
+import HelpAndSupport from '@/components/HelpAndSupport';
 
 export const metadata: Metadata = {
   title: "Visey",
@@ -18,9 +19,8 @@ export default function RootLayout({
     <html lang="en">
       <body className={`font-inter antialiased text-base-black`}>
         <BreakpointIndicator />
-        <Provider>
-          {children}
-        </Provider>
+        <Provider>{children}</Provider>
+        <HelpAndSupport />
       </body>
     </html>
   );

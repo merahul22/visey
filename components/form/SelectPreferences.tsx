@@ -6,14 +6,11 @@ import { Button } from '../ui/button';
 import { listPreferences } from '@/actions/list-preferences';
 import { useRouter } from 'next/navigation';
 
-const preferencesList = [
-  'Cost-effective',
-  'High quality',
-  'Fast delivery',
-  'Eco-friendly',
-  'Innovative',
-  'Popular',
-];
+import { categories } from '@/constants';
+
+const preferencesList = categories.map((category) => category.value);
+
+preferencesList.pop(); // Remove 'Others' from the list
 
 const SelectPreferences = () => {
   const [selectedPreferences, setSelectedPreferences] = useState<string[]>([]);
