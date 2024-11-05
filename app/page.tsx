@@ -10,11 +10,13 @@ import TestimonialSection from "./_components/testimonial-section";
 import FaqSection from "./_components/faq-section";
 import SignUpSection from "./_components/signup-section";
 import Footer from "@/components/navigation/footer";
+import { Navbar } from "@/components/navigation/navbar";
 
 export default function LandingPage() {
   // TODO: Redirect accordingly based on current auth status
   return (
     <div className="font-gothic">
+      <Navbar className="mx-auto max-w-screen-xl" />
       <HeroSection />
       <MarketplaceSection />
       <TargetAudienceSection />

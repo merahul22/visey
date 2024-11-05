@@ -1,12 +1,12 @@
-import { Button } from '@/components/ui/button';
+import { Button } from "@/components/ui/button";
 
-import { CategoryCardBig } from './_components/category-card-big';
-import { CategoryCardSmall } from './_components/category-card-small';
-import { FundingCard } from '../../../components/cards/funding-card';
-import { BusinessCardList } from './_components/buisiness';
-import { auth } from '@/auth';
-import { redirect } from 'next/navigation';
-import Footer from '@/components/Footer';
+import { CategoryCardBig } from "./_components/category-card-big";
+import { CategoryCardSmall } from "./_components/category-card-small";
+import { FundingCard } from "../../../components/cards/funding-card";
+import { BusinessCardList } from "./_components/buisiness";
+import { auth } from "@/auth";
+import { redirect } from "next/navigation";
+import Footer from "@/components/Footer";
 
 async function HomePage() {
   const session = await auth();
@@ -50,7 +50,15 @@ async function HomePage() {
         </h2>
         <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3 ">
           {Array.from({ length: 5 }).map((item, idx) => (
-            <FundingCard key={idx} />
+            <FundingCard
+              key={idx}
+              promoted
+              title="New Studies in Business Media"
+              businessName="Business Name"
+              avatarUrl="https://picsum.photos/100"
+              applyBy="December 25, 2024"
+              location="Delhi, India"
+            />
           ))}
         </div>
         <span className="block text-center">
