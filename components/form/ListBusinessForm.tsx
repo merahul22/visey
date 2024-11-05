@@ -26,7 +26,6 @@ import {
   tags as tagsList,
   categories as categoriesList,
   locations as locationsList,
-  countryCodes as countryCodesList,
 } from '@/constants';
 import Tag from '../Tag';
 import { Stepper } from '../Stepper';
@@ -58,7 +57,6 @@ const ListBusinessForm = () => {
     category: '',
     tags: '',
     tagsList: [],
-    stdCode: '',
     contactNumber: '',
     location: '',
   });
@@ -79,7 +77,6 @@ const ListBusinessForm = () => {
           category: '',
           tags: '',
           tagsList: [],
-          stdCode: '',
           contactNumber: '',
           location: '',
         };
@@ -320,65 +317,33 @@ const ListBusinessForm = () => {
                     ))}
                   </div>
                 )}
-                <div className="flex items-center gap-x-2">
-                  <FormField
-                    control={form.control}
-                    name="stdCode"
-                    render={({ field }) => (
-                      <FormItem className="w-[120px]">
-                        <FormLabel>
-                          <div className="flex justify-between">
-                            <p className="text-neutrals-600 font-semibold">
-                              Std Code
-                            </p>
-                          </div>
-                        </FormLabel>
-                        <FormControl>
-                          <div className="mt-1">
-                            <Combobox
-                              value={field.value}
-                              placeHolder="Code"
-                              noResultText="No std code found"
-                              sizeLarge={100}
-                              sizeSmall={100}
-                              data={countryCodesList}
-                              onChange={(value) => field.onChange(value)}
-                              disabled={loading}
-                            />
-                          </div>
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                  <FormField
-                    control={form.control}
-                    name="contactNumber"
-                    render={({ field }) => (
-                      <FormItem className="w-full">
-                        <FormLabel>
-                          <div className="flex justify-between">
-                            <p className="text-neutrals-600 font-semibold">
-                              Contact Number*
-                            </p>
-                            <Required />
-                          </div>
-                        </FormLabel>
-                        <FormControl>
-                          <div className="flex items-center">
-                            <Input
-                              className="mt-1"
-                              {...field}
-                              value={field.value ?? ''}
-                              disabled={loading}
-                            />
-                          </div>
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                </div>
+                <FormField
+                  control={form.control}
+                  name="contactNumber"
+                  render={({ field }) => (
+                    <FormItem className="w-full">
+                      <FormLabel>
+                        <div className="flex justify-between">
+                          <p className="text-neutrals-600 font-semibold">
+                            Contact Number*
+                          </p>
+                          <Required />
+                        </div>
+                      </FormLabel>
+                      <FormControl>
+                        <div className="flex items-center">
+                          <Input
+                            className="mt-1"
+                            {...field}
+                            value={field.value ?? ''}
+                            disabled={loading}
+                          />
+                        </div>
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
                 <FormField
                   control={form.control}
                   name="location"
