@@ -275,7 +275,7 @@ const SignupForm = () => {
                             className={`text-sm ${
                               hasMinLength
                                 ? 'text-success-200'
-                                : 'text-neutrals-500'
+                                : 'text-neutrahasUpper  ls-500'
                             }`}
                           >
                             <CheckIcon className="w-4 h-4 inline mr-1" />

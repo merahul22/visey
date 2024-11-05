@@ -5,9 +5,9 @@ import Provider from '@/components/Provider';
 import HelpAndSupport from '@/components/HelpAndSupport';
 
 export const metadata: Metadata = {
-  title: 'Visey',
+  title: "Visey",
   description:
-    'promote your startup and small business and grow more with visey',
+    "promote your startup and small business and grow more with visey",
 };
 
 export default function RootLayout({
