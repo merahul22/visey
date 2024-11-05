@@ -55,7 +55,7 @@ const StartupProfile = ({ user }) => {
             <p className="font-semibold">{user.name}</p>
             <div className="flex gap-x-2 items-center">
               <MapPin />
-              <p>{user.startup.location || 'Location'}</p>
+              <p>{user.startup?.location || 'Location'}</p>
             </div>
           </div>
         </div>
