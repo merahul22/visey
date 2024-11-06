@@ -6,8 +6,9 @@ import { auth } from '@/auth';
 import { UserDropdown } from '@/components/UserDropdown';
 import Link from 'next/link';
 import { Business, Startup } from '@prisma/client';
+import { cn } from '@/lib/utils';
 
-export async function Navbar() {
+export async function Navbar({className}: {className?: string}) {
   const session = await auth();
   const user = session?.user;
 
@@ -22,8 +23,8 @@ export async function Navbar() {
   };
 
   return (
-    <header className="sticky top-0 z-30 bg-white px-4 py-2.5 shadow-[0_4px_6px_-1px_rgba(0,0,0,0.1)] w-full">
-      <nav className="flex items-center justify-between">
+    <header className="sticky top-0 z-30 bg-primary-landing px-4 py-3 shadow-[0_4px_6px_-1px_rgba(0,0,0,0.1)] w-full">
+      <nav className={cn("flex items-center justify-between", className)}>
         <div className="shrink-0 lg:w-48 cursor-pointer">
           <Link href="/home">
             <Image
@@ -35,7 +36,7 @@ export async function Navbar() {
           </Link>
         </div>
 
-        <div className="flex-1 px-8 flex justify-center">
+        <div className="flex px-8 flex-1 justify-center">
           {user?.type === 'BUSINESS' && !user.business && (
             <Link
               href="/list-business"
@@ -56,10 +57,10 @@ export async function Navbar() {
             </Link>
           )}
 
-          <div className="hidden lg:block w-8/12">
-            <div className="relative shadow-inner w-full">
+          <div className="hidden lg:block w-full ">
+            <div className="relative shadow-inner w-[40rem]">
               <Input
-                className="flex-1 pr-10 border-none py-6"
+                className="flex-1 pr-10 border-none py-6 bg-white"
                 type="text"
                 placeholder="Type to Search.."
               />
@@ -113,7 +114,7 @@ export async function Navbar() {
 
       <div className="relative z-10 mt-4 shadow-inner lg:hidden">
         <Input
-          className="flex-1 pr-10 border-none py-6"
+          className="flex-1 pr-10 border-none py-6 bg-white"
           type="text"
           placeholder="Type to Search.."
         />
