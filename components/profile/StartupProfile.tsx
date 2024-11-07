@@ -98,7 +98,7 @@ const StartupProfile = ({ user }) => {
               </p>
             </div>
             <Button size="sm" variant="outline" className="rounded-full">
-              Add Preferences
+              Add preferences
             </Button>
           </div>
           <div className="md:hidden cursor-pointer">

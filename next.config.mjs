@@ -27,6 +27,14 @@ const nextConfig = {
         protocol: 'https',
         hostname: 'images.pexels.com',
       },
+      {
+        protocol: 'https',
+        hostname: 'protoforge.in',
+      },
+      {
+        protocol: 'https',
+        hostname: 'archive.org',
+      },
     ],
   },
 };

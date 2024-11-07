@@ -1,21 +1,21 @@
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Separator } from "@/components/ui/separator";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Separator } from '@/components/ui/separator';
 
 import {
   PhoneCall,
   HeartStraight,
   ShareFat,
   Star,
-} from "@phosphor-icons/react/dist/ssr";
-import { Button } from "@/components/ui/button";
+} from '@phosphor-icons/react/dist/ssr';
+import { Button } from '@/components/ui/button';
 
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import About from "./_components/about";
-import Services from "./_components/services";
-import Achievements from "./_components/achivements";
-import Opportunities from "./_components/opportunities";
-import Gallery from "./_components/gallery";
-import RatingReview from "./_components/rating-review";
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import About from '../../../components/profile/_components/about';
+import Services from '../../../components/profile/_components/services';
+import Achievements from '../../../components/profile/_components/achivements';
+import Opportunities from '../../../components/profile/_components/opportunities';
+import Gallery from '../../../components/profile/_components/gallery';
+import RatingReview from '../../../components/profile/_components/rating-review';
 export default function BusinessProfile() {
   return (
     <section className="flex gap-x-12">
@@ -120,22 +120,19 @@ export default function BusinessProfile() {
         </div>
 
         <div className="p-2 border rounded-lg  mx-auto">
-          <div className='bg-neutrals-400 rounded-lg w-32 aspect-[1/4]'></div>
+          <div className="bg-neutrals-400 rounded-lg w-32 aspect-[1/4]"></div>
         </div>
-        
-        <div className='border rounded-xl p-6 space-y-2'>
-          <Button className='w-full'>
-            Contact Business
-          </Button>
-          <Button variant="outline" className='gap-x-2 items-center w-full'>
-            <Star className='shrink-0 -translate-y-[1.5px]' size={16} />
+
+        <div className="border rounded-xl p-6 space-y-2">
+          <Button className="w-full">Contact Business</Button>
+          <Button variant="outline" className="gap-x-2 items-center w-full">
+            <Star className="shrink-0 -translate-y-[1.5px]" size={16} />
             <span>Rate this business</span>
           </Button>
-
         </div>
 
         <div className="p-2 border rounded-lg  mx-auto">
-          <div className='bg-neutrals-400 rounded-lg w-32 aspect-[1/4]'></div>
+          <div className="bg-neutrals-400 rounded-lg w-32 aspect-[1/4]"></div>
         </div>
       </div>
     </section>

@@ -1,4 +1,4 @@
-import { Button } from "@/components/ui/button";
+import { Button } from '@/components/ui/button';
 import {
   ArrowUpRight,
   ClockCountdown,
@@ -6,10 +6,10 @@ import {
   DotsThreeVertical,
   ThumbsUp,
   ThumbsDown,
-} from "@phosphor-icons/react/dist/ssr";
+} from '@phosphor-icons/react/dist/ssr';
 
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import Image from "next/image";
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import Image from 'next/image';
 
 // import { CaretRight, PencilSimple } from "@phosphor-icons/react/dist/ssr";
 
