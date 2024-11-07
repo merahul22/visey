@@ -29,7 +29,6 @@ import {
 } from '@/constants';
 import Tag from '../Tag';
 import { Stepper } from '../Stepper';
-import Required from '../Required';
 import { listBusiness } from '@/actions/list-business';
 import { useRouter } from 'next/navigation';
 import { DEFAULT_LOGIN_REDIRECT } from '@/routes';
@@ -327,7 +326,6 @@ const ListBusinessForm = () => {
                           <p className="text-neutrals-600 font-semibold">
                             Contact Number*
                           </p>
-                          <Required />
                         </div>
                       </FormLabel>
                       <FormControl>

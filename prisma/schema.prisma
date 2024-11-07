@@ -108,40 +108,58 @@ model Startup {
   teamSize            String?
   noOfFte             String?
   noOfInterns         String?
+  competitors         String?
 
-  user        User         @relation(fields: [userId], references: [id], onDelete: Cascade)
-  competitors Competitor[]
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@map("startup")
 }
 
-model Competitor {
-  id          String @id @default(uuid())
-  name        String
-  description String
-  startupId   String
-
-  startup Startup @relation(fields: [startupId], references: [id])
-
-  @@map("competitor")
-}
-
 model Business {
-  id             String   @id @default(uuid())
-  userId         String   @unique
+  id             String        @id @default(uuid())
+  userId         String        @unique
+  image          String        @default("https://res.cloudinary.com/dlriuadjv/image/upload/v1729353205/xbbb0zw6js60dxnq64qj.png")
   name           String
   registeredName String?
   websiteUrl     String?
   contactNumber  String
+  email          String?
   location       String
   category       String
   categoryTags   String[]
   description    String?
-  gallery       String[]
+  gallery        String[]
+  achievements   Achievement[]
+  opportunities  Opportunity[]
+  services       Services[]
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@map("business")
+}
+
+model Achievement {
+  id           String @id @default(uuid())
+  businessId   String
+  name         String
+  organization String
+  year         String
+
+  business Business @relation(fields: [businessId], references: [id], onDelete: Cascade)
+
+  @@map("achievement")
+}
+
+model Services {
+  id           String @id @default(uuid())
+  businessId   String
+  category     String
+  categoryName String
+  price        String
+
+  business Business @relation(fields: [businessId], references: [id], onDelete: Cascade)
+
+  @@map("services")
 }
 
 model Opportunity {
@@ -163,7 +181,10 @@ model Opportunity {
   startDatetime      DateTime?
   endDatetime        DateTime?
   noOfRegistrations  String?
-  questions   Json?
+  questions          Json?
+  businessId         String
+
+  business Business @relation(fields: [businessId], references: [id], onDelete: Cascade)
 
   @@map("opportunity")
 }

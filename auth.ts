@@ -1,6 +1,11 @@
 import NextAuth, { DefaultSession } from 'next-auth';
 import { PrismaAdapter } from '@auth/prisma-adapter';
-import { PrismaClient } from '@prisma/client';
+import {
+  Achievement,
+  Opportunity,
+  PrismaClient,
+  Services,
+} from '@prisma/client';
 import authConfig from './auth.config';
 import {} from 'next-auth/jwt';
 import { Business, Startup } from '@prisma/client';
@@ -12,7 +17,13 @@ declare module 'next-auth/jwt' {
     hasPassword: boolean;
     email?: string | null;
     phoneNumber?: string | null;
-    business: Business | null;
+    business:
+      | (Business & {
+          services: Services[];
+          achievements: Achievement[];
+          opportunities: Opportunity[];
+        })
+      | null;
     startup: Startup | null;
     name: string;
     preferences: string[];
@@ -32,7 +43,13 @@ declare module 'next-auth' {
       hasPassword: boolean;
       email: string;
       phoneNumber: string;
-      business: Business | null;
+      business:
+        | (Business & {
+            services: Services[];
+            achievements: Achievement[];
+            opportunities: Opportunity[];
+          })
+        | null;
       startup: Startup | null;
       name: string;
       preferences: string[];
@@ -79,6 +96,11 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
       const business = await prisma.business.findFirst({
         where: {
           userId: token.sub,
+        },
+        include: {
+          services: true,
+          achievements: true,
+          opportunities: true,
         },
       });
 

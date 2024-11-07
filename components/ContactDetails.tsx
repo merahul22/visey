@@ -6,7 +6,15 @@ import { PhoneCall } from '@phosphor-icons/react/dist/ssr';
 import { Cross2Icon } from '@radix-ui/react-icons';
 import Link from 'next/link';
 
-const ContactOverlay = () => {
+const ContactOverlay = ({
+  contactNumber,
+  email,
+  websiteUrl,
+}: {
+  contactNumber: string | undefined;
+  email: string | null | undefined;
+  websiteUrl: string | null | undefined;
+}) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
   const closeOverlay = () => {
@@ -19,8 +27,9 @@ const ContactOverlay = () => {
         variant="outline"
         onClick={() => setIsOpen(true)}
         className="rounded-full"
+        size="sm"
       >
-        <div className="flex gap-x-4">
+        <div className="flex gap-x-4 items-center">
           <PhoneCall size={20} />
           <span className="font-normal">Show contact Details</span>
         </div>
@@ -40,21 +49,21 @@ const ContactOverlay = () => {
               <h2 className="text-lg font-semibold">Contact Details</h2>
               <div className="flex flex-col">
                 <strong>Website:</strong>
-                <Link href="#">https://websitename.in</Link>
+                <Link href="#">{websiteUrl || 'Website Url'}</Link>
               </div>
               <div className="flex flex-col">
                 <strong>Email:</strong>
-                <Link href="#">cmoabc@gmail.com</Link>
+                <Link href="#">{email || 'Email'}</Link>
               </div>
               <div className="flex flex-col">
                 <strong>Contact Number:</strong>
-                <p>+91 7658947302</p>
+                <p>{contactNumber || 'Contact Number'}</p>
               </div>
             </div>
 
-            <Button variant="outline" onClick={closeOverlay}>
+            <div onClick={closeOverlay} className="cursor-pointer">
               <Cross2Icon className="w-4 h-4" />
-            </Button>
+            </div>
           </div>
         </div>
       )}
