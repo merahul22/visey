@@ -2,16 +2,10 @@ import { Separator } from '@/components/ui/separator';
 import React from 'react';
 import { Button } from './ui/button';
 import Image from 'next/image';
-import { auth } from '@/auth';
 import Link from 'next/link';
+import { Startup } from '@prisma/client';
 
-const StartupResume = async () => {
-  const session = await auth();
-
-  const user = session?.user;
-
-  const startup = user?.startup;
-
+const StartupResume = async ({ startup }: { startup: Startup | null }) => {
   const date = new Date(startup?.registrationDate as Date);
   const formattedDate = date.toLocaleDateString('en-US', {
     year: 'numeric',
@@ -26,7 +20,7 @@ const StartupResume = async () => {
         <div className="flex flex-col md:flex-row gap-6 items-center">
           <div>
             <Image
-              src={user?.image || ''}
+              src={startup?.image || ''}
               height={150}
               width={150}
               alt="Profile Photo"
