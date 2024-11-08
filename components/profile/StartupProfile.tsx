@@ -12,6 +12,7 @@ import CreateStartupResume from '../popups/CreateStartupResume';
 import StartupResume from '../StartupResume';
 import Link from 'next/link';
 import { auth } from '@/auth';
+import { redirect } from 'next/navigation';
 
 const StartupProfile = async () => {
   const session = await auth();
@@ -19,7 +20,7 @@ const StartupProfile = async () => {
   const user = session?.user;
 
   if (!user) {
-    return null;
+    return redirect('/login');
   }
 
   const date = new Date(user.createdAt);
