@@ -1,20 +1,26 @@
-'use client'
+'use client';
 import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, PanInfo } from 'framer-motion';
 
-const TestimonialCarousel = () => {
-  const testimonials = [
-    { id: 1, content: "Testimonial 1", author: "John Doe" },
-    { id: 2, content: "Testimonial 2", author: "Jane Smith" },
-    { id: 3, content: "Testimonial 3", author: "Alice Johnson" },
-    { id: 4, content: "Testimonial 4", author: "Bob Wilson" },
-    { id: 5, content: "Testimonial 5", author: "Carol Brown" },
+interface Testimonial {
+  id: number;
+  content: string;
+  author: string;
+}
+
+const TestimonialCarousel: React.FC = () => {
+  const testimonials: Testimonial[] = [
+    { id: 1, content: 'Testimonial 1', author: 'John Doe' },
+    { id: 2, content: 'Testimonial 2', author: 'Jane Smith' },
+    { id: 3, content: 'Testimonial 3', author: 'Alice Johnson' },
+    { id: 4, content: 'Testimonial 4', author: 'Bob Wilson' },
+    { id: 5, content: 'Testimonial 5', author: 'Carol Brown' },
   ];
 
-  const [activeIndex, setActiveIndex] = useState(2);
-  const [isDragging, setIsDragging] = useState(false);
+  const [activeIndex, setActiveIndex] = useState<number>(2);
+  const [isDragging, setIsDragging] = useState<boolean>(false);
 
-  const getOrder = (index) => {
+  const getOrder = (index: number): number => {
     const diff = index - activeIndex;
     const numItems = testimonials.length;
     if (diff < 0) {
@@ -23,27 +29,30 @@ const TestimonialCarousel = () => {
     return diff;
   };
 
-  const getPosition = (order) => {
+  const getPosition = (order: number): number => {
     if (order === 0) return 0;
     const direction = order > testimonials.length / 2 ? -1 : 1;
     return direction * (80 * Math.min(order, testimonials.length - order));
   };
 
-  const getScale = (order) => {
+  const getScale = (order: number): number => {
     if (order === 0) return 1;
-    return Math.max(0.85, 1 - 0.08 * Math.min(order, testimonials.length - order));
+    return Math.max(
+      0.85,
+      1 - 0.08 * Math.min(order, testimonials.length - order)
+    );
   };
 
-  const getZIndex = (order) => {
+  const getZIndex = (order: number): number => {
     if (order === 0) return 5;
     return 5 - Math.min(order, testimonials.length - order);
   };
 
-  const handleDragStart = () => {
+  const handleDragStart = (): void => {
     setIsDragging(true);
   };
 
-  const handleDragEnd = (_, info) => {
+  const handleDragEnd = (_: MouseEvent | TouchEvent, info: PanInfo): void => {
     setIsDragging(false);
     const offset = info.offset.x;
     const velocity = info.velocity.x;
@@ -53,7 +62,8 @@ const TestimonialCarousel = () => {
 
     if (shouldSwipe) {
       const direction = offset > 0 ? -1 : 1;
-      const newIndex = (activeIndex + direction + testimonials.length) % testimonials.length;
+      const newIndex =
+        (activeIndex + direction + testimonials.length) % testimonials.length;
       setActiveIndex(newIndex);
     }
   };
@@ -68,7 +78,7 @@ const TestimonialCarousel = () => {
               key={testimonial.id}
               className={`absolute w-64 bg-white rounded-lg p-6 shadow-lg select-none
                 ${order === 0 ? 'cursor-grab active:cursor-grabbing' : ''}`}
-              style={{ 
+              style={{
                 zIndex: getZIndex(order),
               }}
               animate={{
@@ -76,18 +86,18 @@ const TestimonialCarousel = () => {
                 scale: getScale(order),
                 opacity: order === 0 ? 1 : 0.8,
               }}
-              drag={order === 0 ? "x" : false}
+              drag={order === 0 ? 'x' : false}
               dragConstraints={{ left: -100, right: 100 }}
-              dragElastic={0.1}  // Reduced from default 1
-              dragMomentum={false}  // Disabled momentum
+              dragElastic={0.1} // Reduced from default 1
+              dragMomentum={false} // Disabled momentum
               onDragStart={handleDragStart}
               onDragEnd={handleDragEnd}
               transition={{
                 duration: isDragging ? 0 : 0.3,
-                type: "spring",
-                stiffness: 150,  // Increased from 100
-                damping: 25,     // Increased from 20
-                mass: 0.8       // Added mass for snappier feel
+                type: 'spring',
+                stiffness: 150, // Increased from 100
+                damping: 25, // Increased from 20
+                mass: 0.8, // Added mass for snappier feel
               }}
             >
               <p className="text-gray-800 mb-4">{testimonial.content}</p>

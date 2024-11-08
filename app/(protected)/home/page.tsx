@@ -1,12 +1,12 @@
-import { Button } from "@/components/ui/button";
+import { Button } from '@/components/ui/button';
 
-import { CategoryCardBig } from "./_components/category-card-big";
-import { CategoryCardSmall } from "./_components/category-card-small";
-import { FundingCard } from "../../../components/cards/funding-card";
-import { BusinessCardList } from "./_components/buisiness";
-import { auth } from "@/auth";
-import { redirect } from "next/navigation";
-import Footer from "@/components/Footer";
+import { CategoryCardBig } from './_components/category-card-big';
+import { CategoryCardSmall } from './_components/category-card-small';
+import { FundingCard } from '../../../components/cards/funding-card';
+import { BusinessCardList } from './_components/buisiness';
+import { auth } from '@/auth';
+import { redirect } from 'next/navigation';
+import Footer from '@/components/Footer';
 
 async function HomePage() {
   const session = await auth();
@@ -14,6 +14,8 @@ async function HomePage() {
   if (!session?.user?.type) {
     redirect('/account-type');
   }
+
+  const date = new Date(Date.now());
 
   return (
     <div className="space-y-10">
@@ -56,7 +58,7 @@ async function HomePage() {
               title="New Studies in Business Media"
               businessName="Business Name"
               avatarUrl="https://picsum.photos/100"
-              applyBy="December 25, 2024"
+              applyBy={date}
               location="Delhi, India"
             />
           ))}
