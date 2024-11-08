@@ -11,17 +11,19 @@ import { Cross2Icon } from '@radix-ui/react-icons';
 import CreateStartupResume from '../popups/CreateStartupResume';
 import StartupResume from '../StartupResume';
 import Link from 'next/link';
-import { auth } from '@/auth';
+import { Startup } from '@prisma/client';
 
-const StartupProfile = async () => {
-  const session = await auth();
+interface StartupProfileProps {
+  image: string | null | undefined;
+  startup: Startup | null;
+  email: string;
+  phoneNumber: string;
+  createdAt: Date;
+  name: string;
+  preferences: string[];
+}
 
-  const user = session?.user;
-
-  if (!user) {
-    return null;
-  }
-
+const StartupProfile = async ({ user }: { user: StartupProfileProps }) => {
   const date = new Date(user.createdAt);
 
   const formattedDate = `${date.getDate()} ${date.toLocaleString('default', {
@@ -140,7 +142,7 @@ const StartupProfile = async () => {
             </Button>
           </div>
           <div className="">
-            <StartupResume />
+            <StartupResume startup={user.startup} />
           </div>
         </div>
       </div>

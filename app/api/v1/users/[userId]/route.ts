@@ -1,5 +1,5 @@
 import prisma from '@/lib/db';
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 
 interface Params {
   params: {
@@ -7,7 +7,7 @@ interface Params {
   };
 }
 
-export async function GET(req: Request, { params }: Params) {
+export async function GET(req: NextRequest, { params }: Params) {
   const { userId } = params;
 
   try {
@@ -26,6 +26,4 @@ export async function GET(req: Request, { params }: Params) {
     console.log(err);
     return NextResponse.json({ error: 'Error' }, { status: 500 });
   }
-
-  return NextResponse.json({ message: `User ID is ${userId}` });
 }

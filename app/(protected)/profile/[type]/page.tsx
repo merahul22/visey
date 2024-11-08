@@ -16,8 +16,18 @@ const ProfilePage = async ({ params }: { params: Params }) => {
     redirect('/account-type');
   }
 
+  const userProps = {
+    image: user.image,
+    startup: user.startup,
+    email: user.email,
+    phoneNumber: user.phoneNumber,
+    createdAt: user.createdAt,
+    preferences: user.preferences,
+    name: user.name,
+  };
+
   if (params.type === 'startup' && user?.type === 'STARTUP') {
-    return <StartupProfile />;
+    return <StartupProfile user={userProps} />;
   } else if (params.type === 'business' && user?.type === 'BUSINESS') {
     return <BusinessProfile />;
   } else {
