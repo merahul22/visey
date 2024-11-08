@@ -1,31 +1,31 @@
-"use client";
+'use client';
 
-import Image from "next/image";
-import React, { useState } from "react";
+import Image from 'next/image';
+import React, { useState } from 'react';
 
 export function ImageCarousel() {
   const [activeIndex, setActiveIndex] = useState(2);
 
   const slides = [
     {
-      image: "/api/placeholder/400/300",
-      caption: "First slide",
+      image: '/api/placeholder/400/300',
+      caption: 'First slide',
     },
     {
-      image: "/api/placeholder/400/300",
-      caption: "Second slide",
+      image: '/api/placeholder/400/300',
+      caption: 'Second slide',
     },
     {
-      image: "/api/placeholder/400/300",
-      caption: "An absolute must have for startups and businesses",
+      image: '/api/placeholder/400/300',
+      caption: 'An absolute must have for startups and businesses',
     },
     {
-      image: "/api/placeholder/400/300",
-      caption: "Fourth slide",
+      image: '/api/placeholder/400/300',
+      caption: 'Fourth slide',
     },
     {
-      image: "/api/placeholder/400/300",
-      caption: "Fifth slide",
+      image: '/api/placeholder/400/300',
+      caption: 'Fifth slide',
     },
   ];
 
@@ -41,8 +41,8 @@ export function ImageCarousel() {
           const offset = index - activeIndex;
           const isActive = index === activeIndex;
 
-          let transform = "";
-          let rotation = "";
+          let transform = '';
+          // const rotation = '';
           const zIndex = slides.length - Math.abs(offset);
           let opacity = 1;
 
@@ -51,20 +51,20 @@ export function ImageCarousel() {
               1 - Math.abs(offset) * 0.1
             })`;
             opacity = 1 - Math.abs(offset) * 0.5;
-            rotation = `rotate(${offset * 5}deg)`
+            // rotation = `rotate(${offset * 5}deg)`;
           } else if (offset > 0) {
             transform = `translateX(${offset * 10}%) scale(${
               1 - Math.abs(offset) * 0.1
             })`;
             opacity = 1 - Math.abs(offset) * 0.5;
-            rotation = `rotate(${offset * 5}deg)`
+            // rotation = `rotate(${offset * 5}deg)`
           }
 
           return (
             <div
               key={index}
               className={`absolute top-0 left-0 w-full transition-all duration-300 ease-in-out
-                         ${isActive ? "shadow-lg" : "shadow-md"}`}
+                         ${isActive ? 'shadow-lg' : 'shadow-md'}`}
               style={{
                 transform,
                 zIndex,
@@ -95,11 +95,11 @@ export function ImageCarousel() {
           <button
             key={index}
             onClick={() => handleDotClick(index)}
-            className={`w-2 h-2 rounded-full transition-all duration-300 
+            className={`w-2 h-2 rounded-full transition-all duration-300
                        ${
                          activeIndex === index
-                           ? "bg-blue-500 w-4"
-                           : "bg-gray-300"
+                           ? 'bg-blue-500 w-4'
+                           : 'bg-gray-300'
                        }`}
             aria-label={`Go to slide ${index + 1}`}
           />

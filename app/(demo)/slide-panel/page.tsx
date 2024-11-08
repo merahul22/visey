@@ -70,7 +70,11 @@ export default function SlidePanel() {
         <Separator />
         <div className="py-3 sm:flex justify-between items-center">
           <div className="flex items-center justify-between  sm:justify-normal sm:gap-x-4">
-            <ContactOverlay />
+            <ContactOverlay
+              email="email"
+              contactNumber="number"
+              websiteUrl="url"
+            />
 
             <Button variant="ghost" size="icon">
               <HeartStraight size={24} />

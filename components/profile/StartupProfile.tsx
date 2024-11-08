@@ -11,8 +11,17 @@ import { Cross2Icon } from '@radix-ui/react-icons';
 import CreateStartupResume from '../popups/CreateStartupResume';
 import StartupResume from '../StartupResume';
 import Link from 'next/link';
+import { auth } from '@/auth';
 
-const StartupProfile = ({ user }) => {
+const StartupProfile = async () => {
+  const session = await auth();
+
+  const user = session?.user;
+
+  if (!user) {
+    return null;
+  }
+
   const date = new Date(user.createdAt);
 
   const formattedDate = `${date.getDate()} ${date.toLocaleString('default', {

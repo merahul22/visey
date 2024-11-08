@@ -17,7 +17,7 @@ const ProfilePage = async ({ params }: { params: Params }) => {
   }
 
   if (params.type === 'startup' && user?.type === 'STARTUP') {
-    return <StartupProfile user={user} />;
+    return <StartupProfile />;
   } else if (params.type === 'business' && user?.type === 'BUSINESS') {
     return <BusinessProfile />;
   } else {

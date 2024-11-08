@@ -576,7 +576,7 @@ const PostFundingOpportunityForm = () => {
 
                 {registrations === 'visey' && (
                   <div className="space-y-4">
-                    <FormField
+                    {/* <FormField
                       control={form.control}
                       name="startDate"
                       render={({ field }) => (
@@ -595,8 +595,8 @@ const PostFundingOpportunityForm = () => {
                           <FormMessage />
                         </FormItem>
                       )}
-                    />
-                    <FormField
+                    /> */}
+                    {/* <FormField
                       control={form.control}
                       name="endDate"
                       render={({ field }) => (
@@ -615,7 +615,7 @@ const PostFundingOpportunityForm = () => {
                           <FormMessage />
                         </FormItem>
                       )}
-                    />
+                    /> */}
                     <FormField
                       control={form.control}
                       name="noOfRegistrationsAllowed"
