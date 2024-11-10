@@ -26,10 +26,6 @@ export const signin = async (values: z.infer<typeof loginSchema>) => {
   try {
     const user = await prisma.user.findUnique({
       where: isEmail ? { email: identifier } : { phoneNumber: identifier },
-      include: {
-        business: true,
-        startup: true,
-      },
     });
 
     if (!user) {
@@ -52,7 +48,7 @@ export const signin = async (values: z.infer<typeof loginSchema>) => {
       redirect: false,
     });
 
-    return { success: 'Logged in successfully!', user };
+    return { success: 'Logged in successfully!' };
   } catch (err) {
     if (err instanceof AuthError) {
       switch (err.type) {

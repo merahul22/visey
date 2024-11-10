@@ -21,7 +21,6 @@ import { signin } from '@/actions/signin';
 import { useTransition, useState } from 'react';
 import { FormError } from './FormError';
 import { FormSuccess } from './FormSuccess';
-import { DEFAULT_LOGIN_REDIRECT } from '@/routes';
 import { useRouter } from 'next/navigation';
 
 const LoginForm = () => {
@@ -50,17 +49,8 @@ const LoginForm = () => {
       }
 
       if (res.success) {
-        const user = res.user;
-
-        let redirectUrl = DEFAULT_LOGIN_REDIRECT;
-
-        if (!user.business && user.type === 'BUSINESS') {
-          redirectUrl = '/list-business';
-        } else if (!user.preferences && user.type === 'STARTUP') {
-          redirectUrl = '/list-preferences';
-        }
-
-        router.push(redirectUrl);
+        setSuccess(res.success);
+        router.push('/home');
       }
     });
   };
