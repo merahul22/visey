@@ -5,8 +5,17 @@ import { CategoryCardSmall } from './_components/category-card-small';
 import { FundingCard } from '../../../components/cards/funding-card';
 import { BusinessCardList } from './_components/buisiness';
 import Footer from '@/components/Footer';
+import { auth } from '@/auth';
+import { redirect } from 'next/navigation';
 
 async function HomePage() {
+  const session = await auth();
+
+  const user = session?.user;
+  if (!user?.type) {
+    redirect('/account-type');
+  }
+
   const date = new Date(Date.now());
 
   return (
