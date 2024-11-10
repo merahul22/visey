@@ -1,13 +1,12 @@
 import { PencilSimple, MapPin } from '@phosphor-icons/react/dist/ssr';
 import { Button } from '@/components/ui/button';
-import { auth } from '@/auth';
 
-export default async function About() {
-  const session = await auth();
-  const user = session?.user;
+interface AboutProps {
+  location: string | undefined;
+  description: string | null | undefined;
+}
 
-  const business = user?.business;
-
+export default function About({ location, description }: AboutProps) {
   return (
     <div className="space-y-6 pt-6 pb-4">
       <div className="flex justify-between items-center">
@@ -20,9 +19,9 @@ export default async function About() {
       <div className="space-y-4">
         <div className="flex gap-x-1 items-center">
           <MapPin size={16} />
-          <span>{business?.location || 'Location'}</span>
+          <span>{location || 'Location'}</span>
         </div>
-        <p>{business?.description || 'Business Description'}</p>
+        <p>{description || 'Business Description'}</p>
       </div>
     </div>
   );

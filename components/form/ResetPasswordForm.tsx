@@ -19,20 +19,16 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { resetPasswordSchema } from '@/schemas';
 import { CheckIcon } from 'lucide-react';
-import { useSession } from 'next-auth/react';
 import { resetPassword } from '@/actions/reset-password';
 import { FormError } from './FormError';
 import { FormSuccess } from './FormSuccess';
 
-const ResetPasswordForm = () => {
+const ResetPasswordForm = ({ hasPassword }: { hasPassword: boolean }) => {
   const [password, setPassword] = useState('');
-  const session = useSession();
   const [error, setError] = useState<string | undefined>('');
   const [success, setSuccess] = useState<string | undefined>('');
 
   const [loading, startTransition] = useTransition();
-
-  const user = session.data?.user;
 
   const form = useForm<z.infer<typeof resetPasswordSchema>>({
     resolver: zodResolver(resetPasswordSchema),
@@ -75,7 +71,15 @@ const ResetPasswordForm = () => {
           <FormSuccess message={success} />
         </div>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
-          {user?.hasPassword && (
+          {!hasPassword && (
+            <div>
+              <p className="text-sm text-error-300">
+                You haven&apos;t set a password yet. Please set a password to
+                continue.
+              </p>
+            </div>
+          )}
+          {hasPassword && (
             <FormField
               control={form.control}
               name="currentPassword"

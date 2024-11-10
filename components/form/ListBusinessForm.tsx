@@ -32,6 +32,7 @@ import { Stepper } from '../Stepper';
 import { listBusiness } from '@/actions/list-business';
 import { useRouter } from 'next/navigation';
 import { DEFAULT_LOGIN_REDIRECT } from '@/routes';
+import { useSession } from 'next-auth/react';
 
 function splitAndCapitalize(inputString: string) {
   const words = inputString.split('-');
@@ -46,6 +47,8 @@ const ListBusinessForm = () => {
   const [currentStep, setCurrentStep] = useState<number>(1);
   const [loading, startTransition] = useTransition();
   const router = useRouter();
+
+  const { update } = useSession();
 
   const [formValues, setFormValues] = useState<
     z.infer<typeof listBusinessSchema>
@@ -113,6 +116,7 @@ const ListBusinessForm = () => {
         }
 
         if (res.success) {
+          update();
           router.push(DEFAULT_LOGIN_REDIRECT);
         }
       });

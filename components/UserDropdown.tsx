@@ -15,6 +15,7 @@ import {
   CoinVertical,
   ClipboardText,
   HeartStraight,
+  Bag,
 } from '@phosphor-icons/react/dist/ssr';
 
 import { ExitIcon, GearIcon } from '@radix-ui/react-icons';
@@ -102,6 +103,14 @@ export function UserDropdown({ user }: UserDropdownProps) {
             <>
               <DropdownMenuItem className="cursor-pointer">
                 <span className="flex gap-x-2 items-center">
+                  <Bag />
+                  <Link href={'/account'}>
+                    <span>My Account</span>
+                  </Link>
+                </span>
+              </DropdownMenuItem>
+              <DropdownMenuItem className="cursor-pointer">
+                <span className="flex gap-x-2 items-center">
                   <RowsPlusTop />
                   <span>Manage Opportunities</span>
                 </span>
@@ -142,7 +151,7 @@ export function UserDropdown({ user }: UserDropdownProps) {
           <DropdownMenuItem className="cursor-pointer">
             <span className="flex gap-x-2 items-center">
               <GearIcon className="" />
-              <Link href={`/settings/${user?.type?.toLowerCase()}`}>
+              <Link href={`/settings`}>
                 <span>Settings</span>
               </Link>
             </span>

@@ -2,6 +2,7 @@
 import { auth } from '@/auth';
 import BusinessProfile from '@/components/profile/BusinessProfile';
 import StartupProfile from '@/components/profile/StartupProfile';
+import { Achievement, Business, Opportunity, Services } from '@prisma/client';
 import { redirect } from 'next/navigation';
 
 interface Params {
@@ -16,7 +17,7 @@ const ProfilePage = async ({ params }: { params: Params }) => {
     redirect('/account-type');
   }
 
-  const userProps = {
+  const userStartupProps = {
     image: user.image,
     startup: user.startup,
     email: user.email,
@@ -26,10 +27,18 @@ const ProfilePage = async ({ params }: { params: Params }) => {
     name: user.name,
   };
 
+  const userBusinessProps = {
+    business: user.business as Business,
+    services: user.business?.services as Services[],
+    opportunities: user.business?.opportunities as Opportunity[],
+    gallery: user.business?.gallery as string[],
+    achievements: user.business?.achievements as Achievement[],
+  };
+
   if (params.type === 'startup' && user?.type === 'STARTUP') {
-    return <StartupProfile user={userProps} />;
+    return <StartupProfile user={userStartupProps} />;
   } else if (params.type === 'business' && user?.type === 'BUSINESS') {
-    return <BusinessProfile />;
+    return <BusinessProfile user={userBusinessProps} />;
   } else {
     return <div>Access Denied</div>; // Handle invalid access
   }

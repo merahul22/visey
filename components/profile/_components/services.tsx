@@ -1,13 +1,8 @@
 import { PencilSimple } from '@phosphor-icons/react/dist/ssr';
 import { Button } from '@/components/ui/button';
-import { auth } from '@/auth';
+import { Services } from '@prisma/client';
 
-export default async function Services() {
-  const session = await auth();
-  const user = session?.user;
-
-  const business = user?.business;
-
+export default function Service({ services }: { services: Services[] }) {
   return (
     <div className="space-y-6 pt-6 pb-4">
       <div className="flex justify-between items-center">
@@ -18,26 +13,27 @@ export default async function Services() {
       </div>
 
       <div className="space-y-3">
-        {business?.services.length === 0 && (
+        {(!services || services?.length === 0) && (
           <div>
             <p className="text-sm">No services added yet</p>
           </div>
         )}
-        {business?.services?.map((service, idx) => (
-          <div
-            key={idx}
-            className="rounded-xl border flex justify-between items-center px-2.5 py-4"
-          >
-            <div className="space-y-1">
-              <p className="font-semibold">Category</p>
-              <p className="text-sm">{service.category}</p>
-            </div>
+        {services &&
+          services?.map((service, idx) => (
+            <div
+              key={idx}
+              className="rounded-xl border flex justify-between items-center px-2.5 py-4"
+            >
+              <div className="space-y-1">
+                <p className="font-semibold">Category</p>
+                <p className="text-sm">{service.category}</p>
+              </div>
 
-            <Button size="sm" variant={'secondary'}>
-              ₹{service.price}
-            </Button>
-          </div>
-        ))}
+              <Button size="sm" variant={'secondary'}>
+                ₹{service.price}
+              </Button>
+            </div>
+          ))}
       </div>
     </div>
   );

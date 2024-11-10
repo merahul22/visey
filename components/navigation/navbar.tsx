@@ -8,7 +8,7 @@ import Link from 'next/link';
 import { Business, Startup } from '@prisma/client';
 import { cn } from '@/lib/utils';
 
-export async function Navbar({className}: {className?: string}) {
+export async function Navbar({ className }: { className?: string }) {
   const session = await auth();
   const user = session?.user;
 
@@ -24,7 +24,7 @@ export async function Navbar({className}: {className?: string}) {
 
   return (
     <header className="sticky top-0 z-30 bg-primary-landing px-4 py-3 shadow-[0_4px_6px_-1px_rgba(0,0,0,0.1)] w-full">
-      <nav className={cn("flex items-center justify-between", className)}>
+      <nav className={cn('flex items-center justify-between', className)}>
         <div className="shrink-0 lg:w-48 cursor-pointer">
           <Link href="/home">
             <Image
