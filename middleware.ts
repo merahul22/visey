@@ -14,6 +14,9 @@ export default auth(async (req) => {
   const { nextUrl } = req;
   const isLoggedIn = !!req.auth;
 
+  const session = await auth();
+  const user = session?.user;
+
   const isApiAuthRoute = nextUrl.pathname.startsWith(apiAuthPrefix);
   const isPublicRoute = publicRoutes.includes(nextUrl.pathname);
   const isAuthRoute = authRoutes.includes(nextUrl.pathname);
@@ -23,8 +26,11 @@ export default auth(async (req) => {
   }
 
   if (isAuthRoute) {
-    if (isLoggedIn) {
+    if (isLoggedIn && user?.type) {
       return Response.redirect(new URL(DEFAULT_LOGIN_REDIRECT, nextUrl));
+    }
+    if (isLoggedIn && !user?.type) {
+      return Response.redirect(new URL('/account-type', nextUrl));
     }
     return;
   }

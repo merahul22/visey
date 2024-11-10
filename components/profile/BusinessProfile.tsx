@@ -19,8 +19,8 @@ interface BusinessProfileProps {
   business: Business | null;
   services: Services[];
   opportunities: Opportunity[];
-  gallery: string[];
   achievements: Achievement[];
+  gallery: string[];
 }
 
 export default async function BusinessProfile({
@@ -29,6 +29,14 @@ export default async function BusinessProfile({
   user: BusinessProfileProps;
 }) {
   const business = user.business;
+
+  if (!business) {
+    return (
+      <div className="">
+        <p>Business not found</p>
+      </div>
+    );
+  }
 
   return (
     <section className="flex gap-x-12">

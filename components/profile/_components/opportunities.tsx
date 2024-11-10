@@ -22,23 +22,24 @@ export default async function Opportunities({
       </div>
 
       <div className="grid gap-4 sm:gap-6 sm:grid-cols-2">
-        {opportunities.length === 0 && (
+        {(!opportunities || opportunities.length === 0) && (
           <div>
             <p className="text-sm">No opportunities added yet</p>
           </div>
         )}
 
-        {opportunities?.map((opportunity, idx) => (
-          <FundingCard
-            key={idx}
-            title={opportunity.title}
-            promoted={false}
-            businessName={name}
-            avatarUrl={opportunity.imageUrl as string}
-            applyBy={opportunity.endDatetime}
-            location={location}
-          />
-        ))}
+        {opportunities &&
+          opportunities?.map((opportunity, idx) => (
+            <FundingCard
+              key={idx}
+              title={opportunity.title}
+              promoted={false}
+              businessName={name}
+              avatarUrl={opportunity.imageUrl as string}
+              applyBy={opportunity.endDatetime}
+              location={location}
+            />
+          ))}
       </div>
     </div>
   );

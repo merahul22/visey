@@ -17,23 +17,24 @@ export default async function Achievements({
       </div>
 
       <div className="space-y-3 md:flex md:flex-wrap md:gap-4 md:space-y-0">
-        {achievements.length === 0 && (
+        {(!achievements || achievements?.length === 0) && (
           <div>
             <p className="text-sm">No achievements added yet</p>
           </div>
         )}
 
-        {achievements?.map((achievement, idx) => (
-          <div
-            key={idx}
-            className="rounded-xl border px-2.5 py-4 md:px-3 shrink-0"
-          >
-            <div className="space-y-1">
-              <p className="font-semibold">{achievement.name}</p>
-              <p className="text-sm">{achievement.organization}</p>
+        {achievements &&
+          achievements?.map((achievement, idx) => (
+            <div
+              key={idx}
+              className="rounded-xl border px-2.5 py-4 md:px-3 shrink-0"
+            >
+              <div className="space-y-1">
+                <p className="font-semibold">{achievement.name}</p>
+                <p className="text-sm">{achievement.organization}</p>
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
       </div>
     </div>
   );

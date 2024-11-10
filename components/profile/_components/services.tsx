@@ -13,26 +13,27 @@ export default async function Service({ services }: { services: Services[] }) {
       </div>
 
       <div className="space-y-3">
-        {services?.length === 0 && (
+        {(!services || services?.length === 0) && (
           <div>
             <p className="text-sm">No services added yet</p>
           </div>
         )}
-        {services?.map((service, idx) => (
-          <div
-            key={idx}
-            className="rounded-xl border flex justify-between items-center px-2.5 py-4"
-          >
-            <div className="space-y-1">
-              <p className="font-semibold">Category</p>
-              <p className="text-sm">{service.category}</p>
-            </div>
+        {services &&
+          services?.map((service, idx) => (
+            <div
+              key={idx}
+              className="rounded-xl border flex justify-between items-center px-2.5 py-4"
+            >
+              <div className="space-y-1">
+                <p className="font-semibold">Category</p>
+                <p className="text-sm">{service.category}</p>
+              </div>
 
-            <Button size="sm" variant={'secondary'}>
-              ₹{service.price}
-            </Button>
-          </div>
-        ))}
+              <Button size="sm" variant={'secondary'}>
+                ₹{service.price}
+              </Button>
+            </div>
+          ))}
       </div>
     </div>
   );

@@ -4,17 +4,9 @@ import { CategoryCardBig } from './_components/category-card-big';
 import { CategoryCardSmall } from './_components/category-card-small';
 import { FundingCard } from '../../../components/cards/funding-card';
 import { BusinessCardList } from './_components/buisiness';
-import { auth } from '@/auth';
-import { redirect } from 'next/navigation';
 import Footer from '@/components/Footer';
 
 async function HomePage() {
-  const session = await auth();
-
-  if (!session?.user?.type) {
-    redirect('/account-type');
-  }
-
   const date = new Date(Date.now());
 
   return (

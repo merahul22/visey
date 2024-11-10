@@ -18,25 +18,26 @@ export default async function Gallery({ gallery }: { gallery: string[] }) {
       </div>
 
       <div className="flex gap-x-4 oveflow-x-auto">
-        {gallery.length === 0 && (
+        {(!gallery || gallery.length === 0) && (
           <div className="text-gray-400">No images to display</div>
         )}
 
-        {gallery.map((image, idx) => (
-          <div key={idx}>
-            <div className="bg-gray-200 rounded-lg">
-              <Image
-                src={
-                  'https://archive.org/download/placeholder-image/placeholder-image.jpg'
-                }
-                height={144}
-                width={96}
-                alt="Gallery Image"
-                className="rounded-lg"
-              />
+        {gallery &&
+          gallery.map((image, idx) => (
+            <div key={idx}>
+              <div className="bg-gray-200 rounded-lg">
+                <Image
+                  src={
+                    'https://archive.org/download/placeholder-image/placeholder-image.jpg'
+                  }
+                  height={144}
+                  width={96}
+                  alt="Gallery Image"
+                  className="rounded-lg"
+                />
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
       </div>
     </div>
   );
