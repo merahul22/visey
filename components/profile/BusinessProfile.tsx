@@ -6,25 +6,28 @@ import { Button } from '@/components/ui/button';
 
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import About from '@/components/profile/_components/about';
-import Services from '@/components/profile/_components/services';
+import Service from '@/components/profile/_components/services';
 import Achievements from '@/components/profile/_components/achivements';
 import Opportunities from '@/components/profile/_components/opportunities';
 import Gallery from '@/components/profile/_components/gallery';
 import RatingReview from '@/components/profile/_components/rating-review';
 import ContactOverlay from '../ContactDetails';
 import StarRating from '../StarRating';
-import { auth } from '@/auth';
-import { redirect } from 'next/navigation';
+import { Achievement, Business, Opportunity, Services } from '@prisma/client';
 
-export default async function BusinessProfile() {
-  const session = await auth();
+interface BusinessProfileProps {
+  business: Business | null;
+  services: Services[];
+  opportunities: Opportunity[];
+  gallery: string[];
+  achievements: Achievement[];
+}
 
-  const user = session?.user;
-
-  if (!user?.type) {
-    redirect('/account-type');
-  }
-
+export default async function BusinessProfile({
+  user,
+}: {
+  user: BusinessProfileProps;
+}) {
   const business = user.business;
 
   return (
@@ -89,29 +92,33 @@ export default async function BusinessProfile() {
               <TabsTrigger value="gallery">Gallery</TabsTrigger>
             </TabsList>
             <TabsContent value="overview">
-              <About />
+              <About
+                location={business?.location}
+                description={business?.description}
+              />
               <Separator />
-              <Services />
+              <Service services={user.services} />
               <Separator />
-              <Achievements />
+              <Achievements achievements={user.achievements} />
               <Separator />
-              <Opportunities />
+              <Opportunities
+                opportunities={user.opportunities}
+                name={business?.name as string}
+                location={business?.location as string}
+              />
               <Separator />
-              <Gallery />
+              <Gallery gallery={user.gallery} />
               <Separator />
               <RatingReview />
             </TabsContent>
             <TabsContent value="services">
-              {/* <About /> */}
-              <Services />
+              <Service services={user.services} />
             </TabsContent>
             <TabsContent value="reviews">
-              {/* <About /> */}
               <RatingReview />
             </TabsContent>
             <TabsContent value="gallery">
-              {/* <About /> */}
-              <Gallery />
+              <Gallery gallery={user.gallery} />
             </TabsContent>
           </Tabs>
         </div>
