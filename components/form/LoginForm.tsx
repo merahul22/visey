@@ -45,7 +45,7 @@ const LoginForm = () => {
     startTransition(async () => {
       const res = await signin(values);
 
-      if (res.error) {
+      if (res?.error) {
         setError(res.error);
       }
 

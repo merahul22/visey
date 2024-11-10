@@ -2,7 +2,7 @@ import { PencilSimple } from '@phosphor-icons/react/dist/ssr';
 import { Button } from '@/components/ui/button';
 import { Achievement } from '@prisma/client';
 
-export default async function Achievements({
+export default function Achievements({
   achievements,
 }: {
   achievements: Achievement[];

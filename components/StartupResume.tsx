@@ -5,7 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Startup } from '@prisma/client';
 
-const StartupResume = async ({ startup }: { startup: Startup | null }) => {
+const StartupResume = ({ startup }: { startup: Startup | null }) => {
   const date = new Date(startup?.registrationDate as Date);
   const formattedDate = date.toLocaleDateString('en-US', {
     year: 'numeric',

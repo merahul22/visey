@@ -6,7 +6,7 @@ interface AboutProps {
   description: string | null | undefined;
 }
 
-export default async function About({ location, description }: AboutProps) {
+export default function About({ location, description }: AboutProps) {
   return (
     <div className="space-y-6 pt-6 pb-4">
       <div className="flex justify-between items-center">

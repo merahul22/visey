@@ -3,7 +3,7 @@ import { PencilSimple } from '@phosphor-icons/react/dist/ssr';
 import { Button } from '@/components/ui/button';
 import { Opportunity } from '@prisma/client';
 
-export default async function Opportunities({
+export default function Opportunities({
   opportunities,
   name,
   location,

@@ -2,7 +2,7 @@ import { Button } from '@/components/ui/button';
 import { CaretRight, PencilSimple } from '@phosphor-icons/react/dist/ssr';
 import Image from 'next/image';
 
-export default async function Gallery({ gallery }: { gallery: string[] }) {
+export default function Gallery({ gallery }: { gallery: string[] }) {
   return (
     <div className="space-y-6 pt-6 pb-4">
       <div className="flex justify-between items-center">

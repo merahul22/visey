@@ -23,7 +23,7 @@ interface BusinessProfileProps {
   gallery: string[];
 }
 
-export default async function BusinessProfile({
+export default function BusinessProfile({
   user,
 }: {
   user: BusinessProfileProps;

@@ -2,7 +2,7 @@ import { PencilSimple } from '@phosphor-icons/react/dist/ssr';
 import { Button } from '@/components/ui/button';
 import { Services } from '@prisma/client';
 
-export default async function Service({ services }: { services: Services[] }) {
+export default function Service({ services }: { services: Services[] }) {
   return (
     <div className="space-y-6 pt-6 pb-4">
       <div className="flex justify-between items-center">

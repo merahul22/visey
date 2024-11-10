@@ -23,7 +23,7 @@ interface StartupProfileProps {
   preferences: string[];
 }
 
-const StartupProfile = async ({ user }: { user: StartupProfileProps }) => {
+const StartupProfile = ({ user }: { user: StartupProfileProps }) => {
   const date = new Date(user.createdAt);
 
   const formattedDate = `${date.getDate()} ${date.toLocaleString('default', {
