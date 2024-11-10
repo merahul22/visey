@@ -1,162 +1,162 @@
-import type { Config } from "tailwindcss";
+import type { Config } from 'tailwindcss';
 
 const config: Config = {
-  darkMode: ["class"],
+  darkMode: ['class'],
   content: [
-    "./pages/**/*.{js,ts,jsx,tsx,mdx}",
-    "./components/**/*.{js,ts,jsx,tsx,mdx}",
-    "./app/**/*.{js,ts,jsx,tsx,mdx}",
+    './pages/**/*.{js,ts,jsx,tsx,mdx}',
+    './components/**/*.{js,ts,jsx,tsx,mdx}',
+    './app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
     extend: {
       fontFamily: {
-        inter: ["Inter", "sans-serif"],
-        gothic: ["Gothic A1", "sans-serif"],
-        degular: ["DegularDisplay", "sans-serif"],
+        inter: ['Inter', 'sans-serif'],
+        gothic: ['Gothic A1', 'sans-serif'],
+        degular: ['DegularDisplay', 'sans-serif'],
       },
       fontSize: {
-        display1: "9rem", // 144px
-        display2: "6rem", // 96px
-        display3: "4rem", // 64px
-        heading1: "3.5rem", // 56px
-        heading2: "3rem", // 48px
-        heading3: "2.5rem", // 40px
-        heading4: "2rem", // 32px
-        hero: "1.75rem", // 28px
-        feature: "1.5rem", // 24px
-        highlight: "1.125rem", // 18px
-        content: "1rem", // 16px
-        caption: "0.875rem", // 14px
-        footnote: "0.75rem", // 12px
+        display1: '9rem', // 144px
+        display2: '6rem', // 96px
+        display3: '4rem', // 64px
+        heading1: '3.5rem', // 56px
+        heading2: '3rem', // 48px
+        heading3: '2.5rem', // 40px
+        heading4: '2rem', // 32px
+        hero: '1.75rem', // 28px
+        feature: '1.5rem', // 24px
+        highlight: '1.125rem', // 18px
+        content: '1rem', // 16px
+        caption: '0.875rem', // 14px
+        footnote: '0.75rem', // 12px
       },
       colors: {
-        background: "hsl(var(--background))",
-        foreground: "hsl(var(--foreground))",
-        linkBlue: "#005CC0",
+        background: 'hsl(var(--background))',
+        foreground: 'hsl(var(--foreground))',
+        linkBlue: '#005CC0',
         card: {
-          DEFAULT: "hsl(var(--card))",
-          foreground: "hsl(var(--card-foreground))",
+          DEFAULT: 'hsl(var(--card))',
+          foreground: 'hsl(var(--card-foreground))',
         },
         popover: {
-          DEFAULT: "hsl(var(--popover))",
-          foreground: "hsl(var(--popover-foreground))",
+          DEFAULT: 'hsl(var(--popover))',
+          foreground: 'hsl(var(--popover-foreground))',
         },
         primary: {
-          "100": "#FDE6E9",
-          "200": "#F1B0BE",
-          "300": "#E48A9A",
-          "400": "#E22C64",
-          "500": "#D40A57",
-          "600": "#BC0A4C",
-          "700": "#A11A3E",
-          "800": "#851d37",
-          "900": "#691731",
-          "1000": "#46112A",
-          DEFAULT: "#BD2959",
-          landing: "#E70763",
-          "landing-light": "#EC3982",
-          foreground: "hsl(var(--primary-foreground))",
+          '100': '#F8DEE6',
+          '200': '#F1BDCE',
+          '300': '#EA9CB5',
+          '400': '#E27C9D',
+          '500': '#DB5B84',
+          '600': '#D43A6C',
+          '700': '#A1234C',
+          '800': '#851D3F',
+          '900': '#691731',
+          '1000': '#4D1124',
+          DEFAULT: '#D43A63',
+          landing: '#E70763',
+          'landing-light': '#EC3982',
+          foreground: 'hsl(var(--primary-foreground))',
         },
         secondary: {
-          "100": "#F7E7EB",
-          "200": "#F4D1E7",
-          "300": "#EC7D9E",
-          "400": "#CC2D6A",
-          "500": "#BC1C6F",
-          "600": "#A12A6D",
-          "700": "#97104A",
-          "800": "#6E013B",
-          "900": "#AA4E6D",
-          "1000": "#522943",
-          DEFAULT: "#AAB9C5",
-          landing: "#F31D75",
+          '100': '#F8DEE6',
+          '200': '#F8DEE6',
+          '300': '#EA9CB5',
+          '400': '#E27C9D',
+          '500': '#DB5B84',
+          '600': '#D43A6C',
+          '700': '#A1234C',
+          '800': '#851D3F',
+          '900': '#691731',
+          '1000': '#4D1124',
+          DEFAULT: '#AAB9C5',
+          landing: '#F31D75',
 
-          foreground: "hsl(var(--secondary-foreground))",
+          foreground: 'hsl(var(--secondary-foreground))',
         },
         neutrals: {
-          "100": "#F1F1F1",
-          "200": "#E6E6E6",
-          "300": "#D3D3D3",
-          "400": "#BEBEBE",
-          "500": "#A6A6A6",
-          "600": "#858585",
-          "700": "#717171",
-          "800": "#5d5d5d",
-          "900": "#4a4a4a",
-          "1000": "#373737",
+          '100': '#F3F3F3',
+          '200': '#D3D3D3',
+          '300': '#BFBFBF',
+          '400': '#ACACAC',
+          '500': '#989898',
+          '600': '#858585',
+          '700': '#717171',
+          '800': '#5E5E5E',
+          '900': '#4a4a4a',
+          '1000': '#373737',
         },
         success: {
-          "100": "#AAF2C5",
-          "200": "#56D47A",
-          "300": "#14A853",
-          landing: "#BFFF72",
+          '100': '#AAF2BC',
+          '200': '#54E478',
+          '300': '#148330',
+          landing: '#BFFF72',
         },
         warning: {
-          "100": "#FFE9C7",
-          "200": "#FDBD69",
-          "300": "#E6A13F",
+          '100': '#F9E8C9',
+          '200': '#F3D094',
+          '300': '#CE8C17',
         },
         error: {
-          "100": "#FFE0DD",
-          "200": "#FC8075",
-          "300": "#D33330",
+          '100': '#F5BCBC',
+          '200': '#EC7979',
+          '300': '#AB1919',
         },
-        "base-white": "#FAFAFA",
-        "base-black": "#232323",
-        "base-success": "#1DB944",
-        "base-warning": "#EDB95E",
-        "base-error": "#E23636",
-        "base-primary": "#BD2959",
-        "base-secondary": "#AAB9C5",
+        'base-white': '#FAFAFA',
+        'base-black': '#232323',
+        'base-success': '#1DB944',
+        'base-warning': '#EDB95E',
+        'base-error': '#B00020',
+        'base-primary': '#D43A63',
+        'base-secondary': '#F8DEE6',
         muted: {
-          DEFAULT: "hsl(var(--muted))",
-          foreground: "hsl(var(--muted-foreground))",
+          DEFAULT: 'hsl(var(--muted))',
+          foreground: 'hsl(var(--muted-foreground))',
         },
         accent: {
-          DEFAULT: "hsl(var(--accent))",
-          foreground: "hsl(var(--accent-foreground))",
+          DEFAULT: 'hsl(var(--accent))',
+          foreground: 'hsl(var(--accent-foreground))',
         },
         destructive: {
-          DEFAULT: "hsl(var(--destructive))",
-          foreground: "hsl(var(--destructive-foreground))",
+          DEFAULT: 'hsl(var(--destructive))',
+          foreground: 'hsl(var(--destructive-foreground))',
         },
-        border: "hsl(var(--border))",
-        input: "hsl(var(--input))",
-        ring: "hsl(var(--ring))",
+        border: 'hsl(var(--border))',
+        input: 'hsl(var(--input))',
+        ring: 'hsl(var(--ring))',
         chart: {
-          "1": "hsl(var(--chart-1))",
-          "2": "hsl(var(--chart-2))",
-          "3": "hsl(var(--chart-3))",
-          "4": "hsl(var(--chart-4))",
-          "5": "hsl(var(--chart-5))",
+          '1': 'hsl(var(--chart-1))',
+          '2': 'hsl(var(--chart-2))',
+          '3': 'hsl(var(--chart-3))',
+          '4': 'hsl(var(--chart-4))',
+          '5': 'hsl(var(--chart-5))',
         },
       },
       borderRadius: {
-        lg: "var(--radius)",
-        md: "calc(var(--radius) - 2px)",
-        sm: "calc(var(--radius) - 4px)",
+        lg: 'var(--radius)',
+        md: 'calc(var(--radius) - 2px)',
+        sm: 'calc(var(--radius) - 4px)',
       },
       keyframes: {
-        "accordion-down": {
+        'accordion-down': {
           from: {
-            height: "0",
+            height: '0',
           },
           to: {
-            height: "var(--radix-accordion-content-height)",
+            height: 'var(--radix-accordion-content-height)',
           },
         },
-        "accordion-up": {
+        'accordion-up': {
           from: {
-            height: "var(--radix-accordion-content-height)",
+            height: 'var(--radix-accordion-content-height)',
           },
           to: {
-            height: "0",
+            height: '0',
           },
         },
       },
       animation: {
-        "accordion-down": "accordion-down 0.2s ease-out",
-        "accordion-up": "accordion-up 0.2s ease-out",
+        'accordion-down': 'accordion-down 0.2s ease-out',
+        'accordion-up': 'accordion-up 0.2s ease-out',
       },
     },
   },

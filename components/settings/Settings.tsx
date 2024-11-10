@@ -18,19 +18,17 @@ interface User {
   id: string | undefined;
   email: string;
   phoneNumber: string;
+  hasPassword: boolean;
 }
 
-const StartupSettings = ({ user }: { user: User }) => {
+const Settings = ({ user }: { user: User }) => {
   const [showWarning, setShowWarning] = useState(false);
   const [showIdentifierField, setShowIdentifierField] = useState(false);
 
   return (
     <div className="py-6 flex flex-col gap-4 relative">
-      <div>
-        <h1 className="text-xl">My Account</h1>
-      </div>
       <div className="flex flex-col gap-4">
-        <p className="font-semibold text-sm">Settings</p>
+        <p className="font-semibold text-2xl">Settings</p>
         <div>
           <Accordion type="multiple" className="max-w-[800px]">
             <div className="flex flex-col gap-4">
@@ -77,7 +75,7 @@ const StartupSettings = ({ user }: { user: User }) => {
                   Change Password
                 </AccordionTrigger>
                 <AccordionContent className="mt-4">
-                  <ResetPasswordForm />
+                  <ResetPasswordForm hasPassword={user.hasPassword} />
                 </AccordionContent>
               </AccordionItem>
               <AccordionItem
@@ -131,4 +129,4 @@ const StartupSettings = ({ user }: { user: User }) => {
   );
 };
 
-export default StartupSettings;
+export default Settings;
