@@ -9,7 +9,8 @@ interface Params {
   type: string;
 }
 
-const ProfilePage = async ({ params }: { params: Params }) => {
+const ProfilePage = async (props: { params: Promise<Params> }) => {
+  const params = await props.params;
   const session = await auth();
   const user = session?.user;
 

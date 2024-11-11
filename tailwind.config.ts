@@ -15,19 +15,19 @@ const config: Config = {
         degular: ['DegularDisplay', 'sans-serif'],
       },
       fontSize: {
-        display1: '9rem', // 144px
-        display2: '6rem', // 96px
-        display3: '4rem', // 64px
-        heading1: '3.5rem', // 56px
-        heading2: '3rem', // 48px
-        heading3: '2.5rem', // 40px
-        heading4: '2rem', // 32px
-        hero: '1.75rem', // 28px
-        feature: '1.5rem', // 24px
-        highlight: '1.125rem', // 18px
-        content: '1rem', // 16px
-        caption: '0.875rem', // 14px
-        footnote: '0.75rem', // 12px
+        display1: '9rem',
+        display2: '6rem',
+        display3: '4rem',
+        heading1: '3.5rem',
+        heading2: '3rem',
+        heading3: '2.5rem',
+        heading4: '2rem',
+        hero: '1.75rem',
+        feature: '1.5rem',
+        highlight: '1.125rem',
+        content: '1rem',
+        caption: '0.875rem',
+        footnote: '0.75rem',
       },
       colors: {
         background: 'hsl(var(--background))',
@@ -68,9 +68,8 @@ const config: Config = {
           '800': '#851D3F',
           '900': '#691731',
           '1000': '#4D1124',
-          DEFAULT: '#AAB9C5',
+          DEFAULT: '#F8DEE6',
           landing: '#F31D75',
-
           foreground: 'hsl(var(--secondary-foreground))',
         },
         neutrals: {

@@ -20,7 +20,10 @@ const StartupResume = ({ startup }: { startup: Startup | null }) => {
         <div className="flex flex-col md:flex-row gap-6 items-center">
           <div>
             <Image
-              src={startup?.image || ''}
+              src={
+                startup?.image ||
+                'https://res.cloudinary.com/dlriuadjv/image/upload/v1729353205/xbbb0zw6js60dxnq64qj.png'
+              }
               height={150}
               width={150}
               alt="Profile Photo"

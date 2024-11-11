@@ -285,65 +285,79 @@ export const fundingOpportunityFirstStepSchema = z.object({
   targetWomenFounder: z.boolean(),
   targetProductStage: z.optional(z.string()),
   targetFundingStage: z.optional(z.string()),
+  targetProductStageList: z.optional(z.array(z.string())),
+  targetFundingStageList: z.optional(z.array(z.string())),
   description: z.string().min(2, 'Minimum 2 characters'),
   eligibilityCriteria: z.string().min(2, 'Minimum 2 characters'),
 });
 
-export const fundingOpportunitySecondStepSchema = z.object({
-  startDate: z.optional(z.date()),
-  endDate: z.optional(z.date()),
-  noOfRegistrationsAllowed: z
-    .string()
-    .optional()
-    .refine((val) => !val || /^\d+$/, {
-      message: 'Must be a valid number',
-    }),
-  registration: z.string(),
-  registrationFormLink: z
-    .string()
-    .optional()
-    .refine((val) => !val || /^https?:\/\/[^\s$.?#].[^\s]*$/.test(val), {
-      message: 'Enter a valid URL',
-    }),
-});
+export const fundingOpportunitySecondStepSchema = z
+  .object({
+    startDate: z.date(),
+    endDate: z.date(),
+    noOfRegistrationsAllowed: z
+      .string()
+      .optional()
+      .refine((val) => !val || /^\d+$/, {
+        message: 'Must be a valid number',
+      }),
+    registration: z.string(),
+    registrationFormLink: z
+      .string()
+      .optional()
+      .refine((val) => !val || /^https?:\/\/[^\s$.?#].[^\s]*$/.test(val), {
+        message: 'Enter a valid URL',
+      }),
+  })
+  .refine((data) => data.startDate < data.endDate, {
+    message: 'Start date must be before the end date',
+    path: ['endDate'], // Optionally specify where the error should be shown
+  });
 
-export const fundingOpportunitySchema = z.object({
-  imageUrl: z.string().optional(),
-  type: z.string().min(1, 'This field cannot be left empty'),
-  subtype: z.string().min(1, 'This field cannot be left empty'),
-  title: z
-    .string()
-    .min(2, 'Minimum 2 characters')
-    .max(190, 'Maximum 190 characters'),
-  websiteUrl: z
-    .string()
-    .optional()
-    .refine((val) => !val || /^https?:\/\/[^\s$.?#].[^\s]*$/.test(val), {
-      message: 'Enter a valid URL',
-    }),
-  fundingAmount: z
-    .string()
-    .regex(/^\d+$/, { message: 'Must be a valid number' }),
-  targetIndustry: z.string().min(1, 'This field cannot be left empty'),
-  targetSector: z.string().min(1, 'This field cannot be left empty'),
-  targetWomenFounder: z.boolean(),
-  targetProductStage: z.optional(z.string()),
-  targetFundingStage: z.optional(z.string()),
-  description: z.string().min(2, 'Minimum 2 characters'),
-  eligibilityCriteria: z.string().min(2, 'Minimum 2 characters'),
-  startDate: z.optional(z.date()),
-  endDate: z.optional(z.date()),
-  noOfRegistrationsAllowed: z
-    .string()
-    .optional()
-    .refine((val) => !val || /^\d+$/, {
-      message: 'Must be a valid number',
-    }),
-  registration: z.string(),
-  registrationFormLink: z
-    .string()
-    .optional()
-    .refine((val) => !val || /^https?:\/\/[^\s$.?#].[^\s]*$/.test(val), {
-      message: 'Enter a valid URL',
-    }),
-});
+export const fundingOpportunitySchema = z
+  .object({
+    imageUrl: z.string().optional(),
+    type: z.string().min(1, 'This field cannot be left empty'),
+    subtype: z.string().min(1, 'This field cannot be left empty'),
+    title: z
+      .string()
+      .min(2, 'Minimum 2 characters')
+      .max(190, 'Maximum 190 characters'),
+    websiteUrl: z
+      .string()
+      .optional()
+      .refine((val) => !val || /^https?:\/\/[^\s$.?#].[^\s]*$/.test(val), {
+        message: 'Enter a valid URL',
+      }),
+    fundingAmount: z
+      .string()
+      .regex(/^\d+$/, { message: 'Must be a valid number' }),
+    targetIndustry: z.string().min(1, 'This field cannot be left empty'),
+    targetSector: z.string().min(1, 'This field cannot be left empty'),
+    targetWomenFounder: z.boolean(),
+    targetProductStage: z.optional(z.string()),
+    targetFundingStage: z.optional(z.string()),
+    targetProductStageList: z.optional(z.array(z.string())),
+    targetFundingStageList: z.optional(z.array(z.string())),
+    description: z.string().min(2, 'Minimum 2 characters'),
+    eligibilityCriteria: z.string().min(2, 'Minimum 2 characters'),
+    startDate: z.date(),
+    endDate: z.date(),
+    noOfRegistrationsAllowed: z
+      .string()
+      .optional()
+      .refine((val) => !val || /^\d+$/, {
+        message: 'Must be a valid number',
+      }),
+    registration: z.string(),
+    registrationFormLink: z
+      .string()
+      .optional()
+      .refine((val) => !val || /^https?:\/\/[^\s$.?#].[^\s]*$/.test(val), {
+        message: 'Enter a valid URL',
+      }),
+  })
+  .refine((data) => data.startDate < data.endDate, {
+    message: 'Start date must be before the end date',
+    path: ['endDate'], // Optionally specify where the error should be shown
+  });

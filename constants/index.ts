@@ -846,3 +846,20 @@ export const trlLevels = [
   { value: 'TRL 8: System Incorporated in Commercial Design' },
   { value: 'TRL 9: System Proven and Ready for Full Commercial Deployment' },
 ];
+
+export const productStages = [
+  { value: 'Ideation' },
+  { value: 'Minimum Viable Product (MVP)' },
+  { value: 'Product-Market Fit (PMF)' },
+  { value: 'Go-to-Market' },
+  { value: 'Growth and Scale' },
+];
+
+export const fundingStages = [
+  { value: 'Pre-seed' },
+  { value: 'Seed' },
+  { value: 'Series A' },
+  { value: 'Series B' },
+  { value: 'Series C' },
+  { value: 'Series C+' },
+];

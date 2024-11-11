@@ -29,6 +29,8 @@ import { Switch } from '@/components/ui/switch';
 import { Combobox } from '../Combobox';
 import {
   industries as industriesList,
+  productStages,
+  fundingStages,
   sectors as sectorsList,
 } from '@/constants';
 import Image from 'next/image';
@@ -38,16 +40,27 @@ import { FormError } from './FormError';
 import { FormSuccess } from './FormSuccess';
 import { Stepper } from '../Stepper';
 import { postOpportunityDetails } from '@/actions/post-opportunity-details';
-import SlidePanel from '@/app/(demo)/slide-panel/page';
 import { ShareNetwork } from '@phosphor-icons/react/dist/ssr';
+import Tag from '../Tag';
+import { Popover, PopoverContent, PopoverTrigger } from '../ui/popover';
+import { CalendarIcon } from 'lucide-react';
+import { cn } from '@/lib/utils';
+import { format } from 'date-fns';
+import { Calendar } from '../ui/calendar';
+import { TimePicker } from '../ui/time-picker';
+import PreviewOpportunity from '../PreviewOpportunity';
+import { Business } from '@prisma/client';
 
-const PostFundingOpportunityForm = () => {
+const PostFundingOpportunityForm = ({ business }: { business: Business }) => {
   const [error, setError] = useState<string | undefined>('');
   const [success, setSuccess] = useState<string | undefined>('');
   const [loading, startTransition] = useTransition();
   const [currentStep, setCurrentStep] = useState(1);
 
   const [registrations, setRegistrations] = useState('visey');
+
+  const [productStage, setProductStage] = useState<string[]>([]);
+  const [fundingStage, setFundingStage] = useState<string[]>([]);
 
   const [formValues, setFormValues] = useState<
     z.infer<typeof fundingOpportunitySchema>
@@ -63,6 +76,8 @@ const PostFundingOpportunityForm = () => {
     targetWomenFounder: false,
     targetProductStage: '',
     targetFundingStage: '',
+    targetFundingStageList: [],
+    targetProductStageList: [],
     description: '',
     eligibilityCriteria: '',
     registration: '',
@@ -88,14 +103,14 @@ const PostFundingOpportunityForm = () => {
           targetWomenFounder: false,
           targetProductStage: '',
           targetFundingStage: '',
+          targetFundingStageList: [],
+          targetProductStageList: [],
           description: '',
           eligibilityCriteria: '',
         }
       : {
           registration: '',
           registrationFormLink: '',
-          startDate: new Date(Date.now()),
-          endDate: new Date(Date.now() + 10),
           noOfRegistrationsAllowed: '',
         };
 
@@ -115,34 +130,76 @@ const PostFundingOpportunityForm = () => {
     setSuccess('');
 
     if (currentStep === 1) {
-      setFormValues((prevValues) => ({ ...prevValues, ...values }));
+      if (productStage.length === 0) {
+        form.setError('targetProductStage', {
+          type: 'manual',
+          message: 'At least one Stage is required.',
+        });
+        return;
+      }
+
+      if (fundingStage.length === 0) {
+        form.setError('targetFundingStage', {
+          type: 'manual',
+          message: 'At least one Stage is required.',
+        });
+        return;
+      }
+      setFormValues((prevValues) => ({
+        ...prevValues,
+        ...values,
+        targetFundingStageList: fundingStage,
+        targetProductStageList: productStage,
+      }));
       setCurrentStep(2);
-    } else if (currentStep === 2) {
-      setFormValues((prevValues) => ({ ...prevValues, ...values }));
-      setCurrentStep(3);
     } else {
       setFormValues((prevValues) => ({ ...prevValues, ...values }));
-
-      const backendData = { ...formValues, ...values };
-
-      startTransition(async () => {
-        const res = await postOpportunityDetails(backendData);
-
-        if (res.error) {
-          setError(res.error);
-        }
-
-        if (res.success) {
-          setSuccess(res.success);
-          router.push(`/profile/startup`);
-        }
-      });
+      setCurrentStep(3);
     }
+  };
+
+  const onPublish = () => {
+    startTransition(async () => {
+      const res = await postOpportunityDetails(formValues);
+
+      if (res.error) {
+        setError(res.error);
+      }
+
+      if (res.success) {
+        setSuccess(res.success);
+        router.push(`/profile/business`);
+      }
+    });
+  };
+
+  const handleStageChange = (value: string) => {
+    if (value && !productStage.includes(value)) {
+      setProductStage((prevStages) => [...prevStages, value]);
+    }
+  };
+
+  const handleRemoveStage = (stageName: string) => {
+    setProductStage((prevStages) =>
+      prevStages.filter((stage) => stage !== stageName)
+    );
+  };
+
+  const handleFundingStageChange = (value: string) => {
+    if (value && !fundingStage.includes(value)) {
+      setFundingStage((prevStages) => [...prevStages, value]);
+    }
+  };
+
+  const handleRemoveFundingStage = (stageName: string) => {
+    setFundingStage((prevStages) =>
+      prevStages.filter((stage) => stage !== stageName)
+    );
   };
 
   return (
     <div className="space-y-4">
-      <div className="mt-4 mb-8">
+      <div className="mt-2 mb-8">
         <Stepper currentStep={currentStep} numberOfSteps={3} />
       </div>
       {currentStep === 1 && (
@@ -172,12 +229,12 @@ const PostFundingOpportunityForm = () => {
       )}
 
       <div className="mt-4">
-        <Form {...form}>
-          <div className="mb-4">
-            <FormError message={error} />
-            <FormSuccess message={success} />
-          </div>
-          {currentStep === 1 && (
+        {currentStep === 1 && (
+          <Form {...form}>
+            <div className="mb-4">
+              <FormError message={error} />
+              <FormSuccess message={success} />
+            </div>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
               <h2 className="font-semibold mt-8 text-neutrals-700 text-sm">
                 Upload Logo*
@@ -419,9 +476,9 @@ const PostFundingOpportunityForm = () => {
                         <Combobox
                           value={field.value}
                           placeHolder="Select"
-                          noResultText="No sector found"
-                          data={sectorsList}
-                          onChange={(value) => field.onChange(value)}
+                          noResultText="No stage found"
+                          data={productStages}
+                          onChange={handleStageChange}
                           disabled={loading}
                         />
                       </div>
@@ -430,6 +487,18 @@ const PostFundingOpportunityForm = () => {
                   </FormItem>
                 )}
               />
+              {productStage.length > 0 && (
+                <div className="flex flex-wrap gap-2">
+                  {productStage.map((stage) => (
+                    <Tag
+                      key={stage}
+                      name={stage}
+                      onRemove={handleRemoveStage}
+                    />
+                  ))}
+                </div>
+              )}
+
               <FormField
                 control={form.control}
                 name="targetFundingStage"
@@ -448,8 +517,8 @@ const PostFundingOpportunityForm = () => {
                           value={field.value}
                           placeHolder="Select"
                           noResultText="No sector found"
-                          data={sectorsList}
-                          onChange={(value) => field.onChange(value)}
+                          data={fundingStages}
+                          onChange={handleFundingStageChange}
                           disabled={loading}
                         />
                       </div>
@@ -458,6 +527,18 @@ const PostFundingOpportunityForm = () => {
                   </FormItem>
                 )}
               />
+              {fundingStage.length > 0 && (
+                <div className="flex flex-wrap gap-2">
+                  {fundingStage.map((stage) => (
+                    <Tag
+                      key={stage}
+                      name={stage}
+                      onRemove={handleRemoveFundingStage}
+                    />
+                  ))}
+                </div>
+              )}
+
               <FormField
                 control={form.control}
                 name="description"
@@ -506,64 +587,176 @@ const PostFundingOpportunityForm = () => {
                 </Button>
               </div>
             </form>
-          )}
-          {currentStep === 2 && (
-            <Form {...form}>
-              <form
-                onSubmit={form.handleSubmit(onSubmit)}
-                className="space-y-6"
-              >
+          </Form>
+        )}
+        {currentStep === 2 && (
+          <Form {...form}>
+            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+              <FormField
+                control={form.control}
+                name="registration"
+                render={({ field }) => (
+                  <FormItem className="space-y-3">
+                    <FormControl>
+                      <RadioGroup
+                        onValueChange={(value) => {
+                          field.onChange(value);
+                          setRegistrations(value);
+                        }}
+                        defaultValue={registrations}
+                        className="flex md:flex-col space-y-1"
+                      >
+                        <div className="flex flex-col sm:flex-row gap-4">
+                          <FormItem className="flex items-center space-x-3 space-y-0 w-[245px]">
+                            <FormControl>
+                              <RadioGroupItem value="visey" />
+                            </FormControl>
+                            <FormLabel className="font-normal">
+                              Take registrations on Visey
+                            </FormLabel>
+                          </FormItem>
+                          <FormItem className="flex items-center space-x-3 space-y-0 w-[245px]">
+                            <FormControl>
+                              <RadioGroupItem value="other" />
+                            </FormControl>
+                            <FormLabel className="font-normal">
+                              Take registrations on another platform
+                            </FormLabel>
+                          </FormItem>
+                        </div>
+                      </RadioGroup>
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              {registrations === 'other' && (
                 <FormField
                   control={form.control}
-                  name="registration"
+                  name="registrationFormLink"
                   render={({ field }) => (
-                    <FormItem className="space-y-3">
+                    <FormItem>
+                      <FormLabel className="text-neutrals-700">
+                        Registration form link*
+                      </FormLabel>
                       <FormControl>
-                        <RadioGroup
-                          onValueChange={(value) => {
-                            field.onChange(value);
-                            setRegistrations(value);
-                          }}
-                          defaultValue="visey"
-                          className="flex md:flex-col space-y-1"
-                        >
-                          <div className="flex gap-4">
-                            <FormItem className="flex items-center space-x-3 space-y-0 w-[245px]">
-                              <FormControl>
-                                <RadioGroupItem value="visey" />
-                              </FormControl>
-                              <FormLabel className="font-normal">
-                                Take registrations on Visey
-                              </FormLabel>
-                            </FormItem>
-                            <FormItem className="flex items-center space-x-3 space-y-0 w-[245px]">
-                              <FormControl>
-                                <RadioGroupItem value="other" />
-                              </FormControl>
-                              <FormLabel className="font-normal">
-                                Take registrations on another platform
-                              </FormLabel>
-                            </FormItem>
-                          </div>
-                        </RadioGroup>
+                        <Input
+                          className="text-neutrals-700 mt-1"
+                          placeholder=""
+                          {...field}
+                          disabled={loading}
+                        />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
                   )}
                 />
-                {registrations === 'other' && (
+              )}
+
+              {registrations === 'visey' && (
+                <div className="space-y-4">
                   <FormField
                     control={form.control}
-                    name="registrationFormLink"
+                    name="startDate"
+                    render={({ field }) => (
+                      <FormItem className="flex flex-col items-start">
+                        <FormLabel className="text-neutrals-700">
+                          Registration start date & time*
+                        </FormLabel>
+                        <Popover>
+                          <PopoverTrigger asChild className="mt-1">
+                            <Button
+                              variant={'outline'}
+                              className={cn(
+                                'w-full justify-start text-left font-normal rounded-lg pl-4',
+                                !field.value && 'text-muted-foreground'
+                              )}
+                            >
+                              <CalendarIcon className="mr-2 h-4 w-4" />
+                              {field.value ? (
+                                format(field.value, 'PPP HH:mm:ss')
+                              ) : (
+                                <span>Pick a date and time</span>
+                              )}
+                            </Button>
+                          </PopoverTrigger>
+                          <PopoverContent className="w-auto p-0">
+                            <Calendar
+                              mode="single"
+                              selected={field.value}
+                              onSelect={field.onChange}
+                              disabled={(date) => date > new Date()}
+                              initialFocus
+                            />
+                            <div className="p-3 border-t border-border">
+                              <TimePicker
+                                setDate={field.onChange}
+                                date={field.value}
+                              />
+                            </div>
+                          </PopoverContent>
+                        </Popover>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <FormField
+                    control={form.control}
+                    name="endDate"
+                    render={({ field }) => (
+                      <FormItem className="flex flex-col items-start">
+                        <FormLabel className="text-neutrals-700">
+                          Registration end date & time*
+                        </FormLabel>
+                        <Popover>
+                          <PopoverTrigger asChild className="mt-1">
+                            <Button
+                              variant={'outline'}
+                              className={cn(
+                                'w-full justify-start text-left font-normal rounded-lg pl-4',
+                                !field.value && 'text-muted-foreground'
+                              )}
+                            >
+                              <CalendarIcon className="mr-2 h-4 w-4" />
+                              {field.value ? (
+                                format(field.value, 'PPP HH:mm:ss')
+                              ) : (
+                                <span>Pick a date and time</span>
+                              )}
+                            </Button>
+                          </PopoverTrigger>
+                          <PopoverContent className="w-auto p-0">
+                            <Calendar
+                              mode="single"
+                              selected={field.value}
+                              onSelect={field.onChange}
+                              disabled={(date) => date > new Date()}
+                              initialFocus
+                            />
+                            <div className="p-3 border-t border-border">
+                              <TimePicker
+                                setDate={field.onChange}
+                                date={field.value}
+                              />
+                            </div>
+                          </PopoverContent>
+                        </Popover>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <FormField
+                    control={form.control}
+                    name="noOfRegistrationsAllowed"
                     render={({ field }) => (
                       <FormItem>
                         <FormLabel className="text-neutrals-700">
-                          Registration form link*
+                          Number of registrations allowed
                         </FormLabel>
                         <FormControl>
                           <Input
                             className="text-neutrals-700 mt-1"
-                            placeholder=""
+                            placeholder="Enter the count if cap on max participants"
                             {...field}
                             disabled={loading}
                           />
@@ -572,103 +765,43 @@ const PostFundingOpportunityForm = () => {
                       </FormItem>
                     )}
                   />
-                )}
-
-                {registrations === 'visey' && (
-                  <div className="space-y-4">
-                    {/* <FormField
-                      control={form.control}
-                      name="startDate"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel className="text-neutrals-700">
-                            Registration start date & time*
-                          </FormLabel>
-                          <FormControl>
-                            <Input
-                              className="text-neutrals-700 mt-1"
-                              placeholder=""
-                              {...field}
-                              disabled={loading}
-                            />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    /> */}
-                    {/* <FormField
-                      control={form.control}
-                      name="endDate"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel className="text-neutrals-700">
-                            Registration end date & time*
-                          </FormLabel>
-                          <FormControl>
-                            <Input
-                              className="text-neutrals-700 mt-1"
-                              placeholder=""
-                              {...field}
-                              disabled={loading}
-                            />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    /> */}
-                    <FormField
-                      control={form.control}
-                      name="noOfRegistrationsAllowed"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel className="text-neutrals-700">
-                            Number of registrations allowed
-                          </FormLabel>
-                          <FormControl>
-                            <Input
-                              className="text-neutrals-700 mt-1"
-                              placeholder="Enter the count if cap on max participants"
-                              {...field}
-                              disabled={loading}
-                            />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                  </div>
-                )}
-
-                <div className="flex flex-col items-center">
-                  <Button type="submit">Done</Button>
                 </div>
-              </form>
-            </Form>
-          )}
-          {currentStep === 3 && (
-            <div>
-              <div className="flex gap-2 items-center mt-8 mb-8">
-                <div className="cursor-pointer">
-                  <ShareNetwork />
-                </div>
-                <Button
-                  className="bg-secondary-100 text-neutrals-1000 border-2 border-neutrals-200 shadow-none hover:shadow-md hover:bg-secondary-100 rounded-full font-semibold"
-                  size="sm"
-                >
-                  Promote
-                </Button>
-                <Button
-                  className="text-neutrals-1000 hover:bg-neutrals-100 rounded-full font-semibold"
-                  variant="outline"
-                  size="sm"
-                >
-                  Edit
-                </Button>
+              )}
+
+              <div className="flex flex-col items-center">
+                <Button type="submit">Done</Button>
               </div>
-              <SlidePanel />
+            </form>
+          </Form>
+        )}
+        {currentStep === 3 && (
+          <div>
+            <div className="flex gap-2 items-center mt-8 mb-8">
+              <div className="cursor-pointer">
+                <ShareNetwork />
+              </div>
+              <Button
+                className="bg-secondary-100 text-neutrals-1000 border-2 border-neutrals-200 shadow-none hover:shadow-md hover:bg-secondary-100 rounded-full font-semibold"
+                size="sm"
+              >
+                Promote
+              </Button>
+              <Button
+                className="text-neutrals-1000 hover:bg-neutrals-100 rounded-full font-semibold"
+                variant="outline"
+                size="sm"
+              >
+                Edit
+              </Button>
             </div>
-          )}
-        </Form>
+            <PreviewOpportunity business={business} opportunity={formValues} />
+            <div className="flex items-center justify-center">
+              <Button onClick={onPublish} disabled={loading}>
+                Publish
+              </Button>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );

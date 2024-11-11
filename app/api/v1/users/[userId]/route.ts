@@ -2,12 +2,13 @@ import prisma from '@/lib/db';
 import { NextRequest, NextResponse } from 'next/server';
 
 interface Params {
-  params: {
+  params: Promise<{
     userId: string;
-  };
+  }>;
 }
 
-export async function GET(req: NextRequest, { params }: Params) {
+export async function GET(req: NextRequest, props: Params) {
+  const params = await props.params;
   const { userId } = params;
 
   try {

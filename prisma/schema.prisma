@@ -163,26 +163,28 @@ model Services {
 }
 
 model Opportunity {
-  id                 String    @id @default(uuid())
-  imageUrl           String?
-  type               String
-  subtype            String?
-  title              String
-  websiteUrl         String?
-  fundingAmount      String?
-  targetIndustry     String?
-  targetSector       String?
-  targetWomenFounder Boolean?
-  targetProductStage String[]
-  targetFundingStage String[]
-  description        String?
-  eligibility        String?
-  bannerUrl          String?
-  startDatetime      DateTime?
-  endDatetime        DateTime?
-  noOfRegistrations  String?
-  questions          Json?
-  businessId         String
+  id                   String    @id @default(uuid())
+  imageUrl             String?
+  type                 String
+  subtype              String?
+  title                String
+  websiteUrl           String?
+  fundingAmount        String?
+  targetIndustry       String?
+  targetSector         String?
+  targetWomenFounder   Boolean?
+  targetProductStage   String[]
+  targetFundingStage   String[]
+  description          String?
+  eligibility          String?
+  bannerUrl            String?
+  startDatetime        DateTime?
+  endDatetime          DateTime?
+  noOfRegistrations    String?
+  questions            Json?
+  registration         String?
+  businessId           String
+  registrationFormLink String?
 
   business Business @relation(fields: [businessId], references: [id], onDelete: Cascade)
 

@@ -1,5 +1,6 @@
 import { auth } from '@/auth';
 import PostFundingOpportunity from '@/components/form/PostFundingOpportunity';
+import { Business } from '@prisma/client';
 import React from 'react';
 
 const page = async () => {
@@ -11,10 +12,12 @@ const page = async () => {
     return <div>Access Denied</div>;
   }
 
+  const business = user?.business as Business;
+
   return (
-    <div className="flex justify-center mt-8">
+    <div className="flex justify-center mt-4">
       <div className="xl:min-w-[700px]">
-        <PostFundingOpportunity />
+        <PostFundingOpportunity business={business} />
       </div>
     </div>
   );

@@ -76,8 +76,8 @@ const TestimonialCarousel: React.FC = () => {
           return (
             <motion.div
               key={testimonial.id}
-              className={`absolute w-64 bg-white rounded-lg p-6 shadow-lg select-none
-                ${order === 0 ? 'cursor-grab active:cursor-grabbing' : ''}`}
+              // className={`absolute w-64 bg-white rounded-lg p-6 shadow-lg select-none
+              //   ${order === 0 ? 'cursor-grab active:cursor-grabbing' : ''}`}
               style={{
                 zIndex: getZIndex(order),
               }}
