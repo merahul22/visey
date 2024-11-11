@@ -55,7 +55,10 @@ const StartupProfile = ({ user }: { user: StartupProfileProps }) => {
         <div className="flex items-center gap-4">
           <div>
             <Image
-              src={user.image || ''}
+              src={
+                user.image ||
+                'https://res.cloudinary.com/dlriuadjv/image/upload/v1729353205/xbbb0zw6js60dxnq64qj.png'
+              }
               alt="Profile Photo"
               width={72}
               height={72}
