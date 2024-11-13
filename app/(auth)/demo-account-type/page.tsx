@@ -7,6 +7,8 @@ import { useState } from 'react';
 const Page = () => {
   const [currentType, setCurrentType] = useState<string>('');
 
+  console.log('currentType', currentType);
+
   const onSubmit = () => {
     if (currentType === 'STARTUP') {
       window.location.href =
@@ -31,11 +33,11 @@ const Page = () => {
             <div className="flex flex-col items-center justify-center gap-4 lg:items-stretch lg:flex-row">
               <div
                 className={`border-2 w-[220px] border-neutrals-400 rounded-lg p-4 cursor-pointer hover:border-primary-500 ${
-                  currentType === 'STARTUP'
+                  currentType === 'BUSINESS'
                     ? 'border-primary-500 shadow-lg'
                     : ''
                 }`}
-                onClick={() => setCurrentType('STARTUP')}
+                onClick={() => setCurrentType('BUSINESS')}
               >
                 <h2 className="text-xl font-semibold mb-4">
                   List my Business, to reach startups
@@ -61,11 +63,11 @@ const Page = () => {
               </div>
               <div
                 className={`border-2 w-[220px] border-neutrals-400 rounded-lg p-4 cursor-pointer hover:border-primary-500 ${
-                  currentType === 'BUSINESS'
+                  currentType === 'STARTUP'
                     ? 'border-primary-500 shadow-lg'
                     : ''
                 }`}
-                onClick={() => setCurrentType('BUSINESS')}
+                onClick={() => setCurrentType('STARTUP')}
               >
                 <h2 className="text-xl font-semibold mb-4">
                   Find Resources, for my needs
