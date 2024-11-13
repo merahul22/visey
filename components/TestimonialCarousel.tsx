@@ -41,8 +41,8 @@ export function CarouselDemo({ slides }: { slides: Testimonial[] }) {
           </CarouselItem>
         ))}
       </CarouselContent>
-      <CarouselPrevious className="absolute left-0 top-full md:top-1/2 md:-left-10" />
-      <CarouselNext className="absolute right-0 top-full md:top-1/2 md:-right-10" />
+      <CarouselPrevious className="absolute left-1/3 top-96 md:top-1/2 md:-left-10" />
+      <CarouselNext className="absolute right-1/3 top-96 md:top-1/2 md:-right-10" />
     </Carousel>
   );
 }

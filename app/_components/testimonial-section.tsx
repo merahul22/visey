@@ -8,13 +8,25 @@ interface Testimonial {
 
 const SLIDES: Testimonial[] = [
   {
-    image: '/img/testimonial.png',
-    content: 'An absolute must have for startups and businesses',
+    image: '/img/testimonial1.png',
+    content: '“An absolute must have for startups and businesses”',
   },
-  { image: '/img/testimonial.png', content: 'Testimonial 2' },
-  { image: '/img/testimonial.png', content: 'Testimonial 3' },
-  { image: '/img/testimonial.png', content: 'Testimonial 4' },
-  { image: '/img/testimonial.png', content: 'Testimonial 5' },
+  {
+    image: '/img/testimonial1.png',
+    content: '“A game-changer for our business.”',
+  },
+  {
+    image: '/img/testimonial1.png',
+    content: '“Boosted our productivity instantly.”',
+  },
+  {
+    image: '/img/testimonial1.png',
+    content: '“Perfect for startups. Highly recommend.”',
+  },
+  {
+    image: '/img/testimonial1.png',
+    content: '“We can’t run our startup without it.”',
+  },
 ];
 
 function TestimonialSection() {
