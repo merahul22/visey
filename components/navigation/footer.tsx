@@ -1,5 +1,5 @@
-import { cn } from "@/lib/utils";
-import { Separator } from "@/components/ui/separator";
+import { cn } from '@/lib/utils';
+import { Separator } from '@/components/ui/separator';
 
 import {
   Envelope,
@@ -7,29 +7,29 @@ import {
   Phone,
   WhatsappLogo,
   YoutubeLogo,
-} from "@phosphor-icons/react/dist/ssr";
+} from '@phosphor-icons/react/dist/ssr';
 
-import Image from "next/image";
+import Image from 'next/image';
 
 const footerData = [
   {
-    title: "Product",
-    items: ["About", "Products", "Pricing", "Teams", "Free Business Listing"],
+    title: 'Product',
+    items: ['About', 'Products', 'Pricing', 'Teams', 'Free Business Listing'],
   },
   {
-    title: "Legal",
+    title: 'Legal',
     items: [
-      "Terms & Conditions",
-      "Cookie Policy",
-      "Privacy Policy",
-      "Investor Relation",
+      'Terms & Conditions',
+      'Cookie Policy',
+      'Privacy Policy',
+      'Investor Relation',
     ],
   },
 ];
 
 function Footer({ className }: { className?: string }) {
   return (
-    <footer className={cn("bg-white  p-10 space-y-4", className)}>
+    <footer className={cn('bg-neutrals-100  p-10 space-y-4', className)}>
       <div className="space-y-4 text-center max-w-screen-xl mx-auto">
         <Image
           src="/logo-black.png"

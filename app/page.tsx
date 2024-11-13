@@ -1,22 +1,21 @@
-import { ArrowUpRight } from "@phosphor-icons/react/dist/ssr";
-import { Button } from "@/components/ui/button";
+import { ArrowUpRight } from '@phosphor-icons/react/dist/ssr';
+import { Button } from '@/components/ui/button';
 
-
-import HeroSection from "./_components/hero-section";
-import MarketplaceSection from "./_components/marketplace-section";
-import TargetAudienceSection from "./_components/target-audience-section";
-import BusinessSection from "./_components/business-section";
-import TestimonialSection from "./_components/testimonial-section";
-import FaqSection from "./_components/faq-section";
-import SignUpSection from "./_components/signup-section";
-import Footer from "@/components/navigation/footer";
-import { Navbar } from "@/components/navigation/navbar";
+import HeroSection from './_components/hero-section';
+import MarketplaceSection from './_components/marketplace-section';
+import TargetAudienceSection from './_components/target-audience-section';
+import BusinessSection from './_components/business-section';
+import TestimonialSection from './_components/testimonial-section';
+import FaqSection from './_components/faq-section';
+import SignUpSection from './_components/signup-section';
+import Footer from '@/components/navigation/footer';
+import HeroNav from '@/components/navigation/hero-nav';
 
 export default function LandingPage() {
   // TODO: Redirect accordingly based on current auth status
   return (
     <div className="font-gothic">
-      <Navbar className="mx-auto max-w-screen-xl" />
+      <HeroNav className="mx-auto max-w-screen-xl" />
       <HeroSection />
       <MarketplaceSection />
       <TargetAudienceSection />
@@ -27,14 +26,17 @@ export default function LandingPage() {
           className="absolute inset-0 bg-repeat-x"
           style={{
             backgroundImage: "url('/logo-icon.png')",
-            backgroundSize: "117px auto",
-            backgroundPosition: "center",
+            backgroundSize: '117px auto',
+            backgroundPosition: 'center',
             opacity: 0.2,
           }}
         />
 
         <div className="relative z-10 flex items-center justify-center h-full px-4">
-          <Button className="shadow-lg w-96 bg-success-landing text-base-black gap-x-4 py-4">
+          <Button
+            variant="landing"
+            className="w-full sm:w-96 text-base-black gap-x-4 py-4"
+          >
             <span className="text-lg">List Business Now</span>
             <ArrowUpRight size={24} />
           </Button>

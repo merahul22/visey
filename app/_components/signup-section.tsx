@@ -1,15 +1,15 @@
-import { Input } from "@/components/ui/input";
-import { Separator } from "@/components/ui/separator";
+import { Input } from '@/components/ui/input';
+import { Separator } from '@/components/ui/separator';
 
 function SignUpSection() {
   return (
     <section className="relative py-20 px-4 min-h-[70vh]">
       <div className="text-center">
         <div className="space-y-2">
-          <h2 className="text-2xl leading-relaxed font-semibold font-degular">
+          <h2 className="text-4xl leading-relaxed font-semibold font-degular">
             We help startups & SMEs meet their resource needs quick
           </h2>
-          <p>
+          <p className="text-neutrals-700 text-xl">
             Be the first to know when the product launches and other not-to-miss
             updates.
           </p>
@@ -21,12 +21,12 @@ function SignUpSection() {
         >
           <div className="md:flex-1">
             <Input
-              className="border-0 shadow-none h-12 placeholder-base-white text-base-white"
+              className="border-0 shadow-none h-12  text-base-white"
               placeholder="Your name"
             />
             <Separator />
             <Input
-              className="border-0 shadow-none h-12 placeholder-base-white text-base-white"
+              className="border-0 shadow-none h-12 text-base-white"
               placeholder="Your email"
             />
           </div>
@@ -36,8 +36,8 @@ function SignUpSection() {
         </form>
 
         <p className="text-xs">
-          By subscribing, you agree with our{" "}
-          <span className="font-bold underline">Terms of Use</span>{" "}
+          By subscribing, you agree with our{' '}
+          <span className="font-bold underline">Terms of Use</span>{' '}
         </p>
       </div>
     </section>

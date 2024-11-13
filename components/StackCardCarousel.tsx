@@ -1,20 +1,24 @@
 'use client';
 import React, { useState } from 'react';
 import { motion, AnimatePresence, PanInfo } from 'framer-motion';
+import Image from 'next/image';
+// import { cn } from '@/lib/utils';
 
 interface Testimonial {
-  id: number;
+  image: string;
   content: string;
-  author: string;
 }
 
 const TestimonialCarousel: React.FC = () => {
   const testimonials: Testimonial[] = [
-    { id: 1, content: 'Testimonial 1', author: 'John Doe' },
-    { id: 2, content: 'Testimonial 2', author: 'Jane Smith' },
-    { id: 3, content: 'Testimonial 3', author: 'Alice Johnson' },
-    { id: 4, content: 'Testimonial 4', author: 'Bob Wilson' },
-    { id: 5, content: 'Testimonial 5', author: 'Carol Brown' },
+    {
+      image: '/img/testimonial.png',
+      content: 'An absolute must have for startups and businesses',
+    },
+    { image: '/img/testimonial.png', content: 'Testimonial 2' },
+    { image: '/img/testimonial.png', content: 'Testimonial 3' },
+    { image: '/img/testimonial.png', content: 'Testimonial 4' },
+    { image: '/img/testimonial.png', content: 'Testimonial 5' },
   ];
 
   const [activeIndex, setActiveIndex] = useState<number>(2);
@@ -69,17 +73,21 @@ const TestimonialCarousel: React.FC = () => {
   };
 
   return (
-    <div className="relative w-full h-96 flex items-center justify-center overflow-hidden">
+    <div className="relative w-full h-96   flex items-center justify-center overflow-hidden">
       <AnimatePresence>
         {testimonials.map((testimonial, index) => {
           const order = getOrder(index);
+          const rotateVal = order * 10;
           return (
             <motion.div
-              key={testimonial.id}
-              // className={`absolute w-64 bg-white rounded-lg p-6 shadow-lg select-none
-              //   ${order === 0 ? 'cursor-grab active:cursor-grabbing' : ''}`}
+              key={testimonial.content}
+              // className={cn(
+              //   'space-y-4 absolute w-72 h-full bg-[#FDFFF6]  rounded-xl p-6 shadow-lg select-none',
+              //   order == 0 && 'bg-[#D7FF7B] cursor-grab active:cursor-grabbing'
+              // )}
               style={{
                 zIndex: getZIndex(order),
+                rotate: `rotate(${rotateVal}deg)`,
               }}
               animate={{
                 x: getPosition(order),
@@ -100,8 +108,19 @@ const TestimonialCarousel: React.FC = () => {
                 mass: 0.8, // Added mass for snappier feel
               }}
             >
-              <p className="text-gray-800 mb-4">{testimonial.content}</p>
-              <p className="text-gray-600 font-medium">{testimonial.author}</p>
+              <div className="relative h-64 w-full rounded-xl overflow-hidden">
+                <Image
+                  src={testimonial.image}
+                  fill
+                  objectFit="cover"
+                  alt={testimonial.content}
+                />
+              </div>
+              {order == 0 && (
+                <p className="text-center text-base-black">
+                  &apos;{testimonial.content}&apos;
+                </p>
+              )}
             </motion.div>
           );
         })}

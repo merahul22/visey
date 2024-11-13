@@ -7,7 +7,6 @@ import {
 import { Button } from "@/components/ui/button";
 import { CaretDown } from "@phosphor-icons/react/dist/ssr";
 
-
 const faqData = [
   {
     question: "Is it accessible?",
@@ -34,17 +33,21 @@ function FaqSection() {
         <section className="relative mb-10 pt-20 pb-10 text-base-white max-w-screen-xl xl:mx-auto">
           <div className="text-center">
             <p className="text-success-landing text-2xl font-semibold">FAQs</p>
-            <h2 className="text-xl font-semibold mt-4">Still not Convinced?</h2>
-            <p className="text-base-black mt-1">We&apos;ve got answers</p>
+            <h2 className="font-degular font-semibold text-heading4 md:text-heading3 lg:text-heading2 xl:text-heading1 leading-snug">
+              Still not Convinced?
+            </h2>
+            <p className="text-base-black mt-1 text-lg font-medium">
+              We&apos;ve got the answers
+            </p>
           </div>
           <div className="pt-9 px-4">
             <Accordion type="single" collapsible className="w-full space-y-4">
               {faqData.map((item, index) => (
                 <AccordionItem key={index} value={`item-${index}`}>
-                  <AccordionTrigger className="px-4 bg-secondary-landing font-semibold">
+                  <AccordionTrigger className="px-4 bg-secondary-landing font-semibold rounded-tl-xl rounded-tr-xl border-b-0 text-base">
                     {item.question}
                   </AccordionTrigger>
-                  <AccordionContent className="px-4">
+                  <AccordionContent className="px-4 py-4 text-base font-medium">
                     {item.answer}
                   </AccordionContent>
                 </AccordionItem>
@@ -60,9 +63,9 @@ function FaqSection() {
           </Button>
         </section>
       </section>
-      <p className="text-sm text-center -mt-1">
+      <p className="text-center -mt-1 text-neutrals-700 text-lg font-medium">
         Still have more Questions? Contact our{" "}
-        <span className="font-bold underline">Help Center</span>{" "}
+        <span className="font-bold underline">Help Center.</span>{" "}
       </p>
     </>
   );
