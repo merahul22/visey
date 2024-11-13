@@ -55,18 +55,16 @@ function FaqSection() {
             </Accordion>
           </div>
           <Button
+            variant={"landing"}
             size="sm"
-            className="gap-x-2 bg-success-landing text-base-black  absolute -bottom-4 left-1/2 -translate-x-1/2 px-8"
+            className="gap-x-2  text-base-black  absolute -bottom-4 left-1/2 -translate-x-1/2 px-8 z-20"
           >
             <span>More</span>
             <CaretDown />
           </Button>
         </section>
       </section>
-      <p className="text-center -mt-1 text-neutrals-700 text-lg font-medium">
-        Still have more Questions? Contact our{" "}
-        <span className="font-bold underline">Help Center.</span>{" "}
-      </p>
+      
     </>
   );
 }

@@ -81,7 +81,13 @@ export default function HeroNav({ className }: { className?: string }) {
               </Link>
             ))}
 
-            {['List Business Free', 'Log In/ Sign Up'].map((text) => (
+            <Link href="https://docs.google.com/forms/d/e/1FAIpQLSdzEFmkrANFYzdrmSZrjVgeOm_TJspc6q2yi-SgpuRuh_lrAQ/viewform">
+              <Button variant="nav" size="md">
+                List Business Free
+              </Button>
+            </Link>
+
+            {['Log In/ Sign Up'].map((text) => (
               <Link key={text} href="#">
                 <Button variant="nav" size="md">
                   {text}
@@ -91,9 +97,11 @@ export default function HeroNav({ className }: { className?: string }) {
           </div>
         </div>
         <div className="flex items-center gap-4 lg:hidden">
-          <Button variant="nav" size="md">
-            List Business Free
-          </Button>
+          <Link href="https://docs.google.com/forms/d/e/1FAIpQLSdzEFmkrANFYzdrmSZrjVgeOm_TJspc6q2yi-SgpuRuh_lrAQ/viewform">
+            <Button variant="nav" size="md">
+              List Business Free
+            </Button>
+          </Link>
           <div className="">
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
@@ -126,8 +134,8 @@ export default function HeroNav({ className }: { className?: string }) {
                   </DropdownMenuItem>
                   <DropdownMenuItem className="cursor-pointer">
                     <span className="flex gap-x-2 items-center">
-                      <Link href={'/#'}>
-                        <span>List Business Free</span>
+                      <Link href="https://docs.google.com/forms/d/e/1FAIpQLSdzEFmkrANFYzdrmSZrjVgeOm_TJspc6q2yi-SgpuRuh_lrAQ/viewform">
+                        List Business Free
                       </Link>
                     </span>
                   </DropdownMenuItem>

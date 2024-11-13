@@ -56,7 +56,7 @@ function MarketplaceSection() {
         <Image
           src="/wave-real-2.png"
           fill={true}
-          objectFit="cover"
+          className="object-cover object-left"
           alt="bg-wave"
           priority
         />
@@ -92,7 +92,7 @@ function MarketplaceSection() {
             </p>
           </div>
 
-          <div className="flex flex-col items-center gap-y-6 md:flex-row md:gap-y-0 md:gap-x-6 md:items-stretch">
+          <div className="flex flex-col items-center gap-6 md:flex-row md:items-stretch">
             {cardData.map((data) => (
               <div
                 key={data.title}
@@ -128,7 +128,7 @@ function MarketplaceSection() {
             </div>
 
             <Button className="py-2.5 px-10 text-xl relative z-10">
-              <Link href="/demo-account-type">
+              <Link href="https://docs.google.com/forms/d/e/1FAIpQLSdtH6pIwzl_R46SpS4RnECfIYhU_PdWxQyGQCjFVqa5ygcFvw/viewform">
                 <span className="flex items-center gap-x-3">
                   <span>Start Now</span>
                   <ArrowUpRight weight="bold" />
@@ -140,11 +140,11 @@ function MarketplaceSection() {
       </div>
 
       {/* Bottom wave - full width */}
-      <div className="absolute left-0 bottom-0 w-full h-[240px] md:h-[400px]">
+      <div className="absolute left-0 bottom-0 w-full h-[400px] md:h-[850px]">
         <Image
-          src="/img/bg-1.png"
+          src="/cards-bg.png"
           fill={true}
-          objectFit="cover"
+          className="object-contain"
           alt="bg-wave"
         />
       </div>

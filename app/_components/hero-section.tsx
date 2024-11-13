@@ -44,10 +44,10 @@ const HeroSection = () => {
             {/* Main Image */}
             <div className="relative aspect-[4080/2864] w-full h-96 md:h-full">
               <Image
-                src="/img/hero-img.png"
+                src="/img/hero-img.png "
                 alt="hero image"
                 fill
-                className="object-cover"
+                className="object-cover "
                 quality={100}
                 priority
               />
