@@ -1,36 +1,36 @@
-import { Funnel } from '@phosphor-icons/react/dist/ssr';
-// import Image from 'next/image';
+import { Funnel } from "@phosphor-icons/react/dist/ssr";
+import Image from "next/image";
 
 const businessSection = [
   {
-    title: 'Powerful Marketing Analytics',
+    title: "Powerful Marketing Analytics",
     description:
-      'Visey’s powerful analytics tools give you a clear picture of your business’ progress and the effectiveness of your strategies. Make informed decisions with real-time data at your fingertips.',
+      "Visey’s powerful analytics tools give you a clear picture of your business’ progress and the effectiveness of your strategies. Make informed decisions with real-time data at your fingertips.",
   },
   {
-    title: 'Reach your Target Audience',
+    title: "Reach your Target Audience",
     description:
-      'Our Platform helps businesses efficiently identify and connect with startups actively seeking their services. No more wasted time on ineffective outreach—get in touch with the right audience.',
+      "Our Platform helps businesses efficiently identify and connect with startups actively seeking their services. No more wasted time on ineffective outreach—get in touch with the right audience.",
   },
   {
-    title: 'Build trust through Transparency',
+    title: "Build trust through Transparency",
     description:
-      'Our platform’s integrated ratings and reviews system fosters transparency, helping you build credibility and trust with potential startups as clients',
+      "Our platform’s integrated ratings and reviews system fosters transparency, helping you build credibility and trust with potential startups as clients",
   },
 ];
 
 const features = [
   {
-    title: 'Free Listing',
-    subtitle: 'Go Online',
+    title: "Free Listing",
+    subtitle: "Go Online",
   },
   {
-    title: 'Get Leads',
-    subtitle: 'From across India',
+    title: "Get Leads",
+    subtitle: "From across India",
   },
   {
-    title: 'Close Deals',
-    subtitle: 'Grow with Visey',
+    title: "Close Deals",
+    subtitle: "Grow with Visey",
   },
 ];
 
@@ -41,26 +41,26 @@ function BusinessSection() {
         className="relative rotate-180 w-full h-20 bg-repeat-x opacity-10"
         style={{
           backgroundImage: "url('/triangle.png')",
-          backgroundSize: '100px 100%',
-          backgroundPosition: 'center',
+          backgroundSize: "100px 100%",
+          backgroundPosition: "center",
         }}
       ></div>
 
-      <div className="px-4 space-y-9 pt-9 pb-20">
-        <div className="space-y-2 text-center">
+      <div className="relative px-4 pt-9 pb-20 space-y-9 md:space-y-14 xl:space-y-20">
+        <div className="space-y-2 text-center ">
           <h2 className="font-degular font-semibold text-heading4 md:text-heading3 lg:text-heading2 xl:text-heading1 leading-snug">
             Visey for buissness
           </h2>
           <p className="text-lg">
-            Unlock your full potential with our{' '}
+            Unlock your full potential with our{" "}
             <span className="font-bold">cutting-edge features</span>
           </p>
         </div>
-        <div className="space-y-4 mx-auto md:flex md:space-y-0 md:gap-x-8 md:mx-8">
+        <div className="max-w-screen-2xl mx-auto flex flex-col gap-6 md:flex-row">
           {businessSection.map((data) => (
             <div
               key={data.title}
-              className="p-10 rounded-2xl space-y-6 bg-primary-landing-light text-base-white flex-1"
+              className="px-10 pt-10 pb-24 rounded-2xl space-y-6 bg-primary-landing-light text-base-white flex-1"
             >
               <div className="p-2 rounded-full inline-flex justify-center items-center bg-success-landing">
                 <Funnel size={36} className="text-[#709B08]" />
@@ -74,12 +74,9 @@ function BusinessSection() {
             </div>
           ))}
         </div>
-        <div className="max-w-screen-xl mx-auto flex flex-col gap-4 md:flex-row md:justify-between w-full">
+        <div className="max-w-screen-xl mx-auto flex flex-col gap-4 md:flex-row md:justify-between py-9 md:py-12 lg:py-16">
           {features.map((feat) => (
-            <div
-              key={feat.title}
-              className="flex-grow text-center py-9 md:py-12 lg:py-16"
-            >
+            <div key={feat.title} className="flex-grow text-center ">
               <p className="font-degular text-heading4 text-primary">
                 {feat.title}
               </p>
@@ -87,10 +84,26 @@ function BusinessSection() {
             </div>
           ))}
         </div>
+
+        <div className="absolute z-[-1] opacity-20 left-0 bottom-0 w-full h-[1500px] md:h-[900px]">
+          <Image
+            src="/business-bg.png"
+            fill={true}
+            objectFit="contain"
+            alt="business illustration "
+          />
+        </div>
       </div>
-      {/* <div className="absolute left-0 -bottom-3  w-full h-[240px] opacity-50">
-        <Image src="/wave-2.png" fill={true} objectFit="cover" alt="bg-wave" />
-      </div> */}
+
+      <div className="absolute inset-x-0 -bottom-6 w-full h-[250px] md:h-[200px] lg:h-[300px] opacity-60 transform scale-x-[-1] -rotate-180">
+        <Image
+          src="/wave-real-2.png"
+          fill={true}
+          className="object-cover object-left"
+          alt="bg-wave"
+          priority
+        />
+      </div>
     </section>
   );
 }

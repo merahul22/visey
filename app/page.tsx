@@ -10,6 +10,7 @@ import FaqSection from './_components/faq-section';
 import SignUpSection from './_components/signup-section';
 import Footer from '@/components/navigation/footer';
 import HeroNav from '@/components/navigation/hero-nav';
+import Link from 'next/link';
 
 export default function LandingPage() {
   // TODO: Redirect accordingly based on current auth status
@@ -37,8 +38,13 @@ export default function LandingPage() {
             variant="landing"
             className="w-full sm:w-96 text-base-black gap-x-4 py-4"
           >
-            <span className="text-lg">List Business Now</span>
-            <ArrowUpRight size={24} />
+            <Link
+              href="https://docs.google.com/forms/d/e/1FAIpQLSdzEFmkrANFYzdrmSZrjVgeOm_TJspc6q2yi-SgpuRuh_lrAQ/viewform"
+              className="flex items-center gap-4"
+            >
+              <span className="text-lg">List Business Now</span>
+              <ArrowUpRight size={24} />
+            </Link>
           </Button>
         </div>
       </div>
