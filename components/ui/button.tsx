@@ -16,6 +16,8 @@ const buttonVariants = cva(
         outline: 'border hover:bg-neutrals-100',
         ghost: 'hover:bg-neutrals-100',
         link: 'text-primary underline-offset-4 hover:underline',
+        landing: 'bg-[#BFFF72] shadow-lg hover:shadow-none',
+        nav: 'bg-primary-landing-light shadow-none transition-all duration-300 hover:shadow-md text-base-white',
       },
       size: {
         sm: 'py-2 px-4',

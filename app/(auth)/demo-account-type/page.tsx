@@ -1,31 +1,20 @@
 'use client';
 
 import { CheckIcon } from '@radix-ui/react-icons';
-import { Button } from '../ui/button';
-import { useState, useTransition } from 'react';
-import { selectType } from '@/actions/select-type';
-import { useRouter } from 'next/navigation';
+import { Button } from '@/components/ui/button';
+import { useState } from 'react';
 
-const AccountTypeForm = () => {
+const Page = () => {
   const [currentType, setCurrentType] = useState<string>('');
-  const [loading, startTransition] = useTransition();
-  const router = useRouter();
 
   const onSubmit = () => {
-    startTransition(async () => {
-      const res = await selectType(
-        currentType === 'STARTUP' ? 'STARTUP' : 'BUSINESS'
-      );
-
-      if (res.success) {
-        // Redirect to the next page
-        if (currentType === 'STARTUP') {
-          router.push('/list-preferences');
-        } else {
-          router.push('/list-business');
-        }
-      }
-    });
+    if (currentType === 'STARTUP') {
+      window.location.href =
+        'https://docs.google.com/forms/d/e/1FAIpQLSdtH6pIwzl_R46SpS4RnECfIYhU_PdWxQyGQCjFVqa5ygcFvw/viewform';
+    } else {
+      window.location.href =
+        'https://docs.google.com/forms/d/e/1FAIpQLSdzEFmkrANFYzdrmSZrjVgeOm_TJspc6q2yi-SgpuRuh_lrAQ/viewform';
+    }
   };
 
   return (
@@ -103,11 +92,11 @@ const AccountTypeForm = () => {
             </div>
           </div>
         </div>
-        <Button className="w-full mt-8" onClick={onSubmit} disabled={loading}>
+        <Button className="w-full mt-8" onClick={onSubmit}>
           Continue
         </Button>
       </div>
     </div>
   );
 };
-export default AccountTypeForm;
+export default Page;
