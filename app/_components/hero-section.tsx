@@ -6,7 +6,7 @@ import Link from 'next/link';
 const HeroSection = () => {
   return (
     <section className="relative bg-primary-landing text-base-white overflow-hidden">
-      <div className="max-w-screen-2xl mx-auto py-32">
+      <div className="max-w-screen-2xl mx-auto py-24">
         {/* Main Content Container */}
         <div className="relative flex flex-col gap-20  lg:flex-row">
           {/* Left Content */}

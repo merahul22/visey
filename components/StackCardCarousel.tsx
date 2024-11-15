@@ -12,13 +12,13 @@ interface Testimonial {
 const TestimonialCarousel: React.FC = () => {
   const testimonials: Testimonial[] = [
     {
-      image: '/img/testimonial.png',
+      image: '/img/testimonial1.png',
       content: 'An absolute must have for startups and businesses',
     },
-    { image: '/img/testimonial.png', content: 'Testimonial 2' },
-    { image: '/img/testimonial.png', content: 'Testimonial 3' },
-    { image: '/img/testimonial.png', content: 'Testimonial 4' },
-    { image: '/img/testimonial.png', content: 'Testimonial 5' },
+    { image: '/img/testimonial1.png', content: 'Testimonial 2' },
+    { image: '/img/testimonial1.png', content: 'Testimonial 3' },
+    { image: '/img/testimonial1.png', content: 'Testimonial 4' },
+    { image: '/img/testimonial1.png', content: 'Testimonial 5' },
   ];
 
   const [activeIndex, setActiveIndex] = useState<number>(2);

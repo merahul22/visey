@@ -39,7 +39,9 @@ const ProfilePage = async (props: { params: Promise<Params> }) => {
   if (params.type === 'startup' && user?.type === 'STARTUP') {
     return <StartupProfile user={userStartupProps} />;
   } else if (params.type === 'business' && user?.type === 'BUSINESS') {
-    return <BusinessProfile user={userBusinessProps} />;
+    return <div className="flex items-center justify-center">
+      <BusinessProfile user={userBusinessProps} />
+    </div>
   } else {
     return <div>Access Denied</div>; // Handle invalid access
   }

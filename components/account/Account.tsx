@@ -2,10 +2,10 @@ import React from 'react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import CurrentPlan from '../CurrentPlan';
 import PricingBusiness from '../PricingBusiness';
-import FundingOpportunities from './_components/FundingOpportunities';
 import { Button } from '../ui/button';
 import { Hammer } from '@phosphor-icons/react/dist/ssr';
 import AccountTransactions from '../AccountTransactions';
+import FundingOpportunityCard from '@/components/cards/funding-opportunity-card';
 
 const Account = () => {
   return (
@@ -14,7 +14,7 @@ const Account = () => {
         <h1 className="text-xl">My Account</h1>
       </div>
       <div className="py-6">
-        <Tabs defaultValue="overview" className="">
+        <Tabs defaultValue="overview">
           <div className="overflow-scroll">
             <TabsList>
               <TabsTrigger value="overview">Your Plan</TabsTrigger>
@@ -36,9 +36,33 @@ const Account = () => {
             <div className="mt-8">
               <h2 className="font-semibold mb-4">Funding Opportunities</h2>
               <div className="flex flex-col gap-4">
-                <FundingOpportunities />
-                <FundingOpportunities />
-                <FundingOpportunities />
+                <div
+                  className="flex items-center justify-center lg:justify-start flex-col gap-4 lg:flex-row lg:items-center lg:gap-10">
+                  <FundingOpportunityCard isPromoted={true} underReview={true} />
+                  <div>
+                    <Button className="bg-base-secondary text-base-black shadow-none border-2 hover:bg-base-secondary">
+                      Run Ads
+                    </Button>
+                  </div>
+                </div>
+                <div
+                  className="flex items-center justify-center lg:justify-start flex-col gap-4 lg:flex-row lg:items-center lg:gap-10">
+                  <FundingOpportunityCard isPromoted={true} underReview={true} />
+                  <div>
+                    <Button className="bg-base-secondary text-base-black shadow-none border-2 hover:bg-base-secondary">
+                      Run Ads
+                    </Button>
+                  </div>
+                </div>
+                <div
+                  className="flex items-center justify-center lg:justify-start flex-col gap-4 lg:flex-row lg:items-center lg:gap-10">
+                  <FundingOpportunityCard isPromoted={true} underReview={true} />
+                  <div>
+                    <Button className="bg-base-secondary text-base-black shadow-none border-2 hover:bg-base-secondary">
+                      Run Ads
+                    </Button>
+                  </div>
+                </div>
               </div>
               <div className="mt-4 flex items-center justify-center">
                 <Button size="sm" variant="link">
@@ -80,9 +104,33 @@ const Account = () => {
             <div className="mt-8">
               <h2 className="font-semibold mb-4">Funding Opportunities</h2>
               <div className="flex flex-col gap-4">
-                <FundingOpportunities />
-                <FundingOpportunities />
-                <FundingOpportunities />
+                <div
+                  className="flex items-center justify-center lg:justify-start flex-col gap-4 lg:flex-row lg:items-center lg:gap-10">
+                  <FundingOpportunityCard isPromoted={true} underReview={true} />
+                  <div>
+                    <Button className="bg-base-secondary text-base-black shadow-none border-2 hover:bg-base-secondary">
+                      Run Ads
+                    </Button>
+                  </div>
+                </div>
+                <div
+                  className="flex items-center justify-center lg:justify-start flex-col gap-4 lg:flex-row lg:items-center lg:gap-10">
+                  <FundingOpportunityCard isPromoted={true} underReview={true} />
+                  <div>
+                    <Button className="bg-base-secondary text-base-black shadow-none border-2 hover:bg-base-secondary">
+                      Run Ads
+                    </Button>
+                  </div>
+                </div>
+                <div
+                  className="flex items-center justify-center lg:justify-start flex-col gap-4 lg:flex-row lg:items-center lg:gap-10">
+                  <FundingOpportunityCard isPromoted={true} underReview={true} />
+                  <div>
+                    <Button className="bg-base-secondary text-base-black shadow-none border-2 hover:bg-base-secondary">
+                      Run Ads
+                    </Button>
+                  </div>
+                </div>
               </div>
               <div className="mt-4 flex items-center justify-center">
                 <Button size="sm" variant="link">
