@@ -12,20 +12,16 @@ const SLIDES: Testimonial[] = [
     content: '“An absolute must have for startups and businesses”',
   },
   {
-    image: '/img/testimonial1.png',
+    image: '/img/testimonial2.jpg',
     content: '“A game-changer for our business.”',
   },
   {
-    image: '/img/testimonial1.png',
+    image: '/img/testimonial3.jpg',
     content: '“Boosted our productivity instantly.”',
   },
   {
-    image: '/img/testimonial1.png',
+    image: '/img/testimonial4.jpg',
     content: '“Perfect for startups. Highly recommend.”',
-  },
-  {
-    image: '/img/testimonial1.png',
-    content: '“We can’t run our startup without it.”',
   },
 ];
 

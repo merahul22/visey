@@ -2,6 +2,8 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Separator } from "@/components/ui/separator";
 import Image from "next/image";
+import Link from "next/link";
+
 function SignUpSection() {
   return (
     <div className="relative -mt-10 overflow-hidden">
@@ -44,9 +46,11 @@ function SignUpSection() {
                 placeholder="Your email"
               />
             </div>
-            <Button variant="landing" className="w-11/12 py-3 px-4 rounded-full shadow-2xl mt-6 md:mt-0 md:shrink-0 md:w-auto md:p-6 md:aspect-square cursor-pointer">
-              Sign up
-            </Button>
+            <Link href="/demo-account-type">
+              <Button variant="landing" className="w-11/12 py-3 px-4 rounded-full shadow-2xl mt-6 md:mt-0 md:shrink-0 md:w-auto md:p-6 md:aspect-square cursor-pointer">
+                Sign up
+              </Button>
+            </Link>
           </form>
 
           <p className="text-xs">

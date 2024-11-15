@@ -20,15 +20,15 @@ const cardData = [
 
 const stats = [
   {
-    title: '157k+',
-    subtitle: 'Active Users',
+    title: '1',
+    subtitle: 'Days',
   },
   {
-    title: '937h+',
+    title: '567h+',
     subtitle: 'Hours saved',
   },
   {
-    title: '25k+',
+    title: '825+',
     subtitle: 'Business Listed',
   },
 ];
