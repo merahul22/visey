@@ -56,7 +56,7 @@ const IdentifierChangeForm = ({ onCancel }: IdentifierChangeFormProps) => {
 
       if (res?.success) {
         setSuccess(res?.success);
-        update();
+        await update();
         form.reset();
       }
     });
@@ -92,22 +92,22 @@ const IdentifierChangeForm = ({ onCancel }: IdentifierChangeFormProps) => {
           />
           <div className="flex gap-2">
             <Button
+              type="submit"
+              className="rounded-full"
+              size="lg"
+              disabled={loading}
+            >
+              Change
+            </Button>
+            <Button
               type="button"
               className="rounded-full"
+              variant="outline"
               size="lg"
               disabled={loading}
               onClick={onCancel}
             >
               Cancel
-            </Button>
-            <Button
-              type="submit"
-              className="rounded-full"
-              variant="outline"
-              size="lg"
-              disabled={loading}
-            >
-              Change
             </Button>
           </div>
         </form>

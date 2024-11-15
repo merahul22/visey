@@ -102,17 +102,21 @@ export function UserDropdown({ user }: UserDropdownProps) {
           {user?.type === 'BUSINESS' && (
             <>
               <DropdownMenuItem className="cursor-pointer">
-                <span className="flex gap-x-2 items-center">
-                  <Bag />
-                  <Link href={'/account'}>
+                <span className="">
+                  <Link href={'/account'} className="flex gap-x-2 items-center">
+                    <div>
+                      <Bag className="w-4 h-4" />
+                    </div>
                     <span>My Account</span>
                   </Link>
                 </span>
               </DropdownMenuItem>
               <DropdownMenuItem className="cursor-pointer">
-                <span className="flex gap-x-2 items-center">
-                  <RowsPlusTop />
-                  <span>Manage Opportunities</span>
+                <span className="">
+                  <Link className="flex gap-x-2 items-center" href={"/opportunities"}>
+                    <RowsPlusTop />
+                    <span>Manage Opportunities</span>
+                  </Link>
                 </span>
               </DropdownMenuItem>
               <DropdownMenuItem className="cursor-pointer">

@@ -21,7 +21,7 @@ export default function HeroNav({ className }: { className?: string }) {
   const [search, setSearch] = useState('');
 
   return (
-    <header className="sticky top-0 z-30 bg-primary-landing px-4 py-4 shadow-[0_4px_6px_-1px_rgba(0,0,0,0.1)] w-full transition-all duration-300">
+    <header className="sticky top-0 bg-primary-landing px-4 py-4 shadow-[0_4px_6px_-1px_rgba(0,0,0,0.1)] w-full transition-all duration-300 z-40">
       <nav className={cn('flex items-center justify-between', className)}>
         <div className="shrink-0 lg:w-48 cursor-pointer transition-transform duration-300 hover:scale-105">
           <Link href="/home">

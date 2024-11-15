@@ -318,7 +318,6 @@ export const locations = [
   { value: 'Giridih, Jharkhand' },
   { value: 'Goalpara, Assam' },
   { value: 'Gobindgarh, Punjab' },
-  { value: 'Gobindgarh, Punjab' },
   { value: 'Godhra, Gujarat' },
   { value: 'Gohana, Haryana' },
   { value: 'Gokak, Karnataka' },

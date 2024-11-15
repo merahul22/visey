@@ -43,7 +43,7 @@ const StartupResume = ({ startup }: { startup: Startup | null }) => {
                 />
               </h3>
               <p className="text-linkBlue text-sm">
-                {startup?.registeredName || ''}
+                {startup?.registeredName || 'Registered Name'}
               </p>
               <p className="text-sm">{startup?.description}</p>
             </div>
@@ -72,8 +72,8 @@ const StartupResume = ({ startup }: { startup: Startup | null }) => {
       <article className="space-y-4">
         <div className="space-y-2">
           <h3 className="font-semibold">Website</h3>
-          <Link href="www.visey.dtu.ac.in" className="text-linkBlue text-sm">
-            {startup?.websiteUrl}
+          <Link href={startup?.websiteUrl || "#"} className="text-linkBlue text-sm">
+            {startup?.websiteUrl || "Website Url"}
           </Link>
         </div>
         <div className="space-y-2">
@@ -133,7 +133,7 @@ const StartupResume = ({ startup }: { startup: Startup | null }) => {
             href="https://google.drive.com"
             className="text-linkBlue text-sm"
           >
-            {startup?.demoVideoUrl}
+            {startup?.demoVideoUrl || "Demo Video Url"}
           </Link>
         </div>
         <div className="">
@@ -142,7 +142,7 @@ const StartupResume = ({ startup }: { startup: Startup | null }) => {
             href="https://google.drive.com"
             className="text-linkBlue text-sm"
           >
-            {startup?.pitchDeckUrl}
+            {startup?.pitchDeckUrl || "Pitch Deck Url"}
           </Link>
         </div>
       </article>
@@ -210,11 +210,11 @@ const StartupResume = ({ startup }: { startup: Startup | null }) => {
 
         <div className="">
           <h3 className="font-semibold">Contact Number*</h3>
-          <p className="text-sm">{startup?.contactNumber}</p>
+          <p className="text-sm">{startup?.contactNumber || "Contact Number"}</p>
         </div>
         <div className="">
           <h3 className="font-semibold">Contact Email Id*</h3>
-          <p className="text-sm">{startup?.email}</p>
+          <p className="text-sm">{startup?.email || "Email"}</p>
         </div>
       </article>
     </div>

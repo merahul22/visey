@@ -2,7 +2,7 @@ import { Button } from '@/components/ui/button';
 
 import { CategoryCardBig } from './_components/category-card-big';
 import { CategoryCardSmall } from './_components/category-card-small';
-import { FundingCard } from '../../../components/cards/funding-card';
+import { FundingCard } from '@/components/cards/funding-card';
 import { BusinessCardList } from './_components/buisiness';
 import Footer from '@/components/Footer';
 import { auth } from '@/auth';
