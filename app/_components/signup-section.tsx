@@ -4,8 +4,8 @@ import { Separator } from "@/components/ui/separator";
 import Image from "next/image";
 function SignUpSection() {
   return (
-    <div className="relative -mt-10">
-      <div className="absolute w-full inset-0">
+    <div className="relative -mt-10 overflow-hidden">
+      <div className="absolute w-full inset-0 scale-125 md:scale-100">
         <Image
           src="/waves-background.png"
           fill
