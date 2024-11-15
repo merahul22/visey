@@ -29,6 +29,7 @@ export function CarouselDemo({ slides }: { slides: Testimonial[] }) {
                       <Image
                         src={slide.image}
                         alt="testimonial"
+                        className="rounded-lg"
                         height={240}
                         width={280}
                       />

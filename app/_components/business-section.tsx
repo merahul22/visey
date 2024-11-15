@@ -49,7 +49,7 @@ function BusinessSection() {
       <div className="relative px-4 pt-9 pb-20 space-y-9 md:space-y-14 xl:space-y-20">
         <div className="space-y-2 text-center ">
           <h2 className="font-degular font-semibold text-heading4 md:text-heading3 lg:text-heading2 xl:text-heading1 leading-snug">
-            Visey for buissness
+            Visey for business
           </h2>
           <p className="text-lg">
             Unlock your full potential with our{" "}
