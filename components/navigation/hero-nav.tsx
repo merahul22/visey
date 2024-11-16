@@ -24,7 +24,7 @@ export default function HeroNav({ className }: { className?: string }) {
     <header className="sticky top-0 bg-primary-landing px-4 py-4 shadow-[0_4px_6px_-1px_rgba(0,0,0,0.1)] w-full transition-all duration-300 z-40">
       <nav className={cn('flex items-center justify-between', className)}>
         <div className="shrink-0 lg:w-48 cursor-pointer transition-transform duration-300 hover:scale-105">
-          <Link href="/home">
+          <Link href="/">
             <Image
               src="/logo-white.png"
               width={81}
@@ -71,13 +71,16 @@ export default function HeroNav({ className }: { className?: string }) {
           </div>
 
           <div className="hidden lg:flex items-center gap-x-4 xl:gap-x-8">
-            {['About', 'Pricing', 'Contact Us'].map((item) => (
+            {[{ name: 'About', link: '/about' },
+              { name: 'Pricing', link: '/pricing'},
+              { name: 'Contact Us', link: '/contact-us', }
+            ].map((item) => (
               <Link
-                key={item}
-                href="#"
+                key={item.name}
+                href={item.link}
                 className="text-sm font-semibold text-base-white transition-all duration-300 hover:opacity-80"
               >
-                {item}
+                {item.name}
               </Link>
             ))}
 
@@ -88,7 +91,7 @@ export default function HeroNav({ className }: { className?: string }) {
             </Link>
 
             {['Log In/ Sign Up'].map((text) => (
-              <Link key={text} href="#">
+              <Link key={text} href="/login">
                 <Button variant="nav" size="md">
                   {text}
                 </Button>

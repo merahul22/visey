@@ -39,7 +39,7 @@ const ProfilePage = async (props: { params: Promise<Params> }) => {
   if (params.type === 'startup' && user?.type === 'STARTUP') {
     return <StartupProfile user={userStartupProps} />;
   } else if (params.type === 'business' && user?.type === 'BUSINESS') {
-    return <div className="flex items-center justify-center">
+    return <div className="flex items-center justify-center mt-10">
       <BusinessProfile user={userBusinessProps} />
     </div>
   } else {

@@ -3,6 +3,7 @@ import './globals.css';
 import BreakpointIndicator from '@/components/breakpoint-indicator';
 import Provider from '@/components/Provider';
 import HelpAndSupport from '@/components/HelpAndSupport';
+import React from 'react';
 
 export const metadata: Metadata = {
   title: "Visey",
@@ -10,16 +11,16 @@ export const metadata: Metadata = {
     "promote your startup and small business and grow more with visey",
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
+export default function RootLayout({ children, }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
     <html lang="en">
       <body className={`font-inter antialiased text-base-black`}>
         <BreakpointIndicator />
-        <Provider>{children}</Provider>
+        <Provider>
+          {children}
+        </Provider>
         <HelpAndSupport />
       </body>
     </html>
