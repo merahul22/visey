@@ -40,9 +40,10 @@ export const listBusinessFirstStepSchema = z.object({
   websiteUrl: z
     .string()
     .optional()
-    .refine((val) => !val || /^https?:\/\/[^\s$.?#].[^\s]*$/.test(val), {
+    .refine((val) => !val || /^https?:\/\/[^\s$.?#].\S*$/.test(val), {
       message: 'Enter a valid URL',
     }),
+  description: z.string().min(100, 'Minimum 100 characters are required'),
 });
 
 export const listBusinessSecondStepSchema = z.object({

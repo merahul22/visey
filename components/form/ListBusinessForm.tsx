@@ -33,6 +33,7 @@ import { listBusiness } from '@/actions/list-business';
 import { useRouter } from 'next/navigation';
 import { DEFAULT_LOGIN_REDIRECT } from '@/routes';
 import { useSession } from 'next-auth/react';
+import { Textarea } from '@/components/ui/textarea';
 
 function splitAndCapitalize(inputString: string) {
   const words = inputString.split('-');
@@ -61,6 +62,7 @@ const ListBusinessForm = () => {
     tagsList: [],
     contactNumber: '',
     location: '',
+    description: ''
   });
 
   const schema =
@@ -74,6 +76,7 @@ const ListBusinessForm = () => {
           businessName: '',
           registeredName: '',
           websiteUrl: '',
+          description: ''
         }
       : {
           category: '',
@@ -116,7 +119,7 @@ const ListBusinessForm = () => {
         }
 
         if (res.success) {
-          update();
+          await update();
           router.push(DEFAULT_LOGIN_REDIRECT);
         }
       });
@@ -223,6 +226,25 @@ const ListBusinessForm = () => {
                       </FormLabel>
                       <FormControl>
                         <Input className="mt-1" {...field} disabled={loading} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="description"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>
+                        <div className="flex justify-between">
+                          <p className="text-neutrals-600 font-semibold">
+                            Description
+                          </p>
+                        </div>
+                      </FormLabel>
+                      <FormControl>
+                        <Textarea className="mt-1" {...field} disabled={loading} />
                       </FormControl>
                       <FormMessage />
                     </FormItem>

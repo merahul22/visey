@@ -5,7 +5,18 @@ import Link from 'next/link';
 
 const HeroSection = () => {
   return (
-    <section className="relative bg-primary-landing text-base-white overflow-hidden">
+    <section
+      className="relative bg-primary-landing text-base-white overflow-hidden">
+      <div
+        className="absolute inset-x-0 -bottom-6 w-full h-[250px] md:h-[200px] lg:h-[300px] opacity-80">
+        <Image
+          src="/hero-section-wave.png"
+          fill={true}
+          className="object-cover object-left"
+          alt="bg-wave"
+          priority
+        />
+      </div>
       <div className="max-w-screen-2xl mx-auto py-24">
         {/* Main Content Container */}
         <div className="relative flex flex-col gap-20  lg:flex-row">
@@ -13,7 +24,8 @@ const HeroSection = () => {
           <div className="px-4 md:px-8 lg:pl-8 xl:pl-24 lg:w-3/4 lg:py-24">
             <div className="space-y-8">
               <div className="space-y-4">
-                <h1 className="font-degular text-heading4 md:text-heading2 xl:text-heading1 leading-tight">
+                <h1
+                  className="font-degular text-heading4 md:text-heading2 xl:text-heading1 leading-tight">
                   We help startups & SMEs meet their resource needs quick
                 </h1>
                 <p className="font-gothic text-sm md:text-base opacity-90">

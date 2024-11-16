@@ -1,22 +1,19 @@
 import { ArrowUpRight } from '@phosphor-icons/react/dist/ssr';
 import { Button } from '@/components/ui/button';
-
-import HeroSection from './_components/hero-section';
-import MarketplaceSection from './_components/marketplace-section';
-import TargetAudienceSection from './_components/target-audience-section';
-import BusinessSection from './_components/business-section';
-import TestimonialSection from './_components/testimonial-section';
-import FaqSection from './_components/faq-section';
-import SignUpSection from './_components/signup-section';
+import HeroSection from '@/app/(landing)/_components/hero-section';
+import MarketplaceSection from '@/app/(landing)/_components/marketplace-section';
+import TargetAudienceSection from '@/app/(landing)/_components/target-audience-section';
+import BusinessSection from '@/app/(landing)/_components/business-section';
+import TestimonialSection from '@/app/(landing)/_components/testimonial-section';
+import FaqSection from '@/app/(landing)/_components/faq-section';
+import SignUpSection from '@/app/(landing)/_components/signup-section';
 import Footer from '@/components/navigation/footer';
-import HeroNav from '@/components/navigation/hero-nav';
 import Link from 'next/link';
 
 export default function LandingPage() {
   // TODO: Redirect accordingly based on current auth status
   return (
     <div className="font-gothic">
-      <HeroNav className="mx-auto max-w-screen-xl" />
       <HeroSection />
       <MarketplaceSection />
       <TargetAudienceSection />

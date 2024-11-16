@@ -128,7 +128,7 @@ function MarketplaceSection() {
             </div>
 
             <Button className="py-2.5 px-10 text-xl relative z-10">
-              <Link href="https://docs.google.com/forms/d/e/1FAIpQLSdtH6pIwzl_R46SpS4RnECfIYhU_PdWxQyGQCjFVqa5ygcFvw/viewform">
+              <Link href="/demo-account-type">
                 <span className="flex items-center gap-x-3">
                   <span>Start Now</span>
                   <ArrowUpRight weight="bold" />
