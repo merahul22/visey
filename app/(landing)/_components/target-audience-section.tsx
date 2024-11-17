@@ -16,7 +16,7 @@ function TargetAudienceSection() {
       {/* Main content - with max-width constraint */}
       <div className="max-w-screen-xl mx-auto px-4">
         <section className="py-8 md:py-16 lg:py-24 text-base-white space-y-4 md:flex md:space-y-0  md:gap-x-14">
-          <div className="relative size-80 mx-auto md:mx-0 md:flex-1">
+          <div className="relative size-72 sm:size-80 mx-auto md:mx-0 md:flex-1">
             <Image
               src="/img/startup.png"
               alt="startup illustration"

@@ -17,6 +17,16 @@ const HeroSection = () => {
           priority
         />
       </div>
+      <div
+        className="absolute inset-x-0 top-0 w-full h-[250px] md:h-[200px] lg:h-[300px] opacity-80">
+        <Image
+          src="/Surajmukhi.svg"
+          fill={true}
+          className="object-cover object-left"
+          alt="bg-wave"
+          priority
+        />
+      </div>
       <div className="max-w-screen-2xl mx-auto py-24">
         {/* Main Content Container */}
         <div className="relative flex flex-col gap-20  lg:flex-row">
