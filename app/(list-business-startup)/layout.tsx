@@ -1,9 +1,7 @@
 import React from 'react';
 import Image from 'next/image';
 
-export default function AuthLayout({
-                                     children,
-                                   }: Readonly<{
+export default function Layout({ children, }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
@@ -11,7 +9,7 @@ export default function AuthLayout({
       {/* Image on the left side */}
       <div className="hidden lg:block lg:w-[565px] h-screen relative">
         <Image
-          src={"/img/signup_banner.png"}
+          src={"/img/business_banner.png"}
           alt={"Signup Banner"}
           fill={true}
           objectFit="cover"
