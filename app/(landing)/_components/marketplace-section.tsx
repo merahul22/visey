@@ -127,7 +127,7 @@ function MarketplaceSection() {
               ))}
             </div>
 
-            <Button className="py-2.5 px-10 text-xl relative z-10">
+            <Button variant="landing" className="py-2.5 px-10 text-xl relative z-10">
               <Link href="/demo-account-type">
                 <span className="flex items-center gap-x-3">
                   <span>Start Now</span>
@@ -144,7 +144,7 @@ function MarketplaceSection() {
         <Image
           src="/cards-bg.png"
           fill={true}
-          className="object-contain"
+          className="object-contain opacity-40"
           alt="bg-wave"
         />
       </div>
