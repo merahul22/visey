@@ -152,7 +152,7 @@ const page = () => {
           Together, we&#39;re building
           a brighter future for startups, one bold step at a time.
         </p>
-        <div className="pt-20 flex flex-wrap justify-around gap-12 px-8">
+        <div className="pt-20 flex flex-wrap justify-around gap-12">
           {profiles.map((profile, idx) => {
             return <div key={idx}>
               <ProfileCard profile={profile} />
