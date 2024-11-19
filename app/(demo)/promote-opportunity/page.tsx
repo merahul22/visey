@@ -11,9 +11,8 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from '@/components/ui/accordion';
-import Footer from '@/components/Footer';
 
-const Page = () => {
+const OpportunityPricingPage = () => {
   return (
     <div className="space-y-12">
       <div className="rounded-lg bg-[#ffdfbf] mt-10">
@@ -157,22 +156,22 @@ const Page = () => {
           <Accordion
             type="single"
             collapsible
-            className="w-[324px] lg:w-[800px]"
+            className="w-[324px] lg:w-[800px] flex flex-col gap-2"
           >
-            <AccordionItem value="item-1">
+            <AccordionItem value="item-1" className="border-2 border-primary-100 px-6 rounded-md">
               <AccordionTrigger>Is it accessible?</AccordionTrigger>
               <AccordionContent>
                 Yes. It adheres to the WAI-ARIA design pattern.
               </AccordionContent>
             </AccordionItem>
-            <AccordionItem value="item-2">
+            <AccordionItem value="item-2" className="border-2 border-primary-100 px-6 rounded-md">
               <AccordionTrigger>Is it styled?</AccordionTrigger>
               <AccordionContent>
                 Yes. It comes with default styles that matches the other
                 components&apos; aesthetic.
               </AccordionContent>
             </AccordionItem>
-            <AccordionItem value="item-3">
+            <AccordionItem value="item-3" className="border-2 border-primary-100 px-6 rounded-md">
               <AccordionTrigger>Is it animated?</AccordionTrigger>
               <AccordionContent>
                 Yes. It&apos;s animated by default, but you can disable it if
@@ -185,9 +184,8 @@ const Page = () => {
       <div className="flex justify-center cursor-pointer">
         <p className="text-linkBlue underline">View Terms & Conditions</p>
       </div>
-      <Footer />
     </div>
   );
 };
 
-export default Page;
+export default OpportunityPricingPage;
