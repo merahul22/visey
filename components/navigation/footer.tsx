@@ -16,10 +16,10 @@ const footerData = [
   {
     title: 'Product',
     items: [
-      { name: 'About', link: '#' },
-      { name: 'Products', link: '#' },
-      { name: 'Pricing', link: '#' },
-      { name: 'Teams', link: '#' },
+      { name: 'About', link: '/about' },
+      { name: 'Products', link: '/about' },
+      { name: 'Teams', link: '/about' },
+      { name: 'Pricing', link: '/pricing' },
       {
         name: 'Free Business Listing',
         link: 'https://docs.google.com/forms/d/e/1FAIpQLSdzEFmkrANFYzdrmSZrjVgeOm_TJspc6q2yi-SgpuRuh_lrAQ/viewform',
@@ -29,10 +29,10 @@ const footerData = [
   {
     title: 'Legal',
     items: [
-      { name: 'Terms and Conditions', link: '#' },
-      { name: 'Cookie Policy', link: '#' },
-      { name: 'Privacy Policy', link: '#' },
-      { name: 'Investor Relation', link: '#' },
+      { name: 'Terms and Conditions', link: '/terms-and-conditions' },
+      { name: 'Cookie Policy', link: '/terms-and-conditions' },
+      { name: 'Privacy Policy', link: '/terms-and-conditions' },
+      { name: 'Investor Relation', link: '/partner-with-us' },
     ],
   },
 ];

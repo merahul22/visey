@@ -2,7 +2,7 @@ import BusinessPricingPage from '@/app/(demo)/promote-business/page';
 import OpportunityPricingPage from '@/app/(demo)/promote-opportunity/page';
 
 const page = () => {
-  return <div className="p-10">
+  return <div className="p-10 pb-20">
     <div className="pt-8">
       <h1  className="font-degular font-semibold text-heading4 md:text-heading3 lg:text-heading2 xl:text-heading1 leading-snug text-[#3f3f3f] text-center">Pricing</h1>
       <p className="pt-2 text-center">Start free, Upgrade to unlock business features</p>

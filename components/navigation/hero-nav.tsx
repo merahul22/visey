@@ -116,21 +116,21 @@ export default function HeroNav({ className }: { className?: string }) {
                 <div className="px-4 flex flex-col gap-2">
                   <DropdownMenuItem className="cursor-pointer">
                     <span className="flex gap-x-2 items-center">
-                      <Link href={'/#'}>
+                      <Link href={'/about'}>
                         <span>About</span>
                       </Link>
                     </span>
                   </DropdownMenuItem>
                   <DropdownMenuItem className="cursor-pointer">
                     <span className="flex gap-x-2 items-center">
-                      <Link href={'/#'}>
+                      <Link href={'/pricing'}>
                         <span>Pricing</span>
                       </Link>
                     </span>
                   </DropdownMenuItem>
                   <DropdownMenuItem className="cursor-pointer">
                     <span className="flex gap-x-2 items-center">
-                      <Link href={'/#'}>
+                      <Link href={'/contact-us'}>
                         <span>Contact Us</span>
                       </Link>
                     </span>
@@ -144,10 +144,12 @@ export default function HeroNav({ className }: { className?: string }) {
                   </DropdownMenuItem>
                 </div>
                 <DropdownMenuItem className="flex justify-center cursor-pointer shadow-[0_0_10px_5px_#E27C9D]">
-                  <span className="flex gap-x-2 items-center">
-                    <ExitIcon className="" />
-                    <span>Login/ Sign Up</span>
-                  </span>
+                  <Link href={"/login"}>
+                    <span className="flex gap-x-2 items-center">
+                      <ExitIcon className="" />
+                      <span>Login/ Sign Up</span>
+                    </span>
+                  </Link>
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
