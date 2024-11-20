@@ -7,11 +7,9 @@ import BusinessSection from '@/app/(landing)/_components/business-section';
 import TestimonialSection from '@/app/(landing)/_components/testimonial-section';
 import FaqSection from '@/app/(landing)/_components/faq-section';
 import SignUpSection from '@/app/(landing)/_components/signup-section';
-import Footer from '@/components/navigation/footer';
 import Link from 'next/link';
 
 export default function LandingPage() {
-  // TODO: Redirect accordingly based on current auth status
   return (
     <div className="font-gothic">
       <HeroSection />
@@ -49,7 +47,6 @@ export default function LandingPage() {
       <TestimonialSection />
       <FaqSection />
       <SignUpSection />
-      <Footer className="shadow-[0_-8px_10px_rgba(0,0,0,0.1)] rounded-tl-2xl rounded-tr-3xl" />
     </div>
   );
 }

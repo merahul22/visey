@@ -15,7 +15,7 @@ const profiles = [
 ]
 
 const page = () => {
-  return <div>
+  return <div className="pb-10">
     <div
       className="absolute inset-x-0 top-10 w-full h-[250px] md:h-[200px] lg:h-[300px] opacity-60">
       <Image
