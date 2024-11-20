@@ -1,6 +1,12 @@
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
-import { HeartStraight, MapPin } from '@phosphor-icons/react/dist/ssr';
+import {
+  CaretRight,
+  HeartStraight,
+  MapPin,
+} from '@phosphor-icons/react/dist/ssr';
+import Image from 'next/image';
+import React from 'react';
 
 interface FundingCardProps {
   title: string;
@@ -26,35 +32,59 @@ export function FundingCard({
   })}, ${date.getFullYear()}`;
 
   return (
-    <div className="rounded-xl border p-4 space-y-4">
-      <div className="h-40 bg-neutral-400"></div>
-      <div className="flex flex-col gap-y-2">
-        <div className="flex gap-x-6 justify-between items-start">
-          <h3>{title}</h3>
-          {promoted && (
-            <p className="text-sm px-4 py-0.5 bg-secondary-200 rounded-full">
-              Promoted
-            </p>
-          )}
+    <div className="flex lg:justify-start flex-col gap-4 lg:flex-row lg:items-center lg:gap-10">
+      <div className="border-2 rounded-xl px-4 py-4 space-y-2 max-w-fit">
+        <div className="space-y-2 lg:flex gap-6">
+          <div className="w-[220px] h-[135px] flex items-center justify-center">
+            <Image
+              src="/img/funding-opportunity-placeholder.png"
+              width={300}
+              height={135}
+              className="rounded-lg mt-4 flex items-center justify-center"
+              alt="Funding Opportunity Image"
+            />
+          </div>
+          <div className="space-y-2">
+            <div className="flex gap-1">
+              <h1 className="text-lg max-w-[200px]">
+                {title}
+              </h1>
+              <div className="max-w-[100px]">
+                <Button
+                  size="sm"
+                  className="bg-base-secondary text-base-black font-normal shadow-none border-2 px-4 py-0 hover:bg-base-secondary"
+                >
+                  <p>Promoted</p>
+                </Button>
+              </div>
+            </div>
+            <div className="flex gap-2 items-center">
+              <Avatar>
+                <AvatarImage src="" />
+                <AvatarFallback>
+                  <div>
+                    <p>{'B'}</p>
+                  </div>
+                </AvatarFallback>
+              </Avatar>
+              <p>Business Name</p>
+            </div>
+            <div>
+              <p>Apply By: {formattedDate}</p>
+            </div>
+            <div className="flex gap-2 items-center">
+              <MapPin />
+              <p>{location}</p>
+            </div>
+          </div>
         </div>
-        <div className="flex gap-x-2 items-center">
-          <Avatar className="w-8 h-8 rounded-full overflow-hidden">
-            <AvatarImage src={avatarUrl ?? 'https://picsum.photos/100'} />
-            <AvatarFallback>CN</AvatarFallback>
-          </Avatar>
-          <p className="text-sm">{businessName}</p>
-        </div>
-        <p className="flex gap-x-2 text-sm">
-          <span>Apply By: </span>
-          <span>{formattedDate}</span>
-        </p>
-        <div className="flex gap-x-1 items-center">
-          <MapPin />
-          <span>{location}</span>
-        </div>
-        <div className="flex gap-x-3 items-center ml-auto">
-          <HeartStraight className="pointer" size={30} />
-          <Button variant={'secondary'}>Apply</Button>
+        <div className="flex gap-4 items-center justify-end">
+          <div className="px-4 cursor-pointer">
+            <HeartStraight className="w-6 h-6" />
+          </div>
+            <Button variant="secondary">
+              Apply
+            </Button>
         </div>
       </div>
     </div>

@@ -23,7 +23,7 @@ export async function Navbar({ className }: { className?: string }) {
   };
 
   return (
-    <header className="sticky top-0 z-40 bg-primary-landing px-4 py-3 shadow-[0_4px_6px_-1px_rgba(0,0,0,0.1)] w-full">
+    <header className="sticky top-0 z-40 bg-base-white px-4 py-3 shadow-[0_4px_6px_-1px_rgba(0,0,0,0.1)] w-full">
       <nav className={cn('flex items-center justify-between', className)}>
         <div className="shrink-0 lg:w-48 cursor-pointer">
           <Link href="/home">

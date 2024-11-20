@@ -1,4 +1,3 @@
-// Example: /profile/[type].tsx
 import { auth } from '@/auth';
 import BusinessProfile from '@/components/profile/BusinessProfile';
 import StartupProfile from '@/components/profile/StartupProfile';
@@ -39,7 +38,7 @@ const ProfilePage = async (props: { params: Promise<Params> }) => {
   if (params.type === 'startup' && user?.type === 'STARTUP') {
     return <StartupProfile user={userStartupProps} />;
   } else if (params.type === 'business' && user?.type === 'BUSINESS') {
-    return <div className="flex items-center justify-center mt-10">
+    return <div className="mt-10 max-w-[1200px] mx-auto">
       <BusinessProfile user={userBusinessProps} />
     </div>
   } else {

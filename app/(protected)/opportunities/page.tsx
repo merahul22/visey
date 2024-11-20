@@ -10,7 +10,7 @@ import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Input } from '@/components/ui/input';
 import { MagnifyingGlassIcon } from '@radix-ui/react-icons';
-import FundingOpportunityCard from '@/components/cards/funding-opportunity-card';
+import FundingOpportunityCardApplications from '@/components/cards/funding-opportunity-card-applications';
 import Link from 'next/link';
 
 const Opportunities = async () => {
@@ -91,37 +91,37 @@ const Opportunities = async () => {
             <TabsContent value="all">
               <div className="flex flex-col gap-4">
                 <div className="flex gap-2">
-                  <FundingOpportunityCard isPromoted={true} underReview={false} />
+                  <FundingOpportunityCardApplications isPromoted={true} underReview={false} />
                   <div className="hidden sm:block cursor-pointer">
                     <DotsThreeVertical className="w-5 h-5" />
                   </div>
                 </div>
                 <div className="flex gap-2">
-                  <FundingOpportunityCard isPromoted={true} underReview={false} />
+                  <FundingOpportunityCardApplications isPromoted={true} underReview={false} />
                   <div className="hidden sm:block cursor-pointer">
                     <DotsThreeVertical className="w-5 h-5" />
                   </div>
                 </div>
                 <div className="flex gap-2">
-                  <FundingOpportunityCard isPromoted={false} underReview={true} />
+                  <FundingOpportunityCardApplications isPromoted={false} underReview={true} />
                   <div className="hidden sm:block cursor-pointer">
                     <DotsThreeVertical className="w-5 h-5" />
                   </div>
                 </div>
                 <div className="flex gap-2">
-                  <FundingOpportunityCard isPromoted={true} underReview={false} />
+                  <FundingOpportunityCardApplications isPromoted={true} underReview={false} />
                   <div className="hidden sm:block cursor-pointer">
                     <DotsThreeVertical className="w-5 h-5" />
                   </div>
                 </div>
                 <div className="flex gap-2">
-                  <FundingOpportunityCard isPromoted={true} underReview={false} />
+                  <FundingOpportunityCardApplications isPromoted={true} underReview={false} />
                   <div className="hidden sm:block cursor-pointer">
                     <DotsThreeVertical className="w-5 h-5" />
                   </div>
                 </div>
                 <div className="flex gap-2">
-                  <FundingOpportunityCard isPromoted={true} underReview={false} />
+                  <FundingOpportunityCardApplications isPromoted={true} underReview={false} />
                   <div className="hidden sm:block cursor-pointer">
                     <DotsThreeVertical className="w-5 h-5" />
                   </div>
@@ -131,31 +131,31 @@ const Opportunities = async () => {
             <TabsContent value="active">
               <div className="flex flex-col gap-4">
                 <div className="flex gap-2">
-                  <FundingOpportunityCard isPromoted={true} underReview={false} />
+                  <FundingOpportunityCardApplications isPromoted={true} underReview={false} />
                   <div className="hidden sm:block cursor-pointer">
                     <DotsThreeVertical className="w-5 h-5" />
                   </div>
                 </div>
                 <div className="flex gap-2">
-                  <FundingOpportunityCard isPromoted={true} underReview={false} />
+                  <FundingOpportunityCardApplications isPromoted={true} underReview={false} />
                   <div className="hidden sm:block cursor-pointer">
                     <DotsThreeVertical className="w-5 h-5" />
                   </div>
                 </div>
                 <div className="flex gap-2">
-                  <FundingOpportunityCard isPromoted={true} underReview={false} />
+                  <FundingOpportunityCardApplications isPromoted={true} underReview={false} />
                   <div className="hidden sm:block cursor-pointer">
                     <DotsThreeVertical className="w-5 h-5" />
                   </div>
                 </div>
                 <div className="flex gap-2">
-                  <FundingOpportunityCard isPromoted={true} underReview={false} />
+                  <FundingOpportunityCardApplications isPromoted={true} underReview={false} />
                   <div className="hidden sm:block cursor-pointer">
                     <DotsThreeVertical className="w-5 h-5" />
                   </div>
                 </div>
                 <div className="flex gap-2">
-                  <FundingOpportunityCard isPromoted={true} underReview={false} />
+                  <FundingOpportunityCardApplications isPromoted={true} underReview={false} />
                   <div className="hidden sm:block cursor-pointer">
                     <DotsThreeVertical className="w-5 h-5" />
                   </div>
@@ -165,37 +165,37 @@ const Opportunities = async () => {
             <TabsContent value="past">
               <div className="flex flex-col gap-4">
                 <div className="flex gap-2">
-                  <FundingOpportunityCard isPromoted={true} underReview={false} />
+                  <FundingOpportunityCardApplications isPromoted={true} underReview={false} />
                   <div className="hidden sm:block cursor-pointer">
                     <DotsThreeVertical className="w-5 h-5" />
                   </div>
                 </div>
                 <div className="flex gap-2">
-                  <FundingOpportunityCard isPromoted={true} underReview={false} />
+                  <FundingOpportunityCardApplications isPromoted={true} underReview={false} />
                   <div className="hidden sm:block cursor-pointer">
                     <DotsThreeVertical className="w-5 h-5" />
                   </div>
                 </div>
                 <div className="flex gap-2">
-                  <FundingOpportunityCard isPromoted={true} underReview={false} />
+                  <FundingOpportunityCardApplications isPromoted={true} underReview={false} />
                   <div className="hidden sm:block cursor-pointer">
                     <DotsThreeVertical className="w-5 h-5" />
                   </div>
                 </div>
                 <div className="flex gap-2">
-                  <FundingOpportunityCard isPromoted={true} underReview={false} />
+                  <FundingOpportunityCardApplications isPromoted={true} underReview={false} />
                   <div className="hidden sm:block cursor-pointer">
                     <DotsThreeVertical className="w-5 h-5" />
                   </div>
                 </div>
                 <div className="flex gap-2">
-                  <FundingOpportunityCard isPromoted={true} underReview={false} />
+                  <FundingOpportunityCardApplications isPromoted={true} underReview={false} />
                   <div className="hidden sm:block cursor-pointer">
                     <DotsThreeVertical className="w-5 h-5" />
                   </div>
                 </div>
                 <div className="flex gap-2">
-                  <FundingOpportunityCard isPromoted={true} underReview={false} />
+                  <FundingOpportunityCardApplications isPromoted={true} underReview={false} />
                   <div className="hidden sm:block cursor-pointer">
                     <DotsThreeVertical className="w-5 h-5" />
                   </div>

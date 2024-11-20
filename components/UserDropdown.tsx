@@ -147,8 +147,10 @@ export function UserDropdown({ user }: UserDropdownProps) {
 
           <DropdownMenuItem className="cursor-pointer">
             <span className="flex gap-x-2 items-center">
-              <HeartStraight />
-              <span>Saved</span>
+              <Link className="flex gap-x-2 items-center" href={"/saved"}>
+                <HeartStraight />
+                <span>Saved</span>
+              </Link>
             </span>
           </DropdownMenuItem>
 
