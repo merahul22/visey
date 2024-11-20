@@ -1,7 +1,6 @@
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import {
-  CaretRight,
   HeartStraight,
   MapPin,
 } from '@phosphor-icons/react/dist/ssr';
@@ -49,25 +48,27 @@ export function FundingCard({
               <h1 className="text-lg max-w-[200px]">
                 {title}
               </h1>
-              <div className="max-w-[100px]">
-                <Button
-                  size="sm"
-                  className="bg-base-secondary text-base-black font-normal shadow-none border-2 px-4 py-0 hover:bg-base-secondary"
-                >
-                  <p>Promoted</p>
-                </Button>
-              </div>
+              {promoted && (
+                <div className="max-w-[100px]">
+                  <Button
+                    size="sm"
+                    className="bg-base-secondary text-base-black font-normal shadow-none border-2 px-4 py-0 hover:bg-base-secondary"
+                  >
+                    <p>Promoted</p>
+                  </Button>
+                </div>
+              )}
             </div>
             <div className="flex gap-2 items-center">
               <Avatar>
-                <AvatarImage src="" />
+                <AvatarImage src={`${avatarUrl}`} />
                 <AvatarFallback>
                   <div>
                     <p>{'B'}</p>
                   </div>
                 </AvatarFallback>
               </Avatar>
-              <p>Business Name</p>
+              <p>{businessName}</p>
             </div>
             <div>
               <p>Apply By: {formattedDate}</p>
