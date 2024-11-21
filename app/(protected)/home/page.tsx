@@ -3,8 +3,8 @@ import { Button } from '@/components/ui/button';
 import { CategoryCardBig } from './_components/category-card-big';
 import { CategoryCardSmall } from './_components/category-card-small';
 import { FundingCard } from '@/components/cards/funding-card';
-import { BusinessCardList } from './_components/buisiness';
-import Footer from '@/components/Footer';
+import { BusinessCardList } from './_components/business';
+import Footer from '@/components/navigation/footer';
 import { auth } from '@/auth';
 import { redirect } from 'next/navigation';
 
@@ -51,8 +51,8 @@ async function HomePage() {
         <h2 className="text-xl md:text-2xl font-semibold">
           Funding Opportunities
         </h2>
-        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3 ">
-          {Array.from({ length: 5 }).map((item, idx) => (
+        <div className="flex flex-col gap-4">
+          {Array.from({ length: 3 }).map((item, idx) => (
             <FundingCard
               key={idx}
               promoted
@@ -71,7 +71,7 @@ async function HomePage() {
         </span>
       </section>
 
-      <Footer />
+      <Footer className="rounded-xl" />
     </div>
   );
 }

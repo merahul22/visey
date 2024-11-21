@@ -1,5 +1,6 @@
 import React from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 
 export default function AuthLayout({
                                      children,
@@ -20,6 +21,16 @@ export default function AuthLayout({
       </div>
       {/* Main content */}
       <div className="flex flex-1 items-center justify-center">{children}</div>
+      <div className="shrink-0 lg:w-48 cursor-pointer absolute left-[40px] top-[20px]">
+        <Link href="/">
+          <Image
+            src="/logo-black.png"
+            width={71}
+            height={32}
+            alt="visey logo"
+          />
+        </Link>
+      </div>
     </div>
   );
 }

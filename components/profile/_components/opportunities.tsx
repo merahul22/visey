@@ -21,7 +21,7 @@ export default function Opportunities({
         </Button>
       </div>
 
-      <div className="grid gap-4 sm:gap-6 sm:grid-cols-2">
+      <div className="flex flex-col gap-4">
         {(!opportunities || opportunities.length === 0) && (
           <div>
             <p className="text-sm">No opportunities added yet</p>

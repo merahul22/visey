@@ -13,7 +13,7 @@ interface Props {
   underReview: boolean;
 }
 
-const FundingOpportunityCard = ({isPromoted, underReview}: Props) => {
+const FundingOpportunityCardApplications = ({ isPromoted, underReview }: Props) => {
   return (
     <div className="flex items-center justify-center lg:justify-start flex-col gap-4 lg:flex-row lg:items-center lg:gap-10">
       <div className="border-2 rounded-xl px-4 py-4 space-y-2 max-w-fit">
@@ -81,4 +81,4 @@ const FundingOpportunityCard = ({isPromoted, underReview}: Props) => {
   );
 };
 
-export default FundingOpportunityCard;
+export default FundingOpportunityCardApplications;
