@@ -17,7 +17,9 @@ const ProfilePage = async () => {
     hasPassword: user.hasPassword,
   };
 
-  return <Settings user={userProps} />;
+  return <div className="mb-20">
+    <Settings user={userProps} />
+  </div>
 };
 
 export default ProfilePage;

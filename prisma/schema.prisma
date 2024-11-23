@@ -1,9 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -37,8 +31,10 @@ model User {
   startup  Startup?
   business Business?
 
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  createdAt      DateTime         @default(now())
+  updatedAt      DateTime         @updatedAt
+  Review         Review[]
+  ReviewReaction ReviewReaction[]
 
   @@map("users")
 }
@@ -132,6 +128,7 @@ model Business {
   achievements   Achievement[]
   opportunities  Opportunity[]
   services       Services[]
+  reviews        Review[]
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
@@ -189,4 +186,41 @@ model Opportunity {
   business Business @relation(fields: [businessId], references: [id], onDelete: Cascade)
 
   @@map("opportunity")
+}
+
+model Review {
+  id         String   @id @default(uuid())
+  userId     String
+  businessId String
+  rating     Int
+  comment    String
+  likes      Int      @default(0)
+  dislikes   Int      @default(0)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  user           User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+  business       Business         @relation(fields: [businessId], references: [id], onDelete: Cascade)
+  ReviewReaction ReviewReaction[]
+
+  @@map("reviews")
+}
+
+model ReviewReaction {
+  id        String   @id @default(uuid())
+  userId    String
+  reviewId  String
+  reaction  Reaction
+  createdAt DateTime @default(now())
+
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  review Review @relation(fields: [reviewId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, reviewId])
+  @@map("review_reactions")
+}
+
+enum Reaction {
+  LIKE
+  DISLIKE
 }

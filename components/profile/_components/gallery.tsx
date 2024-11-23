@@ -2,7 +2,7 @@ import { Button } from '@/components/ui/button';
 import { CaretRight, PencilSimple } from '@phosphor-icons/react/dist/ssr';
 import Image from 'next/image';
 
-export default function Gallery({ gallery }: { gallery: string[] }) {
+export default function Gallery({ gallery, isPublic }: { gallery: string[], isPublic: boolean }) {
   return (
     <div className="space-y-6 pt-6 pb-4">
       <div className="flex justify-between items-center">
@@ -11,9 +11,11 @@ export default function Gallery({ gallery }: { gallery: string[] }) {
           <Button size="icon" variant="secondary">
             <CaretRight size={20} />
           </Button>
-          <Button size="icon" variant="ghost" className="text-linkBlue">
-            <PencilSimple size={20} />
-          </Button>
+          {!isPublic && (
+            <Button size="icon" variant="ghost" className="text-linkBlue">
+              <PencilSimple size={20} />
+            </Button>
+          )}
         </div>
       </div>
 

@@ -1,16 +1,20 @@
-"use client";
+import React, { useState } from "react";
 
 interface StarRatingProps {
   maxRating?: number;
+  defaultRating?: number;
   color?: string;
   size?: number;
-  className?: string;
   messages?: string[];
-  rating: number; // Since users can only view, this is the only prop needed for rating
+  className?: string;
+  onSetRating?: (rating: number) => void;
 }
 
 interface StarProps {
+  onRate: () => void;
   full: boolean;
+  onHoverIn: () => void;
+  onHoverOut: () => void;
   color: string;
   size: number;
 }
@@ -25,43 +29,70 @@ const starContainerStyle: React.CSSProperties = {
   display: "flex",
 };
 
-export default function StarRating({
-  maxRating = 5,
-  color = "#fcc419",
-  size = 24,
-  className = "",
-  messages = [],
-  rating,
-}: StarRatingProps) {
+export default function StarRatingSetter({
+                                     maxRating = 5,
+                                     color = "#FF9529",
+                                     size = 48,
+                                     className = "",
+                                     messages = [],
+                                     defaultRating = 0,
+                                     onSetRating,
+                                   }: StarRatingProps) {
+  const [rating, setRating] = useState(defaultRating);
+  const [tempRating, setTempRating] = useState(0);
+
+  const handleRating = (rating: number) => {
+    setRating(rating);
+    if (onSetRating) onSetRating(rating);
+  };
+
   const textStyle: React.CSSProperties = {
     lineHeight: "1",
     margin: "0",
-    fontSize: `${size / 1.5}px`,
+    fontSize: `${size / 2}px`,
+    fontWeight: 'bold'
   };
 
   return (
     <div style={containerStyle} className={className}>
       <p style={textStyle}>
-        {messages.length === maxRating ? messages[rating - 1] : rating || ""}
+        {messages.length === maxRating
+          ? messages[tempRating ? tempRating - 1 : rating - 1]
+          : tempRating || rating || ''}
       </p>
       <div style={starContainerStyle}>
         {Array.from({ length: maxRating }, (_, i) => (
-          <Star key={i} full={rating >= i + 1} color={color} size={size} />
+          <Star
+            key={i}
+            full={tempRating ? tempRating >= i + 1 : rating >= i + 1}
+            onRate={() => handleRating(i + 1)}
+            onHoverIn={() => setTempRating(i + 1)}
+            onHoverOut={() => setTempRating(0)}
+            color={color}
+            size={size}
+          />
         ))}
       </div>
     </div>
   );
 }
 
-function Star({ full, color, size }: StarProps) {
+function Star({ onRate, full, onHoverIn, onHoverOut, color, size }: StarProps) {
   const starStyle: React.CSSProperties = {
     width: `${size}px`,
     height: `${size}px`,
     display: "block",
+    cursor: "pointer",
   };
 
   return (
-    <span style={starStyle}>
+    <span
+      role="button"
+      style={starStyle}
+      onClick={onRate}
+      onMouseEnter={onHoverIn}
+      onMouseLeave={onHoverOut}
+    >
       {full ? (
         <svg
           xmlns="http://www.w3.org/2000/svg"

@@ -15,7 +15,7 @@ const page = async () => {
   const startup = user?.startup as Startup;
 
   return (
-    <div className="flex justify-center mt-8">
+    <div className="flex justify-center mt-8 mb-20">
       <StartupDetailsForm startup={startup} />
     </div>
   );

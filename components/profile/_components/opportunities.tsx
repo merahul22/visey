@@ -7,18 +7,22 @@ export default function Opportunities({
   opportunities,
   name,
   location,
+  isPublic
 }: {
   opportunities: Opportunity[];
   name: string;
   location: string;
+  isPublic: boolean;
 }) {
   return (
     <div className="space-y-6 pt-6 pb-4">
       <div className="flex justify-between items-center">
         <p className="font-semibold">Opportunities</p>
-        <Button size="icon" variant="ghost" className="text-linkBlue">
-          <PencilSimple size={20} />
-        </Button>
+        {!isPublic && (
+          <Button size="icon" variant="ghost" className="text-linkBlue">
+            <PencilSimple size={20} />
+          </Button>
+        )}
       </div>
 
       <div className="flex flex-col gap-4">

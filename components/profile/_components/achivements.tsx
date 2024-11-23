@@ -4,16 +4,20 @@ import { Achievement } from '@prisma/client';
 
 export default function Achievements({
   achievements,
+  isPublic,
 }: {
   achievements: Achievement[];
+  isPublic: boolean;
 }) {
   return (
     <div className="space-y-6 pt-6 pb-4">
       <div className="flex justify-between items-center">
         <p className="font-semibold">Achivements</p>
-        <Button size="icon" variant="ghost" className="text-linkBlue">
-          <PencilSimple size={20} />
-        </Button>
+        {!isPublic && (
+          <Button size="icon" variant="ghost" className="text-linkBlue">
+            <PencilSimple size={20} />
+          </Button>
+        )}
       </div>
 
       <div className="space-y-3 md:flex md:flex-wrap md:gap-4 md:space-y-0">

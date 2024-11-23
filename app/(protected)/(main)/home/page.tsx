@@ -4,7 +4,6 @@ import { CategoryCardBig } from './_components/category-card-big';
 import { CategoryCardSmall } from './_components/category-card-small';
 import { FundingCard } from '@/components/cards/funding-card';
 import { BusinessCardList } from './_components/business';
-import Footer from '@/components/navigation/footer';
 import { auth } from '@/auth';
 import { redirect } from 'next/navigation';
 
@@ -19,7 +18,7 @@ async function HomePage() {
   const date = new Date(Date.now());
 
   return (
-    <div className="space-y-10">
+    <div className="space-y-10 mb-20">
       <section className="space-y-4">
         <h2 className="text-xl md:text-2xl font-semibold">Search For</h2>
         <div className="hidden overflow-x-auto md:flex gap-x-4">
@@ -70,8 +69,6 @@ async function HomePage() {
           </Button>
         </span>
       </section>
-
-      <Footer className="rounded-xl" />
     </div>
   );
 }

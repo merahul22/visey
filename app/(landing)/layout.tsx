@@ -11,7 +11,7 @@ export default function RootLayout({
     <>
       <HeroNav className="mx-auto max-w-screen-xl" />
       {children}
-      <Footer className="shadow-[0_-8px_10px_rgba(0,0,0,0.1)] rounded-tl-2xl rounded-tr-3xl" />
+      <Footer className="shadow-[0_-8px_10px_rgba(0,0,0,0.1)] rounded-3xl mb-2" />
     </>
   );
 }
