@@ -61,7 +61,7 @@ function Footer({ className }: { className?: string }) {
             <h2 className="font-semibold text-xl">{item.title}</h2>
             <div className="space-y-1">
               {item.items.map((item, idx) => (
-                <Link href={`${item.link}`} key={idx}>
+                <Link href={item.link} key={idx}>
                   <p className="text-[#545454]">{item.name}</p>
                 </Link>
               ))}

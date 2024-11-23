@@ -362,3 +362,7 @@ export const fundingOpportunitySchema = z
     message: 'Start date must be before the end date',
     path: ['endDate'], // Optionally specify where the error should be shown
   });
+
+export const reviewSchema = z.object({
+  review: z.string().min(1, "Review cannot be left empty"),
+})

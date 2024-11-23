@@ -21,7 +21,7 @@ const Opportunities = async () => {
     return <div>Access Denied</div>
   }
 
-  return <div className="px-0 sm:px-4">
+  return <div className="px-0 sm:px-4 mb-20">
     <div className="flex gap-4 items-center mt-2">
       <div className="cursor-pointer">
         <ShareNetwork />

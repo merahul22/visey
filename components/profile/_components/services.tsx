@@ -2,14 +2,16 @@ import { PencilSimple } from '@phosphor-icons/react/dist/ssr';
 import { Button } from '@/components/ui/button';
 import { Services } from '@prisma/client';
 
-export default function Service({ services }: { services: Services[] }) {
+export default function Service({ services, isPublic }: { services: Services[], isPublic: boolean }) {
   return (
     <div className="space-y-6 pt-6 pb-4">
       <div className="flex justify-between items-center">
         <p className="font-semibold">Services</p>
-        <Button size="icon" variant="ghost" className="text-linkBlue">
-          <PencilSimple size={20} />
-        </Button>
+        {!isPublic && (
+          <Button size="icon" variant="ghost" className="text-linkBlue">
+            <PencilSimple size={20} />
+          </Button>
+        )}
       </div>
 
       <div className="space-y-3">

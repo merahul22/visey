@@ -3,6 +3,7 @@ import './globals.css';
 import BreakpointIndicator from '@/components/breakpoint-indicator';
 import Provider from '@/components/Provider';
 import HelpAndSupport from '@/components/HelpAndSupport';
+import { Toaster } from "@/components/ui/sonner"
 import React from 'react';
 
 export const metadata: Metadata = {
@@ -22,6 +23,7 @@ export default function RootLayout({ children, }: Readonly<{
           {children}
         </Provider>
         <HelpAndSupport />
+        <Toaster />
       </body>
     </html>
   );

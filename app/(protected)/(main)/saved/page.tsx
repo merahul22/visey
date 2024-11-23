@@ -6,7 +6,7 @@ import { FundingCard } from '@/components/cards/funding-card';
 const page = () => {
   const date = new Date(Date.now());
 
-  return <div>
+  return <div className="mb-20">
     <h1 className="text-xl font-semibold">Saved</h1>
     <Tabs defaultValue="business" className="mt-2">
       <div className="overflow-scroll">

@@ -12,10 +12,11 @@ import Opportunities from '@/components/profile/_components/opportunities';
 import Gallery from '@/components/profile/_components/gallery';
 import RatingReview from '@/components/profile/_components/rating-review';
 import ContactOverlay from '../ContactDetails';
-import StarRating from '../StarRating';
+import StarRatingConstant from '../StarRatingConstant';
 import { Achievement, Business, Opportunity, Services } from '@prisma/client';
 
 interface BusinessProfileProps {
+  userId: string | undefined;
   business: Business | null;
   services: Services[];
   opportunities: Opportunity[];
@@ -23,9 +24,7 @@ interface BusinessProfileProps {
   gallery: string[];
 }
 
-export default function BusinessProfile({
-  user,
-}: {
+export default function BusinessProfilePrivate({ user, }: {
   user: BusinessProfileProps;
 }) {
   const business = user.business;
@@ -65,7 +64,7 @@ export default function BusinessProfile({
           </div>
           <div className="flex gap-x-4 items-center">
             <div className="flex justify-center gap-x-1">
-              <StarRating rating={4.1} />
+              <StarRatingConstant rating={4.1} />
             </div>
             <p className="text-sm">439 ratings</p>
           </div>
@@ -105,30 +104,55 @@ export default function BusinessProfile({
               <About
                 location={business?.location}
                 description={business?.description}
+                isPublic={false}
               />
               <Separator />
-              <Service services={user.services} />
+              <Service
+                services={user.services}
+                isPublic={false}
+              />
               <Separator />
-              <Achievements achievements={user.achievements} />
+              <Achievements
+                achievements={user.achievements}
+                isPublic={false}
+              />
               <Separator />
               <Opportunities
                 opportunities={user.opportunities}
                 name={business?.name as string}
                 location={business?.location as string}
+                isPublic={false}
               />
               <Separator />
-              <Gallery gallery={user.gallery} />
+              <Gallery
+                gallery={user.gallery}
+                isPublic={false}
+              />
               <Separator />
-              <RatingReview />
+              <RatingReview
+                businessId={ business.id }
+                userId={ user.userId }
+                isPublic={false}
+              />
             </TabsContent>
             <TabsContent value="services">
-              <Service services={user.services} />
+              <Service
+                services={user.services}
+                isPublic={false}
+              />
             </TabsContent>
             <TabsContent value="reviews">
-              <RatingReview />
+              <RatingReview
+                businessId={ business.id }
+                userId={ user.userId }
+                isPublic={false}
+              />
             </TabsContent>
             <TabsContent value="gallery">
-              <Gallery gallery={user.gallery} />
+              <Gallery
+                gallery={user.gallery}
+                isPublic={false}
+              />
             </TabsContent>
           </Tabs>
         </div>

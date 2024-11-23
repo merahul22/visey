@@ -15,7 +15,7 @@ const page = async () => {
   const business = user?.business as Business;
 
   return (
-    <div className="flex justify-center mt-4">
+    <div className="flex justify-center mt-4 mb-20">
       <div className="xl:min-w-[700px]">
         <PostFundingOpportunity business={business} />
       </div>
