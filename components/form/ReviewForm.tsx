@@ -33,7 +33,7 @@ interface ReviewFormProps {
 }
 
 interface Rating {
-  id?: string;
+  id: string;
   user: {
     id: string;
     name: string;
@@ -68,7 +68,7 @@ const ReviewForm = ({ onCancel, setReview, userId, businessId, rating, addReview
 
       if (res?.success) {
         const newReview: Rating = {
-          id: res.review?.id,
+          id: res.review?.id as string,
           user: {
             id: res.review?.user.id as string,
             name: res.review?.user.name as string,

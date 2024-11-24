@@ -137,6 +137,11 @@ export const categories = [
   { value: 'Coworking Space' },
   { value: 'Finance' },
   { value: 'Sales' },
+  { value: 'Legal' },
+  { value: 'Software Development' },
+  { value: 'Packaging' },
+  { value: 'Manufacturing' },
+  { value: 'Startup funding' },
   { value: 'Others' },
 ];
 
