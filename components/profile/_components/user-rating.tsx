@@ -12,7 +12,7 @@ import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
 
 interface Rating {
-  id?: string;
+  id: string;
   user: {
     id: string;
     name: string;
@@ -58,7 +58,10 @@ const UserRating = (props: Rating) => {
           <p>{props.comment}</p>
           <div className="flex gap-x-6">
             <div className="flex items-center gap-x-0.5">
-              <Button size="icon" variant="ghost">
+              <Button
+                size="icon"
+                variant="ghost"
+              >
                 <ThumbsUp size={16} />
               </Button>
 
@@ -66,7 +69,10 @@ const UserRating = (props: Rating) => {
             </div>
 
             <div className="flex items-center gap-x-0.5">
-              <Button size="icon" variant="ghost">
+              <Button
+                size="icon"
+                variant="ghost"
+              >
                 <ThumbsDown size={16} />
               </Button>
 

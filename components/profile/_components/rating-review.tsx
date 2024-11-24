@@ -21,7 +21,7 @@ interface RatingReviewProps {
 }
 
 interface Review {
-  id?: string;
+  id: string;
   user: {
     id: string;
     name: string;
@@ -172,6 +172,7 @@ export default function RatingReview({ businessId, userId, isPublic }: RatingRev
           {ratings.map((rating, idx) => (
               <UserRating
                 key={idx}
+                id={rating.id}
                 user={rating.user}
                 rating={rating.rating}
                 comment={rating.comment}

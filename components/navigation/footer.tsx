@@ -18,8 +18,9 @@ const footerData = [
     items: [
       { name: 'About', link: '/about' },
       { name: 'Products', link: '/about' },
-      { name: 'Teams', link: '/about' },
       { name: 'Pricing', link: '/pricing' },
+      { name: 'Team', link: '/about' },
+      { name: 'Blog', link: '/blogs/1' },
       {
         name: 'Free Business Listing',
         link: 'https://docs.google.com/forms/d/e/1FAIpQLSdzEFmkrANFYzdrmSZrjVgeOm_TJspc6q2yi-SgpuRuh_lrAQ/viewform',
@@ -59,7 +60,7 @@ function Footer({ className }: { className?: string }) {
         {footerData.map((item) => (
           <div className="space-y-2" key={item.title}>
             <h2 className="font-semibold text-xl">{item.title}</h2>
-            <div className="space-y-1">
+            <div className="space-y-2">
               {item.items.map((item, idx) => (
                 <Link href={item.link} key={idx}>
                   <p className="text-[#545454]">{item.name}</p>
@@ -71,7 +72,7 @@ function Footer({ className }: { className?: string }) {
         <div className="space-y-4">
           <div className="space-y-2">
             <h2 className="font-semibold text-xl">Contact Us</h2>
-            <div className="space-y-1">
+            <div className="space-y-2">
               <div className="flex items-center space-x-2">
                 <Phone size={20} />
                 <span className="text-[#545454]">+91 78275 86754</span>
