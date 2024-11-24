@@ -5,6 +5,7 @@ import {
   CaretLeft,
   ArrowUpRight,
 } from '@phosphor-icons/react/dist/ssr';
+import { redirect } from "next/navigation";
 
 const Page = async ({ params } : { params: Promise<{ id: string }> }) => {
   const id = (await params).id;
@@ -469,7 +470,7 @@ const Page = async ({ params } : { params: Promise<{ id: string }> }) => {
             </span>
           </div>
         </Button>
-        <Button variant="link" className="text-sm text-base-black">
+        <Button variant="link" className="text-sm text-base-black" onClick={() => redirect(`/blogs/${id+1}`)}>
           <div className="flex items-center gap-2">
             <span>
               Next

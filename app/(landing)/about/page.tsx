@@ -6,12 +6,12 @@ import { Separator } from '@/components/ui/separator';
 
 const profiles = [
   {name: "Jhonty Dhol", role: "Founder", image: "/img/Jhonty_dhol.jpg", linkedIn: "https://www.linkedin.com/in/jhonty-dhol-8997b7227/"},
-  {name: "Riddhima", role: "Founder", image: "/img/Riddhima_goel.jpg", linkedIn: "#"},
+  {name: "Riddhima", role: "Founder", image: "/img/Riddhima_goel.jpg", linkedIn: "https://www.linkedin.com/in/riddhima-goel-36b3a6217/"},
   {name: "Rahul Chaurasiya", role: "Tech Lead", image: "/img/Rahul_chaurasiya.jpg", linkedIn: "https://www.linkedin.com/in/rahul-chourasiya-b80882254/"},
   {name: "Sahil Singh Tomar", role: "Fullstack Developer", image: "/img/sahil_singh_tomar.jpg", linkedIn: "https://www.linkedin.com/in/sahil-singh-tomar-83b22b22a/"},
   {name: "Varun Singh", role: "Frontend Developer", image: "/img/varun_bhatt.jpg", linkedIn: "https://www.linkedin.com/in/varun-bhatt-653109213/"},
   {name: "Paras", role: "AI/ML", image: "/img/Paras.jpg", linkedIn: "#"},
-  {name: "Sparsh Jain", role: "AI/ML", image: "/img/Sparsh_jain.jpg", linkedIn: "#"}
+  {name: "Sparsh Jain", role: "AI/ML", image: "/img/Sparsh_jain.jpg", linkedIn: "https://www.linkedin.com/in/sparsh-jain-1bb598298/"}
 ]
 
 const page = () => {
