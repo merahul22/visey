@@ -34,6 +34,7 @@ import { useRouter } from 'next/navigation';
 import { DEFAULT_LOGIN_REDIRECT } from '@/routes';
 import { useSession } from 'next-auth/react';
 import { Textarea } from '@/components/ui/textarea';
+import { toast } from 'sonner';
 
 function splitAndCapitalize(inputString: string) {
   const words = inputString.split('-');
@@ -115,11 +116,12 @@ const ListBusinessForm = () => {
         const res = await listBusiness(backendData);
 
         if (res.error) {
-          console.log(res.error);
+          toast.error(res.error);
         }
 
         if (res.success) {
           await update();
+          toast.success("Business listed successfully.");
           router.push(DEFAULT_LOGIN_REDIRECT);
         }
       });

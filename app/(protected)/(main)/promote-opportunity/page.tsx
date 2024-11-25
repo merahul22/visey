@@ -14,7 +14,7 @@ import {
 
 const OpportunityPricingPage = () => {
   return (
-    <div className="space-y-12">
+    <div className="space-y-12 mb-24">
       <div className="rounded-lg bg-[#ffdfbf] mt-10">
         <div className="bg-primary-600 text-base-white py-2 rounded-t-lg text-sm text-center font-semibold">
           <p>Start free and Upgrade to unlock business features.</p>

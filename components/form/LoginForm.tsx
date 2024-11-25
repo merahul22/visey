@@ -22,6 +22,7 @@ import { useTransition, useState } from 'react';
 import { FormError } from './FormError';
 import { FormSuccess } from './FormSuccess';
 import { useRouter } from 'next/navigation';
+import { toast } from 'sonner';
 
 const LoginForm = () => {
   const [loading, startTransition] = useTransition();
@@ -50,6 +51,7 @@ const LoginForm = () => {
 
       if (res.success) {
         setSuccess(res.success);
+        toast.success("Logged in successfully!");
         router.push('/home');
       }
     });

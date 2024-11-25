@@ -13,7 +13,7 @@ import PricingBusiness from '@/components/PricingBusiness';
 
 const BusinessPricingPage = () => {
   return (
-    <div className="space-y-12">
+    <div className="space-y-12 mb-24">
       <div className="rounded-lg bg-primary-100 mt-10">
         <div className="bg-primary-600 text-base-white py-2 rounded-t-lg text-sm text-center font-semibold">
           <p>Start free and Upgrade to unlock business features.</p>
@@ -38,7 +38,7 @@ const BusinessPricingPage = () => {
             <div>
               <div>
                 <p className="text-2xl font-semibold">3 Months Plan</p>
-                <p className="text-sm">Generate Leads & Access Analytics</p>
+                <p className="text-sm">Generate Leads & Rank Higher</p>
               </div>
             </div>
           </div>

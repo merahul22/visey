@@ -26,6 +26,7 @@ import { register } from '@/actions/register';
 import { FormSuccess } from './FormSuccess';
 import { Stepper } from '../Stepper';
 import { useRouter } from 'next/navigation';
+import { toast } from 'sonner';
 
 const SignupForm = () => {
   const [password, setPassword] = useState<string>('');
@@ -60,6 +61,7 @@ const SignupForm = () => {
       }
 
       if (res.success) {
+        toast.success("Account created successfully!");
         if (currentType === 'BUSINESS') {
           router.push('/list-business');
         } else {

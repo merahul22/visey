@@ -83,7 +83,7 @@ const ReviewForm = ({ onCancel, setReview, userId, businessId, rating, addReview
 
         setReview(values.review);
         addReviewToState(newReview);
-        toast("Review posted successfully.");
+        toast.success("Review posted successfully.");
       }
     });
   };

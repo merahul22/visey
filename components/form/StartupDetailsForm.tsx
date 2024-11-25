@@ -45,6 +45,7 @@ import { completeStartupDetails } from '@/actions/complete-startup-details';
 import { useRouter } from 'next/navigation';
 import { FormError } from './FormError';
 import { FormSuccess } from './FormSuccess';
+import { toast } from 'sonner';
 
 interface StartupDetailsFormProps {
   startup?: Startup;
@@ -70,6 +71,7 @@ const StartupDetailsForm = ({ startup }: StartupDetailsFormProps) => {
       }
 
       if (res.success) {
+        toast.success(res.success);
         setSuccess(res.success);
         router.push(`/profile/startup`);
       }

@@ -46,7 +46,12 @@ export async function Navbar({ className }: { className?: string }) {
             </Link>
           )}
           {user?.type === 'BUSINESS' && user.business && (
-            <p className="text-center text-linkBlue md:hidden">Promote</p>
+            <Link
+              href="/promote-business"
+              className="text-center text-linkBlue md:hidden"
+            >
+              Promote
+            </Link>
           )}
           {user?.type === 'STARTUP' && !user.startup && (
             <Link
@@ -84,7 +89,7 @@ export async function Navbar({ className }: { className?: string }) {
             </Link>
           )}
           {user?.type === 'BUSINESS' && (
-            <Link href="/promote">
+            <Link href="/promote-business">
               <Button
                 variant="outline"
                 size="sm"

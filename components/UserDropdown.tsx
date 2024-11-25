@@ -24,6 +24,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { Button } from './ui/button';
 import { Business, Startup } from '@prisma/client';
+import { toast } from 'sonner';
 
 interface User {
   type?: 'BUSINESS' | 'STARTUP';
@@ -166,7 +167,10 @@ export function UserDropdown({ user }: UserDropdownProps) {
           {/* Logout functionality */}
           <DropdownMenuItem
             className="flex justify-center border cursor-pointer"
-            onClick={() => signOut()}
+            onClick={async () => {
+              await signOut()
+              toast("Logged out successfully!");
+            }}
           >
             <span className="flex gap-x-2 items-center">
               <ExitIcon className="" />

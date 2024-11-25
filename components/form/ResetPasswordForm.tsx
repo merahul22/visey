@@ -22,6 +22,7 @@ import { CheckIcon } from 'lucide-react';
 import { resetPassword } from '@/actions/reset-password';
 import { FormError } from './FormError';
 import { FormSuccess } from './FormSuccess';
+import { toast } from 'sonner';
 
 const ResetPasswordForm = ({ hasPassword }: { hasPassword: boolean }) => {
   const [password, setPassword] = useState('');
@@ -53,11 +54,13 @@ const ResetPasswordForm = ({ hasPassword }: { hasPassword: boolean }) => {
 
       if (res?.error) {
         form.reset();
+        toast.error(res?.error);
         setError(res?.error);
       }
 
       if (res?.success) {
         form.reset();
+        toast.success("Password reset successfully!");
         setSuccess(res?.success);
       }
     });

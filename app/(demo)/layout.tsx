@@ -1,6 +1,7 @@
 import { Navbar } from "@/components/navigation/navbar";
 import { BottomBar } from "@/components/navigation/bottom-bar";
 import { Sidebar } from "@/components/navigation/sidebar";
+import React from 'react';
 
 export default function RootLayout({
   children,

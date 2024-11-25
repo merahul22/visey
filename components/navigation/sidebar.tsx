@@ -2,21 +2,24 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-
 import { Button } from "../ui/button";
-import { House, MagnifyingGlass, Bell } from "@phosphor-icons/react/dist/ssr";
+import { House, MagnifyingGlass, Bell, Plus } from "@phosphor-icons/react/dist/ssr";
 import { cn } from "@/lib/utils";
 
-const sidebarItems = [
+interface SidebarProps {
+  userType: "BUSINESS" | "STARTUP";
+}
+
+const getSidebarItems = (userType: SidebarProps["userType"]) => [
   {
     label: "Home",
     icon: <House size={18} />,
     route: "/home",
   },
   {
-    label: "Search",
-    icon: <MagnifyingGlass size={18} />,
-    route: "/search",
+    label: userType === "STARTUP" ? "Search" : "Post",
+    icon: userType === "STARTUP" ? <MagnifyingGlass size={18} /> : <Plus size={18} />,
+    route: userType === "STARTUP" ? "/search" : "/post-funding-opportunity",
   },
   {
     label: "Notifications",
@@ -25,29 +28,44 @@ const sidebarItems = [
   },
 ];
 
-export function Sidebar() {
+export function Sidebar({ userType }: SidebarProps) {
   const pathname = usePathname();
+  const sidebarItems = getSidebarItems(userType);
 
   return (
-    <aside className="hidden h-[calc(100vh-4rem)] pt-24 pb-4 flex-grow md:flex flex-col justify-between z-10 shrink-0 w-52 border-r fixed bg-base-white px-4">
-      <div className="flex flex-col gap-y-4">
-        {sidebarItems.map((item) => (
-          <Button key={item.route}  variant="ghost" className="justify-start" asChild>
-            <Link
-              href={item.route}
+    <aside className="hidden h-[calc(100vh-4rem)] pt-16 pb-4 md:flex flex-col justify-between z-10 shrink-0 w-52 border-r fixed bg-base-white px-4">
+      {/* Top Section */}
+      <div className="flex flex-col gap-y-4 flex-grow">
+        {sidebarItems.map((item) => {
+          const isActive = pathname.startsWith(item.route);
+
+          return (
+            <Button
+              key={item.route}
+              variant="ghost"
               className={cn(
-                "flex items-center gap-x-4",
-                pathname == item.route && "bg-neutrals-100"
+                "justify-start w-full flex items-center gap-x-4",
+                isActive && "bg-neutrals-100 text-primary font-medium"
               )}
+              asChild
             >
-              <span className="-translate-y-0.5">{item.icon}</span>
-              <span>{item.label}</span>
-            </Link>
-          </Button>
-        ))}
+              <Link href={item.route} aria-current={isActive ? "page" : undefined}>
+                <span className="-translate-y-0.5">{item.icon}</span>
+                <span>{item.label}</span>
+              </Link>
+            </Button>
+          );
+        })}
       </div>
-      <div className="mx-auto">
-        <Button size="lg" className="rounded-full">Promote</Button>
+
+      {/* Bottom Section */}
+      <div className="flex flex-col gap-2 mt-4">
+        <Button size="lg" className="rounded-full" variant="outline" asChild>
+          <Link href="/settings">Settings</Link>
+        </Button>
+        <Button size="lg" className="rounded-full" asChild>
+          <Link href="/promote-business">Promote</Link>
+        </Button>
       </div>
     </aside>
   );
