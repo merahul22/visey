@@ -50,6 +50,7 @@ import { Calendar } from '../ui/calendar';
 import { TimePicker } from '../ui/time-picker';
 import PreviewOpportunity from '../PreviewOpportunity';
 import { Business } from '@prisma/client';
+import { toast } from 'sonner';
 
 const PostFundingOpportunityForm = ({ business }: { business: Business }) => {
   const [error, setError] = useState<string | undefined>('');
@@ -163,10 +164,12 @@ const PostFundingOpportunityForm = ({ business }: { business: Business }) => {
       const res = await postOpportunityDetails(formValues);
 
       if (res.error) {
+        toast.error(res.error);
         setError(res.error);
       }
 
       if (res.success) {
+        toast.success("Opportunity posted successfully.");
         setSuccess(res.success);
         router.push(`/profile/business`);
       }

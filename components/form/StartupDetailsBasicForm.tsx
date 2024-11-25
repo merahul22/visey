@@ -35,6 +35,7 @@ import { startupdetails } from '@/actions/startup-details';
 
 import { useRouter } from 'next/navigation';
 import { useSession } from 'next-auth/react';
+import { toast } from 'sonner';
 
 const StartupDetailsBasicForm = () => {
   const { update } = useSession();
@@ -97,7 +98,8 @@ const StartupDetailsBasicForm = () => {
         const res = await startupdetails(finalValues);
 
         if (res.success) {
-          update();
+          toast.success("Startup details added successfully.");
+          await update();
           router.push('/home');
         }
       });

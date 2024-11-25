@@ -22,6 +22,7 @@ import { FormError } from './FormError';
 import { FormSuccess } from './FormSuccess';
 import { identifierChange } from '@/actions/identifier-change';
 import { useSession } from 'next-auth/react';
+import { toast } from 'sonner';
 
 interface IdentifierChangeFormProps {
   onCancel: () => void;
@@ -55,6 +56,7 @@ const IdentifierChangeForm = ({ onCancel }: IdentifierChangeFormProps) => {
       }
 
       if (res?.success) {
+        toast.success(res.success);
         setSuccess(res?.success);
         await update();
         form.reset();
