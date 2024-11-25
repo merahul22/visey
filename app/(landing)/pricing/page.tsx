@@ -1,5 +1,5 @@
-import BusinessPricingPage from '@/app/(demo)/promote-business/page';
-import OpportunityPricingPage from '@/app/(demo)/promote-opportunity/page';
+import BusinessPricingPage from '@/app/(protected)/(main)/promote-business/page';
+import OpportunityPricingPage from "@/app/(protected)/(main)/promote-opportunity/page";
 
 const page = () => {
   return <div className="p-10 pb-20">
