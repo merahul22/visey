@@ -23,11 +23,13 @@ import { FormError } from './FormError';
 import { FormSuccess } from './FormSuccess';
 import { useRouter } from 'next/navigation';
 import { toast } from 'sonner';
+import { Eye, EyeSlash } from '@phosphor-icons/react/dist/ssr';
 
 const LoginForm = () => {
   const [loading, startTransition] = useTransition();
   const [error, setError] = useState<string | undefined>('');
   const [success, setSuccess] = useState<string | undefined>('');
+  const [isPasswordVisible, setIsPasswordVisible] = useState<boolean>(false);
   const router = useRouter();
 
   const form = useForm<z.infer<typeof loginSchema>>({
@@ -102,41 +104,55 @@ const LoginForm = () => {
                   </FormItem>
                 )}
               />
-              <FormField
-                control={form.control}
-                name="password"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>
-                      <div className="flex justify-between">
-                        <p className="text-neutrals-600 font-semibold">
-                          Password
-                        </p>
-                      </div>
-                    </FormLabel>
-                    <FormControl>
-                      <Input
-                        className="mt-1"
-                        type="password"
-                        placeholder="Enter your password"
-                        {...field}
-                        disabled={loading}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                    <Button variant="link" asChild className="px-0 font-normal">
-                      <Link href="/auth/reset">Forgot password?</Link>
-                    </Button>
-                  </FormItem>
-                )}
-              />
+              <div className="relative">
+                <FormField
+                  control={form.control}
+                  name="password"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>
+                        <div className="flex justify-between">
+                          <p className="text-neutrals-600 font-semibold">
+                            Password
+                          </p>
+                        </div>
+                      </FormLabel>
+                      <FormControl>
+                        <Input
+                          className="mt-1"
+                          type={`${isPasswordVisible ? "text" : "password"}`}
+                          placeholder="Enter your password"
+                          {...field}
+                          disabled={loading}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                      <Button
+                        variant="link"
+                        asChild
+                        className="px-0 font-normal">
+                        <Link href="/forgot-password">Forgot password?</Link>
+                      </Button>
+                    </FormItem>
+                  )}
+                />
+                <span
+                  className="absolute inset-y-0 right-3 -top-6 flex items-center cursor-pointer"
+                  onClick={() => setIsPasswordVisible(prev => !prev)}
+                    >
+                  { isPasswordVisible ?
+                    <Eye className="h-5 w-5" />
+                    :
+                    <EyeSlash className="h-5 w-5" /> }
+                </span>
+              </div>
             </div>
             <Button
               className="w-full rounded-full font-semibold"
               type="submit"
               disabled={loading}
             >
-              Log In
+            {loading ? "Logging in..." : "Login"}
             </Button>
           </form>
         </Form>

@@ -27,6 +27,7 @@ import { FormSuccess } from './FormSuccess';
 import { Stepper } from '../Stepper';
 import { useRouter } from 'next/navigation';
 import { toast } from 'sonner';
+import { Eye, EyeSlash } from '@phosphor-icons/react/dist/ssr';
 
 const SignupForm = () => {
   const [password, setPassword] = useState<string>('');
@@ -35,6 +36,7 @@ const SignupForm = () => {
   const [success, setSuccess] = useState<string | undefined>('');
   const [currentStep, setCurrentStep] = useState<number>(1);
   const [currentType, setCurrentType] = useState('' as 'STARTUP' | 'BUSINESS');
+  const [isPasswordVisible, setIsPasswordVisible] = useState<boolean>(false);
 
   const router = useRouter();
 
@@ -247,68 +249,78 @@ const SignupForm = () => {
                       </FormItem>
                     )}
                   />
-
-                  <FormField
-                    control={form.control}
-                    name="password"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>
-                          <p className="text-neutrals-600 font-semibold">
-                            Password*
-                          </p>
-                        </FormLabel>
-                        <FormControl>
-                          <Input
-                            className="mt-1"
-                            type="password"
-                            placeholder="Enter your password"
-                            {...field}
-                            onChange={(e) => {
-                              field.onChange(e);
-                              setPassword(e.target.value);
-                            }}
-                            disabled={loading}
-                          />
-                        </FormControl>
-                        <FormMessage />
-                        <FormDescription>
-                          <span
-                            className={`text-sm ${
-                              hasMinLength
-                                ? 'text-success-200'
-                                : 'text-neutrahasUpper  ls-500'
-                            }`}
-                          >
-                            <CheckIcon className="w-4 h-4 inline mr-1" />
-                            Atleast 8 characters
-                          </span>
-                          <br />
-                          <span
-                            className={`text-sm ${
-                              hasSpecialChar
-                                ? 'text-success-200'
-                                : 'text-neutrals-500'
-                            }`}
-                          >
-                            <CheckIcon className="w-4 h-4 inline mr-1" />
-                            Use at least 1 special character
-                          </span>
-                          <br />
-                          <span
-                            className={`text-sm ${
-                              hasUpperCase
-                                ? 'text-success-200'
-                                : 'text-neutrals-500'
-                            }`}
-                          >
-                            <CheckIcon className="w-4 h-4 inline mr-1" />
-                            Use at least 1 uppercase letter
-                          </span>
-                        </FormDescription>
-                      </FormItem>
-                    )}
-                  />
+                  <div className="relative">
+                    <FormField
+                      control={form.control}
+                      name="password"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>
+                            <p className="text-neutrals-600 font-semibold">
+                              Password*
+                            </p>
+                          </FormLabel>
+                          <FormControl>
+                            <Input
+                              className="mt-1"
+                              type={`${isPasswordVisible ? "text" : "password"}`}
+                              placeholder="Enter your password"
+                              {...field}
+                              onChange={(e) => {
+                                field.onChange(e);
+                                setPassword(e.target.value);
+                              }}
+                              disabled={loading}
+                            />
+                          </FormControl>
+                          <FormMessage />
+                          <FormDescription>
+                            <span
+                              className={`text-sm ${
+                                hasMinLength
+                                  ? 'text-success-200'
+                                  : 'text-neutrals-500'
+                              }`}
+                            >
+                              <CheckIcon className="w-4 h-4 inline mr-1" />
+                              At least 8 characters
+                            </span>
+                            <br />
+                            <span
+                              className={`text-sm ${
+                                hasSpecialChar
+                                  ? 'text-success-200'
+                                  : 'text-neutrals-500'
+                              }`}
+                            >
+                              <CheckIcon className="w-4 h-4 inline mr-1" />
+                              Use at least 1 special character
+                            </span>
+                            <br />
+                            <span
+                              className={`text-sm ${
+                                hasUpperCase
+                                  ? 'text-success-200'
+                                  : 'text-neutrals-500'
+                              }`}
+                            >
+                              <CheckIcon className="w-4 h-4 inline mr-1" />
+                              Use at least 1 uppercase letter
+                            </span>
+                          </FormDescription>
+                        </FormItem>
+                      )}
+                    />
+                    <span
+                      className="absolute inset-y-0 right-3 -top-1/3 flex items-center cursor-pointer"
+                      onClick={() => setIsPasswordVisible(prev => !prev)}
+                    >
+                    {isPasswordVisible ?
+                      <Eye className="h-5 w-5" />
+                      :
+                      <EyeSlash className="h-5 w-5" />}
+                  </span>
+                  </div>
                 </div>
                 <Button className="w-full" type="submit" disabled={loading}>
                   {loading ? 'Signing up...' : 'Sign up'}
