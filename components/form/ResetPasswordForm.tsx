@@ -23,11 +23,15 @@ import { resetPassword } from '@/actions/reset-password';
 import { FormError } from './FormError';
 import { FormSuccess } from './FormSuccess';
 import { toast } from 'sonner';
+import { Eye, EyeSlash } from '@phosphor-icons/react/dist/ssr';
 
 const ResetPasswordForm = ({ hasPassword }: { hasPassword: boolean }) => {
   const [password, setPassword] = useState('');
   const [error, setError] = useState<string | undefined>('');
   const [success, setSuccess] = useState<string | undefined>('');
+  const [isPasswordVisibleCurrent, setIsPasswordVisibleCurrent] = useState<boolean>(false);
+  const [isPasswordVisibleNew, setIsPasswordVisibleNew] = useState<boolean>(false);
+  const [isPasswordVisibleConfirm, setIsPasswordVisibleConfirm] = useState<boolean>(false);
 
   const [loading, startTransition] = useTransition();
 
@@ -83,18 +87,54 @@ const ResetPasswordForm = ({ hasPassword }: { hasPassword: boolean }) => {
             </div>
           )}
           {hasPassword && (
+            <div className="relative">
+              <FormField
+                control={form.control}
+                name="currentPassword"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Current Password*</FormLabel>
+                    <FormControl>
+                      <Input
+                        type={`${isPasswordVisibleCurrent ? "text" : "password"}`}
+                        placeholder="Enter the current password"
+                        {...field}
+                        className="mt-1"
+                        disabled={loading}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <span
+                className="absolute inset-y-0 right-3 top-6 flex items-center cursor-pointer"
+                onClick={() => setIsPasswordVisibleCurrent(prev => !prev)}
+              >
+                  {isPasswordVisibleCurrent ?
+                    <Eye className="h-5 w-5" />
+                    :
+                    <EyeSlash className="h-5 w-5" />}
+                </span>
+            </div>
+          )}
+          <div className="relative">
             <FormField
               control={form.control}
-              name="currentPassword"
+              name="password"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Current Password*</FormLabel>
+                  <FormLabel>New Password*</FormLabel>
                   <FormControl>
                     <Input
-                      type="password"
-                      placeholder="Enter the current password"
-                      {...field}
                       className="mt-1"
+                      type={`${isPasswordVisibleNew ? "text" : "password"}`}
+                      placeholder="Enter the new password"
+                      {...field}
+                      onChange={(e) => {
+                        field.onChange(e);
+                        setPassword(e.target.value);
+                      }}
                       disabled={loading}
                     />
                   </FormControl>
@@ -102,77 +142,74 @@ const ResetPasswordForm = ({ hasPassword }: { hasPassword: boolean }) => {
                 </FormItem>
               )}
             />
-          )}
-          <FormField
-            control={form.control}
-            name="password"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>New Password*</FormLabel>
-                <FormControl>
-                  <Input
-                    className="mt-1"
-                    type="password"
-                    placeholder="Enter the new password"
-                    {...field}
-                    onChange={(e) => {
-                      field.onChange(e);
-                      setPassword(e.target.value);
-                    }}
-                    disabled={loading}
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="confirmPassword"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Confirm Password*</FormLabel>
-                <FormControl>
-                  <Input
-                    type="password"
-                    placeholder="Confirm password"
-                    {...field}
-                    className="mt-1"
-                    disabled={loading}
-                  />
-                </FormControl>
-                <FormMessage />
-                <FormDescription>
-                  <span
-                    className={`text-sm ${
-                      hasMinLength ? 'text-success-200' : 'text-neutrals-500'
-                    }`}
-                  >
-                    <CheckIcon className="w-4 h-4 inline mr-1" />
-                    Atleast 8 characters
-                  </span>
-                  <br />
-                  <span
-                    className={`text-sm ${
-                      hasSpecialChar ? 'text-success-200' : 'text-neutrals-500'
-                    }`}
-                  >
-                    <CheckIcon className="w-4 h-4 inline mr-1" />
-                    Use at least 1 special character
-                  </span>
-                  <br />
-                  <span
-                    className={`text-sm ${
-                      hasUpperCase ? 'text-success-200' : 'text-neutrals-500'
-                    }`}
-                  >
-                    <CheckIcon className="w-4 h-4 inline mr-1" />
-                    Use at least 1 uppercase letter
-                  </span>
-                </FormDescription>
-              </FormItem>
-            )}
-          />
+            <span
+              className="absolute inset-y-0 right-3 top-6 flex items-center cursor-pointer"
+              onClick={() => setIsPasswordVisibleNew(prev => !prev)}
+            >
+              {isPasswordVisibleNew ?
+                <Eye className="h-5 w-5" />
+                :
+                <EyeSlash className="h-5 w-5" />}
+            </span>
+          </div>
+          <div className="relative">
+            <FormField
+              control={form.control}
+              name="confirmPassword"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Confirm Password*</FormLabel>
+                  <FormControl>
+                    <Input
+                      type={`${isPasswordVisibleConfirm ? "text" : "password"}`}
+                      placeholder="Confirm password"
+                      {...field}
+                      className="mt-1"
+                      disabled={loading}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                  <FormDescription>
+                    <span
+                      className={`text-sm ${
+                        hasMinLength ? 'text-success-200' : 'text-neutrals-500'
+                      }`}
+                    >
+                      <CheckIcon className="w-4 h-4 inline mr-1" />
+                      At least 8 characters
+                    </span>
+                    <br />
+                    <span
+                      className={`text-sm ${
+                        hasSpecialChar ? 'text-success-200' : 'text-neutrals-500'
+                      }`}
+                    >
+                      <CheckIcon className="w-4 h-4 inline mr-1" />
+                      Use at least 1 special character
+                    </span>
+                    <br />
+                    <span
+                      className={`text-sm ${
+                        hasUpperCase ? 'text-success-200' : 'text-neutrals-500'
+                      }`}
+                    >
+                      <CheckIcon className="w-4 h-4 inline mr-1" />
+                      Use at least 1 uppercase letter
+                    </span>
+                  </FormDescription>
+                </FormItem>
+              )}
+            />
+            <span
+              className="absolute inset-y-0 right-3 -top-1/3 flex items-center cursor-pointer"
+              onClick={() => setIsPasswordVisibleConfirm(prev => !prev)}
+            >
+              {isPasswordVisibleConfirm ?
+                <Eye className="h-5 w-5" />
+                :
+                <EyeSlash className="h-5 w-5" />}
+            </span>
+          </div>
           <Button
             type="submit"
             className="rounded-full"
