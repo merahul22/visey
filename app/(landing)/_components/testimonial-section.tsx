@@ -1,19 +1,21 @@
-import { CarouselDemo } from '@/components/TestimonialCarousel';
 import Image from 'next/image';
+import { EmblaOptionsType } from 'embla-carousel'
+import EmblaCarousel from '@/components/EmblaCarousel';
 
 interface Testimonial {
   image: string;
   content: string;
 }
 
+const OPTIONS: EmblaOptionsType = { loop: true }
 const SLIDES: Testimonial[] = [
-  {
-    image: '/img/testimonial1.png',
-    content: '“An absolute must have for startups and businesses”',
-  },
   {
     image: '/img/testimonial2.jpg',
     content: '“A game-changer for our business.”',
+  },
+  {
+    image: '/img/testimonial1.png',
+    content: '“An absolute must have for startups and businesses”',
   },
   {
     image: '/img/testimonial3.jpg',
@@ -46,7 +48,7 @@ function TestimonialSection() {
         </p>
       </div>
       <div className="py-24 flex items-center justify-center">
-        <CarouselDemo slides={SLIDES} />
+        <EmblaCarousel slides={SLIDES} options={OPTIONS} />
       </div>
 
       <div
