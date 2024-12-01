@@ -137,7 +137,7 @@ const LoginForm = () => {
                   )}
                 />
                 <span
-                  className="absolute inset-y-0 right-3 -top-6 flex items-center cursor-pointer"
+                  className="absolute inset-y-0 right-3 -top-1/3 flex items-center cursor-pointer"
                   onClick={() => setIsPasswordVisible(prev => !prev)}
                     >
                   { isPasswordVisible ?

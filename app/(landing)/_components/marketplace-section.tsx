@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { ArrowUpRight, Funnel } from '@phosphor-icons/react/dist/ssr';
+import { ArrowUpRight, Funnel, Command, Aperture  } from '@phosphor-icons/react/dist/ssr';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 
@@ -93,13 +93,15 @@ function MarketplaceSection() {
           </div>
 
           <div className="flex flex-col items-center gap-6 md:flex-row md:items-stretch">
-            {cardData.map((data) => (
+            {cardData.map((data, idx) => (
               <div
                 key={data.title}
                 className="relative z-10 p-10 rounded-2xl space-y-6 bg-primary-landing-light text-base-white w-10/12 h-[286px] md:h-auto"
               >
                 <div className="p-2 rounded-full inline-flex justify-center items-center bg-success-landing">
-                  <Funnel size={36} className="text-[#709B08]" />
+                  {idx === 0 && <Funnel size={36} className="text-[#709B08]" />}
+                  {idx === 1 && <Aperture size={36} className="text-[#709B08]" />}
+                  {idx === 2 && <Command size={36} className="text-[#709B08]" />}
                 </div>
                 <div className="space-y-2">
                   <h3 className="font-degular font-medium text-hero">

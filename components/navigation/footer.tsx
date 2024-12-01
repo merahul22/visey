@@ -20,7 +20,7 @@ const footerData = [
       { name: 'Products', link: '/about' },
       { name: 'Pricing', link: '/pricing' },
       { name: 'Team', link: '/about' },
-      { name: 'Blog', link: '/blogs/1' },
+      { name: 'Blog', link: '/blogs' },
       {
         name: 'Free Business Listing',
         link: 'https://docs.google.com/forms/d/e/1FAIpQLSdzEFmkrANFYzdrmSZrjVgeOm_TJspc6q2yi-SgpuRuh_lrAQ/viewform',
