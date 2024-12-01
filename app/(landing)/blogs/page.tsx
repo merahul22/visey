@@ -1,3 +1,5 @@
+"use client";
+
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import {
@@ -5,11 +7,8 @@ import {
   CaretLeft,
   ArrowUpRight,
 } from '@phosphor-icons/react/dist/ssr';
-import { redirect } from "next/navigation";
 
-const Page = async ({ params } : { params: Promise<{ id: string }> }) => {
-  const id = (await params).id;
-
+const Page = () => {
   return <div className="max-w-[1000px] mx-auto mt-16 mb-24">
     <h1 className="font-degular text-heading4 md:text-heading2 xl:text-heading1 leading-tight font-semibold text-[#3f3f3f]">30 Best Startup Ideas in India: Opportunities for New Entrepreneurs</h1>
     <h2 className="text-2xl font-medium mt-2">
@@ -470,7 +469,7 @@ const Page = async ({ params } : { params: Promise<{ id: string }> }) => {
             </span>
           </div>
         </Button>
-        <Button variant="link" className="text-sm text-base-black" onClick={() => redirect(`/blogs/${id+1}`)}>
+        <Button variant="link" className="text-sm text-base-black">
           <div className="flex items-center gap-2">
             <span>
               Next

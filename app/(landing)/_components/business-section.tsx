@@ -1,4 +1,4 @@
-import { Funnel } from "@phosphor-icons/react/dist/ssr";
+import { ChartLineUp, UsersThree, Eye  } from "@phosphor-icons/react/dist/ssr";
 import Image from "next/image";
 
 const businessSection = [
@@ -57,13 +57,15 @@ function BusinessSection() {
           </p>
         </div>
         <div className="max-w-screen-2xl mx-auto flex flex-col gap-6 md:flex-row">
-          {businessSection.map((data) => (
+          {businessSection.map((data, idx) => (
             <div
               key={data.title}
               className="px-10 pt-10 pb-24 rounded-2xl space-y-6 bg-primary-landing-light text-base-white flex-1"
             >
               <div className="p-2 rounded-full inline-flex justify-center items-center bg-success-landing">
-                <Funnel size={36} className="text-[#709B08]" />
+                {idx === 0 && <ChartLineUp size={36} className="text-[#709B08]" /> }
+                {idx === 1 && <UsersThree size={36} className="text-[#709B08]" /> }
+                {idx === 2 && <Eye size={36} className="text-[#709B08]" /> }
               </div>
               <div className="space-y-4 ">
                 <h3 className="font-degular font-medium text-hero leading-tight">
