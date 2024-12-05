@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import { EmblaOptionsType } from 'embla-carousel'
 import EmblaCarousel from '@/components/EmblaCarousel';
+import EmblaCarouselLarge from '@/components/EmblaCarouselLarge';
 
 interface Testimonial {
   image: string;
@@ -48,7 +49,8 @@ function TestimonialSection() {
         </p>
       </div>
       <div className="py-24 flex items-center justify-center">
-        <EmblaCarousel slides={SLIDES} options={OPTIONS} />
+        <EmblaCarousel className="sm:hidden" slides={SLIDES} options={OPTIONS} />
+        <EmblaCarouselLarge className="hidden sm:block" slides={SLIDES} options={OPTIONS} />
       </div>
 
       <div
