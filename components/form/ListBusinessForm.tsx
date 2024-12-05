@@ -123,6 +123,7 @@ const ListBusinessForm = () => {
           await update();
           toast.success("Business listed successfully.");
           router.push(DEFAULT_LOGIN_REDIRECT);
+          router.refresh();
         }
       });
     }
