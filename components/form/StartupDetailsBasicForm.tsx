@@ -36,6 +36,7 @@ import { startupdetails } from '@/actions/startup-details';
 import { useRouter } from 'next/navigation';
 import { useSession } from 'next-auth/react';
 import { toast } from 'sonner';
+import { DEFAULT_LOGIN_REDIRECT } from '@/routes';
 
 const StartupDetailsBasicForm = () => {
   const { update } = useSession();
@@ -100,7 +101,8 @@ const StartupDetailsBasicForm = () => {
         if (res.success) {
           toast.success("Startup details added successfully.");
           await update();
-          router.push('/home');
+          router.push(DEFAULT_LOGIN_REDIRECT);
+          router.refresh();
         }
       });
     }

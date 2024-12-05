@@ -43,14 +43,14 @@ const ProfilePage = async (props: { params: Promise<Params> }) => {
 
   if (params.type === 'startup' && user?.type === 'STARTUP') {
     return <div className="mb-20">
-      <StartupProfile user={userStartupProps} />;
+      <StartupProfile user={userStartupProps} />
     </div>
   } else if (params.type === 'business' && user?.type === 'BUSINESS') {
     return <div className="mt-10 max-w-[1200px] mx-auto mb-20">
       <BusinessProfilePrivate user={userBusinessProps} />
     </div>
   } else {
-    return <div>Access Denied</div>; // Handle invalid access
+    return <div>Access Denied</div> // Handle invalid access
   }
 };
 
