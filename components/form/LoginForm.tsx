@@ -118,13 +118,24 @@ const LoginForm = () => {
                         </div>
                       </FormLabel>
                       <FormControl>
-                        <Input
-                          className="mt-1"
-                          type={`${isPasswordVisible ? "text" : "password"}`}
-                          placeholder="Enter your password"
-                          {...field}
-                          disabled={loading}
-                        />
+                        <div className="relative">
+                          <Input
+                            className="mt-1"
+                            type={`${isPasswordVisible ? 'text' : 'password'}`}
+                            placeholder="Enter your password"
+                            {...field}
+                            disabled={loading}
+                          />
+                          <span
+                            className="absolute inset-y-0 right-3 flex items-center cursor-pointer"
+                            onClick={() => setIsPasswordVisible(prev => !prev)}
+                          >
+                            {isPasswordVisible ?
+                              <Eye className="h-5 w-5" />
+                              :
+                              <EyeSlash className="h-5 w-5" />}
+                          </span>
+                        </div>
                       </FormControl>
                       <FormMessage />
                       <Button
@@ -136,15 +147,6 @@ const LoginForm = () => {
                     </FormItem>
                   )}
                 />
-                <span
-                  className="absolute inset-y-0 right-3 -top-1/3 flex items-center cursor-pointer"
-                  onClick={() => setIsPasswordVisible(prev => !prev)}
-                    >
-                  { isPasswordVisible ?
-                    <Eye className="h-5 w-5" />
-                    :
-                    <EyeSlash className="h-5 w-5" /> }
-                </span>
               </div>
             </div>
             <Button
