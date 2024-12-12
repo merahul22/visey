@@ -7,6 +7,7 @@ import {
   Phone,
   WhatsappLogo,
   YoutubeLogo,
+  InstagramLogo
 } from '@phosphor-icons/react/dist/ssr';
 
 import Image from 'next/image';
@@ -17,9 +18,9 @@ const footerData = [
     title: 'Product',
     items: [
       { name: 'About', link: '/about' },
-      { name: 'Products', link: '#product' },
+      { name: 'Products', link: '/about#product' },
       { name: 'Pricing', link: '/pricing' },
-      { name: 'Team', link: '#team' },
+      { name: 'Team', link: '/about#team' },
       { name: 'Blog', link: '/blogs' },
       {
         name: 'Free Business Listing',
@@ -33,7 +34,8 @@ const footerData = [
       { name: 'Terms and Conditions', link: '/terms-and-conditions' },
       { name: 'Cookie Policy', link: '/terms-and-conditions' },
       { name: 'Privacy Policy', link: '/terms-and-conditions' },
-      { name: 'Investor Relation', link: '/partner-with-us' },
+      { name: 'Partner with us', link: '/partner-with-us' },
+     
     ],
   },
 ];
@@ -43,7 +45,7 @@ function Footer({ className }: { className?: string }) {
     <footer className={cn('bg-neutrals-100  p-10 space-y-4', className)}>
       <div className="space-y-4 text-center max-w-screen-xl mx-auto">
         <Image
-          src="/logo-black.png"
+          src="/footervisey.svg"
           width={140}
           height={50}
           alt="visey logo"
@@ -83,7 +85,7 @@ function Footer({ className }: { className?: string }) {
                   contact@visey.co.in
                 </span>
               </div>
-              <p className="text-[#545454]">Partner with us</p>
+             
             </div>
           </div>
 
@@ -102,6 +104,9 @@ function Footer({ className }: { className?: string }) {
             </Link>
             <Link href="#">
               <YoutubeLogo size={24} />
+            </Link>
+            <Link href="https://www.instagram.com/visey.co.in/profilecard/?igsh=ZXpnZHZrcXUyenVp">
+              <InstagramLogo size={24} />
             </Link>
             <Link href="https://www.linkedin.com/company/viseycompany">
               <LinkedinLogo size={24} />

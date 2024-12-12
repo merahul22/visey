@@ -162,7 +162,7 @@ const page = () => {
         </div>
       </div>
     </div>
-    <div id='product' className="pt-8 max-w-[1200px] mx-auto">
+    <div id='product' className="pt-8 max-w-[1200px] mx-auto ">
       <h1 className="text-center font-degular font-semibold text-heading4 md:text-heading3 lg:text-heading2 xl:text-heading1 leading-snug text-[#3f3f3f]">Product</h1>
       <p className="text-center px-24">Our platform is your gateway to growth—bringing Startups, SMEs, and
         Businesses together with
@@ -369,10 +369,10 @@ const page = () => {
         <div className="flex items-center gap-2">
           <Link
            href="/demo-account-type"
-                  className="flex items-center gap-4"
+          className="flex items-center gap-4"
           ><span>Start now</span>
-          <ArrowUpRight /></Link>
-          
+          <ArrowUpRight />
+          </Link>
         </div>
       </Button>
     </div>

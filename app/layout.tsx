@@ -18,7 +18,7 @@ export default function RootLayout({ children, }: Readonly<{
   return (
     <html lang="en">
       <body className={`font-inter antialiased text-base-black`}>
-        <BreakpointIndicator />
+        {/* <BreakpointIndicator /> */}
         <Provider>
           {children}
         </Provider>

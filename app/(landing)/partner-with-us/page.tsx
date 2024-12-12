@@ -10,7 +10,7 @@ const page = () => {
     <div className="m-8 mb-24 p-8 border-2 rounded-xl">
       <div>
         <h1 className="font-degular font-semibold text-heading4 md:text-heading3 lg:text-heading2 xl:text-heading1 leading-snug text-[#3f3f3f]">
-          Investor Relations/ Partner With Us
+           Partner With Us
         </h1>
         <p className="font-medium">
           At Visey, we’re committed to empowering the entrepreneurial ecosystem
