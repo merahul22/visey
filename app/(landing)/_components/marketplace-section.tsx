@@ -54,7 +54,7 @@ function MarketplaceSection() {
       {/* Top wave - full width */}
       <div className="absolute inset-x-0 top-0 w-full h-[250px] md:h-[200px] lg:h-[300px] opacity-60">
         <Image
-          src="/wave-real-2.png"
+          src="/numberwave.svg"
           fill={true}
           className="object-cover object-left"
           alt="bg-wave"

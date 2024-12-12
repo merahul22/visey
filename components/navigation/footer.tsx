@@ -105,7 +105,7 @@ function Footer({ className }: { className?: string }) {
             <Link href="#">
               <YoutubeLogo size={24} />
             </Link>
-            <Link href="https://www.instagram.com/visey.co.in/profilecard/?igsh=ZXpnZHZrcXUyenVp">
+            <Link href="https://www.instagram.com/visey.co.in/?igsh=ZXpnZHZrcXUyenVp">
               <InstagramLogo size={24} />
             </Link>
             <Link href="https://www.linkedin.com/company/viseycompany">
