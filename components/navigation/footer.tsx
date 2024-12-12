@@ -17,9 +17,9 @@ const footerData = [
     title: 'Product',
     items: [
       { name: 'About', link: '/about' },
-      { name: 'Products', link: '/about' },
+      { name: 'Products', link: '#product' },
       { name: 'Pricing', link: '/pricing' },
-      { name: 'Team', link: '/about' },
+      { name: 'Team', link: '#team' },
       { name: 'Blog', link: '/blogs' },
       {
         name: 'Free Business Listing',
