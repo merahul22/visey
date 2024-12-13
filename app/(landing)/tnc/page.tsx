@@ -1,12 +1,10 @@
-
-
 export default function TermsAndConditions() {
   return (
     <div className="bg-gray-50 min-h-screen p-4 md:p-8">
       <div className="max-w-full mx-auto bg-white shadow-md rounded-lg p-6 m-3 ">
         <div id='tnc' className='border-solid border-indigo-600 max-w-full mx-auto bg-white shadow-md rounded-lg p-6'><h1 className="text-2xl font-bold text-gray-800 mb-4">Terms & Conditions</h1>
         <p className="text-gray-600 mb-4">
-          Welcome to "Visey.co.in". By accessing or using our Site, you agree to be bound by these Terms and Conditions. Please
+          Welcome to &#34;Visey.co.in&#34;. By accessing or using our Site, you agree to be bound by these Terms and Conditions. Please
           read these Terms carefully. If you do not agree with any part of these Terms, please do not use our Site.
         </p>
         <h2 className="text-xl font-semibold text-gray-800 mb-2">Use of the Site (01)</h2>
@@ -35,7 +33,7 @@ export default function TermsAndConditions() {
 <div id='cookie' className='border-solid border-indigo-600 max-w-full mx-auto bg-white shadow-md rounded-lg p-6 m-3'>
 <h1 className="text-2xl font-bold text-gray-800 mb-4 mt-8">Cookie Policy 🍪</h1>
         <p className="text-gray-600 mb-4">
-        We use essential cookies to make our site work. With your consent, we may also use non-essential cookies to improve user experience and analyze website traffic. By clicking “Accept,” you agree to our website's cookie use as described in our Cookie Policy. You can change your cookie settings at any time by clicking “Preferences.”
+        We use essential cookies to make our site work. With your consent, we may also use non-essential cookies to improve user experience and analyze website traffic. By clicking “Accept,” you agree to our website&#39;s cookie use as described in our Cookie Policy. You can change your cookie settings at any time by clicking “Preferences.”
         </p>
         <p className="text-gray-600 mb-4">
         We use different types of cookies to optimize your experience on our website. Click on the preferences below to learn more about their purposes. You may choose which types of cookies to allow and can change your preferences at any time. Remember that disabling cookies may affect your experience on the website. You can learn more about how we use cookies by visiting our Cookie Policy and Privacy Policy.
@@ -53,7 +51,7 @@ export default function TermsAndConditions() {
         <h2 className="text-xl font-semibold text-gray-800 mb-2 mt-4" >Cookie policy for visey.co.in</h2>
         <p className="text-gray-600 mb-4">Last Updated: 02/11/2024</p>
         <p className="text-gray-600 mb-4">
-        Welcome to “Visey.co.in”. This Cookie Policy explains how Visey ("we", "us", or "our") uses cookies and similar technologies to recognize you when you visit our Site. It also explains what these technologies are, why we use them, and your rights to control our use of them.
+        Welcome to “Visey.co.in”. This Cookie Policy explains how Visey (&#34;we&#34;, &#34;us&#34;, or &#34;our&#34;) uses cookies and similar technologies to recognize you when you visit our Site. It also explains what these technologies are, why we use them, and your rights to control our use of them.
         </p>
         <p className="text-gray-600 mb-4">
         By continuing to browse our Site, you agree to our use of cookies in accordance with this policy.
@@ -123,7 +121,7 @@ export default function TermsAndConditions() {
         </ul>
         <h2 className="text-xl font-semibold text-gray-800 mb-2">How Can You Control Cookies? (04)</h2>
         <p className="text-gray-600 mb-4">
-        When you first visit our Site, we will request your consent to use optional cookies. You have the right to accept or reject these cookies. Essential cookies cannot be disabled, as they are necessary for our Site's functionality. 
+        When you first visit our Site, we will request your consent to use optional cookies. You have the right to accept or reject these cookies. Essential cookies cannot be disabled, as they are necessary for our Site&#39;s functionality. 
         </p>
         <p className="text-gray-600 mb-4">
         You can also manage your cookie preferences at any time by adjusting your browser settings. Please note that if you choose to disable certain cookies, parts of our Site may become inaccessible or not function correctly. 
@@ -190,7 +188,7 @@ export default function TermsAndConditions() {
       
 
       <div className="fixed bottom-0 left-0 right-0 bg-white p-4 shadow-md flex justify-center space-x-4 flex-col items-center space-y-2">
-        <p className="text-gray-600">We use essential cookies. With your consent, we may also use non-essential cookies to improve user experience and analyze website traffic. By clicking “Accept,” you agree to our website's cookie use as described in our Cookie Policy.</p>
+        <p className="text-gray-600">We use essential cookies. With your consent, we may also use non-essential cookies to improve user experience and analyze website traffic. By clicking “Accept,” you agree to our website&#39;s cookie use as described in our Cookie Policy.</p>
         <button className="bg-blue-500 text-white px-6 py-2 rounded-lg shadow-md hover:bg-blue-600 w-1/6">Accept</button>
         <button className="bg-gray-500 text-white px-6 py-2 rounded-lg shadow-md hover:bg-gray-600 w-1/6">Preferences</button>
       </div>
