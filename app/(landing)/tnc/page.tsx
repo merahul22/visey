@@ -158,7 +158,7 @@ export default function TermsAndConditions() {
        </p>
        <h1 className="text-2xl font-bold text-gray-800 mb-4 mt-8">Cookie Policy 🍪</h1>
 </div>
-         <div id='privacy' className='border-solid border-indigo-600 max-w-full mx-auto bg-white shadow-md rounded-lg p-6 m-3'>
+         <div id='privacy' className='border-solid border-indigo-600 max-w-fullgit  mx-auto bg-white shadow-md rounded-lg p-6 m-3'>
          <h1 className="text-2xl font-bold text-gray-800 mb-4 mt-8">Privacy Policy</h1>
          <p className="text-gray-600 mb-2  ">
          At Visey.co.in, we are committed to protecting your privacy. This Privacy Policy explains how we collect, use, and protect your information when you use our Site. By using our Site, you agree to the collection and use of information in accordance with this policy.
