@@ -31,9 +31,9 @@ const footerData = [
   {
     title: 'Legal',
     items: [
-      { name: 'Terms and Conditions', link: '/terms-and-conditions' },
-      { name: 'Cookie Policy', link: '/terms-and-conditions' },
-      { name: 'Privacy Policy', link: '/terms-and-conditions' },
+      { name: 'Terms and Conditions', link: '/tnc' },
+      { name: 'Cookie Policy', link: '/tnc#cookie' },
+      { name: 'Privacy Policy', link: '/tnc#privacy' },
       { name: 'Partner with us', link: '/partner-with-us' },
      
     ],
