@@ -1,5 +1,4 @@
 import { Button } from '@/components/ui/button';
-
 import { CategoryCardBig } from './_components/category-card-big';
 import { CategoryCardSmall } from './_components/category-card-small';
 import { FundingCard } from '@/components/cards/funding-card';

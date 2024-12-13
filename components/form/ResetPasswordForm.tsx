@@ -87,7 +87,7 @@ const ResetPasswordForm = ({ hasPassword }: { hasPassword: boolean }) => {
             </div>
           )}
           {hasPassword && (
-            <div className="relative">
+            <div className="">
               <FormField
                 control={form.control}
                 name="currentPassword"
@@ -95,30 +95,32 @@ const ResetPasswordForm = ({ hasPassword }: { hasPassword: boolean }) => {
                   <FormItem>
                     <FormLabel>Current Password*</FormLabel>
                     <FormControl>
-                      <Input
-                        type={`${isPasswordVisibleCurrent ? "text" : "password"}`}
-                        placeholder="Enter the current password"
-                        {...field}
-                        className="mt-1"
-                        disabled={loading}
-                      />
+                      <div className="relative">
+                        <Input
+                          type={`${isPasswordVisibleCurrent ? 'text' : 'password'}`}
+                          placeholder="Enter the current password"
+                          {...field}
+                          className="mt-1"
+                          disabled={loading}
+                        />
+                        <span
+                          className="absolute inset-y-0 right-3 flex items-center cursor-pointer"
+                          onClick={() => setIsPasswordVisibleCurrent(prev => !prev)}
+                        >
+                          {isPasswordVisibleCurrent ?
+                            <Eye className="h-5 w-5" />
+                            :
+                            <EyeSlash className="h-5 w-5" />}
+                        </span>
+                      </div>
                     </FormControl>
                     <FormMessage />
                   </FormItem>
                 )}
               />
-              <span
-                className="absolute inset-y-0 right-3 top-6 flex items-center cursor-pointer"
-                onClick={() => setIsPasswordVisibleCurrent(prev => !prev)}
-              >
-                  {isPasswordVisibleCurrent ?
-                    <Eye className="h-5 w-5" />
-                    :
-                    <EyeSlash className="h-5 w-5" />}
-                </span>
             </div>
           )}
-          <div className="relative">
+          <div>
             <FormField
               control={form.control}
               name="password"
@@ -126,31 +128,33 @@ const ResetPasswordForm = ({ hasPassword }: { hasPassword: boolean }) => {
                 <FormItem>
                   <FormLabel>New Password*</FormLabel>
                   <FormControl>
-                    <Input
-                      className="mt-1"
-                      type={`${isPasswordVisibleNew ? "text" : "password"}`}
-                      placeholder="Enter the new password"
-                      {...field}
-                      onChange={(e) => {
-                        field.onChange(e);
-                        setPassword(e.target.value);
-                      }}
-                      disabled={loading}
-                    />
+                    <div className="relative">
+                      <Input
+                        className="mt-1 relative"
+                        type={`${isPasswordVisibleNew ? 'text' : 'password'}`}
+                        placeholder="Enter the new password"
+                        {...field}
+                        onChange={(e) => {
+                          field.onChange(e);
+                          setPassword(e.target.value);
+                        }}
+                        disabled={loading}
+                      />
+                      <span
+                        className="absolute inset-y-0 right-3 flex items-center cursor-pointer"
+                        onClick={() => setIsPasswordVisibleNew(prev => !prev)}
+                      >
+                        {isPasswordVisibleNew ?
+                          <Eye className="h-5 w-5" />
+                          :
+                          <EyeSlash className="h-5 w-5" />}
+                      </span>
+                    </div>
                   </FormControl>
                   <FormMessage />
                 </FormItem>
               )}
             />
-            <span
-              className="absolute inset-y-0 right-3 top-6 flex items-center cursor-pointer"
-              onClick={() => setIsPasswordVisibleNew(prev => !prev)}
-            >
-              {isPasswordVisibleNew ?
-                <Eye className="h-5 w-5" />
-                :
-                <EyeSlash className="h-5 w-5" />}
-            </span>
           </div>
           <div className="relative">
             <FormField
@@ -160,13 +164,24 @@ const ResetPasswordForm = ({ hasPassword }: { hasPassword: boolean }) => {
                 <FormItem>
                   <FormLabel>Confirm Password*</FormLabel>
                   <FormControl>
-                    <Input
-                      type={`${isPasswordVisibleConfirm ? "text" : "password"}`}
-                      placeholder="Confirm password"
-                      {...field}
-                      className="mt-1"
-                      disabled={loading}
-                    />
+                    <div className="relative">
+                      <Input
+                        type={`${isPasswordVisibleConfirm ? 'text' : 'password'}`}
+                        placeholder="Confirm password"
+                        {...field}
+                        className="mt-1"
+                        disabled={loading}
+                      />
+                      <span
+                        className="absolute inset-y-0 right-3 flex items-center cursor-pointer"
+                        onClick={() => setIsPasswordVisibleConfirm(prev => !prev)}
+                      >
+                        {isPasswordVisibleConfirm ?
+                          <Eye className="h-5 w-5" />
+                          :
+                          <EyeSlash className="h-5 w-5" />}
+                      </span>
+                    </div>
                   </FormControl>
                   <FormMessage />
                   <FormDescription>
@@ -200,15 +215,6 @@ const ResetPasswordForm = ({ hasPassword }: { hasPassword: boolean }) => {
                 </FormItem>
               )}
             />
-            <span
-              className="absolute inset-y-0 right-3 -top-1/3 flex items-center cursor-pointer"
-              onClick={() => setIsPasswordVisibleConfirm(prev => !prev)}
-            >
-              {isPasswordVisibleConfirm ?
-                <Eye className="h-5 w-5" />
-                :
-                <EyeSlash className="h-5 w-5" />}
-            </span>
           </div>
           <Button
             type="submit"

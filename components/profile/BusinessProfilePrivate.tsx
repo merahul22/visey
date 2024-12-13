@@ -31,7 +31,7 @@ export default function BusinessProfilePrivate({ user, }: {
 
   if (!business) {
     return (
-      <div className="">
+      <div className="flex items-center justify-center">
         <p>Business not found</p>
       </div>
     );
