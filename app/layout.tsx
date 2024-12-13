@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import './globals.css';
-import BreakpointIndicator from '@/components/breakpoint-indicator';
+// import BreakpointIndicator from '@/components/breakpoint-indicator';
 import Provider from '@/components/Provider';
 import HelpAndSupport from '@/components/HelpAndSupport';
 import { Toaster } from "@/components/ui/sonner"
@@ -18,7 +18,7 @@ export default function RootLayout({ children, }: Readonly<{
   return (
     <html lang="en">
       <body className={`font-inter antialiased text-base-black`}>
-        <BreakpointIndicator />
+        {/* <BreakpointIndicator /> */}
         <Provider>
           {children}
         </Provider>

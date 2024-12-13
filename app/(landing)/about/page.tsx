@@ -3,6 +3,7 @@ import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { ArrowUpRight } from '@phosphor-icons/react/dist/ssr';
 import { Separator } from '@/components/ui/separator';
+import Link from 'next/link';
 
 const profiles = [
   {name: "Jhonty Dhol", role: "Founder", image: "/img/Jhonty_dhol.jpg", linkedIn: "https://www.linkedin.com/in/jhonty-dhol-8997b7227/"},
@@ -144,7 +145,7 @@ const page = () => {
           backgroundPosition: 'center',
         }}
       ></div>
-      <div className="max-w-[1200px] mx-auto pt-12">
+      <div id='team' className="max-w-[1200px] mx-auto pt-12">
         <h1 className="font-degular font-semibold text-heading4 md:text-heading3 lg:text-heading2 xl:text-heading1 leading-snug text-[#3f3f3f] text-center">Meet the Team Behind Visey</h1>
         <p className="text-center pt-2 px-24">Our team is a passionate blend of innovators, strategists, and dreamers
           - all united by a
@@ -161,7 +162,7 @@ const page = () => {
         </div>
       </div>
     </div>
-    <div className="pt-8 max-w-[1200px] mx-auto">
+    <div id='product' className="pt-8 max-w-[1200px] mx-auto ">
       <h1 className="text-center font-degular font-semibold text-heading4 md:text-heading3 lg:text-heading2 xl:text-heading1 leading-snug text-[#3f3f3f]">Product</h1>
       <p className="text-center px-24">Our platform is your gateway to growth—bringing Startups, SMEs, and
         Businesses together with
@@ -366,8 +367,12 @@ const page = () => {
     <div className="flex items-center justify-center pt-16 pb-16">
       <Button>
         <div className="flex items-center gap-2">
-          <span>Start now</span>
+          <Link
+           href="/demo-account-type"
+          className="flex items-center gap-4"
+          ><span>Start now</span>
           <ArrowUpRight />
+          </Link>
         </div>
       </Button>
     </div>

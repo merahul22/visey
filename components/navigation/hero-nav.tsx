@@ -26,7 +26,7 @@ export default function HeroNav({ className }: { className?: string }) {
         <div className="shrink-0 lg:w-48 cursor-pointer transition-transform duration-300 hover:scale-105">
           <Link href="/">
             <Image
-              src="/logo-white.png"
+              src="/navbar.svg"
               width={81}
               height={42}
               alt="visey logo"

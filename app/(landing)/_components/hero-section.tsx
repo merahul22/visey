@@ -10,7 +10,7 @@ const HeroSection = () => {
       <div
         className="absolute inset-x-0 -bottom-6 w-full h-[250px] md:h-[200px] lg:h-[300px] opacity-80">
         <Image
-          src="/hero-section-wave.png"
+          src="/herowave2.svg"
           fill={true}
           className="object-cover object-left"
           alt="bg-wave"
@@ -18,9 +18,9 @@ const HeroSection = () => {
         />
       </div>
       <div
-        className="absolute inset-x-0 top-0 w-full h-[250px] md:h-[200px] lg:h-[300px] opacity-80">
+        className="absolute inset-x-0 top-0 w-full h-[250px] md:h-[200px] lg:h-[300px]  opacity-80">
         <Image
-          src="/Surajmukhi.svg"
+          src="/surajmukhi.svg"
           fill={true}
           className="object-cover object-left"
           alt="bg-wave"
