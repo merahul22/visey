@@ -10,9 +10,11 @@ const config: Config = {
   theme: {
     extend: {
       fontFamily: {
-        inter: ['Inter', 'sans-serif'],
-        gothic: ['Gothic A1', 'sans-serif'],
-        degular: ['DegularDisplay', 'sans-serif'],
+        inter: ["var(--font-inter)"],
+        degular: ["var(--font-degular)"],
+        geist: ["var(--font-geist)"],
+        geistMono: ["var(--font-geistMono)"],
+        gothic: ["var(--font-gothic)"]
       },
       fontSize: {
         display1: '9rem',

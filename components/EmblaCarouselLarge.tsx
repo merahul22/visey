@@ -12,6 +12,7 @@ import {
   PrevButton,
   usePrevNextButtons,
 } from './EmblaCarouselArrowButtons';
+import Image from 'next/image';
 
 const TWEEN_FACTOR_BASE = 0.84
 
@@ -101,16 +102,18 @@ const EmblaCarouselLarge: React.FC<PropType> = (props) => {
       <div className="lembla__viewport" ref={emblaRef}>
         <div className="lembla__container">
           {slides.map((slide, index) => (
-            <div className="lembla__slide flex flex-col justify-center gap-2 items-center" key={index}>
-              <img
-                className="lembla__slide__img"
-                src={`${slide.image}`}
-                alt="Your alt text"
-              />
-              <div>
-                <p className="font-medium font-gothic">
-                  {slide.content}
-                </p>
+            <div className="embla__slide flex flex-col gap-2 justify-center" key={index}>
+              <div className="embla__slide__img relative">
+                <Image
+                  src={slide.image}
+                  alt="Testinomial images"
+                  layout="fill"
+                  className="rounded-2xl"
+                  objectFit="cover"
+                />
+              </div>
+              <div className="font-medium font-gothic">
+                <p>{slide.content}</p>
               </div>
             </div>
           ))}

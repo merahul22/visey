@@ -1,20 +1,20 @@
 import Image from 'next/image';
-import { ArrowUpRight, Funnel, Command, Aperture  } from '@phosphor-icons/react/dist/ssr';
+import { ArrowUpRight, Funnel, Command, Aperture } from '@phosphor-icons/react/dist/ssr';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 
 const cardData = [
   {
     title: 'Filter & Match',
-    description: 'To find the right match for your startup needs',
+    description: 'Easily find the right match for your startup’s needs.',
   },
   {
     title: 'Data Support',
-    description: 'Visualize trends and monitor key performances',
+    description: 'Visualize trends and monitor key performance indicators.',
   },
   {
     title: 'All Startups',
-    description: 'Accross India, accross stages',
+    description: 'Explore businesses across India, catering to all stages.',
   },
 ];
 
@@ -29,36 +29,36 @@ const stats = [
   },
   {
     title: '825+',
-    subtitle: 'Business Listed',
+    subtitle: 'Businesses Listed',
   },
 ];
 
 const features = [
   {
     title: 'Find',
-    subtitle: 'Resource in 3-clicks',
+    subtitle: 'Resources in 3-clicks',
   },
   {
     title: 'Connect',
-    subtitle: 'With Business that offer what you need',
+    subtitle: 'With businesses offering what you need',
   },
   {
     title: 'Rate',
-    subtitle: 'Your experience',
+    subtitle: 'Share your experience',
   },
 ];
 
 function MarketplaceSection() {
   return (
-    <section className="relative w-full">
+    <section className="relative w-full" aria-labelledby="marketplace-heading">
       {/* Top wave - full width */}
-      <div className="absolute inset-x-0 top-0 w-full h-[250px] md:h-[200px] lg:h-[300px] opacity-60">
+      <div className="absolute inset-x-0 top-0 w-full h-[250px] md:h-[200px] lg:h-[300px] opacity-60" aria-hidden="true">
         <Image
           src="/numberwave.svg"
-          fill={true}
+          fill
           className="object-cover object-left"
-          alt="bg-wave"
-          priority
+          alt="Background wave image"
+          loading="lazy"
         />
       </div>
 
@@ -68,30 +68,29 @@ function MarketplaceSection() {
         <div className="relative z-10 space-y-6 text-center sm:flex sm:space-y-0 sm:justify-between">
           {stats.map((stat) => (
             <div key={stat.title} className="flex-grow space-y-1">
-              <p className="font-degular text-heading4 lg:text-heading3 xl:text-heading2">
-                {stat.title}
-              </p>
-              <p className="text-xl lg:text-hero  text-primary font-medium">
-                {stat.subtitle}
-              </p>
+              <p className="font-degular text-heading4 lg:text-heading3 xl:text-heading2">{stat.title}</p>
+              <p className="text-xl lg:text-hero text-primary font-medium">{stat.subtitle}</p>
             </div>
           ))}
         </div>
 
         {/* Main content */}
         <div className="pt-9 md:pt-16 lg:pt-24 xl:pt-24 space-y-9 md:space-y-14 xl:space-y-20">
+          {/* Heading and Subheading */}
           <div className="space-y-4 text-center md:space-y-4">
-            <h2 className="font-degular font-semibold text-heading4 md:text-heading3 lg:text-heading2 xl:text-heading1 leading-snug">
-              India&apos;s first Marketplace, for startups to find resource
-              providers
+            <h2
+              id="marketplace-heading"
+              className="font-degular font-semibold text-heading4 md:text-heading3 lg:text-heading2 xl:text-heading1 leading-snug"
+            >
+              India&apos;s First Marketplace for Startups to Find Resource Providers
             </h2>
-
-            <p className="text-lg">
+            <p className="font-gothic font-medium text-lg">
               Find businesses for all your startup needs in{' '}
-              <span className="font-bold">one destination</span>
+              <span className="font-bold">one destination</span>.
             </p>
           </div>
 
+          {/* Cards Section */}
           <div className="flex flex-col items-center gap-6 md:flex-row md:items-stretch">
             {cardData.map((data, idx) => (
               <div
@@ -104,31 +103,28 @@ function MarketplaceSection() {
                   {idx === 2 && <Command size={36} className="text-[#709B08]" />}
                 </div>
                 <div className="space-y-2">
-                  <h3 className="font-degular font-medium text-hero">
-                    {data.title}
-                  </h3>
-                  <p className="">{data.description}</p>
+                  <h3 className="font-degular font-medium text-hero">{data.title}</h3>
+                  <p className="font-gothic">{data.description}</p>
                 </div>
               </div>
             ))}
           </div>
 
+          {/* Features Section */}
           <div className="flex flex-col items-center">
             <h3 className="font-degular font-semibold text-2xl text-center text-feature md:text-3xl lg:text-heading3">
-              Visey is Startup&apos;s support system
+              Visey is Your Startup&apos;s Support System
             </h3>
-
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 text-center w-full py-9 md:pt-14 md:pb-12 lg:pt-16">
               {features.map((feat) => (
                 <div key={feat.title} className="flex flex-col items-center">
-                  <p className="font-degular text-heading4 text-primary">
-                    {feat.title}
-                  </p>
-                  <p className="font-medium text-lg">{feat.subtitle}</p>
+                  <p className="font-degular text-heading4 text-primary">{feat.title}</p>
+                  <p className="font-gothic font-medium text-lg">{feat.subtitle}</p>
                 </div>
               ))}
             </div>
 
+            {/* Call-to-Action */}
             <Button variant="landing" className="py-2.5 px-10 text-xl relative z-10">
               <Link href="/demo-account-type">
                 <span className="flex items-center gap-x-3">
@@ -142,15 +138,17 @@ function MarketplaceSection() {
       </div>
 
       {/* Bottom wave - full width */}
-      <div className="absolute left-0 bottom-0 w-full h-[400px] md:h-[850px]">
+      <div className="absolute left-0 bottom-0 w-full h-[400px] md:h-[850px]" aria-hidden="true">
         <Image
           src="/cards-bg.png"
-          fill={true}
+          fill
           className="object-contain opacity-40"
-          alt="bg-wave"
+          alt="Background wave image"
+          loading="lazy"
         />
       </div>
     </section>
   );
 }
+
 export default MarketplaceSection;
