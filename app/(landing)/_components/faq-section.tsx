@@ -8,7 +8,7 @@ import {
 } from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
 import { CaretDown, CaretUp } from "@phosphor-icons/react/dist/ssr";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 const faqData = [
   {
@@ -55,23 +55,19 @@ const faqData = [
 
 function FaqSection() {
   const [showAll, setShowAll] = useState(false);
-  const [maxHeight, setMaxHeight] = useState("600px");
 
   const toggleShowAll = () => {
     setShowAll(!showAll);
   };
 
-  useEffect(() => {
-    setMaxHeight(showAll ? "1000px" : "600px");
-  }, [showAll]);
-
-  // Show only the first 4 items initially
+  // Control displayed FAQs
   const displayedFaqs = showAll ? faqData : faqData.slice(0, 4);
 
   return (
-    <section className="bg-primary-landing">
+    <section className="bg-primary-landing" aria-labelledby="faq-section-heading">
       <section className="relative mb-10 pt-20 pb-10 text-base-white max-w-screen-xl xl:mx-auto">
-        <div className="text-center">
+        {/* Heading */}
+        <div className="text-center" id="faq-section-heading">
           <p className="text-success-landing text-2xl font-semibold">FAQs</p>
           <h2 className="font-degular font-semibold text-heading4 md:text-heading3 lg:text-heading2 xl:text-heading1 leading-snug">
             Still not Convinced?
@@ -80,32 +76,44 @@ function FaqSection() {
             We&apos;ve got the answers
           </p>
         </div>
+
+        {/* Accordion */}
         <div className="pt-9 px-4">
-          <div
-            className={`transition-all duration-500 overflow-hidden`}
-            style={{ maxHeight }}
+          <Accordion
+            type="single"
+            collapsible
+            className="w-full space-y-4"
+            aria-label="Frequently Asked Questions"
           >
-            <Accordion type="single" collapsible className="w-full space-y-4">
-              {displayedFaqs.map((item, index) => (
-                <AccordionItem key={index} value={`item-${index}`}>
-                  <AccordionTrigger className="px-4 bg-secondary-landing font-semibold rounded-tl-xl rounded-tr-xl border-b-0 text-base">
-                    {item.question}
-                  </AccordionTrigger>
-                  <AccordionContent className="px-4 py-4 text-base font-medium">
-                    {item.answer}
-                  </AccordionContent>
-                </AccordionItem>
-              ))}
-            </Accordion>
-          </div>
+            {displayedFaqs.map((item, index) => (
+              <AccordionItem key={index} value={`item-${index}`}>
+                <AccordionTrigger
+                  className="font-gothic px-4 bg-secondary-landing font-semibold rounded-tl-xl rounded-tr-xl border-b-0 text-base"
+                  aria-controls={`content-${index}`}
+                  aria-expanded={false}
+                >
+                  {item.question}
+                </AccordionTrigger>
+                <AccordionContent
+                  id={`content-${index}`}
+                  className="px-4 py-4 text-base font-medium"
+                >
+                  {item.answer}
+                </AccordionContent>
+              </AccordionItem>
+            ))}
+          </Accordion>
         </div>
+
+        {/* Toggle Button */}
         <Button
           variant={"landing"}
           size="sm"
           onClick={toggleShowAll}
           className="gap-x-2 text-base-black absolute -bottom-4 left-1/2 -translate-x-1/2 px-8 z-20"
+          aria-expanded={showAll}
         >
-          <span>{showAll ? "Less" : "More"}</span>
+          <span>{showAll ? "Show Less" : "Show More"}</span>
           {showAll ? <CaretUp /> : <CaretDown />}
         </Button>
       </section>

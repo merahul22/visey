@@ -9,6 +9,7 @@ import {
   PrevButton,
   usePrevNextButtons
 } from './EmblaCarouselArrowButtons'
+import Image from 'next/image';
 
 interface Testimonial {
   image: string;
@@ -38,11 +39,15 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
         <div className="embla__container">
           {slides.map((slide, index) => (
             <div className="embla__slide flex flex-col gap-2 justify-center" key={index}>
-              <img
-                className="embla__slide__img"
-                src={`${slide.image}`}
-                alt="Your alt text"
-              />
+              <div className="embla__slide__img relative">
+                <Image
+                  src={slide.image}
+                  alt="Testinomial images"
+                  layout="fill"
+                  className="rounded-2xl"
+                  objectFit="cover"
+                />
+              </div>
               <div className="font-medium font-gothic">
                 <p>{slide.content}</p>
               </div>
