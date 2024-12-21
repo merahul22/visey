@@ -28,9 +28,9 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
     useDotButton(emblaApi)
 
   return (
-    <div className={`embla ${className || ''}`}>
-      <div className="embla__viewport" ref={emblaRef}>
-        <div className="embla__container">
+    <div className={`max-w-[320px] ${className || ''}`}>
+      <div className="overflow-hidden" ref={emblaRef}>
+        <div className="flex flex-row">
           {slides.map((slide, index) => (
             <div key={index}>
               <TestimonialCard image={slide.image} content={slide.content} />

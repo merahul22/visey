@@ -29,7 +29,7 @@ const HeroSection = () => {
         aria-hidden="true"
       >
         <Image
-          src="/surajmukhi.svg"
+          src="/Surajmukhi.svg"
           fill
           className="object-cover object-left"
           alt="Decorative sunflower background"
