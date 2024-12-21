@@ -3,13 +3,9 @@
 import React from 'react'
 import { EmblaOptionsType } from 'embla-carousel'
 import useEmblaCarousel from 'embla-carousel-react'
-import Fade from 'embla-carousel-fade'
-import {
-  NextButton,
-  PrevButton,
-  usePrevNextButtons
-} from './EmblaCarouselArrowButtons'
-import Image from 'next/image';
+import AutoScroll from 'embla-carousel-auto-scroll'
+import TestimonialCard from '@/components/cards/TestimonialCard';
+import { DotButton, useDotButton } from './EmblaCarouselDotButton'
 
 interface Testimonial {
   image: string;
@@ -24,42 +20,34 @@ type PropType = {
 
 const EmblaCarousel: React.FC<PropType> = (props) => {
   const { slides, options, className } = props
-  const [emblaRef, emblaApi] = useEmblaCarousel(options, [Fade()])
+  const [emblaRef, emblaApi] = useEmblaCarousel(options, [
+    AutoScroll({ playOnInit: true })
+  ])
 
-  const {
-    prevBtnDisabled,
-    nextBtnDisabled,
-    onPrevButtonClick,
-    onNextButtonClick
-  } = usePrevNextButtons(emblaApi)
+  const { selectedIndex, scrollSnaps, onDotButtonClick } =
+    useDotButton(emblaApi)
 
   return (
     <div className={`embla ${className || ''}`}>
       <div className="embla__viewport" ref={emblaRef}>
         <div className="embla__container">
           {slides.map((slide, index) => (
-            <div className="embla__slide flex flex-col gap-2 justify-center" key={index}>
-              <div className="embla__slide__img relative">
-                <Image
-                  src={slide.image}
-                  alt="Testinomial images"
-                  layout="fill"
-                  className="rounded-2xl"
-                  objectFit="cover"
-                />
-              </div>
-              <div className="font-medium font-gothic">
-                <p>{slide.content}</p>
-              </div>
+            <div key={index}>
+              <TestimonialCard image={slide.image} content={slide.content} />
             </div>
           ))}
         </div>
-      </div>
 
-      <div className="embla__controls">
-        <div className="embla__buttons">
-          <PrevButton onClick={onPrevButtonClick} disabled={prevBtnDisabled} />
-          <NextButton onClick={onNextButtonClick} disabled={nextBtnDisabled} />
+        <div className="mt-4">
+          <div className="flex justify-center items-center gap-2">
+            {scrollSnaps.map((_, index) => (
+              <DotButton
+                key={index}
+                onClick={() => onDotButtonClick(index)}
+                className={`w-3 h-3 rounded-full ${index === selectedIndex ? 'bg-primary-landing' : 'bg-[#D9D9D9]'}`}
+              />
+            ))}
+          </div>
         </div>
       </div>
     </div>

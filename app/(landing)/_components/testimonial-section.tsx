@@ -56,7 +56,7 @@ function TestimonialSection() {
         >
           Experiences speak louder
         </h2>
-        <p className="text-lg">
+        <p className="text-lg font-gothic font-medium">
           &quot;This is the most helpful resource for my startup&quot;
         </p>
       </div>

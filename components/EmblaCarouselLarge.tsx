@@ -7,12 +7,9 @@ import {
   EmblaOptionsType,
 } from 'embla-carousel';
 import useEmblaCarousel from 'embla-carousel-react';
-import {
-  NextButton,
-  PrevButton,
-  usePrevNextButtons,
-} from './EmblaCarouselArrowButtons';
-import Image from 'next/image';
+import AutoScroll from 'embla-carousel-auto-scroll'
+import TestimonialCard from '@/components/cards/TestimonialCard';
+import { DotButton, useDotButton } from './EmblaCarouselDotButton'
 
 const TWEEN_FACTOR_BASE = 0.84
 
@@ -32,15 +29,13 @@ type PropType = {
 
 const EmblaCarouselLarge: React.FC<PropType> = (props) => {
   const { slides, options, className } = props
-  const [emblaRef, emblaApi] = useEmblaCarousel(options)
+  const [emblaRef, emblaApi] = useEmblaCarousel(options, [
+    AutoScroll({ playOnInit: true })
+  ])
   const tweenFactor = useRef(0)
 
-  const {
-    prevBtnDisabled,
-    nextBtnDisabled,
-    onPrevButtonClick,
-    onNextButtonClick
-  } = usePrevNextButtons(emblaApi)
+  const { selectedIndex, scrollSnaps, onDotButtonClick } =
+    useDotButton(emblaApi)
 
   const setTweenFactor = useCallback((emblaApi: EmblaCarouselType) => {
     tweenFactor.current = TWEEN_FACTOR_BASE * emblaApi.scrollSnapList().length
@@ -88,6 +83,9 @@ const EmblaCarouselLarge: React.FC<PropType> = (props) => {
   useEffect(() => {
     if (!emblaApi) return
 
+    const autoScroll = emblaApi?.plugins()?.autoScroll
+    if (!autoScroll) return
+
     setTweenFactor(emblaApi)
     tweenOpacity(emblaApi)
     emblaApi
@@ -98,32 +96,26 @@ const EmblaCarouselLarge: React.FC<PropType> = (props) => {
   }, [emblaApi, setTweenFactor, tweenOpacity])
 
   return (
-    <div className={`lembla ${className || ''}`}>
-      <div className="lembla__viewport" ref={emblaRef}>
-        <div className="lembla__container">
+    <div className={`max-w-[500px] ${className || ''}`}>
+      <div className="overflow-hidden" ref={emblaRef}>
+        <div className="flex flex-row">
           {slides.map((slide, index) => (
-            <div className="embla__slide flex flex-col gap-2 justify-center" key={index}>
-              <div className="embla__slide__img relative">
-                <Image
-                  src={slide.image}
-                  alt="Testinomial images"
-                  layout="fill"
-                  className="rounded-2xl"
-                  objectFit="cover"
-                />
-              </div>
-              <div className="font-medium font-gothic">
-                <p>{slide.content}</p>
-              </div>
+            <div key={index}>
+              <TestimonialCard image={slide.image} content={slide.content} />
             </div>
           ))}
         </div>
-      </div>
 
-      <div className="lembla__controls">
-        <div className="lembla__buttons">
-          <PrevButton onClick={onPrevButtonClick} disabled={prevBtnDisabled} />
-          <NextButton onClick={onNextButtonClick} disabled={nextBtnDisabled} />
+        <div className="mt-4">
+          <div className="flex justify-center items-center gap-2">
+            {scrollSnaps.map((_, index) => (
+              <DotButton
+                key={index}
+                onClick={() => onDotButtonClick(index)}
+                className={`w-3 h-3 rounded-full ${index === selectedIndex ? 'bg-primary-landing' : 'bg-[#D9D9D9]'}`}
+              />
+            ))}
+          </div>
         </div>
       </div>
     </div>
