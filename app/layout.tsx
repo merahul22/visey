@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import localFont from 'next/font/local';
 import './globals.css';
-// import BreakpointIndicator from '@/components/breakpoint-indicator';
+import BreakpointIndicator from '@/components/breakpoint-indicator';
 import Provider from '@/components/Provider';
 import HelpAndSupport from '@/components/HelpAndSupport';
 import { Toaster } from "@/components/ui/sonner"
@@ -16,7 +16,7 @@ const inter = localFont({
 const degularDisplay = localFont({
   src: "./fonts/DegularDisplayVF.ttf",
   variable: "--font-degular",
-  weight: "400 500 600 700",
+  weight: "100 200 300 400 500 600 700 800 900",
 });
 
 const geist = localFont({
@@ -51,7 +51,7 @@ export default function RootLayout({ children, }: Readonly<{
     <html lang="en">
       <body
         className={`${inter.variable} ${geist.variable} ${gothic.variable} ${geistMono.variable} ${degularDisplay.variable} antialiased text-base-black`}>
-        {/* <BreakpointIndicator /> */}
+         <BreakpointIndicator />
         <Provider>
           {children}
         </Provider>
