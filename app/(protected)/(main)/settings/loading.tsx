@@ -1,4 +1,8 @@
+import LoadingPage from '@/components/Loading';
+
 export default function Loading() {
   // Or a custom loading skeleton component
-  return <p>Loading...</p>;
+  return <div>
+    <LoadingPage />
+  </div>
 }
