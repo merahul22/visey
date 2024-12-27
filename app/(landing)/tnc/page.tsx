@@ -16,7 +16,7 @@ export default function TermsAndConditions() {
           All content, trademarks, logos, and intellectual property on the Site are owned by Visey or its licensors. You may not reproduce or
           distribute them without prior written consent.
         </p>
-        <h2 className="text-xl font-semibold text-gray-800 mb-2">User Accounts (03)</h2>
+        <h2 className="text-xl font-semibold text-gray-800 mb-2">User Accounts (0)</h2>
         <p className="text-gray-600 mb-4">
         If you create an account on our Site, you are responsible for maintaining the confidentiality of your account information and password. You agree to accept responsibility for all activities that occur under your account.
         </p>
