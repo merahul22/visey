@@ -33,7 +33,7 @@ const page = () => {
         className="font-degular font-semibold text-heading4 md:text-heading3 lg:text-heading2 xl:text-heading1 leading-snug text-[#3f3f3f]">About
         Visey</h1>
       <div
-        className="flex flex-col justify-center items-center gap-6 mt-5 text-base font-medium px-10 text-justify">
+        className="font-medium flex flex-col justify-center items-center gap-6 mt-5 text-base px-10 text-justify">
         <p>Welcome Indian entrepreneurs! We believe that every visionary has the
           potential to change
           the world, and we are here to make that journey accessible and
@@ -87,13 +87,13 @@ const page = () => {
       ></div>
       <div className="max-w-[1000px] mx-auto py-16 text-base-white">
         <div className="px-12">
-          <h2 className="text-center text-3xl font-medium pb-4">Mission</h2>
-          <h3 className="text-xl text-center font-light pb-2">&#34;Empowering
+          <h2 className="text-center text-[32px] font-medium pb-4">Mission</h2>
+          <h3 className="text-2xl text-center font-medium pb-2">&#34;Empowering
             Indian entrepreneurs with a world-class, accessible
             ecosystem that ignites
             growth, innovation, and lasting impact.&#34;
           </h3>
-          <p className="text-sm text-center">At the heart of our organization is
+          <p className="text-base text-center">At the heart of our organization is
             a commitment to providing a
             high-quality, accessible
             entrepreneurial ecosystem tailored specifically for Indian
@@ -108,13 +108,13 @@ const page = () => {
         </div>
         <Separator className="my-10" />
         <div className="px-12">
-          <h2 className="text-center text-3xl font-medium pb-4">Vision</h2>
-          <h3 className="text-xl text-center font-light pb-2">&#34;A global
+          <h2 className="text-center text-[32px] font-medium pb-4">Vision</h2>
+          <h3 className="text-2xl text-center font-medium pb-2">&#34;A global
             landscape where every entrepreneur has the resources
             and support to thrive, no
             matter where they are.&#34;
           </h3>
-          <p className="text-sm text-center">We envision a world where
+          <p className="text-base text-center">We envision a world where
             geographical boundaries no longer limit
             entrepreneurial spirit and
             ambition. Our goal is to create a global landscape where every
@@ -147,7 +147,7 @@ const page = () => {
       ></div>
       <div id='team' className="max-w-[1200px] mx-auto pt-12">
         <h1 className="font-degular font-semibold text-heading4 md:text-heading3 lg:text-heading2 xl:text-heading1 leading-snug text-[#3f3f3f] text-center">Meet the Team Behind Visey</h1>
-        <p className="text-center pt-2 px-24">Our team is a passionate blend of innovators, strategists, and dreamers
+        <p className="font-medium text-center pt-2 px-24">Our team is a passionate blend of innovators, strategists, and dreamers
           - all united by a
           common goal: to empower and elevate India’s entrepreneurial spirit.
           Together, we&#39;re building
@@ -164,7 +164,7 @@ const page = () => {
     </div>
     <div id='product' className="pt-8 max-w-[1200px] mx-auto ">
       <h1 className="text-center font-degular font-semibold text-heading4 md:text-heading3 lg:text-heading2 xl:text-heading1 leading-snug text-[#3f3f3f]">Product</h1>
-      <p className="text-center px-24">Our platform is your gateway to growth—bringing Startups, SMEs, and
+      <p className="font-medium text-center px-24">Our platform is your gateway to growth—bringing Startups, SMEs, and
         Businesses together with
         the tools, insights, and networks they need to thrive. Dive in and
         discover how we can empower
@@ -178,14 +178,14 @@ const page = () => {
           <div className="flex flex-col gap-4 max-w-[400px]">
             <div>
               <h2 className="font-semibold">Efficient Search Engine</h2>
-              <p>Find exactly what you need, fast. Our search feature delivers
+              <p className="font-medium">Find exactly what you need, fast. Our search feature delivers
                 accurate, relevant results—no
                 more wasting time sifting through unrelated content.
               </p>
             </div>
             <div>
               <h2 className="font-semibold">Personalized Recommendations</h2>
-              <p>Get suggestions tailored to your business goals and needs. Our
+              <p className="font-medium">Get suggestions tailored to your business goals and needs. Our
                 smart engine adapts to
                 bring you the most useful resources and connections.
               </p>
@@ -214,14 +214,14 @@ const page = () => {
           <div className="flex flex-col gap-4 max-w-[400px]">
             <div>
               <h2 className="font-semibold">All Resources on One Platform</h2>
-              <p>Everything in one place. Access a wide range of resources—
+              <p className="font-medium">Everything in one place. Access a wide range of resources—
                 funding, networking, and
                 tools— without needing multiple subscriptions or platforms.
               </p>
             </div>
             <div>
               <h2 className="font-semibold">Robust Rating & Review System</h2>
-              <p>Make informed decisions with transparent, community-driven
+              <p className="font-medium">Make informed decisions with transparent, community-driven
                 feedback. Check ratings and
                 reviews from other startups to ensure you’re choosing the best
                 resources.
@@ -233,7 +233,7 @@ const page = () => {
           <div className="flex flex-col gap-4 max-w-[400px]">
             <div>
               <h2 className="font-semibold">On-Demand Mentor Guidance</h2>
-              <p>
+              <p className="font-medium">
                 Expert advice, whenever you need it. Connect with mentors who
                 provide targeted
                 insights to help you overcome challenges and grow.
@@ -241,7 +241,7 @@ const page = () => {
             </div>
             <div>
               <h2 className="font-semibold">Mentor-Mentee Match</h2>
-              <p>Connect with mentors who truly align with your business’s stage,
+              <p className="font-medium">Connect with mentors who truly align with your business’s stage,
                 industry, and
                 . Our mentor-mentee matching feature pairs you with experienced
                 mentors who can guide
@@ -277,7 +277,7 @@ const page = () => {
           <div className="flex flex-col gap-4 max-w-[400px]">
             <div>
               <h2 className="font-semibold">Better Reach to Startups & SMEs</h2>
-              <p>Connect with a focused audience of startups and SMEs actively
+              <p className="font-medium">Connect with a focused audience of startups and SMEs actively
                 seeking services like
                 yours, giving you unparalleled access to this high-potential
                 segment.
@@ -285,7 +285,7 @@ const page = () => {
             </div>
             <div>
               <h2 className="font-semibold">Simplified Traction Building</h2>
-              <p>Easily build traction with meaningful connections. Streamline
+              <p className="font-medium">Easily build traction with meaningful connections. Streamline
                 your marketing and connect
                 with clients who can help propel your business forward.
               </p>
@@ -297,14 +297,14 @@ const page = () => {
             <div>
               <h2 className="font-semibold">Leads of Interested Potential
                 Customers</h2>
-              <p>Access warm leads from startups and SMEs already interested in
+              <p className="font-medium">Access warm leads from startups and SMEs already interested in
                 your services. Streamline
                 your sales process and improve conversion rates.
               </p>
             </div>
             <div>
               <h2 className="font-semibold">Promote Your Business</h2>
-              <p>Highlight your brand directly on our platform at just $0.82/day,
+              <p className="font-medium">Highlight your brand directly on our platform at just $0.82/day,
                 gaining visibility
                 among startups and SMEs eager to discover new solutions and
                 services.
@@ -312,7 +312,7 @@ const page = () => {
             </div>
             <div>
               <h2 className="font-semibold">Posting Opportunities</h2>
-              <p>List funding opportunity, partnerships, events, and incubation or
+              <p className="font-medium">List funding opportunity, partnerships, events, and incubation or
                 acceleration service
                 opportunities on the platform, reaching a motivated audience ready
                 to engage with your
@@ -344,7 +344,7 @@ const page = () => {
             <div>
               <h2 className="font-semibold">In-Depth, Data-Based Marketing
                 Analytics</h2>
-              <p>Track engagement, understand what resonates, and make informed
+              <p className="font-medium">Track engagement, understand what resonates, and make informed
                 adjustments. Our analytics
                 dashboard provides clear insights into your audience’s needs and
                 behaviors.
@@ -353,7 +353,7 @@ const page = () => {
             <div>
               <h2 className="font-semibold">Drastically Reduced Promotional
                 Costs</h2>
-              <p>Showcase your products and services without the high costs of
+              <p className="font-medium">Showcase your products and services without the high costs of
                 traditional marketing.
                 Promote directly to a qualified, engaged audience and save on
                 overheads.

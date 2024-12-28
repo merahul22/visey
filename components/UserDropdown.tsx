@@ -9,13 +9,13 @@ import {
 } from '@/components/ui/dropdown-menu';
 
 import {
-  CaretRight,
-  RowsPlusTop,
-  HandCoins,
-  CoinVertical,
-  ClipboardText,
-  HeartStraight,
   Bag,
+  CaretRight,
+  ClipboardText,
+  CoinVertical,
+  HandCoins,
+  HeartStraight,
+  RowsPlusTop,
 } from '@phosphor-icons/react/dist/ssr';
 
 import { ExitIcon, GearIcon } from '@radix-ui/react-icons';
@@ -45,7 +45,7 @@ export function UserDropdown({ user }: UserDropdownProps) {
 
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger>
+      <DropdownMenuTrigger asChild>
         <Avatar>
           <AvatarImage src={user?.image || ''} />
           <AvatarFallback>

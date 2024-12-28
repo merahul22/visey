@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Gothic+A1:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -142,4 +144,5 @@
 body {
   -ms-overflow-style: none;
   scrollbar-width: none;
+  font-family: "Gothic A1", serif;
 }
