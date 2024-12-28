@@ -5,19 +5,14 @@ import { Check, ShieldCheck } from '@phosphor-icons/react/dist/ssr';
 import { Button } from '@/components/ui/button';
 import Image from 'next/image';
 
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from '@/components/ui/accordion';
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 
 const OpportunityPricingPage = () => {
   return (
     <div className="space-y-12 mb-24">
       <div className="rounded-lg bg-[#ffdfbf] mt-10">
         <div className="bg-primary-600 text-base-white py-2 rounded-t-lg text-sm text-center font-semibold">
-          <p>Start free and Upgrade to unlock business features.</p>
+          <p className="font-medium">Start free and Upgrade to unlock business features.</p>
         </div>
 
         <div className="flex flex-col items-center px-8 py-4 gap-4 lg:flex-row lg:justify-between">

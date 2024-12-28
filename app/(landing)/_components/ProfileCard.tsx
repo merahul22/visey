@@ -25,7 +25,7 @@ const ProfileCard = ({ profile }: { profile: ProfileCardProps }) => {
           </div>
           <div className="text-base-white flex items-center justify-between pt-2 pb-3">
             <div className="flex flex-col">
-              <p>{profile.name}</p>
+              <p className="font-medium">{profile.name}</p>
               <p className="text-sm">{profile.role}</p>
             </div>
             <Link href={profile.linkedIn}>

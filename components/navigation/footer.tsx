@@ -1,14 +1,7 @@
 import { cn } from '@/lib/utils';
 import { Separator } from '@/components/ui/separator';
 
-import {
-  Envelope,
-  LinkedinLogo,
-  Phone,
-  WhatsappLogo,
-  YoutubeLogo,
-  InstagramLogo
-} from '@phosphor-icons/react/dist/ssr';
+import { Envelope, LinkedinLogo, Phone, WhatsappLogo, YoutubeLogo } from '@phosphor-icons/react/dist/ssr';
 
 import Image from 'next/image';
 import Link from 'next/link';
@@ -31,10 +24,10 @@ const footerData = [
   {
     title: 'Legal',
     items: [
-      { name: 'Terms and Conditions', link: '/tnc' },
+      { name: 'Terms & Conditions', link: '/tnc' },
       { name: 'Cookie Policy', link: '/tnc#cookie' },
       { name: 'Privacy Policy', link: '/tnc#privacy' },
-      { name: 'Partner with us', link: '/partner-with-us' },
+      { name: 'Investor Relation', link: '/partner-with-us' },
      
     ],
   },
@@ -62,7 +55,7 @@ function Footer({ className }: { className?: string }) {
         {footerData.map((item) => (
           <div className="space-y-2" key={item.title}>
             <h2 className="font-semibold text-xl">{item.title}</h2>
-            <div className="space-y-2">
+            <div className="space-y-8">
               {item.items.map((item, idx) => (
                 <Link href={item.link} key={idx}>
                   <p className="text-[#545454]">{item.name}</p>
@@ -75,16 +68,25 @@ function Footer({ className }: { className?: string }) {
           <div className="space-y-2">
             <h2 className="font-semibold text-xl">Contact Us</h2>
             <div className="space-y-2">
-              <div className="flex items-center space-x-2">
-                <Phone size={20} />
-                <span className="text-[#545454]">+91 78275 86754</span>
-              </div>
-              <div className="flex items-center space-x-2">
-                <Envelope size={20} />
-                <span className="text-[#545454] underline">
-                  contact@visey.co.in
+              <Link href="tel:+917827586754">
+                <div className="flex items-center space-x-2">
+                  <Phone size={20} />
+                  <span className="text-[#545454]">+91 78275 86754</span>
+                </div>
+              </Link>
+              <Link href="mailto:contact@visey.co.in">
+                <div className="flex items-center space-x-2">
+                  <Envelope size={20} />
+                  <span className="text-[#545454] underline">
+                    contact@visey.co.in
+                  </span>
+                </div>
+              </Link>
+              <Link href="/partner-with-us">
+                <span className="text-[#545454]">
+                  Partner with Us
                 </span>
-              </div>
+              </Link>
              
             </div>
           </div>
@@ -104,9 +106,6 @@ function Footer({ className }: { className?: string }) {
             </Link>
             <Link href="#">
               <YoutubeLogo size={24} />
-            </Link>
-            <Link href="https://www.instagram.com/visey.co.in/?igsh=ZXpnZHZrcXUyenVp">
-              <InstagramLogo size={24} />
             </Link>
             <Link href="https://www.linkedin.com/company/viseycompany">
               <LinkedinLogo size={24} />
