@@ -142,6 +142,7 @@ export const categories = [
   { value: 'Packaging' },
   { value: 'Manufacturing' },
   { value: 'Startup funding' },
+  { value: 'Corporate gifting' },
   { value: 'Others' },
 ];
 
