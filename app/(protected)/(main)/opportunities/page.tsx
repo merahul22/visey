@@ -1,11 +1,5 @@
 import { auth } from '@/auth';
-import {
-  ShareNetwork,
-  Trash,
-  Plus,
-  ListBullets,
-  DotsThreeVertical,
-} from '@phosphor-icons/react/dist/ssr';
+import { DotsThreeVertical, ListBullets, Plus, ShareNetwork, Trash } from '@phosphor-icons/react/dist/ssr';
 import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Input } from '@/components/ui/input';
@@ -204,8 +198,6 @@ const Opportunities = async () => {
             </TabsContent>
           </Tabs>
         </div>
-
-
       </div>
     </div>
   </div>

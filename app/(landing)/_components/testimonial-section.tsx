@@ -2,6 +2,7 @@ import Image from 'next/image';
 import { EmblaOptionsType } from 'embla-carousel';
 import EmblaCarousel from '@/components/EmblaCarousel';
 import EmblaCarouselLarge from '@/components/EmblaCarouselLarge';
+import StackCardCarousel from '@/components/StackCardCarousel';
 
 interface Testimonial {
   image: string;
@@ -25,6 +26,10 @@ const SLIDES: Testimonial[] = [
   {
     image: '/img/testimonial4.jpg',
     content: '“Perfect for startups. Highly recommend.”',
+  },
+  {
+    image: '/img/testimonial1.png',
+    content: '“An absolute must-have for startups and businesses.”',
   },
 ];
 
@@ -63,17 +68,19 @@ function TestimonialSection() {
 
       {/* Carousel Section */}
       <div className="py-24 flex items-center justify-center">
-        <EmblaCarousel
-          className="sm:hidden"
-          slides={SLIDES}
-          options={OPTIONS}
-        />
-        <EmblaCarouselLarge
-          className="hidden sm:block"
-          slides={SLIDES}
-          options={OPTIONS}
-        />
+        <div className="sm:hidden">
+          <EmblaCarousel slides={SLIDES} options={OPTIONS} />
+        </div>
+
+        <div className="hidden sm:block lg:hidden">
+          <EmblaCarouselLarge slides={SLIDES} options={OPTIONS} />
+        </div>
+        
+        <div className="hidden lg:block">
+          <StackCardCarousel />
+        </div>
       </div>
+
 
       {/* Decorative Bottom Triangle */}
       <div
