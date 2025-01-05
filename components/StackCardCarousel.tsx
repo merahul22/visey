@@ -57,8 +57,6 @@ export default function StackCardCarousel({ className } : { className?: string }
     });
   };
 
-  console.log({slides})
-
   return (
     <div>
       <div className={`card-stack w-96 lg:w-80 ${className || ''}`}>
