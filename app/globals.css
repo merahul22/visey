@@ -146,3 +146,42 @@ body {
   scrollbar-width: none;
   font-family: "Gothic A1", serif;
 }
+
+.card-stack {
+  display: grid;
+  grid: [ui] 1fr / [cards] 1fr;
+
+  --scaler: 8;
+}
+
+.card-stack > .card {
+  aspect-ratio: 3/4;
+  grid-area: ui / cards;
+  transform-origin: center 300%;
+  transform: rotate(var(--r, 0)) translateY(var(--t, 0));
+}
+
+.card-1 {
+  --r: calc(var(--scaler, 5) * 2 * -1deg);
+  z-index: 10;
+}
+
+.card-2 {
+  --r: calc(var(--scaler, 5) * 1 * -1deg);
+  z-index: 20;
+}
+
+.card-3 {
+  --r: calc(var(--scaler, 5) * 0);
+  z-index: 30;
+}
+
+.card-4 {
+  --r: calc(var(--scaler, 5) * 1 * 1deg);
+  z-index: 20;
+}
+
+.card-5 {
+  --r: calc(var(--scaler, 5) * 2 * 1deg);
+  z-index: 10;
+}
