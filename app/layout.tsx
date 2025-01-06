@@ -5,6 +5,8 @@ import Provider from '@/components/Provider';
 import HelpAndSupport from '@/components/HelpAndSupport';
 import { Toaster } from "@/components/ui/sonner"
 import React from 'react';
+import { GoogleAnalytics } from '@next/third-parties/google'
+
 
 const inter = localFont({
   src: "./fonts/InterVF.ttf",
@@ -48,6 +50,7 @@ export default function RootLayout({ children, }: Readonly<{
 }>) {
   return (
     <html lang="en">
+   
       <body
         className={`${inter.variable} ${geist.variable} ${gothic.variable} ${geistMono.variable} ${degularDisplay.variable} antialiased text-base-black`}>
         <Provider>
@@ -55,6 +58,7 @@ export default function RootLayout({ children, }: Readonly<{
         </Provider>
         <HelpAndSupport />
         <Toaster />
+        <GoogleAnalytics gaId="G-ME7W8R36MY" />
       </body>
     </html>
   );
