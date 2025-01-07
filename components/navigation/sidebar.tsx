@@ -1,10 +1,10 @@
 "use client";
 
-import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { Button } from "../ui/button";
-import { House, MagnifyingGlass, Bell, Plus } from "@phosphor-icons/react/dist/ssr";
-import { cn } from "@/lib/utils";
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import { Button } from '../ui/button';
+import { Bell, House, MagnifyingGlass, Plus } from '@phosphor-icons/react/dist/ssr';
+import { cn } from '@/lib/utils';
 
 interface SidebarProps {
   userType: "BUSINESS" | "STARTUP";

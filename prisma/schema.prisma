@@ -31,10 +31,13 @@ model User {
   startup  Startup?
   business Business?
 
-  createdAt      DateTime         @default(now())
-  updatedAt      DateTime         @updatedAt
-  Review         Review[]
-  ReviewReaction ReviewReaction[]
+  createdAt        DateTime           @default(now())
+  updatedAt        DateTime           @updatedAt
+  Review           Review[]
+  ReviewReaction   ReviewReaction[]
+  SavedBusiness    SavedBusiness[]
+  Opportunity      Opportunity[]
+  SavedOpportunity SavedOpportunity[]
 
   @@map("users")
 }
@@ -130,9 +133,22 @@ model Business {
   services       Services[]
   reviews        Review[]
 
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user          User            @relation(fields: [userId], references: [id], onDelete: Cascade)
+  SavedBusiness SavedBusiness[]
 
   @@map("business")
+}
+
+model SavedBusiness {
+  id         String   @id @default(uuid())
+  userId     String
+  businessId String
+  createdAt  DateTime @default(now())
+
+  user     User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  business Business @relation(fields: [businessId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, businessId])
 }
 
 model Achievement {
@@ -183,9 +199,22 @@ model Opportunity {
   businessId           String
   registrationFormLink String?
 
-  business Business @relation(fields: [businessId], references: [id], onDelete: Cascade)
+  business         Business           @relation(fields: [businessId], references: [id], onDelete: Cascade)
+  User             User?              @relation(fields: [userId], references: [id])
+  userId           String?
+  SavedOpportunity SavedOpportunity[]
 
   @@map("opportunity")
+}
+
+model SavedOpportunity {
+  id            String   @id @default(uuid())
+  userId        String
+  opportunityId String
+  createdAt     DateTime @default(now())
+
+  user        User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  opportunity Opportunity @relation(fields: [opportunityId], references: [id], onDelete: Cascade)
 }
 
 model Review {
