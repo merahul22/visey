@@ -50,7 +50,9 @@ export default function RootLayout({ children, }: Readonly<{
 }>) {
   return (
     <html lang="en">
-   
+   <head>
+   <meta name="google-site-verification" content="bISGtC6Hz3nFRSokWosu7fIw6szcfcxrnKoj7tYsOMg" />
+   </head>
       <body
         className={`${inter.variable} ${geist.variable} ${gothic.variable} ${geistMono.variable} ${degularDisplay.variable} antialiased text-base-black`}>
         <Provider>
