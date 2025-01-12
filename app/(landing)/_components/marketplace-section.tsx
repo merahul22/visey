@@ -41,7 +41,7 @@ const features = [
 function MarketplaceSection() {
   // Intersection Observer hook
   const { ref: statsRef, inView: statsInView } = useInView({
-    threshold: 0.3, // Trigger when 30% of the section is visible
+    threshold: 0, // Trigger when 30% of the section is visible
     triggerOnce: true, // Animate only once
   });
 
