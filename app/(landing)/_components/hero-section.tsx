@@ -6,7 +6,7 @@ import Link from 'next/link';
 const HeroSection = () => {
   return (
     <section
-      className="relative bg-primary-landing text-base-white overflow-hidden"
+      className="relative bg-primary-landing text-base-white overflow-hidden lg:h-screen"
       aria-labelledby="hero-heading"
     >
       {/* Decorative Background Wave - Bottom */}
