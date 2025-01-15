@@ -1,12 +1,12 @@
-'use client';
+"use client";
 
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
+} from "@/components/ui/dropdown-menu";
 
 import {
   Bag,
@@ -16,19 +16,19 @@ import {
   HandCoins,
   HeartStraight,
   RowsPlusTop,
-} from '@phosphor-icons/react/dist/ssr';
+} from "@phosphor-icons/react/dist/ssr";
 
-import { ExitIcon, GearIcon } from '@radix-ui/react-icons';
-import { signOut } from 'next-auth/react';
-import Link from 'next/link';
-import Image from 'next/image';
-import { Button } from './ui/button';
-import { Business, Startup } from '@prisma/client';
-import { toast } from 'sonner';
-import { useState } from 'react';
+import { ExitIcon, GearIcon } from "@radix-ui/react-icons";
+import { signOut } from "next-auth/react";
+import Link from "next/link";
+import Image from "next/image";
+import { Button } from "./ui/button";
+import { Business, Startup } from "@prisma/client";
+import { toast } from "sonner";
+import { useState } from "react";
 
 interface User {
-  type?: 'BUSINESS' | 'STARTUP';
+  type?: "BUSINESS" | "STARTUP";
   image?: string | null;
   business?: Business;
   startup?: Startup;
@@ -50,14 +50,14 @@ export function UserDropdown({ user }: UserDropdownProps) {
     await signOut();
     toast.success("Logged out successfully!");
     setShowLogoutWarning(false);
-  }
+  };
 
   return (
     <>
       <DropdownMenu>
-        <DropdownMenuTrigger>
+        <DropdownMenuTrigger asChild>
           <Avatar>
-            <AvatarImage src={user?.image || ''} />
+            <AvatarImage src={user?.image || ""} />
             <AvatarFallback>
               <div>
                 <p>{user?.name?.charAt(0).toUpperCase()}</p>
@@ -69,7 +69,7 @@ export function UserDropdown({ user }: UserDropdownProps) {
           <div className="flex items-center gap-x-3 h-[90px]">
             <div>
               <Image
-                src={user?.image || ''}
+                src={user?.image || ""}
                 alt="Profile Photo"
                 width={72}
                 height={72}
@@ -96,47 +96,46 @@ export function UserDropdown({ user }: UserDropdownProps) {
             </div>
           </div>
 
-          {user?.type === 'STARTUP' && !isComplete && (
+          {user?.type === "STARTUP" && !isComplete && (
             <div className="bg-neutrals-100 px-6 py-2 rounded-lg">
               <p className="text-xl font-semibold">You&apos;re missing out</p>
               <p>on recommendations</p>
-              <Button
-                className="bg-white border-2 mt-2 border-neutrals-200 rounded-full"
-                variant="outline"
-              >
-                <Link href={`/startup-details`}>Complete Profile</Link>
-              </Button>
+              <Link href={`/startup-details`}>
+                <Button
+                  className="bg-white border-2 mt-2 border-neutrals-200 rounded-full"
+                  variant="outline"
+                >
+                  Complete Profile
+                </Button>
+              </Link>
             </div>
           )}
 
           <div className="px-2 py-2 space-y-1">
-            {user?.type === 'BUSINESS' && (
+            {user?.type === "BUSINESS" && (
               <>
-                <DropdownMenuItem className="cursor-pointer">
-                  <span className="">
-                    <Link href={'/account'} className="flex gap-x-2 items-center">
-                      <div>
-                        <Bag className="w-4 h-4" />
-                      </div>
-                      <span>My Account</span>
-                    </Link>
-                  </span>
+                <DropdownMenuItem className="cursor-pointer" asChild>
+                  <Link href={"/account"} className="flex gap-x-2 items-center">
+                    <Bag className="w-4 h-4" />
+                    <span>My Account</span>
+                  </Link>
                 </DropdownMenuItem>
-                <DropdownMenuItem className="cursor-pointer">
-                  <span className="">
-                    <Link className="flex gap-x-2 items-center" href={"/opportunities"}>
-                      <RowsPlusTop />
-                      <span>Manage Opportunities</span>
-                    </Link>
-                  </span>
+                <DropdownMenuItem className="cursor-pointer" asChild>
+                  <Link
+                    className="flex gap-x-2 items-center"
+                    href={"/opportunities"}
+                  >
+                    <RowsPlusTop />
+                    <span>Manage Opportunities</span>
+                  </Link>
                 </DropdownMenuItem>
-                <DropdownMenuItem className="cursor-pointer">
+                <DropdownMenuItem className="cursor-pointer" asChild>
                   <span className="flex gap-x-2 items-center">
                     <HandCoins />
                     <span>Leads</span>
                   </span>
                 </DropdownMenuItem>
-                <DropdownMenuItem className="cursor-pointer">
+                <DropdownMenuItem className="cursor-pointer" asChild>
                   <span className="flex gap-x-2 items-center">
                     <CoinVertical />
                     <span>Plans & Billing</span>
@@ -145,9 +144,9 @@ export function UserDropdown({ user }: UserDropdownProps) {
               </>
             )}
 
-            {user?.type === 'STARTUP' && (
+            {user?.type === "STARTUP" && (
               <>
-                <DropdownMenuItem className="cursor-pointer">
+                <DropdownMenuItem className="cursor-pointer" asChild>
                   <span className="flex gap-x-2 items-center">
                     <ClipboardText />
                     <span>Applications</span>
@@ -156,22 +155,18 @@ export function UserDropdown({ user }: UserDropdownProps) {
               </>
             )}
 
-            <DropdownMenuItem className="cursor-pointer">
-              <span className="flex gap-x-2 items-center">
-                <Link className="flex gap-x-2 items-center" href={"/saved"}>
-                  <HeartStraight />
-                  <span>Saved</span>
-                </Link>
-              </span>
+            <DropdownMenuItem className="cursor-pointer" asChild>
+              <Link className="flex gap-x-2 items-center" href={"/saved"}>
+                <HeartStraight />
+                <span>Saved</span>
+              </Link>
             </DropdownMenuItem>
 
-            <DropdownMenuItem className="cursor-pointer">
-              <span className="flex gap-x-2 items-center">
-                <GearIcon className="" />
-                <Link href={`/settings`}>
-                  <span>Settings</span>
-                </Link>
-              </span>
+            <DropdownMenuItem className="cursor-pointer" asChild>
+              <Link className="flex gap-x-2 items-center" href={"/settings"}>
+                <GearIcon />
+                <span>Settings</span>
+              </Link>
             </DropdownMenuItem>
 
             {/* Logout functionality */}
@@ -191,7 +186,9 @@ export function UserDropdown({ user }: UserDropdownProps) {
       {showLogoutWarning && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
           <div className="bg-white p-6 rounded-lg shadow-lg text-center flex flex-col justify-center items-center">
-            <p className="text-lg font-semibold mb-4">Are you sure you want to logout?</p>
+            <p className="text-lg font-semibold mb-4">
+              Are you sure you want to logout?
+            </p>
             <div className="">
               <Image
                 src="/img/warning.png"
@@ -203,12 +200,14 @@ export function UserDropdown({ user }: UserDropdownProps) {
             <div className="flex justify-center gap-x-4">
               <Button
                 className="bg-primary-landing text-white"
+                size="md"
                 onClick={handleLogout}
               >
                 Confirm
               </Button>
               <Button
                 variant="outline"
+                size="md"
                 onClick={() => setShowLogoutWarning(false)}
               >
                 Cancel
