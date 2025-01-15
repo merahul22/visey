@@ -84,15 +84,15 @@ export function UserDropdown({ user }: UserDropdownProps) {
                 </p>
               </div>
 
-              <Link
-                href={`/profile/${user?.type?.toLowerCase()}`}
-                className="flex items-center gap-x-2"
-              >
-                View Profile
-                <div>
+              <DropdownMenuItem className="cursor-pointer" asChild>
+                <Link
+                  href={`/profile/${user?.type?.toLowerCase()}`}
+                  className="flex items-center gap-x-2"
+                >
+                  View Profile
                   <CaretRight />
-                </div>
-              </Link>
+                </Link>
+              </DropdownMenuItem>
             </div>
           </div>
 
@@ -114,13 +114,19 @@ export function UserDropdown({ user }: UserDropdownProps) {
           <div className="px-2 py-2 space-y-1">
             {user?.type === "BUSINESS" && (
               <>
-                <DropdownMenuItem className="cursor-pointer" asChild>
+                <DropdownMenuItem
+                  className="cursor-pointer rounded-full"
+                  asChild
+                >
                   <Link href={"/account"} className="flex gap-x-2 items-center">
                     <Bag className="w-4 h-4" />
                     <span>My Account</span>
                   </Link>
                 </DropdownMenuItem>
-                <DropdownMenuItem className="cursor-pointer" asChild>
+                <DropdownMenuItem
+                  className="cursor-pointer rounded-full"
+                  asChild
+                >
                   <Link
                     className="flex gap-x-2 items-center"
                     href={"/opportunities"}
@@ -129,13 +135,19 @@ export function UserDropdown({ user }: UserDropdownProps) {
                     <span>Manage Opportunities</span>
                   </Link>
                 </DropdownMenuItem>
-                <DropdownMenuItem className="cursor-pointer" asChild>
+                <DropdownMenuItem
+                  className="cursor-pointer rounded-full"
+                  asChild
+                >
                   <span className="flex gap-x-2 items-center">
                     <HandCoins />
                     <span>Leads</span>
                   </span>
                 </DropdownMenuItem>
-                <DropdownMenuItem className="cursor-pointer" asChild>
+                <DropdownMenuItem
+                  className="cursor-pointer rounded-full"
+                  asChild
+                >
                   <span className="flex gap-x-2 items-center">
                     <CoinVertical />
                     <span>Plans & Billing</span>
@@ -146,7 +158,10 @@ export function UserDropdown({ user }: UserDropdownProps) {
 
             {user?.type === "STARTUP" && (
               <>
-                <DropdownMenuItem className="cursor-pointer" asChild>
+                <DropdownMenuItem
+                  className="cursor-pointer rounded-full"
+                  asChild
+                >
                   <span className="flex gap-x-2 items-center">
                     <ClipboardText />
                     <span>Applications</span>
@@ -155,14 +170,14 @@ export function UserDropdown({ user }: UserDropdownProps) {
               </>
             )}
 
-            <DropdownMenuItem className="cursor-pointer" asChild>
+            <DropdownMenuItem className="cursor-pointer rounded-full" asChild>
               <Link className="flex gap-x-2 items-center" href={"/saved"}>
                 <HeartStraight />
                 <span>Saved</span>
               </Link>
             </DropdownMenuItem>
 
-            <DropdownMenuItem className="cursor-pointer" asChild>
+            <DropdownMenuItem className="cursor-pointer rounded-full" asChild>
               <Link className="flex gap-x-2 items-center" href={"/settings"}>
                 <GearIcon />
                 <span>Settings</span>
@@ -171,7 +186,7 @@ export function UserDropdown({ user }: UserDropdownProps) {
 
             {/* Logout functionality */}
             <DropdownMenuItem
-              className="flex justify-center border cursor-pointer"
+              className="flex justify-center border cursor-pointer rounded-full"
               onClick={() => setShowLogoutWarning(true)}
             >
               <span className="flex gap-x-2 items-center">
