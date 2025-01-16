@@ -19,6 +19,8 @@ import {
 import { useSession } from "next-auth/react";
 import { useState } from "react";
 import { Cross2Icon } from "@radix-ui/react-icons";
+import { deleteBusinessReview } from "@/actions/delete-business-review";
+import { toast } from "sonner";
 
 interface Rating {
   id: string;
@@ -32,6 +34,8 @@ interface Rating {
   createdAt: Date;
   likes: number;
   dislikes: number;
+  onDelete: (id: string) => void;
+  onSetHasReview: () => void;
 }
 
 const UserRating = (props: Rating) => {
@@ -66,11 +70,19 @@ const UserRating = (props: Rating) => {
     setShowDeleteWarning(true);
   };
 
-  const confirmDelete = () => {
+  const confirmDelete = async () => {
     console.log("Deleted Review ID:", deleteReviewId);
 
-    // Add delete API call here if needed
-    // fetch(`/api/reviews/${deleteReviewId}`, { method: "DELETE" });
+    const res = await deleteBusinessReview(deleteReviewId);
+
+    if (res?.error) {
+      toast.error(res.error);
+    }
+    if (res?.success) {
+      toast.success("Review has been deleted successfully.");
+      props.onDelete(deleteReviewId as string);
+      props.onSetHasReview();
+    }
 
     setShowDeleteWarning(false);
     setDeleteReviewId(null);
@@ -148,7 +160,6 @@ const UserRating = (props: Rating) => {
                 <Button size="icon" variant="ghost">
                   <ThumbsUp size={16} />
                 </Button>
-
                 <span className="text-sm">{props.likes}</span>
               </div>
 
