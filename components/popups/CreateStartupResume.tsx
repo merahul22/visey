@@ -1,6 +1,6 @@
-import React from 'react';
-import { Button } from '../ui/button';
-import Image from 'next/image';
+import React from "react";
+import { Button } from "../ui/button";
+import Image from "next/image";
 
 const CreateStartupResume = () => {
   return (
@@ -12,7 +12,7 @@ const CreateStartupResume = () => {
       </div>
       <div>
         <Image
-          src="/img/create-resume.png"
+          src="/img/create-resume.webp"
           height={180}
           width={135}
           alt="Create Resume Logo"
