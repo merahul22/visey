@@ -72,8 +72,12 @@ function BusinessSection() {
               className="px-10 pt-10 pb-24 rounded-2xl space-y-6 bg-primary-landing-light text-base-white flex-1"
             >
               <div className="p-2 rounded-full inline-flex justify-center items-center bg-success-landing">
-                {idx === 0 && <ChartLineUp size={36} className="text-[#709B08]" />}
-                {idx === 1 && <UsersThree size={36} className="text-[#709B08]" />}
+                {idx === 0 && (
+                  <ChartLineUp size={36} className="text-[#709B08]" />
+                )}
+                {idx === 1 && (
+                  <UsersThree size={36} className="text-[#709B08]" />
+                )}
                 {idx === 2 && <Eye size={36} className="text-[#709B08]" />}
               </div>
               <div className="space-y-4">
@@ -90,7 +94,9 @@ function BusinessSection() {
         <div className="max-w-screen-xl mx-auto flex flex-col gap-4 md:flex-row md:justify-between py-9 md:py-12 lg:py-16">
           {features.map((feat) => (
             <div key={feat.title} className="flex-grow text-center">
-              <p className="font-degular text-heading4 text-primary">{feat.title}</p>
+              <p className="font-degular text-heading4 text-primary">
+                {feat.title}
+              </p>
               <p className="font-medium font-gothic text-lg">{feat.subtitle}</p>
             </div>
           ))}
@@ -102,7 +108,7 @@ function BusinessSection() {
           aria-hidden="true"
         >
           <Image
-            src="/business-bg.png"
+            src="/business-bg.webp"
             fill
             className="object-contain"
             alt="Abstract business background"

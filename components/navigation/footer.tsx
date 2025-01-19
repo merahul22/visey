@@ -1,44 +1,49 @@
-import { cn } from '@/lib/utils';
-import { Separator } from '@/components/ui/separator';
+import { cn } from "@/lib/utils";
+import { Separator } from "@/components/ui/separator";
 
-import { Envelope, LinkedinLogo, Phone, WhatsappLogo, YoutubeLogo } from '@phosphor-icons/react/dist/ssr';
+import {
+  Envelope,
+  LinkedinLogo,
+  Phone,
+  WhatsappLogo,
+  YoutubeLogo,
+} from "@phosphor-icons/react/dist/ssr";
 
-import Image from 'next/image';
-import Link from 'next/link';
+import Image from "next/image";
+import Link from "next/link";
 
 const footerData = [
   {
-    title: 'Product',
+    title: "Product",
     items: [
-      { name: 'About', link: '/about' },
-      { name: 'Products', link: '/about#product' },
-      { name: 'Pricing', link: '/pricing' },
-      { name: 'Team', link: '/about#team' },
-      { name: 'Blog', link: '/blogs' },
+      { name: "About", link: "/about" },
+      { name: "Products", link: "/about#product" },
+      { name: "Pricing", link: "/pricing" },
+      { name: "Team", link: "/about#team" },
+      { name: "Blog", link: "/blogs" },
       {
-        name: 'Free Business Listing',
-        link: 'https://docs.google.com/forms/d/e/1FAIpQLSdzEFmkrANFYzdrmSZrjVgeOm_TJspc6q2yi-SgpuRuh_lrAQ/viewform',
+        name: "Free Business Listing",
+        link: "https://docs.google.com/forms/d/e/1FAIpQLSdzEFmkrANFYzdrmSZrjVgeOm_TJspc6q2yi-SgpuRuh_lrAQ/viewform",
       },
     ],
   },
   {
-    title: 'Legal',
+    title: "Legal",
     items: [
-      { name: 'Terms & Conditions', link: '/tnc' },
-      { name: 'Cookie Policy', link: '/tnc#cookie' },
-      { name: 'Privacy Policy', link: '/tnc#privacy' },
-      { name: 'Investor Relation', link: '/partner-with-us' },
-     
+      { name: "Terms & Conditions", link: "/tnc" },
+      { name: "Cookie Policy", link: "/tnc#cookie" },
+      { name: "Privacy Policy", link: "/tnc#privacy" },
+      { name: "Investor Relation", link: "/partner-with-us" },
     ],
   },
 ];
 
 function Footer({ className }: { className?: string }) {
   return (
-    <footer className={cn('bg-neutrals-100  p-10 space-y-4', className)}>
+    <footer className={cn("bg-neutrals-100  p-10 space-y-4", className)}>
       <div className="space-y-4 text-center max-w-screen-xl mx-auto">
         <Image
-          src="/footervisey.svg"
+          src="/logo-black.webp"
           width={140}
           height={50}
           alt="visey logo"
@@ -83,11 +88,8 @@ function Footer({ className }: { className?: string }) {
                 </div>
               </Link>
               <Link href="/partner-with-us">
-                <span className="text-[#545454]">
-                  Partner with Us
-                </span>
+                <span className="text-[#545454]">Partner with Us</span>
               </Link>
-             
             </div>
           </div>
 

@@ -1,10 +1,10 @@
-import React from 'react';
-import Image from 'next/image';
-import Link from 'next/link';
+import React from "react";
+import Image from "next/image";
+import Link from "next/link";
 
 export default function AuthLayout({
-                                     children,
-                                   }: Readonly<{
+  children,
+}: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
@@ -12,7 +12,7 @@ export default function AuthLayout({
       {/* Image on the left side */}
       <div className="hidden lg:block lg:w-[565px] h-screen relative">
         <Image
-          src={"/img/signup_banner.png"}
+          src={"/img/signup_banner.webp"}
           alt={"Signup Banner"}
           fill={true}
           objectFit="cover"
@@ -24,7 +24,7 @@ export default function AuthLayout({
       <div className="shrink-0 lg:w-48 cursor-pointer absolute left-[40px] top-[20px]">
         <Link href="/">
           <Image
-            src="/logo-black.png"
+            src="/logo-black.webp"
             width={71}
             height={32}
             alt="visey logo"

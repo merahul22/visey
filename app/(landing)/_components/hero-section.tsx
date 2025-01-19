@@ -1,7 +1,7 @@
-import Image from 'next/image';
-import { ArrowUpRight } from '@phosphor-icons/react/dist/ssr';
-import { Button } from '@/components/ui/button';
-import Link from 'next/link';
+import Image from "next/image";
+import { ArrowUpRight } from "@phosphor-icons/react/dist/ssr";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 const HeroSection = () => {
   return (
@@ -78,7 +78,7 @@ const HeroSection = () => {
             {/* Main Image */}
             <div className="relative aspect-[4080/2864] w-full h-96 md:h-full">
               <Image
-                src="/img/hero-img.png"
+                src="/img/hero-img.webp"
                 alt="Entrepreneur analyzing resources for their startup"
                 fill
                 className="object-cover"

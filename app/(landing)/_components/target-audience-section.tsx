@@ -2,7 +2,10 @@ import Image from "next/image";
 
 function TargetAudienceSection() {
   return (
-    <section className="bg-[#F01D74] w-full py-4" aria-labelledby="target-audience-heading">
+    <section
+      className="bg-[#F01D74] w-full py-4"
+      aria-labelledby="target-audience-heading"
+    >
       {/* Triangle top border - decorative */}
       <div
         className="w-full h-20 bg-repeat-x"
@@ -20,7 +23,7 @@ function TargetAudienceSection() {
           {/* Image Section */}
           <div className="relative size-72 sm:size-80 mx-auto md:mx-0 md:flex-1">
             <Image
-              src="/img/startup.png"
+              src="/img/startup.webp"
               alt="Illustration of a startup workflow"
               fill
               className="object-contain"

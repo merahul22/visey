@@ -206,7 +206,7 @@ export function UserDropdown({ user }: UserDropdownProps) {
             </p>
             <div className="">
               <Image
-                src="/img/warning.png"
+                src="/img/warning.webp"
                 alt="Warning Photo"
                 width={200}
                 height={200}
