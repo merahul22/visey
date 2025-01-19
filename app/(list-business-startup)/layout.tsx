@@ -1,8 +1,10 @@
-import React from 'react';
-import Image from 'next/image';
-import Link from 'next/link';
+import React from "react";
+import Image from "next/image";
+import Link from "next/link";
 
-export default function Layout({ children, }: Readonly<{
+export default function Layout({
+  children,
+}: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
@@ -10,7 +12,7 @@ export default function Layout({ children, }: Readonly<{
       {/* Image on the left side */}
       <div className="hidden lg:block lg:w-[565px] h-screen relative">
         <Image
-          src={"/img/business_banner.png"}
+          src={"/img/business_banner.webp"}
           alt={"Signup Banner"}
           fill={true}
           objectFit="cover"
@@ -19,11 +21,10 @@ export default function Layout({ children, }: Readonly<{
       </div>
       {/* Main content */}
       <div className="flex flex-1 items-center justify-center">{children}</div>
-      <div
-        className="shrink-0 lg:w-48 cursor-pointer absolute left-[40px] top-[20px]">
+      <div className="shrink-0 lg:w-48 cursor-pointer absolute left-[40px] top-[20px]">
         <Link href="/">
           <Image
-            src="/logo-black.png"
+            src="/logo-black.webp"
             width={71}
             height={32}
             alt="visey logo"

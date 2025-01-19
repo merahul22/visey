@@ -1,10 +1,10 @@
-'use client';
+"use client";
 
-import React, { useTransition } from 'react';
-import { Button } from '../ui/button';
-import Image from 'next/image';
-import { deleteAccount } from '@/actions/delete-account';
-import { signOut } from 'next-auth/react';
+import React, { useTransition } from "react";
+import { Button } from "../ui/button";
+import Image from "next/image";
+import { deleteAccount } from "@/actions/delete-account";
+import { signOut } from "next-auth/react";
 
 interface PermanentDeleteWarningProps {
   onCancel: () => void;
@@ -39,7 +39,7 @@ const PermanentDeleteWarning = ({
       </div>
       <div>
         <Image
-          src="/img/warning.png"
+          src="/img/warning.webp"
           height={135}
           width={180}
           alt="Warning Logo"
