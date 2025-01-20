@@ -83,7 +83,9 @@ function Footer({ className }: { className?: string }) {
                 <div className="flex items-center space-x-2">
                   <Envelope size={20} />
                   <span className="text-[#545454] underline">
-                    contact@visey.co.in
+                  <Link href="mailto:contact@visey.co.in">
+                  contact@visey.co.in
+                  </Link>
                   </span>
                 </div>
               </Link>
