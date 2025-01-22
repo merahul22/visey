@@ -2,11 +2,13 @@ import Image from "next/image";
 import { Button } from "../ui/button";
 import { Input } from "@/components/ui/input";
 import { MagnifyingGlassIcon } from "@radix-ui/react-icons";
+import { Bell } from "@phosphor-icons/react/dist/ssr";
 import { auth } from "@/auth";
 import { UserDropdown } from "@/components/UserDropdown";
 import Link from "next/link";
 import { Business, Startup } from "@prisma/client";
 import { cn } from "@/lib/utils";
+import { NotificationsDropdown } from "@/components/NotificationsDropdown";
 
 export async function Navbar({ className }: { className?: string }) {
   const session = await auth();
@@ -111,8 +113,13 @@ export async function Navbar({ className }: { className?: string }) {
             </Link>
           )}
 
-          <div>
-            <UserDropdown user={userDropDownProps} />
+          <div className="flex gap-1 sm:gap-4 items-center">
+            <div>
+              <NotificationsDropdown />
+            </div>
+            <div>
+              <UserDropdown user={userDropDownProps} />
+            </div>
           </div>
         </div>
       </nav>

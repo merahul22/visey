@@ -1,12 +1,11 @@
-import type { Metadata } from 'next';
-import localFont from 'next/font/local';
-import './globals.css';
-import Provider from '@/components/Provider';
-import HelpAndSupport from '@/components/HelpAndSupport';
-import { Toaster } from "@/components/ui/sonner"
-import React from 'react';
-import { GoogleAnalytics } from '@next/third-parties/google'
-
+import type { Metadata } from "next";
+import localFont from "next/font/local";
+import "./globals.css";
+import Provider from "@/components/Provider";
+import HelpAndSupport from "@/components/HelpAndSupport";
+import { Toaster } from "@/components/ui/sonner";
+import React from "react";
+import { GoogleAnalytics } from "@next/third-parties/google";
 
 const inter = localFont({
   src: "./fonts/InterVF.ttf",
@@ -39,25 +38,31 @@ const gothic = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Visey - India's Premier Marketplace Connecting Startups with Resource Providers",
+  title:
+    "Visey - India's Premier Marketplace Connecting Startups with Resource Providers",
   description:
     "Visey is India's first marketplace designed to connect startups and SMEs with businesses offering essential resources. Simplify your search and find the right match in just three clicks.",
-  keywords: "Visey, startup resources, SME services, business marketplace, India startups, resource providers, business solutions"
+  keywords:
+    "Visey, startup resources, SME services, business marketplace, India startups, resource providers, business solutions",
 };
 
-export default function RootLayout({ children, }: Readonly<{
+export default function RootLayout({
+  children,
+}: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
     <html lang="en">
-   <head>
-   <meta name="google-site-verification" content="bISGtC6Hz3nFRSokWosu7fIw6szcfcxrnKoj7tYsOMg" />
-   </head>
+      <head>
+        <meta
+          name="google-site-verification"
+          content="bISGtC6Hz3nFRSokWosu7fIw6szcfcxrnKoj7tYsOMg"
+        />
+      </head>
       <body
-        className={`${inter.variable} ${geist.variable} ${gothic.variable} ${geistMono.variable} ${degularDisplay.variable} antialiased text-base-black`}>
-        <Provider>
-          {children}
-        </Provider>
+        className={`${inter.variable} ${geist.variable} ${gothic.variable} ${geistMono.variable} ${degularDisplay.variable} antialiased text-base-black`}
+      >
+        <Provider>{children}</Provider>
         <HelpAndSupport />
         <Toaster />
         <GoogleAnalytics gaId="G-ME7W8R36MY" />
