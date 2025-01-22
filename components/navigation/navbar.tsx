@@ -2,7 +2,6 @@ import Image from "next/image";
 import { Button } from "../ui/button";
 import { Input } from "@/components/ui/input";
 import { MagnifyingGlassIcon } from "@radix-ui/react-icons";
-import { Bell } from "@phosphor-icons/react/dist/ssr";
 import { auth } from "@/auth";
 import { UserDropdown } from "@/components/UserDropdown";
 import Link from "next/link";
