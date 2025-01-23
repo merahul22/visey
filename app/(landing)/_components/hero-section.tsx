@@ -49,12 +49,10 @@ const HeroSection = () => {
                   id="hero-heading"
                   className="font-degular text-heading4 md:text-heading2 xl:text-heading1 leading-tight"
                 >
-                  We help startups & SMEs meet their resource needs quickly
+                    We help Indian startups and MSMEs meet resource needs quickly.
                 </h1>
                 <p className="font-gothic font-medium text-sm md:text-base opacity-90">
-                  Visey marketplace makes it easy for startups and SME owners to
-                  find the right resources by connecting them with businesses
-                  that can fulfill their needs, in just three simple clicks.
+                Visey is an online platform that helps entrepreneurs find the best resource providers for their startup’s needs in just three clicks. It also helps resource providers connect with ideal clients and offer Resources.
                 </p>
               </div>
               {/* Call-to-Action */}

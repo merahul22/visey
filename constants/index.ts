@@ -868,3 +868,98 @@ export const fundingStages = [
   { value: 'Series C' },
   { value: 'Series C+' },
 ];
+export const viseydetails=[
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Visey",
+    "url": "https://visey.co.in",
+    "logo": "/logo-black.webp",  // Replace with your logo URL
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "telephone": "+91-7827586754",  // Customer support phone number
+      "contactType": "Customer Service",
+      "areaServed": "IN",
+      "availableLanguage": "English"
+    },
+    "sameAs": [
+      "https://www.linkedin.com/company/viseycompany/",
+      "https://api.whatsapp.com/send/?phone=917827586754&text&type=phone_number&app_absent=0",
+      "https://www.instagram.com/visey.co.in?igsh=ZXpnZHZrcXUyenVp"
+    ],
+    "description": "Visey is India's premier marketplace for startups and SMEs, providing trusted business resources and services to help grow and scale businesses.",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "E-2039, Gaur Green City, 8- Vaibhav Khand, Indirapuram",
+      "addressLocality": "Ghaziabad",
+      "addressRegion": "Uttar Pradesh",
+      "postalCode": "201014",
+      "addressCountry": "IN"
+    }
+  }
+  
+]
+export const accordian=[
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How does Visey reduce my search time for services?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Visey simplifies the search process by offering a curated marketplace of vetted service providers tailored to the unique needs of Indian startups. Instead of navigating multiple platforms, you can easily filter, compare, and connect with trusted providers in legal, digital marketing, mentorship, and other critical services—all in one place."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is Visey, and how does it benefit my business?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Visey is India’s first dedicated marketplace designed to connect resource providers with startups, helping you generate targeted leads and establish valuable partnerships. Whether you specialize in financial planning, SEO services, or startup mentorship programs, Visey ensures your expertise reaches the startups that need it most."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is there a cost to join Visey?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "For startups, Visey is completely free, providing unrestricted access to a wide range of resource providers. Businesses can start with a free basic tier, which includes listing their services and connecting with startups. Premium plans are also available for advanced features such as enhanced visibility, analytics, lead generation, and improved ranking within the platform."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What kind of businesses can join Visey?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Visey supports a wide range of businesses essential to startup success, including legal services, financial consulting, digital marketing, software development, human resources, mentorship programs, and more. Whether your business specializes in helping startups with company registration or providing tools for scaling operations, Visey connects you directly with your target audience."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What if I don’t find the exact service I need?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Visey is constantly expanding its service offerings. If you don’t find the specific service you need, you can submit a request, and our team will work to onboard suitable service providers to fulfill your requirements. We aim to ensure no startup resource need goes unmet."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How can I leave feedback on a service provider?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Feedback is essential for maintaining trust and transparency on Visey. Startups can rate and review service providers after utilizing their services. These reviews help future users make informed decisions and encourage service providers to maintain high-quality offerings."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How does Visey promote my business to startups?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Visey uses advanced search features and category-based listings to make your services visible to Indian startups. Businesses that opt for premium plans enjoy enhanced rankings, targeted promotions, and priority placements in search results, ensuring their services reach the right audience efficiently."
+        }
+      }
+    ]
+  }  
+]

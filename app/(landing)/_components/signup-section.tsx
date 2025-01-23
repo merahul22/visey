@@ -29,7 +29,7 @@ function SignUpSection() {
           {/* Headings */}
           <div className="space-y-2">
             <h2 className="text-4xl leading-relaxed font-semibold font-degular">
-              We help startups & SMEs meet their resource needs quickly
+            We help Indian startups and SMEs meet their resource needs quickly with solutions tailored to the Startup India ecosystem.
             </h2>
             <p className="text-neutrals-700 text-xl">
               Be the first to know when the product launches and other

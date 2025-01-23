@@ -13,23 +13,24 @@ const OPTIONS: EmblaOptionsType = { loop: true };
 const SLIDES: Testimonial[] = [
   {
     image: '/img/testimonial2.jpg',
-    content: '“A game-changer for our business.”',
+    content: '"Visey made it easy for our startup to find trusted service providers. The platform saved us time and helped us connect with the right resources to scale faster."',
   },
   {
     image: '/img/testimonial1.png',
-    content: '“An absolute must-have for startups and businesses.”',
+    content: '"As an SME, Visey helped us access quality business solutions quickly. It’s the perfect platform for finding reliable partners in marketing and tech."',
   },
   {
     image: '/img/testimonial3.jpg',
-    content: '“Boosted our productivity instantly.”',
+    content: "Visey's marketplace is a game-changer! We easily found the right legal and financial services for our startup, saving us time and effort.",
   },
   {
     image: '/img/testimonial4.jpg',
-    content: '“Perfect for startups. Highly recommend.”',
+    content: "Thanks to Visey, we connected with the right businesses to grow our SME. It's an invaluable resource for finding the right tools and services."
+,
   },
   {
     image: '/img/testimonial1.png',
-    content: '“An absolute must-have for startups and businesses.”',
+    content: "Visey helped our startup find the perfect tech partners and streamline our growth. A must-have platform for any entrepreneur.",
   },
 ];
 

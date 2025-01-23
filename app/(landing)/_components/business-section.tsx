@@ -3,19 +3,19 @@ import Image from "next/image";
 
 const businessSection = [
   {
-    title: "Powerful Marketing Analytics",
+    title: "Actionable Insights for Growth",
     description:
-      "Visey’s powerful analytics tools give you a clear picture of your business’ progress and the effectiveness of your strategies. Make informed decisions with real-time data at your fingertips.",
+      "Visey’s platform offers valuable insights to help resource providers better serve the needs of startups",
   },
   {
     title: "Reach your Target Audience",
     description:
-      "Our platform helps businesses efficiently identify and connect with startups actively seeking their services. No more wasted time on ineffective outreach—get in touch with the right audience.",
+      "Visey enables businesses to efficiently connect with Indian startups actively seeking their specific services.",
   },
   {
-    title: "Build trust through Transparency",
+    title: "Build Trust Through Transparency",
     description:
-      "Our platform’s integrated ratings and reviews system fosters transparency, helping you build credibility and trust with potential startups as clients.",
+      "Integrated reviews and ratings ensure transparency, fostering trust and credibility among startups and service providers",
   },
 ];
 
@@ -56,7 +56,7 @@ function BusinessSection() {
             id="business-section-heading"
             className="font-degular font-semibold text-heading4 md:text-heading3 lg:text-heading2 xl:text-heading1 leading-snug"
           >
-            Visey for business
+            Visey for Resource Providers
           </h2>
           <p className="text-lg font-gothic">
             Unlock your full potential with our{" "}

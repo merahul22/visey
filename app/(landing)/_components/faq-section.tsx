@@ -14,43 +14,42 @@ const faqData = [
   {
     question: "How does Visey reduce my search time for services?",
     answer:
-      "Visey simplifies your search by offering a curated marketplace of vetted service providers tailored specifically to startup needs. Instead of searching across multiple platforms, you can find, compare, and connect with the right providers in one place, saving you valuable time and effort.",
+      "Visey simplifies the search process by offering a curated marketplace of vetted service providers tailored to the unique needs of Indian startups. Instead of navigating multiple platforms, you can easily filter, compare, and connect with trusted providers in legal, digital marketing, mentorship, and other critical services—all in one place.",
   },
   {
-    question: "What is Visey, and how does it benefit my business?",
+    question: " What is Visey, and how does it benefit my business?",
     answer:
-      "Visey is a marketplace designed to connect businesses with startups actively seeking services like yours. By joining Visey, you gain access to a targeted audience of startups, allowing you to efficiently generate leads, build partnerships, and grow your customer base. Our platform also provides data-driven insights to help you optimize your marketing strategies and maximize your ROI.",
+      "Visey is India’s first dedicated marketplace designed to connect resource providers with startups, helping you generate targeted leads and establish valuable partnerships. Whether you specialize in financial planning, SEO services, or startup mentorship programs, Visey ensures your expertise reaches the startups that need it most.",
   },
   {
     question: "Is there a cost to join Visey?",
     answer:
-      "Visey is completely free for startups. For businesses, we offer different pricing tiers. There is a free basic tier that allows you to get started, with premium options available that provide enhanced features and benefits, such as advanced analytics, lead generation and higher ranking. You can choose the plan that best aligns with your business goals.",
+      "For startups, Visey is completely free, providing unrestricted access to a wide range of resource providers. Businesses can start with a free basic tier, which includes listing their services and connecting with startups. Premium plans are also available for advanced features such as enhanced visibility, analytics, lead generation, and improved ranking within the platform.",
   },
   {
     question: "What kind of businesses can join Visey?",
     answer:
-      "Visey is open to a wide range of businesses that provide essential services to startups, including but not limited to Legal, Financial, Marketing, Tech development, HR, Mentorship, Social Media. If your business supports startups in any capacity, Visey is the ideal platform to reach your target audience.",
+      "Visey supports a wide range of businesses essential to startup success, including legal services, financial consulting, digital marketing, software development, human resources, mentorship programs, and more. Whether your business specializes in helping startups with company registration or providing tools for scaling operations, Visey connects you directly with your target audience.",
   },
   {
     question: "What if I don't find the exact service I need?",
     answer:
-      "We are constantly expanding our range of services. If you don't find what you're looking for, you can let us know, and we'll work to bring suitable providers to the platform.",
-  },
-  {
-    question: "How do I connect with potential clients on Visey?",
-    answer:
-      "Startups can view your profile, explore your services, and reach out directly.",
+      "Visey is constantly expanding its service offerings. If you don’t find the specific service you need, you can submit a request, and our team will work to onboard suitable service providers to fulfill your requirements. We aim to ensure no startup resource need goes unmet.",
   },
   {
     question: "How can I leave feedback on a service provider?",
     answer:
-      "Startup users can leave reviews and ratings, building transparency and help other users make informed decisions.",
+      "Feedback is essential for maintaining trust and transparency on Visey. Startups can rate and review service providers after utilizing their services. These reviews help future users make informed decisions and encourage service providers to maintain high-quality offerings.",
   },
+  
   {
     question: "How does Visey promote my business to startups?",
     answer:
-      "Visey's search features and category listings make it easy for startups to discover your services. Premium options may also be available to help boost your profile's visibility.",
+      "Visey uses advanced search features and category-based listings to make your services visible to Indian startups. Businesses that opt for premium plans enjoy enhanced rankings, targeted promotions, and priority placements in search results, ensuring their services reach the right audience efficiently.",
   },
+  {
+    
+  }
 ];
 
 function FaqSection() {

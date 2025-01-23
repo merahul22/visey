@@ -19,7 +19,7 @@ function TargetAudienceSection() {
 
       {/* Main content - with max-width constraint */}
       <div className="max-w-screen-xl mx-auto px-4">
-        <section className="py-8 md:py-16 lg:py-24 text-base-white space-y-4 md:flex md:space-y-0 md:gap-x-14">
+        <section className="py-8 md:py-16 lg:py-24 text-base-white space-y-4 md:flex md:space-y-0 md:gap-x-14 md:items-center">
           {/* Image Section */}
           <div className="relative size-72 sm:size-80 mx-auto md:mx-0 md:flex-1">
             <Image
@@ -38,19 +38,19 @@ function TargetAudienceSection() {
                 id="target-audience-heading"
                 className="font-degular font-semibold text-heading4 md:text-4xl"
               >
-                Startups
+                Startups & MSMEs
               </h1>
               <p className="md:text-2xl text-xl font-light">
-                Find resources for all your needs.
+              Search for trusted resource providers tailored to your needs and get results in seconds with our robust rating and review system. Save time and focus on what truly matters—growing your business with expert support in funding, mentorship, networking, and more.
               </p>
             </div>
 
             <div className="space-y-1">
               <h1 className="font-degular font-semibold text-heading4 md:text-4xl">
-                Businesses
+              Resource Providers
               </h1>
               <p className="text-xl md:text-2xl font-light">
-                Reach startup clients for your services.
+              Boost your revenue by generating high-quality leads through our platform. Gain better visibility and reach startups and MSMEs seeking legal, financial, digital marketing, and other services. Leverage data-driven insights, in-depth marketing analytics, and personalized recommendations to grow your business effectively.
               </p>
             </div>
           </div>

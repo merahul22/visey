@@ -11,15 +11,15 @@ import { useInView } from 'react-intersection-observer';
 const cardData = [
   {
     title: 'Filter & Match',
-    description: 'Easily find the right match for your startup’s needs.',
+    description: 'Easily filter through resources and find the perfect match for your startup’s requirements.',
   },
   {
     title: 'Data Support',
-    description: 'Visualize trends and monitor key performance indicators.',
+    description: ' Build your startup profile and get advanced recommendations.',
   },
   {
     title: 'All Startups',
-    description: 'Explore businesses across India, catering to all stages.',
+    description: 'Explore resource providers across India for every stage and track startup trends.',
   },
 ];
 
@@ -124,11 +124,12 @@ function MarketplaceSection() {
                   id="marketplace-heading"
                   className="font-degular font-semibold text-heading4 md:text-heading3 lg:text-heading2 xl:text-heading1 leading-snug"
               >
-                India&apos;s First Marketplace for Startups to Find Resource Providers
+                India's First Marketplace for Startups to Find Resource Providers.
+                {/* India&apos;s First Marketplace for Startups to Find Resource Providers */}
               </h2>
               <p className="font-gothic font-medium text-lg">
-                Find businesses for all your startup needs in{' '}
-                <span className="font-bold">one destination</span>.
+              Discover all business solutions for your startup needs in{' '}
+                <span className="font-bold">one trusted destination</span> with visey.
               </p>
             </div>
 
@@ -155,7 +156,7 @@ function MarketplaceSection() {
             {/* Features Section */}
             <div className="flex flex-col items-center">
               <h3 className="font-degular font-semibold text-2xl text-center text-feature md:text-3xl lg:text-heading3">
-                Visey is Your Startup&apos;s Support System
+              Visey is the ultimate platform for Indian startups, connecting them with trusted resource providers and mentorship opportunities tailored to their needs
               </h3>
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 text-center w-full py-9 md:pt-14 md:pb-12 lg:pt-16">
                 {features.map((feat) => (
