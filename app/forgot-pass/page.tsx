@@ -2,7 +2,13 @@ import React from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import Link from "next/link";
 
 const ForgotPasswordForm = () => {
@@ -12,15 +18,18 @@ const ForgotPasswordForm = () => {
         <CardHeader className="flex-col flex gap-4 max-w-100 mx-auto justify-center">
           <CardTitle className="flex flex-col gap-3 mx-auto  text-center">
             Forgot Password
-             <p className="text-sm mb-4 text-neutral-500">
-            Enter your registered Email or Phone Number to reset your password
-          </p></CardTitle>
+            <p className="text-sm mb-4 text-neutral-500">
+              Enter your registered Email or Phone Number to reset your password
+            </p>
+          </CardTitle>
         </CardHeader>
         <CardContent className="flex flex-col gap-4 mx-auto">
-         
           <form>
             <div className="mb-4">
-              <Label htmlFor="emailOrPhone" className="text-md text-neutral-500">
+              <Label
+                htmlFor="emailOrPhone"
+                className="text-md text-neutral-500"
+              >
                 Email/Phone Number
               </Label>
               <Input
@@ -29,7 +38,10 @@ const ForgotPasswordForm = () => {
                 placeholder="Enter your email or phone number"
               />
             </div>
-            <Button type="submit" className="w-full bg-pink-600 hover:bg-pink-700 rounded-lg">
+            <Button
+              type="submit"
+              className="w-full bg-pink-600 hover:bg-pink-700 rounded-lg"
+            >
               Submit
             </Button>
           </form>

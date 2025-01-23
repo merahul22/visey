@@ -1,10 +1,10 @@
-'use client';
+"use client";
 
-import { zodResolver } from '@hookform/resolvers/zod';
-import { useForm } from 'react-hook-form';
-import { z } from 'zod';
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
 
-import { Button } from '@/components/ui/button';
+import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
@@ -13,35 +13,35 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '@/components/ui/form';
-import { Input } from '@/components/ui/input';
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
 import {
   listBusinessFirstStepSchema,
   listBusinessSecondStepSchema,
   listBusinessSchema,
-} from '@/schemas';
-import { useState, useTransition } from 'react';
-import { Combobox } from '../Combobox';
+} from "@/schemas";
+import { useState, useTransition } from "react";
+import { Combobox } from "../Combobox";
 import {
   tags as tagsList,
   categories as categoriesList,
   locations as locationsList,
-} from '@/constants';
-import Tag from '../Tag';
-import { Stepper } from '../Stepper';
-import { listBusiness } from '@/actions/list-business';
-import { useRouter } from 'next/navigation';
-import { DEFAULT_LOGIN_REDIRECT } from '@/routes';
-import { useSession } from 'next-auth/react';
-import { Textarea } from '@/components/ui/textarea';
-import { toast } from 'sonner';
+} from "@/constants";
+import Tag from "../Tag";
+import { Stepper } from "../Stepper";
+import { listBusiness } from "@/actions/list-business";
+import { useRouter } from "next/navigation";
+import { DEFAULT_LOGIN_REDIRECT } from "@/routes";
+import { useSession } from "next-auth/react";
+import { Textarea } from "@/components/ui/textarea";
+import { toast } from "sonner";
 
 function splitAndCapitalize(inputString: string) {
-  const words = inputString.split('-');
+  const words = inputString.split("-");
   const capitalizedWords = words.map(
-    (word) => word.charAt(0).toUpperCase() + word.slice(1)
+    (word) => word.charAt(0).toUpperCase() + word.slice(1),
   );
-  return capitalizedWords.join(' ');
+  return capitalizedWords.join(" ");
 }
 
 const ListBusinessForm = () => {
@@ -55,15 +55,15 @@ const ListBusinessForm = () => {
   const [formValues, setFormValues] = useState<
     z.infer<typeof listBusinessSchema>
   >({
-    businessName: '',
-    registeredName: '',
-    websiteUrl: '',
-    category: '',
-    tags: '',
+    businessName: "",
+    registeredName: "",
+    websiteUrl: "",
+    category: "",
+    tags: "",
     tagsList: [],
-    contactNumber: '',
-    location: '',
-    description: ''
+    contactNumber: "",
+    location: "",
+    description: "",
   });
 
   const schema =
@@ -74,22 +74,22 @@ const ListBusinessForm = () => {
   const defaultValues =
     currentStep === 1
       ? {
-          businessName: '',
-          registeredName: '',
-          websiteUrl: '',
-          description: ''
+          businessName: "",
+          registeredName: "",
+          websiteUrl: "",
+          description: "",
         }
       : {
-          category: '',
-          tags: '',
+          category: "",
+          tags: "",
           tagsList: [],
-          contactNumber: '',
-          location: '',
+          contactNumber: "",
+          location: "",
         };
 
   const form = useForm<z.infer<typeof schema>>({
     resolver: zodResolver(schema),
-    defaultValues: defaultValues,
+    defaultValues,
   });
 
   function onSubmit(values: z.infer<typeof schema>) {
@@ -98,9 +98,9 @@ const ListBusinessForm = () => {
       setCurrentStep(2);
     } else {
       if (categoryTagList.length === 0) {
-        form.setError('tags', {
-          type: 'manual',
-          message: 'At least one tag is required.',
+        form.setError("tags", {
+          type: "manual",
+          message: "At least one tag is required.",
         });
         return;
       }
@@ -247,7 +247,11 @@ const ListBusinessForm = () => {
                         </div>
                       </FormLabel>
                       <FormControl>
-                        <Textarea className="mt-1" {...field} disabled={loading} />
+                        <Textarea
+                          className="mt-1"
+                          {...field}
+                          disabled={loading}
+                        />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -362,7 +366,7 @@ const ListBusinessForm = () => {
                           <Input
                             className="mt-1"
                             {...field}
-                            value={field.value ?? ''}
+                            value={field.value ?? ""}
                             disabled={loading}
                           />
                         </div>
