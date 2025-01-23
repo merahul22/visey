@@ -6,6 +6,7 @@ import HelpAndSupport from "@/components/HelpAndSupport";
 import { Toaster } from "@/components/ui/sonner";
 import React from "react";
 import { GoogleAnalytics } from "@next/third-parties/google";
+import { accordian, viseydetails } from "@/constants";
 
 const inter = localFont({
   src: "./fonts/InterVF.ttf",
@@ -39,9 +40,9 @@ const gothic = localFont({
 
 export const metadata: Metadata = {
   title:
-    "Visey - India's Premier Marketplace Connecting Startups with Resource Providers",
+    "Visey | Startup Growth Platform for MSMEs – Solutions, Mentorship & More",
   description:
-    "Visey is India's first marketplace designed to connect startups and SMEs with businesses offering essential resources. Simplify your search and find the right match in just three clicks.",
+    "Join Visey, India’s leading platform for startups. Access resources, mentorship, and growth tools tailored for Indian startups. Be part of the Startup India ecosystem and succeed with Visey.",
   keywords:
     "Visey, startup resources, SME services, business marketplace, India startups, resource providers, business solutions",
 };
@@ -51,13 +52,18 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const jsonLDvisey=viseydetails
+  const jsonLDaccordian=accordian
   return (
     <html lang="en">
       <head>
-        <meta
-          name="google-site-verification"
-          content="bISGtC6Hz3nFRSokWosu7fIw6szcfcxrnKoj7tYsOMg"
-        />
+      <meta name="google-site-verification" content="bISGtC6Hz3nFRSokWosu7fIw6szcfcxrnKoj7tYsOMg" />
+      <script type="application/ld+json"
+      dangerouslySetInnerHTML={{__html:JSON.stringify(jsonLDvisey)}}
+      />
+      <script type="application/ld+json"
+      dangerouslySetInnerHTML={{__html:JSON.stringify(jsonLDaccordian)}}
+      />
       </head>
       <body
         className={`${inter.variable} ${geist.variable} ${gothic.variable} ${geistMono.variable} ${degularDisplay.variable} antialiased text-base-black`}
