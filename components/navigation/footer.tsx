@@ -79,16 +79,16 @@ function Footer({ className }: { className?: string }) {
                   <span className="text-[#545454]">+91 78275 86754</span>
                 </div>
               </Link>
-              <Link href="mailto:contact@visey.co.in">
+              <div>
                 <div className="flex items-center space-x-2">
                   <Envelope size={20} />
                   <span className="text-[#545454] underline">
-                  <Link href="mailto:contact@visey.co.in">
-                  contact@visey.co.in
-                  </Link>
+                    <Link href="mailto:contact@visey.co.in">
+                      contact@visey.co.in
+                    </Link>
                   </span>
                 </div>
-              </Link>
+              </div>
               <Link href="/partner-with-us">
                 <span className="text-[#545454]">Partner with Us</span>
               </Link>

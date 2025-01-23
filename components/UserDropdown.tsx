@@ -56,7 +56,7 @@ export function UserDropdown({ user }: UserDropdownProps) {
     <>
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <Avatar>
+          <Avatar className="cursor-pointer">
             <AvatarImage src={user?.image || ""} />
             <AvatarFallback>
               <div>

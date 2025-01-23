@@ -21,7 +21,7 @@ export default function LandingPage() {
         <div
           className="absolute inset-0 bg-repeat-x"
           style={{
-            backgroundImage: "url('/logo-icon.png')",
+            backgroundImage: "url('/logo-icon.webp')",
             backgroundSize: "117px auto",
             backgroundPosition: "center",
             opacity: 0.2,

@@ -1,7 +1,7 @@
-import BusinessProfilePublic from '@/components/profile/BusinessProfilePublic';
-import { getBusinessById } from '@/actions/get-business-by-id';
-import { Achievement, Business, Opportunity, Services } from '@prisma/client';
-import { auth } from '@/auth';
+import BusinessProfilePublic from "@/components/profile/BusinessProfilePublic";
+import { getBusinessById } from "@/actions/get-business-by-id";
+import { Achievement, Business, Opportunity, Services } from "@prisma/client";
+import { auth } from "@/auth";
 
 interface FullBusiness extends Business {
   services: Services[];
@@ -9,13 +9,13 @@ interface FullBusiness extends Business {
   opportunities: Opportunity[];
 }
 
-async function Page({ params }: { params: Promise<{id: string}> }) {
+async function Page({ params }: { params: Promise<{ id: string }> }) {
   const id = (await params).id;
 
   const response = await getBusinessById(id);
   const session = await auth();
   if (!session || !session.user) {
-    return <div>Not logged in!</div>
+    return <div>Not logged in!</div>;
   }
 
   const user = session.user;

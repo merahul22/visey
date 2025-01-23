@@ -7,6 +7,7 @@ import { UserDropdown } from "@/components/UserDropdown";
 import Link from "next/link";
 import { Business, Startup } from "@prisma/client";
 import { cn } from "@/lib/utils";
+import { NotificationsDropdown } from "@/components/NotificationsDropdown";
 
 export async function Navbar({ className }: { className?: string }) {
   const session = await auth();
@@ -111,8 +112,13 @@ export async function Navbar({ className }: { className?: string }) {
             </Link>
           )}
 
-          <div>
-            <UserDropdown user={userDropDownProps} />
+          <div className="flex gap-1 sm:gap-4 items-center">
+            <div>
+              <NotificationsDropdown />
+            </div>
+            <div>
+              <UserDropdown user={userDropDownProps} />
+            </div>
           </div>
         </div>
       </nav>
