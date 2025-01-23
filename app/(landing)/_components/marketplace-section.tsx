@@ -124,7 +124,7 @@ function MarketplaceSection() {
                   id="marketplace-heading"
                   className="font-degular font-semibold text-heading4 md:text-heading3 lg:text-heading2 xl:text-heading1 leading-snug"
               >
-                India's First Marketplace for Startups to Find Resource Providers.
+                India&#39;s First Marketplace for Startups to Find Resource Providers.
                 {/* India&apos;s First Marketplace for Startups to Find Resource Providers */}
               </h2>
               <p className="font-gothic font-medium text-lg">
