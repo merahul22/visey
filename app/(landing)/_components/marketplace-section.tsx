@@ -105,7 +105,10 @@ function MarketplaceSection() {
                     {statsInView ? (
                         <>
                           <CountUp start={0} end={stat.value} duration={2} separator=","/>
-                          {stat.subtitle === 'Hours saved' && 'h'}
+                          {stat.subtitle === 'Hours saved' && 'h+'}
+                          {
+                            stat.subtitle==='Businesses Listed' && '+'
+                          }
                         </>
                     ) : (
                         0

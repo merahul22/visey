@@ -13,24 +13,24 @@ const OPTIONS: EmblaOptionsType = { loop: true };
 const SLIDES: Testimonial[] = [
   {
     image: '/img/testimonial2.jpg',
-    content: '"Visey made it easy for our startup to find trusted service providers. The platform saved us time and helped us connect with the right resources to scale faster."',
+    content: '"Visey made it quick to find trusted resource providers for my startup. With its support, we were able to scale faster"',
   },
   {
     image: '/img/testimonial1.png',
-    content: '"As an SME, Visey helped us access quality business solutions quickly. It’s the perfect platform for finding reliable partners in marketing and tech."',
+    content: '"For our MSME, Visey helped us find reliable partners in marketing and tech. I find the marketplace a perfect place to find quality business solutions."',
   },
   {
     image: '/img/testimonial3.jpg',
-    content: "Visey's marketplace is a game-changer! We easily found the right legal and financial services for our startup, saving us time and effort.",
+    content: "It's a game-changer for startups! We easily found the right legal and financial services for our startup at zero cost, saving us time, effort and money.",
   },
   {
     image: '/img/testimonial4.jpg',
-    content: "Thanks to Visey, we connected with the right businesses to grow our SME. It's an invaluable resource for finding the right tools and services."
+    content: "Thanks to Visey, we could connect with every resource provider needed to grow our early-stage MSME. It’s an invaluable resource for finding tools and services."
 ,
   },
   {
     image: '/img/testimonial1.png',
-    content: "Visey helped our startup find the perfect tech partners and streamline our growth. A must-have platform for any entrepreneur.",
+    content: "We found the perfect tech partners and were able to streamline our growth. It’s a must-have platform for entrepreneur support.",
   },
 ];
 

@@ -5,17 +5,17 @@ const businessSection = [
   {
     title: "Actionable Insights for Growth",
     description:
-      "Visey’s platform offers valuable insights to help resource providers better serve the needs of startups",
+      "Visey’s platform offers analytics for valuable insights to help you better serve the needs of startups.",
   },
   {
     title: "Reach your Target Audience",
     description:
-      "Visey enables businesses to efficiently connect with Indian startups actively seeking their specific services.",
+      "Visey enables your business to efficiently connect with Indian startups actively seeking your services.",
   },
   {
     title: "Build Trust Through Transparency",
     description:
-      "Integrated reviews and ratings ensure transparency, fostering trust and credibility among startups and service providers",
+      "Integrated verification, ratings and reviews ensure transparency, fostering trust and credibility among startups and resource providers.",
   },
 ];
 
