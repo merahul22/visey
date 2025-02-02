@@ -13,14 +13,14 @@ export default async function ProtectedLayout({
 }>) {
   const session = await auth();
   if (!session || !session.user) {
-    return <div>
-      <p>Not Logged in!</p>
-      <Link href="/login">
-        <Button>
+     return <div>
+       <p>Not Logged in!</p>
+       <Link href="/login">
+         <Button>
           Login
         </Button>
-      </Link>
-    </div>
+       </Link>
+     </div>
   }
 
   const user = session.user;

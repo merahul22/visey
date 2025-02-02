@@ -4,7 +4,11 @@ import { Separator } from '@/components/ui/separator';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import React from 'react';
-
+import { Metadata } from 'next';
+export const metadata:Metadata={
+  title:"Partner with Visey | Empowering India's Startup Ecosystem",
+  description:"Partner with Visey to support India’s innovative startups. Join our network of investors, mentors, and resource providers to create lasting impact and growth."
+}
 const page = () => {
   return (
     <div className="m-8 mb-24 p-8 border-2 rounded-xl">
@@ -13,19 +17,11 @@ const page = () => {
            Partner With Us
         </h1>
         <p className="font-medium">
-          At Visey, we’re committed to empowering the entrepreneurial ecosystem
-          across India, and we
-          believe that collaboration is key to this journey. By partnering with
-          us, you’ll join a network
-          of forward-thinking investors, mentors, service providers, and
-          stakeholders who are all
-          dedicated to supporting innovative startups and breaking down barriers
-          for entrepreneurs
-          everywhere.
+        At Visey, we're passionate about empowering India’s entrepreneurial ecosystem. We believe that collaboration drives success, and by partnering with Visey, you can be part of a dynamic network of investors, mentors, resource providers, and other key stakeholders. Our shared mission is to support innovative startups and create a thriving environment for entrepreneurs across the country.
         </p>
       </div>
       <div className="pt-16">
-        <h2 className="font-semibold text-2xl mb-8 text-center">Why Partner with Us?</h2>
+        <h2 className="font-semibold text-2xl mb-8 text-center">Why Partner with Visey?</h2>
         <div className="max-w-screen-2xl mx-auto flex flex-col gap-6 md:flex-row">
           <div
             className="px-10 pt-10 pb-24 rounded-2xl space-y-6 bg-primary-landing-light text-base-white flex-1"
@@ -36,14 +32,10 @@ const page = () => {
             </div>
             <div className="space-y-4 ">
               <h3 className="font-degular font-medium text-hero leading-tight">
-                Access to a Dynamic Startup Community
+              Access to a Dynamic Startup Community
               </h3>
               <p className="">
-                Connect with passionate entrepreneurs and promising
-                startups across India.
-                Share your expertise, showcase your offerings, and build
-                relationships with the leaders
-                of tomorrow.
+              Join a vibrant community of entrepreneurs, innovative businesses, and startup founders. By collaborating with Visey, you can connect with passionate entrepreneurs, offer your resources, and build long-term relationships with the leaders of tomorrow.
               </p>
             </div>
           </div>
@@ -56,13 +48,10 @@ const page = () => {
             </div>
             <div className="space-y-4 ">
               <h3 className="font-degular font-medium text-hero leading-tight">
-                Create Lasting Impact
+              Create a Lasting Impact
               </h3>
               <p className="">
-                Together, we can break down barriers in the entrepreneurial journey,
-                accelerate startup growth, and foster an environment where innovation can thrive. Partnering
-                with Visey isn’t just a collaboration; it’s a commitment to building a resilient and
-                accessible ecosystem.
+              Our partnership will help break down barriers for startups, accelerating their growth and fostering an ecosystem where creativity and innovation thrive. At Visey, collaboration isn’t just a partnership—it’s a shared commitment to building a resilient and accessible environment for entrepreneurial success.
               </p>
             </div>
           </div>
@@ -75,55 +64,52 @@ const page = () => {
             </div>
             <div className="space-y-4 ">
               <h3 className="font-degular font-medium text-hero leading-tight">
-                Mutual Growth Opportunities
+              Mutual Growth Opportunities
               </h3>
               <p className="">
-                As a Visey partner, you gain access to a powerful network of resources,
-                insights, and strategic alliances. Together, we create value and unlock growth opportunities
-                for both our partners and the startups we serve.
+              As a Visey partner, you’ll have access to a wealth of resources, strategic insights, and alliances. Together, we unlock growth opportunities that benefit both our partners and the startups we support.
               </p>
             </div>
           </div>
         </div>
       </div>
       <div className="pt-16">
-        <h2 className="font-semibold text-2xl text-center">Who we partner with?</h2>
-        <p className="pt-8">We’re looking for partners from diverse areas of the startup ecosystem, including:</p>
+        <h2 className="font-semibold text-2xl text-center">Who Can Partner with Us?</h2>
+        <p className="pt-8">We are looking to partner with individuals and organizations that align with our vision for a flourishing startup ecosystem. This includes:</p>
         <ul className="pt-6 list-disc pl-4">
           <li>
             <p>
               <span className="font-semibold">Investors:</span>
-              aiming to support impactful ventures
+              Looking to fund high-impact ventures and drive startup growth.
             </p>
           </li>
           <li>
             <p>
               <span className="font-semibold">Mentors:</span>
-              eager to guide entrepreneurs with their expertise
+              Eager to share their expertise and guide aspiring entrepreneurs
             </p>
           </li>
           <li>
             <p>
               <span className="font-semibold">Incubators & Accelerators:</span>
-              sharing our vision for ecosystem growth
+              Organizations passionate about ecosystem growth and startup success.
             </p>
           </li>
           <li>
             <p>
               <span className="font-semibold">Service Providers:</span>
-              offering tools and resources for startup success
+              Businesses offering tools and resources that contribute to startup growth.
             </p>
           </li>
           <li>
             <p>
               <span className="font-semibold">Entrepreneurial Events:</span>
-              interested in collaborating to create engaging, impactful experiences for the startup community
+              Interested in collaborating to create engaging, educational experiences for the startup community.
             </p>
           </li>
         </ul>
         <p className="pt-8">
-          Let’s work together to shape the future of innovation in India. Reach out to us at <span className="font-semibold">contact@visey.co.in</span> to explore how
-          we can make a difference, together. Also you can directly call us on <span className="font-semibold">+91 78275 86754</span>
+        Together, we can drive forward the future of innovation in India. Reach out to us at <span className="font-semibold">contact@visey.co.in</span> or call us at<span className="font-semibold">+91 78275 86754</span> to explore how we can create meaningful change together.
         </p>
       </div>
       <div className="pt-16">

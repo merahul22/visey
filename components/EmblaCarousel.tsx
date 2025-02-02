@@ -30,7 +30,7 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
   return (
     <div className={`max-w-[320px] ${className || ''}`}>
       <div className="overflow-hidden" ref={emblaRef}>
-        <div className="flex flex-row">
+        <div className="flex flex-row p-3">
           {slides.map((slide, index) => (
             <div key={index}>
               <TestimonialCard image={slide.image} content={slide.content} />

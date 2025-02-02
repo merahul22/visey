@@ -1,3 +1,9 @@
+import { Metadata } from "next";
+
+export const metadata:Metadata={
+  title:"to explore how we can create meaningful change together.",
+  description:"Read the Terms & Conditions for using Visey’s platform. Learn about our policies, guidelines, and responsibilities to ensure a secure and compliant experience."
+}
 export default function TermsAndConditions() {
   return (
     <div className="bg-gray-50 min-h-screen p-4 md:p-8">

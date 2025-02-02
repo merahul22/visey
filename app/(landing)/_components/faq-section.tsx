@@ -19,22 +19,22 @@ const faqData = [
   {
     question: " What is Visey, and how does it benefit my business?",
     answer:
-      "Visey simplifies the search process by offering a curated marketplace of vetted resource providers tailored to the unique needs of Indian startups. Instead of navigating multiple platforms, you can easily filter, compare, and connect with trusted providers for legal, digital marketing, mentorship, and other critical services—all in one place, we help you to allign with startup India vision",
+      "Visey is India’s first dedicated marketplace designed to connect resource providers with startups, helping you generate targeted leads and establish valuable partnerships. Whether you specialize in financial planning, SEO services, or startup mentorship programs, Visey ensures your expertise reaches the startups that need it.",
   },
   {
     question: "Is there a cost to join Visey?",
     answer:
-      "For startups, Visey is completely free, providing unrestricted access to a wide range of resource providers. Resource providers can start with a free basic tier, which includes listing their services and connecting with startups. Premium plans are also available for advanced features such as lead generation, analytics, enhanced visibility, and improved ranking within the platform.",
+      "Visey is India’s first dedicated marketplace designed to connect resource providers with startups, helping you generate targeted leads and establish valuable partnerships. Whether you specialize in financial planning, SEO services, or startup mentorship programs, Visey ensures your expertise reaches the startups that need it.",
   },
   {
     question: "What kind of businesses can join Visey?",
     answer:
-      "Visey supports a wide range of businesses essential to startup success, including legal services, financial consulting, digital marketing, software development, human resources, mentorship programs, and more. Whether your business specializes in helping startups with company registration or providing tools for scaling operations, Visey connects you directly with your target audience.",
+      "Visey supports a wide range of resource providers essential to startup success, including legal services, financial consulting, digital marketing, software development, design services, human resources, mentorship programs, and many more. Whether your business specializes in helping startups with company registration or providing tools for scaling operations, Visey connects you directly with your target audience.",
   },
   {
     question: "What if I don't find the exact service I need?",
     answer:
-      "Visey is constantly expanding its service offerings. If you don’t find the specific service you need, you can submit a request, and our team will work to onboard suitable resource providers to fulfill your requirements. We aim to ensure no startup resource need goes unmet",
+      "Visey is constantly expanding its service offerings. If you don’t find the specific service you need, you can submit a request, and our team will work to onboard suitable resource providers to fulfill your requirements. We aim to ensure no startup resource need goes unmet.",
   },
   {
     question: "How can I leave feedback on a service provider?",

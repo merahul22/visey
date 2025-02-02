@@ -40,9 +40,9 @@ const gothic = localFont({
 
 export const metadata: Metadata = {
   title:
-    "Visey | Startup Growth Platform for MSMEs – Solutions, Mentorship & More",
+    "Visey | Indian Startup Growth | Funding, Mentorship, AI Tools",
   description:
-    "Join Visey, India’s leading platform for startups. Access resources, mentorship, and growth tools tailored for Indian startups. Be part of the Startup India ecosystem and succeed with Visey.",
+    "Join Visey, India's leading startup platform. Access mentorship, funding, resources, and AI tools to scale your startup. Be part of India's startup ecosystem.",
   keywords:
     "Visey, startup resources, SME services, business marketplace, India startups, resource providers, business solutions",
 };

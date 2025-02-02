@@ -39,7 +39,7 @@ function TargetAudienceSection() {
               >
                 Startups & MSMEs
               </h1>
-              <p className="md:text-2xl text-xl font-light">
+              <p className="font-light">
               Search resource providers according to your needs and get results in seconds. Trust with verification, ratings and reviews. Save time and focus on what truly matters to grow your business with expert support in funding, mentorship, networking, and more. Plus, it’s completely free to find resources.
               </p>
             </div>
@@ -48,7 +48,7 @@ function TargetAudienceSection() {
               <h1 className="font-degular font-semibold text-heading4 md:text-4xl">
               Resource Providers
               </h1>
-              <p className="text-xl md:text-2xl font-light">
+              <p className="font-light">
               Boost your revenue by generating high-quality leads through our platform. Gain better visibility and reach to startups and MSMEs seeking legal, financial, digital marketing, and other services. Leverage in-depth business analytics, data-driven insights and personalized recommendations of growth strategies for your business.
               </p>
             </div>

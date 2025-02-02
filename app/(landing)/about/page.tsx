@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button';
 import { ArrowUpRight } from '@phosphor-icons/react/dist/ssr';
 import { Separator } from '@/components/ui/separator';
 import Link from 'next/link';
+import { Metadata } from 'next';
 
 const profiles = [
   {name: "Jhonty Dhol", role: "Founder", image: "/img/Jhonty_dhol.jpg", linkedIn: "https://www.linkedin.com/in/jhonty-dhol-8997b7227/"},
@@ -14,7 +15,13 @@ const profiles = [
   {name: "Paras", role: "AI/ML", image: "/img/Paras.jpg", linkedIn: "#"},
   {name: "Sparsh Jain", role: "AI/ML", image: "/img/Sparsh_jain.jpg", linkedIn: "https://www.linkedin.com/in/sparsh-jain-1bb598298/"}
 ]
+export const metadata: Metadata = {
+  title:
+    "About Visey | Empowering Entrepreneurs in India's Startup Ecosystem",
+  description:
+    "At Visey, we connect Indian entrepreneurs with trusted resource providers, empowering them with the tools, mentorship, and support they need to succeed.",
 
+};
 const page = () => {
   return <div className="pb-10">
     <div
@@ -34,37 +41,11 @@ const page = () => {
         Visey</h1>
       <div
         className="font-medium flex flex-col justify-center items-center gap-6 mt-5 text-base px-10 text-justify">
-        <p>Welcome Indian entrepreneurs! We believe that every visionary has the
-          potential to change
-          the world, and we are here to make that journey accessible and
-          enriching. As active participants
-          in the Indian startup ecosystem, we understand firsthand the
-          challenges and limitations that
-          entrepreneurs face daily. We’ve navigated the rocky terrain of
-          uncertainty and resilience,
-          allowing us to truly empathize with the core feelings of every
-          entrepreneur striving to make
-          a difference. It is through our journey that we recognize the
-          struggles, the setbacks, and the
-          triumphs that come with the entrepreneurial path.
+        <p>Welcome, Indian entrepreneurs! At Visey, we believe every visionary has the potential to change the world, and we’re here to make that journey more accessible and enriching. As active participants in the Indian startup ecosystem, we’ve experienced firsthand the challenges entrepreneurs face. We've navigated the uncertainty and resilience required to succeed, and we truly understand the core struggles of entrepreneurs.
         </p>
-        <p>To break through the limitations and barriers of this journey, we
-          created Visey—your gateway
-          to swiftly accessing the resources you need quickly by connecting you
-          with every stakeholder
-          in the startup ecosystem. We are committed to ensuring that no
-          entrepreneur feels alone in
-          their quest for success. With Visey, you have the support, insights,
-          and connections to
-          elevate your journey and transform your ideas into reality.
+        <p>To break through these barriers, we created Visey—a platform that connects startups with trusted resource providers across India’s entrepreneurial ecosystem. Whether you’re a startup looking for resources or a resource provider seeking clients, we help foster the right connections to fuel your growth.
         </p>
-        <p>Join us on this exciting journey as we build an inclusive, dynamic,
-          and supportive environment
-          for entrepreneurs. Whether you are just starting out or looking to
-          scale your business, we
-          invite you to connect with us and discover how we can help you
-          succeed. Together, let’s
-          reshape the future of entrepreneurship!
+        <p>The Indian startup ecosystem is often centered in Tier 1 cities, but some of the brightest entrepreneurial talents come from Tier 2, Tier 3, and rural areas. These entrepreneurs face immense challenges, but Visey is here to level the playing field, ensuring that every dreamer, regardless of their background, gets equal access to opportunities.
         </p>
       </div>
     </div>
@@ -88,42 +69,17 @@ const page = () => {
       <div className="max-w-[1000px] mx-auto py-16 text-base-white">
         <div className="px-12">
           <h2 className="text-center text-[32px] font-medium pb-4">Mission</h2>
-          <h3 className="text-2xl text-center font-medium pb-2">&#34;Empowering
-            Indian entrepreneurs with a world-class, accessible
-            ecosystem that ignites
-            growth, innovation, and lasting impact.&#34;
+          <h3 className="text-2xl text-center font-medium pb-2">&#34;Empowering Indian entrepreneurs with a world-class, accessible ecosystem that ignites growth, innovation, and lasting impact.&#34;
           </h3>
-          <p className="text-base text-center">At the heart of our organization is
-            a commitment to providing a
-            high-quality, accessible
-            entrepreneurial ecosystem tailored specifically for Indian
-            entrepreneurs. We strive to equip
-            you with the tools, resources, and support you need to turn your
-            innovative ideas into
-            successful ventures. Our ecosystem fosters collaboration,
-            creativity,
-            and growth, ensuring
-            that every entrepreneur has the opportunity to thrive.
+          <p className="text-base text-center">At the core of Visey is a vision to provide an accessible entrepreneurial ecosystem that supports Indian entrepreneurs in their pursuit of success. We are committed to providing the resources, mentorship, and growth solutions that every startup needs to thrive. Our ecosystem encourages creativity, collaboration, and growth, ensuring that every entrepreneur has the tools they need to achieve their dreams
           </p>
         </div>
         <Separator className="my-10" />
         <div className="px-12">
           <h2 className="text-center text-[32px] font-medium pb-4">Vision</h2>
-          <h3 className="text-2xl text-center font-medium pb-2">&#34;A global
-            landscape where every entrepreneur has the resources
-            and support to thrive, no
-            matter where they are.&#34;
+          <h3 className="text-2xl text-center font-medium pb-2">&#34;A global landscape where every entrepreneur has the resources and support to thrive, no matter where they are.&#34;
           </h3>
-          <p className="text-base text-center">We envision a world where
-            geographical boundaries no longer limit
-            entrepreneurial spirit and
-            ambition. Our goal is to create a global landscape where every
-            entrepreneur, regardless of
-            their location, has access to the resources, mentorship, and
-            connections necessary to realize
-            their dreams. Together, we can break barriers, cultivate talent, and
-            inspire the next
-            generation of leaders.
+          <p className="text-base text-center">We envision a future where no entrepreneurial spirit is hindered by geographical boundaries. Our goal is to create a global ecosystem where entrepreneurs from every corner of India, including rural areas, have access to the resources, mentorship, and connections they need to achieve their goals. Together, we can break barriers, unlock potential, and inspire the next generation of leaders.
           </p>
         </div>
       </div>
@@ -147,11 +103,7 @@ const page = () => {
       ></div>
       <div id='team' className="max-w-[1200px] mx-auto pt-12">
         <h1 className="font-degular font-semibold text-heading4 md:text-heading3 lg:text-heading2 xl:text-heading1 leading-snug text-[#3f3f3f] text-center">Meet the Team Behind Visey</h1>
-        <p className="font-medium text-center pt-2 px-24">Our team is a passionate blend of innovators, strategists, and dreamers
-          - all united by a
-          common goal: to empower and elevate India’s entrepreneurial spirit.
-          Together, we&#39;re building
-          a brighter future for startups, one bold step at a time.
+        <p className="font-medium text-center pt-2 px-24">Our team is a passionate mix of innovators, strategists, and dreamers, all united by one mission: to elevate India’s entrepreneurial spirit. Together, we are building a brighter, more inclusive future for startups, one bold step at a time.
         </p>
         <div className="pt-20 flex flex-wrap justify-around gap-12">
           {profiles.map((profile, idx) => {
@@ -164,30 +116,22 @@ const page = () => {
     </div>
     <div id='product' className="pt-8 max-w-[1200px] mx-auto ">
       <h1 className="text-center font-degular font-semibold text-heading4 md:text-heading3 lg:text-heading2 xl:text-heading1 leading-snug text-[#3f3f3f]">Product</h1>
-      <p className="font-medium text-center px-24">Our platform is your gateway to growth—bringing Startups, SMEs, and
-        Businesses together with
-        the tools, insights, and networks they need to thrive. Dive in and
-        discover how we can empower
-        your success!
+      <p className="font-medium text-center px-24">Visey is the ultimate platform connecting Indian startups, MSMEs, and businesses, enabling them to thrive in a competitive landscape. With access to essential startup resources, innovative tools, and a collaborative network, we empower entrepreneurs to achieve their goals faster and more efficiently. Explore how Visey can be your partner in growth and success today!
       </p>
     </div>
     <div className="pt-16 max-w-[1200px] mx-auto">
-      <h1 className="text-center text-3xl font-semibold">For Startup & SMEs</h1>
+      <h1 className="text-center text-3xl font-semibold">For Startup & MSMEs</h1>
       <div className="flex flex-col gap-16 pt-12 px-8">
         <div className="flex flex-col md:flex-row items-center gap-16">
           <div className="flex flex-col gap-4 max-w-[400px]">
             <div>
               <h2 className="font-semibold">Efficient Search Engine</h2>
-              <p className="font-medium">Find exactly what you need, fast. Our search feature delivers
-                accurate, relevant results—no
-                more wasting time sifting through unrelated content.
+              <p className="font-medium">Find the resources your startup or MSME needs quickly and accurately. Our advanced search delivers relevant results, saving you time and effort.
               </p>
             </div>
             <div>
               <h2 className="font-semibold">Personalized Recommendations</h2>
-              <p className="font-medium">Get suggestions tailored to your business goals and needs. Our
-                smart engine adapts to
-                bring you the most useful resources and connections.
+              <p className="font-medium">Receive tailored suggestions that align with your business goals and industry needs. Visey’s smart engine connects startups and MSMEs with the most valuable resources, tools, and partnerships.
               </p>
             </div>
           </div>
@@ -213,18 +157,13 @@ const page = () => {
           </div>
           <div className="flex flex-col gap-4 max-w-[400px]">
             <div>
-              <h2 className="font-semibold">All Resources on One Platform</h2>
-              <p className="font-medium">Everything in one place. Access a wide range of resources—
-                funding, networking, and
-                tools— without needing multiple subscriptions or platforms.
+              <h2 className="font-semibold">All Resources on One Place</h2>
+              <p className="font-medium">Access everything your business needs—from startup funding to networking and business growth tools—all on one platform. Simplify your entrepreneurial journey without juggling multiple platforms or subscriptions.
               </p>
             </div>
             <div>
               <h2 className="font-semibold">Robust Rating & Review System</h2>
-              <p className="font-medium">Make informed decisions with transparent, community-driven
-                feedback. Check ratings and
-                reviews from other startups to ensure you’re choosing the best
-                resources.
+              <p className="font-medium">Make confident decisions with community-driven ratings and reviews. Learn from other Indian startups and MSMEs about the most effective business tools and resources
               </p>
             </div>
           </div>
@@ -234,18 +173,12 @@ const page = () => {
             <div>
               <h2 className="font-semibold">On-Demand Mentor Guidance</h2>
               <p className="font-medium">
-                Expert advice, whenever you need it. Connect with mentors who
-                provide targeted
-                insights to help you overcome challenges and grow.
+              Connect with expert mentors for personalized insights and advice. Overcome challenges with targeted guidance from experienced professionals who understand the Indian startup ecosystem.
               </p>
             </div>
             <div>
               <h2 className="font-semibold">Mentor-Mentee Match</h2>
-              <p className="font-medium">Connect with mentors who truly align with your business’s stage,
-                industry, and
-                . Our mentor-mentee matching feature pairs you with experienced
-                mentors who can guide
-                you on your unique path to success.
+              <p className="font-medium">Get paired with mentors who specialize in your industry and growth stage. Our matching feature ensures startups and MSMEs find mentors aligned with their needs, boosting your chances of success.
               </p>
             </div>
           </div>
@@ -276,18 +209,13 @@ const page = () => {
           </div>
           <div className="flex flex-col gap-4 max-w-[400px]">
             <div>
-              <h2 className="font-semibold">Better Reach to Startups & SMEs</h2>
-              <p className="font-medium">Connect with a focused audience of startups and SMEs actively
-                seeking services like
-                yours, giving you unparalleled access to this high-potential
-                segment.
+              <h2 className="font-semibold"> Reach to Startups & SMEs</h2>
+              <p className="font-medium">Tap into a focused audience of Indian startups and MSMEs actively seeking the resources you provide. Connect effortlessly with high-potential entrepreneurs and build lasting partnerships.
               </p>
             </div>
             <div>
-              <h2 className="font-semibold">Simplified Traction Building</h2>
-              <p className="font-medium">Easily build traction with meaningful connections. Streamline
-                your marketing and connect
-                with clients who can help propel your business forward.
+              <h2 className="font-semibold">Simplify Traction Building</h2>
+              <p className="font-medium">Easily build traction by connecting with startups and MSMEs looking for your business resources. Strengthen your presence in the startup ecosystem and streamline your marketing efforts.
               </p>
             </div>
           </div>
@@ -295,28 +223,18 @@ const page = () => {
         <div className="flex flex-col md:flex-row items-center gap-16">
           <div className="flex flex-col gap-4 max-w-[400px]">
             <div>
-              <h2 className="font-semibold">Leads of Interested Potential
-                Customers</h2>
-              <p className="font-medium">Access warm leads from startups and SMEs already interested in
-                your services. Streamline
-                your sales process and improve conversion rates.
+              <h2 className="font-semibold">Warm Leads Delivered</h2>
+              <p className="font-medium">Access warm leads from startups and MSMEs already interested in your business solutions. Increase your conversion rates with a qualified, engaged audience.
               </p>
             </div>
             <div>
-              <h2 className="font-semibold">Promote Your Business</h2>
-              <p className="font-medium">Highlight your brand directly on our platform at just $0.82/day,
-                gaining visibility
-                among startups and SMEs eager to discover new solutions and
-                services.
+              <h2 className="font-semibold">Marketing Analytics Dashboard</h2>
+              <p className="font-medium">Leverage data-driven insights to better understand your audience. Track engagement, identify what resonates, and optimize your marketing strategies to meet the needs of Indian entrepreneurs.
               </p>
             </div>
             <div>
-              <h2 className="font-semibold">Posting Opportunities</h2>
-              <p className="font-medium">List funding opportunity, partnerships, events, and incubation or
-                acceleration service
-                opportunities on the platform, reaching a motivated audience ready
-                to engage with your
-                business.
+              <h2 className="font-semibold">Cut Promotional Costs</h2>
+              <p className="font-medium">Promote your products and resources directly to a qualified audience of startups and MSMEs. Save significantly on traditional marketing costs while driving meaningful engagement.
               </p>
             </div>
           </div>

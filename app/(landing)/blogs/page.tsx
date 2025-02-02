@@ -7,6 +7,11 @@ import {
   CaretLeft,
   ArrowUpRight,
 } from "@phosphor-icons/react/dist/ssr";
+import { Metadata } from "next";
+export const metadata:Metadata={
+title:"Visey Blogs | Insights & Tips for Startup Growth and Innovation",
+description:"Explore Visey's blogs for valuable insights and strategies to help startups grow. Stay updated on the latest trends in innovation, business solutions, and more."
+}
 
 const Page = () => {
   return (
