@@ -33,7 +33,7 @@ const footerData = [
       { name: "Terms & Conditions", link: "/tnc" },
       { name: "Cookie Policy", link: "/tnc#cookie" },
       { name: "Privacy Policy", link: "/tnc#privacy" },
-      { name: "Investor Relation", link: "/partner-with-us" },
+      { name: "Partner With Us", link: "/partner-with-us" },
     ],
   },
 ];

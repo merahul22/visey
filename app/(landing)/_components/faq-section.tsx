@@ -19,7 +19,7 @@ const faqData = [
   {
     question: " What is Visey, and how does it benefit my business?",
     answer:
-      "Visey simplifies the search process by offering a curated marketplace of vetted resource providers tailored to the unique needs of Indian startups. Instead of navigating multiple platforms, you can easily filter, compare, and connect with trusted providers for legal, digital marketing, mentorship, and other critical services—all in one place.",
+      "Visey simplifies the search process by offering a curated marketplace of vetted resource providers tailored to the unique needs of Indian startups. Instead of navigating multiple platforms, you can easily filter, compare, and connect with trusted providers for legal, digital marketing, mentorship, and other critical services—all in one place, we help you to allign with startup India vision",
   },
   {
     question: "Is there a cost to join Visey?",

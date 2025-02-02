@@ -159,7 +159,7 @@ function MarketplaceSection() {
             {/* Features Section */}
             <div className="flex flex-col items-center">
               <h3 className="font-degular font-semibold text-2xl text-center text-feature md:text-3xl lg:text-heading3">
-              Visey is the ultimate platform for Indian startups, connecting them with trusted resource providers and mentorship opportunities tailored to their needs
+              Visey is your one stop digital hub for all startup resource needs 
               </h3>
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 text-center w-full py-9 md:pt-14 md:pb-12 lg:pt-16">
                 {features.map((feat) => (

@@ -12,23 +12,23 @@ interface Testimonial {
 const SLIDES: Testimonial[] = [
   {
     image: '/img/testimonial2.jpg',
-    content: '“A game-changer for our business.”',
+    content: '"Visey made it quick to find trusted resource providers for my startup. With its support, we were able to scale faster"',
   },
   {
     image: '/img/testimonial1.png',
-    content: '“An absolute must-have for startups and businesses.”',
+    content: '"For our MSME, Visey helped us find reliable partners in marketing and tech. I find the marketplace a perfect place to find quality business solutions."',
   },
   {
     image: '/img/testimonial3.jpg',
-    content: '“Boosted our productivity instantly.”',
+    content: '"For our MSME, Visey helped us find reliable partners in marketing and tech. I find the marketplace a perfect place to find quality business solutions."',
   },
   {
     image: '/img/testimonial4.jpg',
-    content: '“Perfect for startups. Highly recommend.”',
+    content: '"Thanks to Visey, we could connect with every resource provider needed to grow our early-stage MSME. It’s an invaluable resource for finding tools and services."',
   },
   {
     image: '/img/testimonial1.png',
-    content: '“Great tool for new startup and businesses.”',
+    content: '"We found the perfect tech partners and were able to streamline our growth. It’s a must-have platform for entrepreneur support."',
   },
 ];
 
