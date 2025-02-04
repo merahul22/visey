@@ -1,17 +1,28 @@
+"use client";
+
 import Image from "next/image";
 import { Button } from "../ui/button";
 import { Input } from "@/components/ui/input";
 import { MagnifyingGlassIcon } from "@radix-ui/react-icons";
-import { auth } from "@/auth";
+import { useSession } from "next-auth/react";
 import { UserDropdown } from "@/components/UserDropdown";
 import Link from "next/link";
 import { Business, Startup } from "@prisma/client";
 import { cn } from "@/lib/utils";
 import { NotificationsDropdown } from "@/components/NotificationsDropdown";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
 
-export async function Navbar({ className }: { className?: string }) {
-  const session = await auth();
+export function Navbar({ className }: { className?: string }) {
+  const { data: session } = useSession();
   const user = session?.user;
+  const router = useRouter();
+  const [searchQuery, setSearchQuery] = useState("");
+
+  const handleSearchSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    router.push(`/search?query=${searchQuery}`);
+  };
 
   const userDropDownProps = {
     type: user?.type as "BUSINESS" | "STARTUP",
@@ -64,16 +75,18 @@ export async function Navbar({ className }: { className?: string }) {
           )}
 
           <div className="hidden lg:block w-full">
-            <div className="relative shadow-inner w-[30rem] xl:w-[40rem]">
+            <form onSubmit={handleSearchSubmit} className="relative shadow-inner w-[30rem] xl:w-[40rem]">
               <Input
                 className="flex-1 pr-10 border-none py-6 bg-white"
                 type="text"
                 placeholder="Type to Search.."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
               />
               <span className="absolute inset-y-0 right-3 flex items-center pointer-events-none">
                 <MagnifyingGlassIcon className="w-5 h-5 text-gray-600" />
               </span>
-            </div>
+            </form>
           </div>
         </div>
 
@@ -124,14 +137,18 @@ export async function Navbar({ className }: { className?: string }) {
       </nav>
 
       <div className="relative z-10 mt-4 shadow-inner lg:hidden">
-        <Input
-          className="flex-1 pr-10 border-none py-6 bg-white"
-          type="text"
-          placeholder="Type to Search.."
-        />
-        <span className="absolute inset-y-0 right-3 flex items-center pointer-events-none">
-          <MagnifyingGlassIcon className="w-5 h-5 text-gray-600" />
-        </span>
+        <form onSubmit={handleSearchSubmit}>
+          <Input
+            className="flex-1 pr-10 border-none py-6 bg-white"
+            type="text"
+            placeholder="Type to Search.."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+          />
+          <span className="absolute inset-y-0 right-3 flex items-center pointer-events-none">
+            <MagnifyingGlassIcon className="w-5 h-5 text-gray-600" />
+          </span>
+        </form>
       </div>
     </header>
   );
