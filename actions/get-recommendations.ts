@@ -1,7 +1,7 @@
-'use server';
+"use server";
 
-import axios, { AxiosError } from 'axios';
-import * as z from 'zod';
+import axios, { AxiosError } from "axios";
+import * as z from "zod";
 
 // Define the schema for the recommendation request
 const recommendationSchema = z.object({
@@ -16,7 +16,7 @@ const recommendationSchema = z.object({
 // Function to get recommendations
 export const getRecommendations = async (
   startupDetails: z.infer<typeof recommendationSchema>,
-  limit: number = 10 // Default limit set to 10 if not provided
+  limit: number = 10, // Default limit set to 10 if not provided
 ) => {
   console.log("Received startup details for validation:", startupDetails);
 
@@ -24,11 +24,11 @@ export const getRecommendations = async (
   const validatedFields = recommendationSchema.safeParse(startupDetails);
 
   if (!validatedFields.success) {
-    console.error('Validation failed:', validatedFields.error);
-    return { error: 'Invalid fields!' };
+    console.error("Validation failed:", validatedFields.error);
+    return { error: "Invalid fields!" };
   }
 
-  console.log('Validated fields:', validatedFields.data);
+  console.log("Validated fields:", validatedFields.data);
 
   try {
     // Make the API call to get recommendations
@@ -37,30 +37,33 @@ export const getRecommendations = async (
       validatedFields.data,
       {
         headers: {
-          'Content-Type': 'application/json',
-          'accept': 'application/json',
+          "Content-Type": "application/json",
+          accept: "application/json",
         },
-      }
+      },
     );
 
-    console.log('API response:', response.data);
+    console.log("API response:", response.data);
     return response.data;
   } catch (error) {
     if (error instanceof AxiosError) {
       if (error.response) {
         // The request was made and the server responded with a status code
         // that falls out of the range of 2xx
-        console.error('Failed to fetch recommendations:', error.response.data);
-        return { error: 'Failed to fetch recommendations', details: error.response.data };
+        console.error("Failed to fetch recommendations:", error.response.data);
+        return {
+          error: "Failed to fetch recommendations",
+          details: error.response.data,
+        };
       } else if (error.request) {
         // The request was made but no response was received
-        console.error('No response received:', error.request);
-        return { error: 'No response received from server' };
+        console.error("No response received:", error.request);
+        return { error: "No response received from server" };
       }
     }
     // Something happened in setting up the request that triggered an Error
-    console.error('Error in setting up request:', (error as Error).message);
-    return { error: 'Error in setting up request' };
+    console.error("Error in setting up request:", (error as Error).message);
+    return { error: "Error in setting up request" };
   }
 };
 
