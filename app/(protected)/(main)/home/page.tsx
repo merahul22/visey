@@ -50,7 +50,7 @@ async function HomePage() {
           Funding Opportunities
         </h2>
         <div className="flex flex-col gap-4">
-          {Array.from({ length: 3 }).map((item, idx) => (
+          {Array.from({ length: 3 }).map((_, idx) => (
             <FundingCard
               key={idx}
               promoted
