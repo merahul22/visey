@@ -64,7 +64,7 @@ export default function StackCardCarousel({ className } : { className?: string }
           const activeSlide = idx === 2;
           return (
             <div
-              key={slide.content}
+              key={idx}
               className={cn(
                 `p-4 grid grid-rows-4 gap-8 card card-${
                   idx + 1
