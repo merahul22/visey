@@ -1,10 +1,15 @@
 "use client";
 
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
-import { Button } from '../ui/button';
-import { Bell, House, MagnifyingGlass, Plus } from '@phosphor-icons/react/dist/ssr';
-import { cn } from '@/lib/utils';
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { Button } from "../ui/button";
+import {
+  Bell,
+  House,
+  MagnifyingGlass,
+  Plus,
+} from "@phosphor-icons/react/dist/ssr";
+import { cn } from "@/lib/utils";
 
 interface SidebarProps {
   userType: "BUSINESS" | "STARTUP";
@@ -18,7 +23,12 @@ const getSidebarItems = (userType: SidebarProps["userType"]) => [
   },
   {
     label: userType === "STARTUP" ? "Search" : "Post",
-    icon: userType === "STARTUP" ? <MagnifyingGlass size={18} /> : <Plus size={18} />,
+    icon:
+      userType === "STARTUP" ? (
+        <MagnifyingGlass size={18} />
+      ) : (
+        <Plus size={18} />
+      ),
     route: userType === "STARTUP" ? "/search" : "/post-funding-opportunity",
   },
   {
@@ -37,7 +47,7 @@ export function Sidebar({ userType }: SidebarProps) {
       {/* Top Section */}
       <div className="flex flex-col gap-y-4 flex-grow">
         {sidebarItems.map((item) => {
-          const isActive = pathname.startsWith(item.route);
+          const isActive = pathname?.startsWith(item.route);
 
           return (
             <Button
@@ -45,11 +55,14 @@ export function Sidebar({ userType }: SidebarProps) {
               variant="ghost"
               className={cn(
                 "justify-start w-full flex items-center gap-x-4",
-                isActive && "bg-neutrals-100 text-primary font-medium"
+                isActive && "bg-neutrals-100 text-primary font-medium",
               )}
               asChild
             >
-              <Link href={item.route} aria-current={isActive ? "page" : undefined}>
+              <Link
+                href={item.route}
+                aria-current={isActive ? "page" : undefined}
+              >
                 <span className="-translate-y-0.5">{item.icon}</span>
                 <span>{item.label}</span>
               </Link>
