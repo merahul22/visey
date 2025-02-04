@@ -17,7 +17,7 @@ const page = () => {
            Partner With Us
         </h1>
         <p className="font-medium">
-        At Visey, we're passionate about empowering India’s entrepreneurial ecosystem. We believe that collaboration drives success, and by partnering with Visey, you can be part of a dynamic network of investors, mentors, resource providers, and other key stakeholders. Our shared mission is to support innovative startups and create a thriving environment for entrepreneurs across the country.
+        At Visey, we&#39;re passionate about empowering India’s entrepreneurial ecosystem. We believe that collaboration drives success, and by partnering with Visey, you can be part of a dynamic network of investors, mentors, resource providers, and other key stakeholders. Our shared mission is to support innovative startups and create a thriving environment for entrepreneurs across the country.
         </p>
       </div>
       <div className="pt-16">
