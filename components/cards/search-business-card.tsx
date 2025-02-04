@@ -6,12 +6,12 @@ interface Business {
   name: string;
   image: string;
   location: string;
-  averageRating: number;
+  averageRating?: number; // Ensure this is optional
   promoted: boolean;
-  services: { name: string }[];
+  services?: { name: string }[]; // Ensure this is optional
 }
 
-export function BusinessCard({ business }: { business: Business }) {
+export function SearchBusinessCard({ business }: { business: Business }) {
   return (
     <article className="border rounded-md">
       <div className="relative h-28 m-1 bg-gray-400 rounded-md">
@@ -29,12 +29,18 @@ export function BusinessCard({ business }: { business: Business }) {
             <Image src="/img/badge.png" height={24} width={24} alt="badge" />
           </h3>
           <div className="flex justify-center gap-x-3">
-            <h2 className="font-bold">{business.averageRating.toFixed(1)}</h2>
-            <div className="flex justify-center gap-x-1">
-              {Array.from({ length: 5 }).map((_, idx: number) => (
-                <span key={idx}>⭐</span>
-              ))}
-            </div>
+            {business.averageRating !== undefined ? (
+              <>
+                <h2 className="font-bold">{business.averageRating.toFixed(1)}</h2>
+                <div className="flex justify-center gap-x-1">
+                  {Array.from({ length: 5 }).map((_, idx: number) => (
+                    <span key={idx}>⭐</span>
+                  ))}
+                </div>
+              </>
+            ) : (
+              <p>No rating available</p>
+            )}
           </div>
           <p className="-translate-x-1.5 flex justify-center items-center gap-x-1">
             <MapPin />
@@ -42,7 +48,7 @@ export function BusinessCard({ business }: { business: Business }) {
           </p>
 
           <div className="flex justify-center pt-3 gap-x-2">
-            {business.services.map((service: { name: string }, idx: number) => (
+            {(business.services || []).map((service: { name: string }, idx: number) => (
               <button key={idx} className="py-0.5 px-2.5 rounded-full border">
                 {service.name}
               </button>
