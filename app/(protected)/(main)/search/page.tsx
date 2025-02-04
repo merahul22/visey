@@ -27,7 +27,7 @@ const SearchPage = () => {
       setBusinesses(data);
     };
 
-    fetchBusinesses().then((r) => console.log(r));
+    fetchBusinesses();
   }, [query, session, router]);
 
   return (
