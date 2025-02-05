@@ -1,10 +1,10 @@
-'use client';
+"use client";
 
-import { zodResolver } from '@hookform/resolvers/zod';
-import { useForm } from 'react-hook-form';
-import { z } from 'zod';
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
 
-import { Button } from '@/components/ui/button';
+import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
@@ -13,29 +13,29 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '@/components/ui/form';
-import { Input } from '@/components/ui/input';
-import { signUpSchema } from '@/schemas';
-import Link from 'next/link';
-import { FormError } from './FormError';
-import GoogleLogin from './GoogleLogin';
-import { useState, useTransition } from 'react';
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import { signUpSchema } from "@/schemas";
+import Link from "next/link";
+import { FormError } from "./FormError";
+import GoogleLogin from "./GoogleLogin";
+import { useState, useTransition } from "react";
 
-import { CheckIcon } from '@radix-ui/react-icons';
-import { register } from '@/actions/register';
-import { FormSuccess } from './FormSuccess';
-import { Stepper } from '../Stepper';
-import { useRouter } from 'next/navigation';
-import { toast } from 'sonner';
-import { Eye, EyeSlash } from '@phosphor-icons/react/dist/ssr';
+import { CheckIcon } from "@radix-ui/react-icons";
+import { register } from "@/actions/register";
+import { FormSuccess } from "./FormSuccess";
+import { Stepper } from "../Stepper";
+import { useRouter } from "next/navigation";
+import { toast } from "sonner";
+import { Eye, EyeSlash } from "@phosphor-icons/react/dist/ssr";
 
 const SignupForm = () => {
-  const [password, setPassword] = useState<string>('');
+  const [password, setPassword] = useState<string>("");
   const [loading, startTransition] = useTransition();
-  const [error, setError] = useState<string | undefined>('');
-  const [success, setSuccess] = useState<string | undefined>('');
+  const [error, setError] = useState<string | undefined>("");
+  const [success, setSuccess] = useState<string | undefined>("");
   const [currentStep, setCurrentStep] = useState<number>(1);
-  const [currentType, setCurrentType] = useState('' as 'STARTUP' | 'BUSINESS');
+  const [currentType, setCurrentType] = useState("" as "STARTUP" | "BUSINESS");
   const [isPasswordVisible, setIsPasswordVisible] = useState<boolean>(false);
 
   const router = useRouter();
@@ -44,16 +44,16 @@ const SignupForm = () => {
     resolver: zodResolver(signUpSchema),
     defaultValues: {
       type: currentType,
-      identifier: '',
-      password: '',
-      verificationCode: '',
-      name: '',
+      identifier: "",
+      password: "",
+      verificationCode: "",
+      name: "",
     },
   });
 
   const onSubmit = async (values: z.infer<typeof signUpSchema>) => {
-    setError('');
-    setSuccess('');
+    setError("");
+    setSuccess("");
 
     startTransition(async () => {
       const res = await register(values);
@@ -64,10 +64,10 @@ const SignupForm = () => {
 
       if (res.success) {
         toast.success("Account created successfully!");
-        if (currentType === 'BUSINESS') {
-          router.push('/list-business');
+        if (currentType === "BUSINESS") {
+          router.push("/list-business");
         } else {
-          router.push('/list-preferences');
+          router.push("/list-preferences");
         }
       }
     });
@@ -78,7 +78,7 @@ const SignupForm = () => {
       return;
     }
 
-    form.setValue('type', currentType);
+    form.setValue("type", currentType);
 
     // add type queries to navbar
     router.push(`?type=${currentType}`);
@@ -113,11 +113,11 @@ const SignupForm = () => {
                 <div className="flex flex-col items-center justify-center gap-4 lg:items-stretch lg:flex-row">
                   <div
                     className={`border w-[220px] border-neutrals-400 rounded-lg p-4 cursor-pointer hover:border-primary-500 ${
-                      currentType === 'STARTUP'
-                        ? 'border-primary-500 shadow-lg'
-                        : ''
+                      currentType === "BUSINESS"
+                        ? "border-primary-500 shadow-lg"
+                        : ""
                     }`}
-                    onClick={() => setCurrentType('STARTUP')}
+                    onClick={() => setCurrentType("BUSINESS")}
                   >
                     <h2 className="text-xl font-semibold mb-4">
                       List my Business, to reach startups
@@ -143,11 +143,11 @@ const SignupForm = () => {
                   </div>
                   <div
                     className={`border w-[220px] border-neutrals-400 rounded-lg p-4 cursor-pointer hover:border-primary-500 ${
-                      currentType === 'BUSINESS'
-                        ? 'border-primary-500 shadow-lg'
-                        : ''
+                      currentType === "STARTUP"
+                        ? "border-primary-500 shadow-lg"
+                        : ""
                     }`}
-                    onClick={() => setCurrentType('BUSINESS')}
+                    onClick={() => setCurrentType("STARTUP")}
                   >
                     <h2 className="text-xl font-semibold mb-4">
                       Find Resources, for my startup needs
@@ -264,7 +264,7 @@ const SignupForm = () => {
                             <div className="relative">
                               <Input
                                 className="mt-1"
-                                type={`${isPasswordVisible ? 'text' : 'password'}`}
+                                type={`${isPasswordVisible ? "text" : "password"}`}
                                 placeholder="Enter your password"
                                 {...field}
                                 onChange={(e) => {
@@ -275,12 +275,15 @@ const SignupForm = () => {
                               />
                               <span
                                 className="absolute inset-y-0 right-3 flex items-center cursor-pointer"
-                                onClick={() => setIsPasswordVisible(prev => !prev)}
+                                onClick={() =>
+                                  setIsPasswordVisible((prev) => !prev)
+                                }
                               >
-                                {isPasswordVisible ?
+                                {isPasswordVisible ? (
                                   <Eye className="h-5 w-5" />
-                                  :
-                                  <EyeSlash className="h-5 w-5" />}
+                                ) : (
+                                  <EyeSlash className="h-5 w-5" />
+                                )}
                               </span>
                             </div>
                           </FormControl>
@@ -289,8 +292,8 @@ const SignupForm = () => {
                             <span
                               className={`text-sm ${
                                 hasMinLength
-                                  ? 'text-success-200'
-                                  : 'text-neutrals-500'
+                                  ? "text-success-200"
+                                  : "text-neutrals-500"
                               }`}
                             >
                               <CheckIcon className="w-4 h-4 inline mr-1" />
@@ -300,8 +303,8 @@ const SignupForm = () => {
                             <span
                               className={`text-sm ${
                                 hasSpecialChar
-                                  ? 'text-success-200'
-                                  : 'text-neutrals-500'
+                                  ? "text-success-200"
+                                  : "text-neutrals-500"
                               }`}
                             >
                               <CheckIcon className="w-4 h-4 inline mr-1" />
@@ -311,8 +314,8 @@ const SignupForm = () => {
                             <span
                               className={`text-sm ${
                                 hasUpperCase
-                                  ? 'text-success-200'
-                                  : 'text-neutrals-500'
+                                  ? "text-success-200"
+                                  : "text-neutrals-500"
                               }`}
                             >
                               <CheckIcon className="w-4 h-4 inline mr-1" />
@@ -325,7 +328,7 @@ const SignupForm = () => {
                   </div>
                 </div>
                 <Button className="w-full" type="submit" disabled={loading}>
-                  {loading ? 'Signing up...' : 'Sign up'}
+                  {loading ? "Signing up..." : "Sign up"}
                 </Button>
               </form>
             </Form>

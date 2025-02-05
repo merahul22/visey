@@ -1,19 +1,26 @@
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Separator } from '@/components/ui/separator';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Separator } from "@/components/ui/separator";
 
-import { HeartStraight, ShareFat, Star } from '@phosphor-icons/react/dist/ssr';
-import { Button } from '@/components/ui/button';
+import {
+  HeartStraight,
+  PencilSimple,
+  ShareFat,
+  Star,
+  DotsThreeVertical,
+} from "@phosphor-icons/react/dist/ssr";
+import { Button } from "@/components/ui/button";
 
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import About from '@/components/profile/_components/about';
-import Service from '@/components/profile/_components/services';
-import Achievements from '@/components/profile/_components/achivements';
-import Opportunities from '@/components/profile/_components/opportunities';
-import Gallery from '@/components/profile/_components/gallery';
-import RatingReview from '@/components/profile/_components/rating-review';
-import ContactOverlay from '../ContactDetails';
-import StarRatingConstant from '../StarRatingConstant';
-import { Achievement, Business, Opportunity, Services } from '@prisma/client';
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import About from "@/components/profile/_components/about";
+import Service from "@/components/profile/_components/services";
+import Achievements from "@/components/profile/_components/achivements";
+import Opportunities from "@/components/profile/_components/opportunities";
+import Gallery from "@/components/profile/_components/gallery";
+import RatingReview from "@/components/profile/_components/rating-review";
+import ContactOverlay from "../ContactDetails";
+import StarRatingConstant from "../StarRatingConstant";
+import { Achievement, Business, Opportunity, Services } from "@prisma/client";
+import EditProfileHeaderBusinessModal from "@/components/modal-windows/EditProfileHeaderBusinessModal";
 
 interface BusinessProfileProps {
   userId: string | undefined;
@@ -24,7 +31,9 @@ interface BusinessProfileProps {
   gallery: string[];
 }
 
-export default function BusinessProfilePrivate({ user, }: {
+export default function BusinessProfilePrivate({
+  user,
+}: {
   user: BusinessProfileProps;
 }) {
   const business = user.business;
@@ -51,15 +60,18 @@ export default function BusinessProfilePrivate({ user, }: {
           <div className="space-y-0.5">
             <div className="flex gap-x-6 justify-between items-start">
               <p className="text-xl md:text-2xl">{business?.name}</p>
-              <p className="text-sm px-4 py-0.5 bg-secondary-200 rounded-full">
-                Promoted
-              </p>
+              <div>
+                <EditProfileHeaderBusinessModal business={business} />
+                <Button size="icon" variant="ghost">
+                  <DotsThreeVertical size={20} />
+                </Button>
+              </div>
             </div>
             <p className="text-linkBlue text-sm">
-              {business?.registeredName || 'Business Registered Name'}
+              {business?.registeredName || "Business Registered Name"}
             </p>
             <p className="">
-              {business?.description || 'Business Description'}
+              {business?.description || "Business Description"}
             </p>
           </div>
           <div className="flex gap-x-4 items-center">
@@ -107,15 +119,9 @@ export default function BusinessProfilePrivate({ user, }: {
                 isPublic={false}
               />
               <Separator />
-              <Service
-                services={user.services}
-                isPublic={false}
-              />
+              <Service services={user.services} isPublic={false} />
               <Separator />
-              <Achievements
-                achievements={user.achievements}
-                isPublic={false}
-              />
+              <Achievements achievements={user.achievements} isPublic={false} />
               <Separator />
               <Opportunities
                 opportunities={user.opportunities}
@@ -124,35 +130,26 @@ export default function BusinessProfilePrivate({ user, }: {
                 isPublic={false}
               />
               <Separator />
-              <Gallery
-                gallery={user.gallery}
-                isPublic={false}
-              />
+              <Gallery gallery={user.gallery} isPublic={false} />
               <Separator />
               <RatingReview
-                businessId={ business.id }
-                userId={ user.userId }
+                businessId={business.id}
+                userId={user.userId}
                 isPublic={false}
               />
             </TabsContent>
             <TabsContent value="services">
-              <Service
-                services={user.services}
-                isPublic={false}
-              />
+              <Service services={user.services} isPublic={false} />
             </TabsContent>
             <TabsContent value="reviews">
               <RatingReview
-                businessId={ business.id }
-                userId={ user.userId }
+                businessId={business.id}
+                userId={user.userId}
                 isPublic={false}
               />
             </TabsContent>
             <TabsContent value="gallery">
-              <Gallery
-                gallery={user.gallery}
-                isPublic={false}
-              />
+              <Gallery gallery={user.gallery} isPublic={false} />
             </TabsContent>
           </Tabs>
         </div>

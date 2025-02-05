@@ -164,11 +164,11 @@ model Achievement {
 }
 
 model Services {
-  id           String @id @default(uuid())
-  businessId   String
-  category     String
-  categoryName String
-  price        String
+  id          String  @id @default(uuid())
+  businessId  String
+  name        String
+  description String?
+  price       String
 
   business Business @relation(fields: [businessId], references: [id], onDelete: Cascade)
 

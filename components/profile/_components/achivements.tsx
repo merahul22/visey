@@ -1,6 +1,6 @@
-import { PencilSimple } from '@phosphor-icons/react/dist/ssr';
-import { Button } from '@/components/ui/button';
-import { Achievement } from '@prisma/client';
+import { Achievement } from "@prisma/client";
+
+import AddAchievementsModal from "@/components/modal-windows/AddAchievementModal";
 
 export default function Achievements({
   achievements,
@@ -12,12 +12,8 @@ export default function Achievements({
   return (
     <div className="space-y-6 pt-6 pb-4">
       <div className="flex justify-between items-center">
-        <p className="font-semibold">Achivements</p>
-        {!isPublic && (
-          <Button size="icon" variant="ghost" className="text-linkBlue">
-            <PencilSimple size={20} />
-          </Button>
-        )}
+        <p className="font-semibold">Achievements</p>
+        {!isPublic && <AddAchievementsModal />}
       </div>
 
       <div className="space-y-3 md:flex md:flex-wrap md:gap-4 md:space-y-0">
