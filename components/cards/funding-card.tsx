@@ -1,13 +1,13 @@
+"use client";
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
-import {
-  HeartStraight,
-  MapPin,
-} from '@phosphor-icons/react/dist/ssr';
+import { HeartStraight, MapPin } from '@phosphor-icons/react/dist/ssr';
 import Image from 'next/image';
 import React from 'react';
+import { useRouter } from 'next/navigation';
 
 interface FundingCardProps {
+  id: string;
   title: string;
   promoted: boolean;
   businessName: string;
@@ -17,6 +17,7 @@ interface FundingCardProps {
 }
 
 export function FundingCard({
+  id,
   title,
   promoted,
   businessName,
@@ -24,11 +25,16 @@ export function FundingCard({
   applyBy,
   location,
 }: FundingCardProps) {
+  const router = useRouter();
   const date = new Date(applyBy as Date);
 
   const formattedDate = `${date.getDate()} ${date.toLocaleString('default', {
     month: 'long',
   })}, ${date.getFullYear()}`;
+
+  const handleApplyClick = () => {
+    router.push(`/apply-opportunity?id=${id}`);
+  };
 
   return (
     <div className="flex lg:justify-start flex-col gap-4 lg:flex-row lg:items-center lg:gap-10">
@@ -83,9 +89,9 @@ export function FundingCard({
           <div className="px-4 cursor-pointer">
             <HeartStraight className="w-6 h-6" />
           </div>
-            <Button variant="secondary">
-              Apply
-            </Button>
+          <Button variant="secondary" onClick={handleApplyClick}>
+            Apply
+          </Button>
         </div>
       </div>
     </div>
