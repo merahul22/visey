@@ -2,7 +2,7 @@ import prisma from "@/lib/db";
 
 interface BusinessDetails {
   id: string;
-  userId: string;
+  userId: string | null;
   image: string;
   name: string;
   registeredName?: string | null;
