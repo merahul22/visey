@@ -1,12 +1,14 @@
-'use client';
+"use client";
 
-import { useState, useTransition } from 'react';
-import { CheckIcon } from '@radix-ui/react-icons';
-import { Button } from '../ui/button';
-import { listPreferences } from '@/actions/list-preferences';
-import { useRouter } from 'next/navigation';
+import { useState, useTransition } from "react";
+import { CheckIcon } from "@radix-ui/react-icons";
+import { Button } from "../ui/button";
+import { listPreferences } from "@/actions/list-preferences";
+import { useRouter } from "next/navigation";
 
-import { categories } from '@/constants';
+import { categories } from "@/constants";
+import { useSession } from "next-auth/react";
+import { DEFAULT_LOGIN_REDIRECT } from "@/routes";
 
 const preferencesList = categories.map((category) => category.value);
 
@@ -16,6 +18,7 @@ const SelectPreferences = () => {
   const [selectedPreferences, setSelectedPreferences] = useState<string[]>([]);
   const [loading, startTransition] = useTransition();
   const router = useRouter();
+  const { update } = useSession();
 
   const disabled = selectedPreferences.length < 3;
 
@@ -24,7 +27,7 @@ const SelectPreferences = () => {
       (prev) =>
         prev.includes(preference)
           ? prev.filter((item) => item !== preference) // Remove if already selected
-          : [...prev, preference] // Add if not selected
+          : [...prev, preference], // Add if not selected
     );
   };
 
@@ -35,11 +38,14 @@ const SelectPreferences = () => {
     startTransition(async () => {
       const res = await listPreferences(selectedPreferences);
 
+      console.log(res);
+
       if (res.error) {
       }
 
       if (res.success) {
-        router.push('/home');
+        update();
+        router.push(DEFAULT_LOGIN_REDIRECT);
       }
     });
   };
@@ -62,8 +68,8 @@ const SelectPreferences = () => {
               className={`border rounded-full px-4 py-2 flex items-center gap-x-1 cursor-pointer
                 ${
                   isSelected(preference)
-                    ? 'bg-neutrals-200 shadow-inner'
-                    : 'hover:bg-neutrals-200 hover:shadow-inner'
+                    ? "bg-neutrals-200 shadow-inner"
+                    : "hover:bg-neutrals-200 hover:shadow-inner"
                 }`}
               onClick={() => handlePreferenceClick(preference)}
             >
