@@ -120,7 +120,7 @@ const ListBusinessForm = () => {
         }
 
         if (res.success) {
-          await update();
+          update();
           toast.success("Business listed successfully.");
           router.push(DEFAULT_LOGIN_REDIRECT);
           router.refresh();

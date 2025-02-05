@@ -49,10 +49,13 @@ const HeroSection = () => {
                   id="hero-heading"
                   className="font-degular text-heading4 md:text-heading2 xl:text-heading1 leading-tight"
                 >
-                   We help Indian startups & MSMEs meet resource needs quickly
+                  We help Indian startups & MSMEs meet resource needs quickly
                 </h1>
                 <p className="font-gothic font-medium text-sm md:text-base opacity-90">
-                 Visey is an aggregator platform that helps entrepreneurs find the best resource providers for their startup’s needs in just three clicks. And resource providers can generate more revenue by getting leads on the platform.
+                  Visey is an aggregator platform that helps entrepreneurs find
+                  the best resource providers for their startup’s needs in just
+                  three clicks. And resource providers can generate more revenue
+                  by getting leads on the platform.
                 </p>
               </div>
               {/* Call-to-Action */}
@@ -60,10 +63,7 @@ const HeroSection = () => {
                 variant="landing"
                 className="py-3 px-10 text-lg text-base-black hover:scale-105 transition-transform"
               >
-                <Link
-                  href="/demo-account-type"
-                  className="flex items-center gap-4"
-                >
+                <Link href="/login" className="flex items-center gap-4">
                   <span>Start Now</span>
                   <ArrowUpRight size={20} />
                 </Link>

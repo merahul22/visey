@@ -24,6 +24,7 @@ const SearchPage = () => {
     const fetchBusinesses = async () => {
       const res = await fetch(`/api/search-businesses?query=${query}`);
       const data = await res.json();
+      console.log(data);
       setBusinesses(data);
     };
 

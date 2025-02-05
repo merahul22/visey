@@ -1,28 +1,27 @@
-'use client';
+"use client";
 
-import { CheckIcon } from '@radix-ui/react-icons';
-import { Button } from '../ui/button';
-import { useState, useTransition } from 'react';
-import { selectType } from '@/actions/select-type';
-import { useRouter } from 'next/navigation';
+import { CheckIcon } from "@radix-ui/react-icons";
+import { Button } from "../ui/button";
+import { useState, useTransition } from "react";
+import { selectType } from "@/actions/select-type";
+import { useRouter } from "next/navigation";
 
 const AccountTypeForm = () => {
-  const [currentType, setCurrentType] = useState<string>('');
+  const [currentType, setCurrentType] = useState<string>("");
   const [loading, startTransition] = useTransition();
   const router = useRouter();
 
   const onSubmit = () => {
     startTransition(async () => {
       const res = await selectType(
-        currentType === 'STARTUP' ? 'STARTUP' : 'BUSINESS'
+        currentType === "STARTUP" ? "STARTUP" : "BUSINESS",
       );
 
       if (res.success) {
-        // Redirect to the next page
-        if (currentType === 'STARTUP') {
-          router.push('/list-preferences');
+        if (currentType === "STARTUP") {
+          router.push("/list-preferences");
         } else {
-          router.push('/list-business');
+          router.push("/list-business");
         }
       }
     });
@@ -42,11 +41,11 @@ const AccountTypeForm = () => {
             <div className="flex flex-col items-center justify-center gap-4 lg:items-stretch lg:flex-row">
               <div
                 className={`border-2 w-[220px] border-neutrals-400 rounded-lg p-4 cursor-pointer hover:border-primary-500 ${
-                  currentType === 'BUSINESS'
-                    ? 'border-primary-500 shadow-lg'
-                    : ''
+                  currentType === "BUSINESS"
+                    ? "border-primary-500 shadow-lg"
+                    : ""
                 }`}
-                onClick={() => setCurrentType('BUSINESS')}
+                onClick={() => setCurrentType("BUSINESS")}
               >
                 <h2 className="text-xl font-semibold mb-4">
                   List my Business, to reach startups
@@ -72,11 +71,11 @@ const AccountTypeForm = () => {
               </div>
               <div
                 className={`border-2 w-[220px] border-neutrals-400 rounded-lg p-4 cursor-pointer hover:border-primary-500 ${
-                  currentType === 'STARTUP'
-                    ? 'border-primary-500 shadow-lg'
-                    : ''
+                  currentType === "STARTUP"
+                    ? "border-primary-500 shadow-lg"
+                    : ""
                 }`}
-                onClick={() => setCurrentType('STARTUP')}
+                onClick={() => setCurrentType("STARTUP")}
               >
                 <h2 className="text-xl font-semibold mb-4">
                   Find Resources, for my needs
