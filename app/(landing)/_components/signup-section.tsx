@@ -29,7 +29,7 @@ function SignUpSection() {
           {/* Headings */}
           <div className="space-y-2">
             <h2 className="text-4xl leading-relaxed font-semibold font-degular">
-            We help startups and MSMEs meet their resource needs quickly
+              We help startups and MSMEs meet their resource needs quickly
             </h2>
             <p className="text-neutrals-700 text-xl">
               Be the first to know when the product launches and other
@@ -58,7 +58,7 @@ function SignUpSection() {
                 placeholder="Your email"
               />
             </div>
-            <Link href="/demo-account-type">
+            <Link href="/login">
               <Button
                 variant="landing"
                 aria-label="Sign up for updates"
@@ -74,7 +74,8 @@ function SignUpSection() {
             By subscribing, you agree with our{" "}
             <span className="font-bold underline cursor-pointer">
               Terms of Use
-            </span>.
+            </span>
+            .
           </p>
         </div>
       </section>

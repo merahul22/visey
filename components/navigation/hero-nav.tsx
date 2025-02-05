@@ -85,7 +85,7 @@ export default function HeroNav({ className }: { className?: string }) {
               </Link>
             ))}
 
-            <Link href="https://docs.google.com/forms/d/e/1FAIpQLSdzEFmkrANFYzdrmSZrjVgeOm_TJspc6q2yi-SgpuRuh_lrAQ/viewform">
+            <Link href="/login">
               <Button variant="nav" size="md">
                 List Business Free
               </Button>
@@ -101,7 +101,7 @@ export default function HeroNav({ className }: { className?: string }) {
           </div>
         </div>
         <div className="flex items-center gap-4 lg:hidden">
-          <Link href="https://docs.google.com/forms/d/e/1FAIpQLSdzEFmkrANFYzdrmSZrjVgeOm_TJspc6q2yi-SgpuRuh_lrAQ/viewform">
+          <Link href="/login">
             <Button variant="nav" size="md">
               List Business Free
             </Button>
@@ -138,9 +138,7 @@ export default function HeroNav({ className }: { className?: string }) {
                   </DropdownMenuItem>
                   <DropdownMenuItem className="cursor-pointer">
                     <span className="flex gap-x-2 items-center">
-                      <Link href="https://docs.google.com/forms/d/e/1FAIpQLSdzEFmkrANFYzdrmSZrjVgeOm_TJspc6q2yi-SgpuRuh_lrAQ/viewform">
-                        List Business Free
-                      </Link>
+                      <Link href="/login">List Business Free</Link>
                     </span>
                   </DropdownMenuItem>
                 </div>

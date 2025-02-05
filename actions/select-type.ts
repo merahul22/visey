@@ -1,12 +1,13 @@
-'use server';
+"use server";
 
-import { auth } from '@/auth';
-import prisma from '@/lib/db';
+import { auth } from "@/auth";
+import prisma from "@/lib/db";
 
-export const selectType = async (type: 'STARTUP' | 'BUSINESS') => {
+export const selectType = async (type: "STARTUP" | "BUSINESS") => {
   const session = await auth();
 
   const user = session?.user;
+  console.log("user from select-type:", user);
 
   try {
     await prisma.user.update({
@@ -17,6 +18,6 @@ export const selectType = async (type: 'STARTUP' | 'BUSINESS') => {
     return { success: true };
   } catch (err) {
     console.error(err);
-    return { error: 'Something went wrong!' };
+    return { error: "Something went wrong!" };
   }
 };

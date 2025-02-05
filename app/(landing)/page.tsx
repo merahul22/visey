@@ -33,10 +33,7 @@ export default function LandingPage() {
             variant="landing"
             className="w-full sm:w-96 text-base-black gap-x-4 py-4"
           >
-            <Link
-              href="https://docs.google.com/forms/d/e/1FAIpQLSdzEFmkrANFYzdrmSZrjVgeOm_TJspc6q2yi-SgpuRuh_lrAQ/viewform"
-              className="flex items-center gap-4"
-            >
+            <Link href="/login" className="flex items-center gap-4">
               <span className="text-lg">List Business Now</span>
               <ArrowUpRight size={24} />
             </Link>
