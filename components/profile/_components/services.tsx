@@ -1,4 +1,3 @@
-import { PencilSimple } from "@phosphor-icons/react/dist/ssr";
 import { Button } from "@/components/ui/button";
 import { Services } from "@prisma/client";
 import AddServiceModal from "@/components/modal-windows/AddServiceModal";

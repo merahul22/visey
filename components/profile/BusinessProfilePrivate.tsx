@@ -3,7 +3,6 @@ import { Separator } from "@/components/ui/separator";
 
 import {
   HeartStraight,
-  PencilSimple,
   ShareFat,
   Star,
   DotsThreeVertical,

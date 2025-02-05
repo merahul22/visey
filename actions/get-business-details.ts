@@ -1,4 +1,4 @@
-import prisma from '@/lib/db';
+import prisma from "@/lib/db";
 
 interface BusinessDetails {
   id: string;
@@ -23,9 +23,9 @@ interface BusinessDetails {
   }[];
   services: {
     id: string;
-    category: string;
+    name: string;
     businessId: string;
-    categoryName: string;
+    description: string | null;
     price: string;
   }[];
   reviews: {
@@ -45,10 +45,12 @@ interface ErrorResponse {
   error: string;
 }
 
-export async function getBusinessDetails(businessId: string): Promise<BusinessDetails | ErrorResponse> {
+export async function getBusinessDetails(
+  businessId: string,
+): Promise<BusinessDetails | ErrorResponse> {
   if (!businessId) {
-    console.error('Missing businessId');
-    return { error: 'Missing businessId' };
+    console.error("Missing businessId");
+    return { error: "Missing businessId" };
   }
 
   console.log("Fetching business details for businessId:", businessId);
@@ -63,14 +65,17 @@ export async function getBusinessDetails(businessId: string): Promise<BusinessDe
     });
 
     if (!business) {
-      console.log('Business not found for businessId:', businessId);
-      return { error: 'Business not found' };
+      console.log("Business not found for businessId:", businessId);
+      return { error: "Business not found" };
     }
 
     console.log("Business found:", business);
 
     const averageRating = business.reviews.length
-      ? business.reviews.reduce((acc: number, review: any) => acc + review.rating, 0) / business.reviews.length
+      ? business.reviews.reduce(
+          (acc: number, review: any) => acc + review.rating,
+          0,
+        ) / business.reviews.length
       : 0;
 
     console.log("Calculated average rating:", averageRating);
@@ -83,7 +88,7 @@ export async function getBusinessDetails(businessId: string): Promise<BusinessDe
     console.log("Fetched business details:", businessDetails);
     return businessDetails;
   } catch (error) {
-    console.error('Failed to fetch business details:', error);
-    return { error: 'Failed to fetch business details' };
+    console.error("Failed to fetch business details:", error);
+    return { error: "Failed to fetch business details" };
   }
 }
