@@ -1,17 +1,19 @@
-import { PencilSimple } from '@phosphor-icons/react/dist/ssr';
-import { Button } from '@/components/ui/button';
-import { Services } from '@prisma/client';
+import { Button } from "@/components/ui/button";
+import { Services } from "@prisma/client";
+import AddServiceModal from "@/components/modal-windows/AddServiceModal";
 
-export default function Service({ services, isPublic }: { services: Services[], isPublic: boolean }) {
+export default function Service({
+  services,
+  isPublic,
+}: {
+  services: Services[];
+  isPublic: boolean;
+}) {
   return (
     <div className="space-y-6 pt-6 pb-4">
       <div className="flex justify-between items-center">
         <p className="font-semibold">Services</p>
-        {!isPublic && (
-          <Button size="icon" variant="ghost" className="text-linkBlue">
-            <PencilSimple size={20} />
-          </Button>
-        )}
+        {!isPublic && <AddServiceModal />}
       </div>
 
       <div className="space-y-3">
@@ -27,11 +29,11 @@ export default function Service({ services, isPublic }: { services: Services[], 
               className="rounded-xl border flex justify-between items-center px-2.5 py-4"
             >
               <div className="space-y-1">
-                <p className="font-semibold">Category</p>
-                <p className="text-sm">{service.category}</p>
+                <p className="font-semibold">{service.name}</p>
+                <p className="text-sm">{service?.description?.slice(0, 100)}</p>
               </div>
 
-              <Button size="sm" variant={'secondary'}>
+              <Button size="sm" variant={"secondary"}>
                 ₹{service.price}
               </Button>
             </div>

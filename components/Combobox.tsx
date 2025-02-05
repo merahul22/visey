@@ -1,7 +1,7 @@
-import * as React from 'react';
-import { CaretSortIcon, CheckIcon } from '@radix-ui/react-icons';
-import { cn } from '@/lib/utils';
-import { Button } from '@/components/ui/button';
+import * as React from "react";
+import { CaretSortIcon, CheckIcon } from "@radix-ui/react-icons";
+import { cn } from "@/lib/utils";
+import { Button } from "@/components/ui/button";
 import {
   Command,
   CommandEmpty,
@@ -9,12 +9,12 @@ import {
   CommandInput,
   CommandItem,
   CommandList,
-} from '@/components/ui/command';
+} from "@/components/ui/command";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from '@/components/ui/popover';
+} from "@/components/ui/popover";
 
 interface ComboboxProps {
   value: string | undefined;
@@ -74,8 +74,8 @@ export function Combobox({
                   {el.value}
                   <CheckIcon
                     className={cn(
-                      'ml-auto h-4 w-4',
-                      value === el.value ? 'opacity-100' : 'opacity-0'
+                      "ml-auto h-4 w-4",
+                      value === el.value ? "opacity-100" : "opacity-0",
                     )}
                   />
                 </CommandItem>

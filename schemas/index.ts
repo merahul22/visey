@@ -103,7 +103,7 @@ export const listBusinessFirstStepSchema = z.object({
     .refine((val) => !val || /^https?:\/\/[^\s$.?#].\S*$/.test(val), {
       message: "Enter a valid URL",
     }),
-  description: z.string().min(100, "Minimum 100 characters are required"),
+  description: z.string(),
 });
 
 export const listBusinessSecondStepSchema = z.object({
@@ -425,4 +425,45 @@ export const fundingOpportunitySchema = z
 
 export const reviewSchema = z.object({
   review: z.string().min(1, "Review cannot be left empty"),
+});
+
+const currentYear = new Date().getFullYear();
+
+export const addAchievementsSchema = z.object({
+  name: z.string().min(2, "Name cannot be left empty"),
+  organization: z.string().min(2, "Organisation cannot be left empty"),
+  year: z
+    .string()
+    .length(4, "Enter a valid year!")
+    .refine((year) => {
+      const parsedYear = parseInt(year, 10);
+      return parsedYear <= currentYear;
+    }, `Year cannot be greater than ${currentYear}`),
+});
+
+export const addServiceSchema = z.object({
+  name: z.string().min(2, "Service cannot be left empty"),
+  description: z.string(),
+  price: z.string().min(1, "Price cannot be left empty"),
+});
+
+export const editAboutBusinessSchema = z.object({
+  location: z.string().min(2, "Location cannot be left empty"),
+  description: z.string(),
+});
+
+export const editProfileHeaderBusinessSchema = z.object({
+  name: z.string().min(2, "Name cannot be left empty"),
+  companyRegisteredName: z.string(),
+  description: z.string().min(2, "Description cannot be left empty"),
+  websiteUrl: z
+    .string()
+    .min(1, "Website URL cannot be left empty")
+    .refine((val) => !val || /^https?:\/\/[^\s$.?#].\S*$/.test(val), {
+      message: "Enter a valid URL",
+    }),
+  email: z.string().refine((value) => /\S+@\S+\.\S+/.test(value), {
+    message: "Enter a valid email address",
+  }),
+  phoneNumber: z.string().regex(/^[6-9]\d{9}$/, "Enter a valid mobile number"),
 });

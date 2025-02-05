@@ -1,5 +1,5 @@
-import { PencilSimple, MapPin } from '@phosphor-icons/react/dist/ssr';
-import { Button } from '@/components/ui/button';
+import { MapPin } from "@phosphor-icons/react/dist/ssr";
+import EditAboutBusinessModal from "@/components/modal-windows/EditAboutBusinessModal";
 
 interface AboutProps {
   location: string | undefined;
@@ -13,18 +13,19 @@ export default function About({ location, description, isPublic }: AboutProps) {
       <div className="flex justify-between items-center">
         <p className="font-semibold">About</p>
         {!isPublic && (
-          <Button size="icon" variant="ghost" className="text-linkBlue">
-            <PencilSimple size={20} />
-          </Button>
+          <EditAboutBusinessModal
+            location={location as string}
+            description={description as string}
+          />
         )}
       </div>
 
       <div className="space-y-4">
         <div className="flex gap-x-1 items-center">
           <MapPin size={16} />
-          <span>{location || 'Location'}</span>
+          <span>{location || "Location"}</span>
         </div>
-        <p>{description || 'Business Description'}</p>
+        <p>{description || "Business Description"}</p>
       </div>
     </div>
   );
