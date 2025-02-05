@@ -72,33 +72,37 @@ const ApplyFundingOpportunityForm = ({
       return;
     }
 
-    // Update the user's SavedOpportunities with the new opportunity ID
-    const res = await fetch('/api/update-saved-opportunities', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        userId: session.user.id,
-        opportunityId: opportunity.id,
-      }),
-    });
+    try {
+      const res = await fetch('/api/update-saved-opportunities', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          userId: session.user.id,
+          opportunityId: opportunity.id,
+        }),
+      });
 
-    const result = await res.json();
+      const result = await res.json();
 
-    if (result.error) {
-      toast.error(result.error);
-      setError(result.error);
+      if (result.error) {
+        toast.error(result.error);
+        setError(result.error);
+      } else {
+        toast.success('Application submitted successfully.');
+        setSuccess(result.success);
+        router.push(`/profile/startup`);
+      }
+    } catch (error) {
+      toast.error('An error occurred while submitting the application.');
+      setError('An error occurred while submitting the application.');
+    } finally {
+      setLoading(false);
     }
-
-    if (result.success) {
-      toast.success('Application submitted successfully.');
-      setSuccess(result.success);
-      router.push(`/profile/startup`);
-    }
-
-    setLoading(false);
   };
+
+  const userId = "some-user-id"; // Replace with actual userId
 
   return (
     <div className="space-y-4">
@@ -113,6 +117,7 @@ const ApplyFundingOpportunityForm = ({
         <ApplyFundingOpportunityPart1
           defaultValues={formValues}
           onNext={handleNext}
+          userId={userId}
         />
       )}
 

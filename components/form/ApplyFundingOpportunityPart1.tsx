@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
@@ -16,17 +16,58 @@ import {
 import { Input } from '@/components/ui/input';
 import { startupDetailsSchema } from '@/schemas';
 import Image from 'next/image';
+import { getStartupDetails } from '@/actions/get-startup-details';
 
 const ApplyFundingOpportunityPart1 = ({
   defaultValues,
   onNext,
+  userId,
 }: {
   defaultValues: z.infer<typeof startupDetailsSchema>;
   onNext: (values: z.infer<typeof startupDetailsSchema>) => void;
+  userId: string;
 }) => {
+  const [startupDetails, setStartupDetails] = useState<z.infer<typeof startupDetailsSchema> | null>(null);
+
+  useEffect(() => {
+    const fetchStartupDetails = async () => {
+      const details = await getStartupDetails(userId);
+      if (details) {
+        setStartupDetails({
+          ...details,
+          description: details.description || '',
+          registeredName: details.registeredName || '',
+          registrationDate: details.registrationDate ? new Date(details.registrationDate) : undefined,
+          dpiitRecognized: details.dpiitRecognized || false,
+          websiteUrl: details.websiteUrl || '',
+          email: details.email || '',
+          contactNumber: details.contactNumber || '',
+          location: details.location || '',
+          industry: details.industry || '',
+          sector: details.sector || '',
+          trlLevel: details.trlLevel || '',
+          productStage: details.productStage || '',
+          fundingStage: details.fundingStage || '',
+          idea: details.idea || '',
+          problem: details.problem || '',
+          marketSize: details.marketSize || '',
+          twoMajorCompetitors: details.twoMajorCompetitors || '',
+          demoVideoUrl: details.demoVideoUrl || '',
+          pitchDeckUrl: details.pitchDeckUrl || '',
+          foundersDetail: details.foundersDetail || '',
+          teamSize: details.teamSize || '',
+          noOfFte: details.noOfFte || '',
+          noOfInterns: details.noOfInterns || '',
+        });
+      }
+    };
+
+    fetchStartupDetails();
+  }, [userId]);
+
   const form = useForm<z.infer<typeof startupDetailsSchema>>({
     resolver: zodResolver(startupDetailsSchema),
-    defaultValues,
+    defaultValues: startupDetails || defaultValues,
   });
 
   const onSubmit = (values: z.infer<typeof startupDetailsSchema>) => {
@@ -53,7 +94,7 @@ const ApplyFundingOpportunityPart1 = ({
             <div className="flex justify-center">
               <div className="border-2 rounded-lg px-14 py-2">
                 <Image
-                  src={defaultValues.image || 'https://res.cloudinary.com/dlriuadjv/image/upload/v1729353205/xbbb0zw6js60dxnq64qj.png'}
+                  src={startupDetails?.image || defaultValues.image || 'https://res.cloudinary.com/dlriuadjv/image/upload/v1729353205/xbbb0zw6js60dxnq64qj.png'}
                   alt="Startup Logo"
                   width={150}
                   height={150}
@@ -73,6 +114,8 @@ const ApplyFundingOpportunityPart1 = ({
                   <Input
                     className="text-neutrals-700 mt-1"
                     {...field}
+                    value={startupDetails?.name || field.value}
+                    readOnly={!!startupDetails?.name}
                   />
                 </FormControl>
                 <FormMessage />
@@ -90,6 +133,8 @@ const ApplyFundingOpportunityPart1 = ({
                   <Input
                     className="text-neutrals-700 mt-1"
                     {...field}
+                    value={startupDetails?.email || field.value}
+                    readOnly={!!startupDetails?.email}
                   />
                 </FormControl>
                 <FormMessage />
@@ -108,7 +153,14 @@ const ApplyFundingOpportunityPart1 = ({
                     type="date"
                     className="text-neutrals-700 mt-1"
                     {...field}
-                    value={field.value ? field.value.toISOString().split('T')[0] : ''}
+                    //value={startupDetails?.registrationDate ? startupDetails.registrationDate.toISOString().split('T')[0] : (field.value as string) || ''}
+                    value={
+                        startupDetails?.registrationDate
+                          ? new Date(startupDetails.registrationDate).toISOString().split('T')[0] // Convert to YYYY-MM-DD
+                          : field.value && typeof field.value === 'string' // Ensure field.value is a string
+                          ? field.value
+                          : ''
+                      }                    readOnly={!!startupDetails?.registrationDate}
                   />
                 </FormControl>
                 <FormMessage />
@@ -127,7 +179,9 @@ const ApplyFundingOpportunityPart1 = ({
                     type="checkbox"
                     className="text-neutrals-700 mt-1"
                     {...field}
-                    value={field.value ? 'true' : 'false'}
+                    checked={startupDetails?.dpiitRecognized || field.value}
+                    readOnly={!!startupDetails?.dpiitRecognized}
+                    value={undefined} // Remove value to avoid type conflict
                   />
                 </FormControl>
                 <FormMessage />
@@ -145,6 +199,8 @@ const ApplyFundingOpportunityPart1 = ({
                   <Input
                     className="text-neutrals-700 mt-1"
                     {...field}
+                    value={startupDetails?.industry || field.value}
+                    readOnly={!!startupDetails?.industry}
                   />
                 </FormControl>
                 <FormMessage />
@@ -162,6 +218,8 @@ const ApplyFundingOpportunityPart1 = ({
                   <Input
                     className="text-neutrals-700 mt-1"
                     {...field}
+                    value={startupDetails?.websiteUrl || field.value}
+                    readOnly={!!startupDetails?.websiteUrl}
                   />
                 </FormControl>
                 <FormMessage />
@@ -183,6 +241,8 @@ const ApplyFundingOpportunityPart1 = ({
                   <Input
                     className="text-neutrals-700 mt-1"
                     {...field}
+                    value={startupDetails?.productStage || field.value}
+                    readOnly={!!startupDetails?.productStage}
                   />
                 </FormControl>
                 <FormMessage />
@@ -200,6 +260,8 @@ const ApplyFundingOpportunityPart1 = ({
                   <Input
                     className="text-neutrals-700 mt-1"
                     {...field}
+                    value={startupDetails?.fundingStage || field.value}
+                    readOnly={!!startupDetails?.fundingStage}
                   />
                 </FormControl>
                 <FormMessage />
@@ -217,6 +279,8 @@ const ApplyFundingOpportunityPart1 = ({
                   <Input
                     className="text-neutrals-700 mt-1"
                     {...field}
+                    value={startupDetails?.trlLevel || field.value}
+                    readOnly={!!startupDetails?.trlLevel}
                   />
                 </FormControl>
                 <FormMessage />
@@ -238,6 +302,8 @@ const ApplyFundingOpportunityPart1 = ({
                   <Input
                     className="text-neutrals-700 mt-1"
                     {...field}
+                    value={startupDetails?.idea || field.value}
+                    readOnly={!!startupDetails?.idea}
                   />
                 </FormControl>
                 <FormMessage />
@@ -255,6 +321,8 @@ const ApplyFundingOpportunityPart1 = ({
                   <Input
                     className="text-neutrals-700 mt-1"
                     {...field}
+                    value={startupDetails?.problem || field.value}
+                    readOnly={!!startupDetails?.problem}
                   />
                 </FormControl>
                 <FormMessage />
@@ -272,6 +340,8 @@ const ApplyFundingOpportunityPart1 = ({
                   <Input
                     className="text-neutrals-700 mt-1"
                     {...field}
+                    value={startupDetails?.marketSize || field.value}
+                    readOnly={!!startupDetails?.marketSize}
                   />
                 </FormControl>
                 <FormMessage />
@@ -289,6 +359,8 @@ const ApplyFundingOpportunityPart1 = ({
                   <Input
                     className="text-neutrals-700 mt-1"
                     {...field}
+                    value={startupDetails?.twoMajorCompetitors || field.value}
+                    readOnly={!!startupDetails?.twoMajorCompetitors}
                   />
                 </FormControl>
                 <FormMessage />
@@ -310,6 +382,8 @@ const ApplyFundingOpportunityPart1 = ({
                   <Input
                     className="text-neutrals-700 mt-1"
                     {...field}
+                    value={startupDetails?.demoVideoUrl || field.value}
+                    readOnly={!!startupDetails?.demoVideoUrl}
                   />
                 </FormControl>
                 <FormMessage />
@@ -331,6 +405,8 @@ const ApplyFundingOpportunityPart1 = ({
                   <Input
                     className="text-neutrals-700 mt-1"
                     {...field}
+                    value={startupDetails?.pitchDeckUrl || field.value}
+                    readOnly={!!startupDetails?.pitchDeckUrl}
                   />
                 </FormControl>
                 <FormMessage />
@@ -352,6 +428,8 @@ const ApplyFundingOpportunityPart1 = ({
                   <Input
                     className="text-neutrals-700 mt-1"
                     {...field}
+                    value={startupDetails?.foundersDetail || field.value}
+                    readOnly={!!startupDetails?.foundersDetail}
                   />
                 </FormControl>
                 <FormMessage />
@@ -369,6 +447,8 @@ const ApplyFundingOpportunityPart1 = ({
                   <Input
                     className="text-neutrals-700 mt-1"
                     {...field}
+                    value={startupDetails?.teamSize || field.value}
+                    readOnly={!!startupDetails?.teamSize}
                   />
                 </FormControl>
                 <FormMessage />
@@ -386,6 +466,8 @@ const ApplyFundingOpportunityPart1 = ({
                   <Input
                     className="text-neutrals-700 mt-1"
                     {...field}
+                    value={startupDetails?.noOfFte || field.value}
+                    readOnly={!!startupDetails?.noOfFte}
                   />
                 </FormControl>
                 <FormMessage />
@@ -403,6 +485,8 @@ const ApplyFundingOpportunityPart1 = ({
                   <Input
                     className="text-neutrals-700 mt-1"
                     {...field}
+                    value={startupDetails?.noOfInterns || field.value}
+                    readOnly={!!startupDetails?.noOfInterns}
                   />
                 </FormControl>
                 <FormMessage />
@@ -424,6 +508,8 @@ const ApplyFundingOpportunityPart1 = ({
                   <Input
                     className="text-neutrals-700 mt-1"
                     {...field}
+                    value={startupDetails?.contactNumber || field.value}
+                    readOnly={!!startupDetails?.contactNumber}
                   />
                 </FormControl>
                 <FormMessage />
@@ -441,6 +527,8 @@ const ApplyFundingOpportunityPart1 = ({
                   <Input
                     className="text-neutrals-700 mt-1"
                     {...field}
+                    value={startupDetails?.email || field.value}
+                    readOnly={!!startupDetails?.email}
                   />
                 </FormControl>
                 <FormMessage />

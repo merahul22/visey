@@ -53,23 +53,6 @@ const ApplyFundingOpportunityPart2 = ({
             )}
           />
 
-          <FormField
-            control={form.control}
-            name="eligibilityCriteria"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel className="text-neutrals-700">Eligibility Criteria*</FormLabel>
-                <FormControl>
-                  <Input
-                    className="text-neutrals-700 mt-1"
-                    {...field}
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-
           <div className="flex justify-center mt-8">
             <Button type="submit" className="rounded-full">
               Submit Application

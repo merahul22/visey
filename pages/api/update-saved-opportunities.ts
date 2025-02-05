@@ -13,18 +13,16 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   }
 
   try {
-    await prisma.user.update({
-      where: { id: userId },
+    const savedOpportunity = await prisma.savedOpportunity.create({
       data: {
-        SavedOpportunity: {
-          connect: { id: opportunityId },
-        },
+        userId,
+        opportunityId,
       },
     });
 
-    return res.status(200).json({ success: 'Opportunity saved successfully' });
+    return res.status(200).json({ success: 'Opportunity saved successfully', savedOpportunity });
   } catch (error) {
-    console.error('Failed to update SavedOpportunities:', error);
-    return res.status(500).json({ error: 'Failed to update SavedOpportunities' });
+    console.error('Error saving opportunity:', error);
+    return res.status(500).json({ error: 'Internal server error' });
   }
 }
