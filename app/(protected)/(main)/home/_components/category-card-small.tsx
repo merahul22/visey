@@ -1,4 +1,5 @@
 import React from 'react';
+import Image from 'next/image';
 
 interface CategoryCardSmallProps {
   category: string;
@@ -16,7 +17,7 @@ export function CategoryCardSmall({ category, imageUrl, onClick, selected }: Cat
       onClick={onClick}
     >
       <div className="h-20 w-20 rounded-full bg-gray-500 md:rounded-md md:w-full">
-        <img src={imageUrl || defaultImageUrl} alt={category} className="w-full h-full object-cover rounded-md" />
+        <Image src={imageUrl || defaultImageUrl} alt={category} layout="fill" objectFit="cover" className="w-full h-full object-cover rounded-md" />
       </div>
       <div className="w-full">
         <p className="text-center md:text-left md:w-1/2 md:ml-4">{category}</p>

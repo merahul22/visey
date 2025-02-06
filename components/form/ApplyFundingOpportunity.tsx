@@ -11,7 +11,7 @@ import ApplyFundingOpportunityPart2 from './ApplyFundingOpportunityPart2';
 import * as z from 'zod';
 
 const ApplyFundingOpportunityForm = ({
-  business,
+  // business, // Remove unused variable
   startup,
   opportunity,
 }: {
@@ -20,9 +20,9 @@ const ApplyFundingOpportunityForm = ({
   opportunity: z.infer<typeof fundingOpportunitySchema> & { id: string };
 }) => {
   const { data: session } = useSession();
-  const [error, setError] = useState<string | undefined>('');
-  const [success, setSuccess] = useState<string | undefined>('');
-  const [loading, setLoading] = useState(false);
+  // const [error, setError] = useState<string | undefined>(''); // Remove unused state
+  // const [success, setSuccess] = useState<string | undefined>(''); // Remove unused state
+  // const [loading, setLoading] = useState(false); // Remove unused state
   const [step, setStep] = useState(1);
   const [formValues, setFormValues] = useState<z.infer<typeof startupDetailsSchema>>({
     name: startup.name ?? '',
@@ -61,14 +61,14 @@ const ApplyFundingOpportunityForm = ({
     setStep(2);
   };
 
-  const handleSubmit = async (values: z.infer<typeof startupDetailsSchema>) => {
-    setLoading(true);
-    setError('');
-    setSuccess('');
-
+  //const handleSubmit = async (values: z.infer<typeof startupDetailsSchema>) => { 
+    // setLoading(true); // Remove unused state
+    // setError(''); // Remove unused state
+    // setSuccess(''); // Remove unused state
+    const handleSubmit = async () => { // Replace with this line
     if (!session?.user?.id) {
-      setError('User not authenticated');
-      setLoading(false);
+      // setError('User not authenticated'); // Remove unused state
+      // setLoading(false); // Remove unused state
       return;
     }
 
@@ -88,17 +88,17 @@ const ApplyFundingOpportunityForm = ({
 
       if (result.error) {
         toast.error(result.error);
-        setError(result.error);
+        // setError(result.error); // Remove unused state
       } else {
         toast.success('Application submitted successfully.');
-        setSuccess(result.success);
+        // setSuccess(result.success); // Remove unused state
         router.push(`/profile/startup`);
       }
-    } catch (error) {
+    } catch {
       toast.error('An error occurred while submitting the application.');
-      setError('An error occurred while submitting the application.');
+      // setError('An error occurred while submitting the application.'); // Remove unused state
     } finally {
-      setLoading(false);
+      // setLoading(false); // Remove unused state
     }
   };
 

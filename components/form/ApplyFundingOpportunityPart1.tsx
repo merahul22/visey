@@ -83,7 +83,7 @@ const ApplyFundingOpportunityPart1 = ({
       <div>
         <h2 className="text-xl font-semibold">Startup Details</h2>
         <p className="text-sm text-neutrals-700">
-          Your profile won't be publicly listed, but shareable. Fill details to customize your experience.
+          Your profile won&apos;t be publicly listed, but shareable. Fill details to customize your experience.
         </p>
       </div>
 
@@ -423,7 +423,7 @@ const ApplyFundingOpportunityPart1 = ({
             name="foundersDetail"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="text-neutrals-700">Founders' Details (For each founder, in this format: Name, Role, About, LinkedIn URL)</FormLabel>
+                <FormLabel className="text-neutrals-700">Founders&apos; Details (For each founder, in this format: Name, Role, About, LinkedIn URL)</FormLabel>
                 <FormControl>
                   <Input
                     className="text-neutrals-700 mt-1"

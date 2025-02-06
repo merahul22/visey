@@ -27,14 +27,11 @@ const HomePage = () => {
   const router = useRouter();
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
   const [recommendedBusinesses, setRecommendedBusinesses] = useState<any[]>([]);
-  const [filteredBusinesses, setFilteredBusinesses] = useState<any[]>([]);
-  const [fetched, setFetched] = useState(false);
   const [opportunities, setOpportunities] = useState<any[]>([]);
   const [opportunitiesError, setOpportunitiesError] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchData = async () => {
-    // async function fetchData() {
       if (!session) {
         console.log("No session found, redirecting to login");
         router.push('/login');
@@ -42,10 +39,8 @@ const HomePage = () => {
       }
 
       const user = session.user;
-      // console.log("User details received:", user);
 
       if (!user?.type) {
-        // console.log("User type not found, redirecting to account type selection");
         router.push('/account-type');
         return;
       }
@@ -55,7 +50,6 @@ const HomePage = () => {
         return;
       }
 
-      //console.log("Fetching recommendations for user:", user);
       const trlLevelString = user.startup?.trlLevel || "TRL 1: Basic Research";
       const trlLevel = isNaN(Number(trlLevelString))
         ? trlLevelMapping[trlLevelString] || 1
@@ -91,6 +85,16 @@ const HomePage = () => {
       } catch (error) {
         console.error("Error fetching recommendations:", error);
       }
+
+      try {
+        const opportunitiesResponse = await fetch('/api/get-opportunities');
+        const opportunitiesData = await opportunitiesResponse.json();
+        if (opportunitiesData.error) throw new Error(opportunitiesData.error);
+        setOpportunities(opportunitiesData);
+      } catch (error) {
+        console.error("Error fetching opportunities:", error);
+        setOpportunitiesError("Failed to load funding opportunities.");
+      }
     };
 
     if (!recommendedBusinesses.length) {
@@ -114,8 +118,6 @@ const HomePage = () => {
         : [...prev, category],
     );
   }, []);
-
-  const date = new Date(Date.now());
 
   const categories = [
     { name: "Marketing Tools", imageUrl: "/img/Category Images/Icon 1.png" },
