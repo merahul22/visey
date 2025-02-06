@@ -1,14 +1,14 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { CategoryCardBig } from "./_components/category-card-big";
-import { CategoryCardSmall } from "./_components/category-card-small";
-import { FundingCard } from "@/components/cards/funding-card";
-import BusinessCardList from "./_components/business";
-import React, { useEffect, useState, useMemo, useCallback } from "react";
-import { getRecommendations } from "@/actions/get-recommendations";
-import { useSession } from "next-auth/react";
-import { useRouter } from "next/navigation";
+import { CategoryCardBig } from './_components/category-card-big';
+import { CategoryCardSmall } from './_components/category-card-small';
+import { FundingCard } from '@/components/cards/funding-card';
+import BusinessCardList from './_components/business';
+import React, { useEffect, useState, useMemo, useCallback } from 'react';
+import { getRecommendations } from '@/actions/get-recommendations';
+import { useSession } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
 
 const trlLevelMapping: Record<string, number> = {
   "TRL 1: Basic Research": 1,
@@ -27,21 +27,35 @@ const HomePage = () => {
   const router = useRouter();
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
   const [recommendedBusinesses, setRecommendedBusinesses] = useState<any[]>([]);
+  const [filteredBusinesses, setFilteredBusinesses] = useState<any[]>([]);
+  const [fetched, setFetched] = useState(false);
+  const [opportunities, setOpportunities] = useState<any[]>([]);
+  const [opportunitiesError, setOpportunitiesError] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchData = async () => {
+    // async function fetchData() {
       if (!session) {
         console.log("No session found, redirecting to login");
-        router.push("/login");
+        router.push('/login');
         return;
       }
 
       const user = session.user;
+      // console.log("User details received:", user);
+
       if (!user?.type) {
-        router.push("/account-type");
+        // console.log("User type not found, redirecting to account type selection");
+        router.push('/account-type');
         return;
       }
 
+      if (!user.id) {
+        console.log("User ID is undefined");
+        return;
+      }
+
+      //console.log("Fetching recommendations for user:", user);
       const trlLevelString = user.startup?.trlLevel || "TRL 1: Basic Research";
       const trlLevel = isNaN(Number(trlLevelString))
         ? trlLevelMapping[trlLevelString] || 1
@@ -84,7 +98,7 @@ const HomePage = () => {
     }
   }, [session, router, recommendedBusinesses.length]);
 
-  const filteredBusinesses = useMemo(() => {
+  const filteredBusinessesMemo = useMemo(() => {
     if (!selectedCategories.length) return recommendedBusinesses;
     return recommendedBusinesses.filter((business) =>
       selectedCategories.every((category) =>
@@ -104,43 +118,18 @@ const HomePage = () => {
   const date = new Date(Date.now());
 
   const categories = [
-    {
-      name: "Incubation",
-      imageUrl:
-        "https://alcorfund.com/wp-content/uploads/2020/08/Startup-Incubator.png",
-    },
-    {
-      name: "Acceleration Programs",
-      imageUrl: "https://example.com/acceleration.jpg",
-    },
-    { name: "Startup Guidance", imageUrl: "https://example.com/guidance.jpg" },
-    { name: "MVP Creation", imageUrl: "https://example.com/mvp.jpg" },
-    { name: "Website Creation", imageUrl: "https://example.com/website.jpg" },
-    {
-      name: "Marketing Support",
-      imageUrl: "https://example.com/marketing.jpg",
-    },
-    { name: "Branding", imageUrl: "https://example.com/branding.jpg" },
-    {
-      name: "Social Media Handling",
-      imageUrl: "https://example.com/socialmedia.jpg",
-    },
-    {
-      name: "Pitch deck expert",
-      imageUrl: "https://example.com/pitchdeck.jpg",
-    },
-    {
-      name: "Pitch Deck Creation",
-      imageUrl: "https://example.com/pitchdeckcreation.jpg",
-    },
-    {
-      name: "Prototype making (Digital)",
-      imageUrl: "https://example.com/prototype-digital.jpg",
-    },
-    {
-      name: "Prototype making (Hardware)",
-      imageUrl: "https://example.com/prototype-hardware.jpg",
-    },
+    { name: "Marketing Tools", imageUrl: "/img/Category Images/Icon 1.png" },
+    { name: "App Development", imageUrl: "/img/Category Images/Icon 2.png" },
+    { name: "Prototype Builders", imageUrl: "/img/Category Images/Icon 3.png" },
+    { name: "Legal & Compliance Support", imageUrl: "/img/Category Images/Icon 4.png" },
+    { name: "Crowdfunding Platforms", imageUrl: "/img/Category Images/Icon 5.png" }
+  ];
+
+  const bigCategories = [
+    { name: "", imageUrl: "/img/Category Images/Category 1- Visey.png" },
+    { name: "", imageUrl: "/img/Category Images/Category 2- Visey.png" },
+    { name: "", imageUrl: "/img/Category Images/Category 3- Visey.png" },
+    { name: "", imageUrl: "/img/Category Images/Category 4- Visey.png" },
   ];
 
   return (
@@ -148,39 +137,40 @@ const HomePage = () => {
       <section className="space-y-4">
         <h2 className="text-xl md:text-2xl font-semibold">Search For</h2>
         <div className="hidden overflow-x-auto md:flex gap-x-4">
-          {Array.from({ length: 5 }).map((_, idx) => (
-            <CategoryCardBig key={idx} />
+          {bigCategories.map((category, idx) => (
+            <CategoryCardBig key={idx} category={category.name} imageUrl={category.imageUrl} />
           ))}
         </div>
 
         <div className="overflow-x-auto flex gap-x-4">
-          {categories.map(({ name, imageUrl }, idx) => (
+          {categories.map((category, idx) => (
             <CategoryCardSmall
               key={idx}
-              category={name}
-              imageUrl={imageUrl}
-              onClick={() => handleCategoryClick(name)}
-              selected={selectedCategories.includes(name)}
+              category={category.name}
+              imageUrl={category.imageUrl}
+              onClick={() => handleCategoryClick(category.name)}
+              selected={selectedCategories.includes(category.name)}
             />
           ))}
         </div>
       </section>
-
       <section className="space-y-4">
-        <h2 className="text-xl md:text-2xl font-semibold">Recommended</h2>
-        <div className="flex flex-wrap gap-2">
-          {selectedCategories.map((category, idx) => (
-            <span
-              key={idx}
-              className="py-0.5 px-2.5 rounded-full border bg-gray-200"
-            >
-              {category}
-            </span>
-          ))}
-        </div>
-        <BusinessCardList businesses={filteredBusinesses} />
+        <span className="space-y-3">
+          <h2 className="text-xl md:text-2xl font-semibold">Recommended</h2>
+          <p>Selected Categories:</p>
+          <div className="flex flex-wrap gap-2">
+            {selectedCategories.map((category, idx) => (
+              <span key={idx} className="py-0.5 px-2.5 rounded-full border bg-gray-200">
+                {category}
+              </span>
+            ))}
+          </div>
+        </span>
+        <BusinessCardList businesses={filteredBusinessesMemo} />
         <span className="block text-center">
-          <Button variant="link">View all</Button>
+          <Button variant="link" className="">
+            View all
+          </Button>
         </span>
       </section>
 
@@ -188,21 +178,28 @@ const HomePage = () => {
         <h2 className="text-xl md:text-2xl font-semibold">
           Funding Opportunities
         </h2>
-        <div className="flex flex-col gap-4">
-          {Array.from({ length: 3 }).map((_, idx) => (
-            <FundingCard
-              key={idx}
-              promoted
-              title="New Studies in Business Media"
-              businessName="Business Name"
-              avatarUrl="https://picsum.photos/100"
-              applyBy={date}
-              location="Delhi, India"
-            />
-          ))}
-        </div>
+        {opportunitiesError ? (
+          <p className="text-red-500">{opportunitiesError}</p>
+        ) : (
+          <div className="flex flex-col gap-4">
+            {opportunities.map((opportunity, idx) => (
+              <FundingCard
+                key={idx}
+                id={opportunity.id}
+                promoted={opportunity.promoted}
+                title={opportunity.title}
+                businessName={opportunity.businessName}
+                avatarUrl={opportunity.avatarUrl}
+                applyBy={new Date(opportunity.endDatetime)}
+                location={opportunity.location}
+              />
+            ))}
+          </div>
+        )}
         <span className="block text-center">
-          <Button variant="link">View all</Button>
+          <Button variant="link" className="">
+            View all
+          </Button>
         </span>
       </section>
     </div>
