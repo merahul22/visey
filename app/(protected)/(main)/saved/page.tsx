@@ -32,6 +32,7 @@ const page = () => {
             {Array.from({ length: 3 }).map((item, idx) => (
               <FundingCard
                 key={idx}
+                id="1213-1-31312-123"
                 promoted
                 title="New Studies in Business Media"
                 businessName="Business Name"

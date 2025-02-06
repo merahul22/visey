@@ -1,13 +1,13 @@
-import { FundingCard } from '@/components/cards/funding-card';
-import { PencilSimple } from '@phosphor-icons/react/dist/ssr';
-import { Button } from '@/components/ui/button';
-import { Opportunity } from '@prisma/client';
+import { FundingCard } from "@/components/cards/funding-card";
+import { PencilSimple } from "@phosphor-icons/react/dist/ssr";
+import { Button } from "@/components/ui/button";
+import { Opportunity } from "@prisma/client";
 
 export default function Opportunities({
   opportunities,
   name,
   location,
-  isPublic
+  isPublic,
 }: {
   opportunities: Opportunity[];
   name: string;
@@ -36,6 +36,7 @@ export default function Opportunities({
           opportunities?.map((opportunity, idx) => (
             <FundingCard
               key={idx}
+              id={opportunity.id}
               title={opportunity.title}
               promoted={false}
               businessName={name}
