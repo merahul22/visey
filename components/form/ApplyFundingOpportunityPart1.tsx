@@ -1,10 +1,10 @@
-'use client';
+"use client";
 
-import React, { useEffect, useState } from 'react';
-import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
-import * as z from 'zod';
-import { Button } from '../ui/button';
+import React, { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import * as z from "zod";
+import { Button } from "../ui/button";
 import {
   Form,
   FormControl,
@@ -12,11 +12,11 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '../ui/form';
-import { Input } from '@/components/ui/input';
-import { startupDetailsSchema } from '@/schemas';
-import Image from 'next/image';
-import { getStartupDetails } from '@/actions/get-startup-details';
+} from "../ui/form";
+import { Input } from "@/components/ui/input";
+import { startupDetailsSchema } from "@/schemas";
+import Image from "next/image";
+import getStartupDetails from "@/actions/get-startup-details";
 
 const ApplyFundingOpportunityPart1 = ({
   defaultValues,
@@ -32,33 +32,43 @@ const ApplyFundingOpportunityPart1 = ({
 
   useEffect(() => {
     const fetchStartupDetails = async () => {
-      const details = await getStartupDetails(userId);
-      if (details) {
+      const res = await getStartupDetails(userId);
+      if (res.error) {
+        console.log(res.error);
+        setStartupDetails(null);
+      }
+
+      if (res?.success) {
+        if (!res.data) {
+          return;
+        }
         setStartupDetails({
-          ...details,
-          description: details.description || '',
-          registeredName: details.registeredName || '',
-          registrationDate: details.registrationDate ? new Date(details.registrationDate) : undefined,
-          dpiitRecognized: details.dpiitRecognized || false,
-          websiteUrl: details.websiteUrl || '',
-          email: details.email || '',
-          contactNumber: details.contactNumber || '',
-          location: details.location || '',
-          industry: details.industry || '',
-          sector: details.sector || '',
-          trlLevel: details.trlLevel || '',
-          productStage: details.productStage || '',
-          fundingStage: details.fundingStage || '',
-          idea: details.idea || '',
-          problem: details.problem || '',
-          marketSize: details.marketSize || '',
-          twoMajorCompetitors: details.twoMajorCompetitors || '',
-          demoVideoUrl: details.demoVideoUrl || '',
-          pitchDeckUrl: details.pitchDeckUrl || '',
-          foundersDetail: details.foundersDetail || '',
-          teamSize: details.teamSize || '',
-          noOfFte: details.noOfFte || '',
-          noOfInterns: details.noOfInterns || '',
+          ...res.data,
+          description: res.data.description || "",
+          registeredName: res.data.registeredName || "",
+          registrationDate: res.data.registrationDate
+            ? new Date(res.data.registrationDate)
+            : undefined,
+          dpiitRecognized: res.data.dpiitRecognized || false,
+          websiteUrl: res.data.websiteUrl || "",
+          email: res.data.email || "",
+          contactNumber: res.data.contactNumber || "",
+          location: res.data.location || "",
+          industry: res.data.industry || "",
+          sector: res.data.sector || "",
+          trlLevel: res.data.trlLevel || "",
+          productStage: res.data.productStage || "",
+          fundingStage: res.data.fundingStage || "",
+          idea: res.data.idea || "",
+          problem: res.data.problem || "",
+          marketSize: res.data.marketSize || "",
+          twoMajorCompetitors: res.data.twoMajorCompetitors || "",
+          demoVideoUrl: res.data.demoVideoUrl || "",
+          pitchDeckUrl: res.data.pitchDeckUrl || "",
+          foundersDetail: res.data.foundersDetail || "",
+          teamSize: res.data.teamSize || "",
+          noOfFte: res.data.noOfFte || "",
+          noOfInterns: res.data.noOfInterns || "",
         });
       }
     };
@@ -95,7 +105,11 @@ const ApplyFundingOpportunityPart1 = ({
             <div className="flex justify-center">
               <div className="border-2 rounded-lg px-14 py-2">
                 <Image
-                  src={startupDetails?.image || defaultValues.image || 'https://res.cloudinary.com/dlriuadjv/image/upload/v1729353205/xbbb0zw6js60dxnq64qj.png'}
+                  src={
+                    startupDetails?.image ||
+                    defaultValues.image ||
+                    "https://res.cloudinary.com/dlriuadjv/image/upload/v1729353205/xbbb0zw6js60dxnq64qj.png"
+                  }
                   alt="Startup Logo"
                   width={150}
                   height={150}
@@ -110,7 +124,9 @@ const ApplyFundingOpportunityPart1 = ({
             name="name"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="text-neutrals-700">Startup Name*</FormLabel>
+                <FormLabel className="text-neutrals-700">
+                  Startup Name*
+                </FormLabel>
                 <FormControl>
                   <Input
                     className="text-neutrals-700 mt-1"
@@ -148,7 +164,9 @@ const ApplyFundingOpportunityPart1 = ({
             name="registrationDate"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="text-neutrals-700">Company Registration Date (if applicable)</FormLabel>
+                <FormLabel className="text-neutrals-700">
+                  Company Registration Date (if applicable)
+                </FormLabel>
                 <FormControl>
                   <Input
                     type="date"
@@ -156,12 +174,15 @@ const ApplyFundingOpportunityPart1 = ({
                     {...field}
                     //value={startupDetails?.registrationDate ? startupDetails.registrationDate.toISOString().split('T')[0] : (field.value as string) || ''}
                     value={
-                        startupDetails?.registrationDate
-                          ? new Date(startupDetails.registrationDate).toISOString().split('T')[0] // Convert to YYYY-MM-DD
-                          : field.value && typeof field.value === 'string' // Ensure field.value is a string
+                      startupDetails?.registrationDate
+                        ? new Date(startupDetails.registrationDate)
+                            .toISOString()
+                            .split("T")[0] // Convert to YYYY-MM-DD
+                        : field.value && typeof field.value === "string" // Ensure field.value is a string
                           ? field.value
-                          : ''
-                      }                    readOnly={!!startupDetails?.registrationDate}
+                          : ""
+                    }
+                    readOnly={!!startupDetails?.registrationDate}
                   />
                 </FormControl>
                 <FormMessage />
@@ -174,7 +195,9 @@ const ApplyFundingOpportunityPart1 = ({
             name="dpiitRecognized"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="text-neutrals-700">DPIIT Recognized?</FormLabel>
+                <FormLabel className="text-neutrals-700">
+                  DPIIT Recognized?
+                </FormLabel>
                 <FormControl>
                   <Input
                     type="checkbox"
@@ -237,7 +260,9 @@ const ApplyFundingOpportunityPart1 = ({
             name="productStage"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="text-neutrals-700">Startup Product Stage*</FormLabel>
+                <FormLabel className="text-neutrals-700">
+                  Startup Product Stage*
+                </FormLabel>
                 <FormControl>
                   <Input
                     className="text-neutrals-700 mt-1"
@@ -256,7 +281,9 @@ const ApplyFundingOpportunityPart1 = ({
             name="fundingStage"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="text-neutrals-700">Startup Funding Stage*</FormLabel>
+                <FormLabel className="text-neutrals-700">
+                  Startup Funding Stage*
+                </FormLabel>
                 <FormControl>
                   <Input
                     className="text-neutrals-700 mt-1"
@@ -298,7 +325,9 @@ const ApplyFundingOpportunityPart1 = ({
             name="idea"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="text-neutrals-700">Idea (Max 100-150 words)</FormLabel>
+                <FormLabel className="text-neutrals-700">
+                  Idea (Max 100-150 words)
+                </FormLabel>
                 <FormControl>
                   <Input
                     className="text-neutrals-700 mt-1"
@@ -317,7 +346,10 @@ const ApplyFundingOpportunityPart1 = ({
             name="problem"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="text-neutrals-700">What is the problem you are trying to solve? (Max 200-300 words)</FormLabel>
+                <FormLabel className="text-neutrals-700">
+                  What is the problem you are trying to solve? (Max 200-300
+                  words)
+                </FormLabel>
                 <FormControl>
                   <Input
                     className="text-neutrals-700 mt-1"
@@ -336,7 +368,9 @@ const ApplyFundingOpportunityPart1 = ({
             name="marketSize"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="text-neutrals-700">Market Size / Potential Market Opportunity*</FormLabel>
+                <FormLabel className="text-neutrals-700">
+                  Market Size / Potential Market Opportunity*
+                </FormLabel>
                 <FormControl>
                   <Input
                     className="text-neutrals-700 mt-1"
@@ -355,7 +389,10 @@ const ApplyFundingOpportunityPart1 = ({
             name="twoMajorCompetitors"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="text-neutrals-700">2 Major Competitors (For each competitor: Name, Description in 2 sentences)</FormLabel>
+                <FormLabel className="text-neutrals-700">
+                  2 Major Competitors (For each competitor: Name, Description in
+                  2 sentences)
+                </FormLabel>
                 <FormControl>
                   <Input
                     className="text-neutrals-700 mt-1"
@@ -424,7 +461,10 @@ const ApplyFundingOpportunityPart1 = ({
             name="foundersDetail"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="text-neutrals-700">Founders&apos; Details (For each founder, in this format: Name, Role, About, LinkedIn URL)</FormLabel>
+                <FormLabel className="text-neutrals-700">
+                  Founders&#39; Details (For each founder, in this format: Name,
+                  Role, About, LinkedIn URL)
+                </FormLabel>
                 <FormControl>
                   <Input
                     className="text-neutrals-700 mt-1"
@@ -443,7 +483,9 @@ const ApplyFundingOpportunityPart1 = ({
             name="teamSize"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="text-neutrals-700">Team Size (including both part-time and full-time)</FormLabel>
+                <FormLabel className="text-neutrals-700">
+                  Team Size (including both part-time and full-time)
+                </FormLabel>
                 <FormControl>
                   <Input
                     className="text-neutrals-700 mt-1"
@@ -462,7 +504,9 @@ const ApplyFundingOpportunityPart1 = ({
             name="noOfFte"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="text-neutrals-700">Number of full-time members*</FormLabel>
+                <FormLabel className="text-neutrals-700">
+                  Number of full-time members*
+                </FormLabel>
                 <FormControl>
                   <Input
                     className="text-neutrals-700 mt-1"
@@ -481,7 +525,9 @@ const ApplyFundingOpportunityPart1 = ({
             name="noOfInterns"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="text-neutrals-700">Number of part-time members (write 0 if not applicable)</FormLabel>
+                <FormLabel className="text-neutrals-700">
+                  Number of part-time members (write 0 if not applicable)
+                </FormLabel>
                 <FormControl>
                   <Input
                     className="text-neutrals-700 mt-1"
@@ -504,7 +550,9 @@ const ApplyFundingOpportunityPart1 = ({
             name="contactNumber"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="text-neutrals-700">Contact Number*</FormLabel>
+                <FormLabel className="text-neutrals-700">
+                  Contact Number*
+                </FormLabel>
                 <FormControl>
                   <Input
                     className="text-neutrals-700 mt-1"
@@ -523,7 +571,9 @@ const ApplyFundingOpportunityPart1 = ({
             name="email"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="text-neutrals-700">Contact Email ID*</FormLabel>
+                <FormLabel className="text-neutrals-700">
+                  Contact Email ID*
+                </FormLabel>
                 <FormControl>
                   <Input
                     className="text-neutrals-700 mt-1"

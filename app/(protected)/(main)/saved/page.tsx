@@ -1,6 +1,7 @@
 "use client";
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+// import { BusinessCard } from "@/components/cards/business-card";
 import { Separator } from "@/components/ui/separator";
 import { FundingCard } from "@/components/cards/funding-card";
 import { useEffect, useState } from "react";

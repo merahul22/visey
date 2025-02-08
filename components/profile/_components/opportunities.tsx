@@ -1,7 +1,7 @@
-import { FundingCard } from '@/components/cards/funding-card';
-import { PencilSimple } from '@phosphor-icons/react/dist/ssr';
-import { Button } from '@/components/ui/button';
-import { Opportunity } from '@prisma/client';
+import { FundingCard } from "@/components/cards/funding-card";
+import { PencilSimple } from "@phosphor-icons/react/dist/ssr";
+import { Button } from "@/components/ui/button";
+import { Opportunity } from "@prisma/client";
 
 export default function Opportunities({
   opportunities,
