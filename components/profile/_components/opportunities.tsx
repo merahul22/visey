@@ -7,7 +7,7 @@ export default function Opportunities({
   opportunities,
   name,
   location,
-  isPublic
+  isPublic,
 }: {
   opportunities: Opportunity[];
   name: string;

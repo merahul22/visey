@@ -27,7 +27,8 @@ const ApplyFundingOpportunityPart1 = ({
   onNext: (values: z.infer<typeof startupDetailsSchema>) => void;
   userId: string;
 }) => {
-  const [startupDetails, setStartupDetails] = useState<z.infer<typeof startupDetailsSchema> | null>(null);
+  // const [startupDetails, setStartupDetails] = useState<z.infer<typeof startupDetailsSchema> | null>(null);
+  const [startupDetails, setStartupDetails] = useState<any>(null);
 
   useEffect(() => {
     const fetchStartupDetails = async () => {
