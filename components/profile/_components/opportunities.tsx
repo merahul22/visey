@@ -33,9 +33,9 @@ export default function Opportunities({
         )}
 
         {opportunities &&
-          opportunities?.map((opportunity, idx) => (
+          opportunities.map((opportunity) => (
             <FundingCard
-              key={idx}
+              key={opportunity.id}
               id={opportunity.id}
               title={opportunity.title}
               promoted={false}

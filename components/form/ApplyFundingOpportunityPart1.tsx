@@ -27,6 +27,7 @@ const ApplyFundingOpportunityPart1 = ({
   onNext: (values: z.infer<typeof startupDetailsSchema>) => void;
   userId: string;
 }) => {
+  // const [startupDetails, setStartupDetails] = useState<z.infer<typeof startupDetailsSchema> | null>(null);
   const [startupDetails, setStartupDetails] = useState<any>(null);
 
   useEffect(() => {
@@ -93,8 +94,7 @@ const ApplyFundingOpportunityPart1 = ({
       <div>
         <h2 className="text-xl font-semibold">Startup Details</h2>
         <p className="text-sm text-neutrals-700">
-          Your profile won&#39;t be publicly listed, but shareable. Fill details
-          to customize your experience.
+          Your profile won&apos;t be publicly listed, but shareable. Fill details to customize your experience.
         </p>
       </div>
 
