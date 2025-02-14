@@ -12,7 +12,7 @@ export default function Layout({
       {/* Image on the left side */}
       <div className="hidden lg:block lg:w-[565px] h-screen relative">
         <Image
-          src={"/img/business_banner.webp"}
+          src={"/img/signup_banner.webp"}
           alt={"Signup Banner"}
           fill={true}
           objectFit="cover"
@@ -22,7 +22,7 @@ export default function Layout({
       {/* Main content */}
       <div className="flex flex-1 items-center justify-center">{children}</div>
       <div className="shrink-0 lg:w-48 cursor-pointer absolute left-[40px] top-[20px]">
-        <Link href="/">
+        <Link href="/public">
           <Image
             src="/logo-black.webp"
             width={71}
