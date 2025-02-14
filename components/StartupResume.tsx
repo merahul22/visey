@@ -1,16 +1,17 @@
-import { Separator } from '@/components/ui/separator';
-import React from 'react';
-import { Button } from './ui/button';
-import Image from 'next/image';
-import Link from 'next/link';
-import { Startup } from '@prisma/client';
+import { Separator } from "@/components/ui/separator";
+import React from "react";
+import { Button } from "./ui/button";
+import Image from "next/image";
+import Link from "next/link";
+import { Startup } from "@prisma/client";
 
 const StartupResume = ({ startup }: { startup: Startup | null }) => {
   const date = new Date(startup?.registrationDate as Date);
-  const formattedDate = date.toLocaleDateString('en-US', {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
+
+  const formattedDate = date.toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
   });
 
   return (
@@ -22,7 +23,7 @@ const StartupResume = ({ startup }: { startup: Startup | null }) => {
             <Image
               src={
                 startup?.image ||
-                'https://res.cloudinary.com/dlriuadjv/image/upload/v1729353205/xbbb0zw6js60dxnq64qj.png'
+                "https://res.cloudinary.com/dlriuadjv/image/upload/v1729353205/xbbb0zw6js60dxnq64qj.png"
               }
               height={150}
               width={150}
@@ -43,9 +44,9 @@ const StartupResume = ({ startup }: { startup: Startup | null }) => {
                 />
               </h3>
               <p className="text-linkBlue text-sm">
-                {startup?.registeredName || 'Registered Name'}
+                {startup?.registeredName || "N/A"}
               </p>
-              <p className="text-sm">{startup?.description}</p>
+              <p className="text-sm">{startup?.description || "N/A"}</p>
             </div>
             <div className="flex gap-x-2">
               <Button
@@ -53,14 +54,14 @@ const StartupResume = ({ startup }: { startup: Startup | null }) => {
                 size="sm"
                 className="py-1.5 rounded-full"
               >
-                {startup?.industry}
+                {startup?.industry || "N/A"}
               </Button>
               <Button
                 variant="outline"
                 size="sm"
                 className="py-1.5 rounded-full"
               >
-                {startup?.sector}
+                {startup?.sector || "N/A"}
               </Button>
             </div>
           </div>
@@ -72,24 +73,27 @@ const StartupResume = ({ startup }: { startup: Startup | null }) => {
       <article className="space-y-4">
         <div className="space-y-2">
           <h3 className="font-semibold">Website</h3>
-          <Link href={startup?.websiteUrl || "#"} className="text-linkBlue text-sm">
-            {startup?.websiteUrl || "Website Url"}
+          <Link
+            href={startup?.websiteUrl || "#"}
+            className="text-linkBlue text-sm"
+          >
+            {startup?.websiteUrl || "N/A"}
           </Link>
         </div>
         <div className="space-y-2">
           <h1 className="text-xl font-semibold">Progress</h1>
 
           <div className="">
-            <h3 className="font-semibold">Startup Product Stage*</h3>
-            <p className="text-sm ">{startup?.productStage}</p>
+            <h3 className="font-semibold">Startup Product Stage</h3>
+            <p className="text-sm ">{startup?.productStage || "N/A"}</p>
           </div>
           <div className="">
-            <h3 className="font-semibold">Startup Funding Stage*</h3>
-            <p className="text-sm ">{startup?.fundingStage}</p>
+            <h3 className="font-semibold">Startup Funding Stage</h3>
+            <p className="text-sm ">{startup?.fundingStage || "N/A"}</p>
           </div>
           <div className="">
-            <h3 className="font-semibold">TRL Level*</h3>
-            <p className="text-sm ">{startup?.trlLevel}</p>
+            <h3 className="font-semibold">TRL Level</h3>
+            <p className="text-sm ">{startup?.trlLevel || "N/A"}</p>
           </div>
         </div>
       </article>
@@ -100,20 +104,20 @@ const StartupResume = ({ startup }: { startup: Startup | null }) => {
         <h1 className="text-lg font-semibold">Product</h1>
 
         <div className="space-y-2">
-          <h3 className="font-semibold">Idea (Max 100-150 words)*</h3>
-          <p className="text-sm ">{startup?.idea}</p>
+          <h3 className="font-semibold">Idea (Max 100-150 words)</h3>
+          <p className="text-sm ">{startup?.idea || "N/A"}</p>
         </div>
         <div className="">
           <h3 className="font-semibold">
-            What is the problem you are trying to solve? (Max 200-300 words)*
+            What is the problem you are trying to solve? (Max 200-300 words)
           </h3>
-          <p className="text-sm ">{startup?.problem}</p>
+          <p className="text-sm ">{startup?.problem || "N/A"}</p>
         </div>
         <div className="">
           <h3 className="font-semibold">
             Market Size/Potential Market Opportunity
           </h3>
-          <p className="text-sm ">{startup?.marketSize}</p>
+          <p className="text-sm ">{startup?.marketSize || "N/A"}</p>
         </div>
         <div className="">
           <h3 className="font-semibold">
@@ -128,21 +132,21 @@ const StartupResume = ({ startup }: { startup: Startup | null }) => {
           </div>
         </div>
         <div className="">
-          <h3 className="font-semibold">Demo Video*</h3>
+          <h3 className="font-semibold">Demo Video</h3>
           <Link
             href="https://google.drive.com"
             className="text-linkBlue text-sm"
           >
-            {startup?.demoVideoUrl || "Demo Video Url"}
+            {startup?.demoVideoUrl || "N/A"}
           </Link>
         </div>
         <div className="">
-          <h3 className="font-semibold">Pitch Deck*</h3>
+          <h3 className="font-semibold">Pitch Deck</h3>
           <Link
             href="https://google.drive.com"
             className="text-linkBlue text-sm"
           >
-            {startup?.pitchDeckUrl || "Pitch Deck Url"}
+            {startup?.pitchDeckUrl || "N/A"}
           </Link>
         </div>
       </article>
@@ -158,31 +162,25 @@ const StartupResume = ({ startup }: { startup: Startup | null }) => {
             About, Linkedin URL)*
           </h3>
           <div className="">
-            <p className="text-sm">
-              Aditya Jain, CMO, 3rd Year BBA,
-              https://www.linkedin.com/in/adityajain19/
-            </p>
-            <p className="text-sm">
-              Facebook: Social media long standing in market
-            </p>
+            <p className="text-sm">{startup?.foundersDetail || "N/A"}</p>
           </div>
         </div>
         <div className="space-y-2">
           <h3 className="font-semibold">
-            Team Size (including both part-time and full-time)*
+            Team Size (including both part-time and full-time)
           </h3>
-          <p className="text-sm">{startup?.teamSize}</p>
+          <p className="text-sm">{startup?.teamSize || "N/A"}</p>
         </div>
         <div className="sapce-y-2">
-          <h3 className="font-semibold">Number of full-time members*</h3>
-          <p className="text-sm">{startup?.noOfFte}</p>
+          <h3 className="font-semibold">Number of full-time members</h3>
+          <p className="text-sm">{startup?.noOfFte || "N/A"}</p>
         </div>
 
         <div className="space-y-2">
           <h3 className="font-semibold">
-            Number of part-time members (write 0 if not applicable)*
+            Number of part-time members (write 0 if not applicable)
           </h3>
-          <p className="text-sm">{startup?.noOfInterns}</p>
+          <p className="text-sm">{startup?.noOfInterns || "N/A"}</p>
         </div>
       </article>
 
@@ -193,13 +191,13 @@ const StartupResume = ({ startup }: { startup: Startup | null }) => {
 
         <div className="space-y-2">
           <h3 className="font-semibold">DPIIT Recognized</h3>
-          <p className="text-sm">Ideation</p>
+          <p className="text-sm">{startup?.dpiitRecognized ? "Yes" : "No"}</p>
         </div>
         <div className="space-y-2">
           <h3 className="font-semibold">
             Company Registration Date (If applicable)
           </h3>
-          <p className="text-sm">{formattedDate}</p>
+          <p className="text-sm">{formattedDate || "N/A"}</p>
         </div>
       </article>
 
@@ -209,12 +207,12 @@ const StartupResume = ({ startup }: { startup: Startup | null }) => {
         <h1 className="text-lg font-semibold">Contact</h1>
 
         <div className="">
-          <h3 className="font-semibold">Contact Number*</h3>
-          <p className="text-sm">{startup?.contactNumber || "Contact Number"}</p>
+          <h3 className="font-semibold">Contact Number</h3>
+          <p className="text-sm">{startup?.contactNumber || "N/A"}</p>
         </div>
         <div className="">
-          <h3 className="font-semibold">Contact Email Id*</h3>
-          <p className="text-sm">{startup?.email || "Email"}</p>
+          <h3 className="font-semibold">Contact Email Id</h3>
+          <p className="text-sm">{startup?.email || "N/A"}</p>
         </div>
       </article>
     </div>

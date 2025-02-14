@@ -1,6 +1,8 @@
 import React from "react";
 import { Button } from "../ui/button";
 import Image from "next/image";
+import { Startup } from "@prisma/client";
+import Link from "next/link";
 
 const CreateStartupResume = () => {
   return (
@@ -18,9 +20,11 @@ const CreateStartupResume = () => {
           alt="Create Resume Logo"
         />
       </div>
-      <Button variant="default" size="sm">
-        Create Startup Resume
-      </Button>
+      <Link href="/startup-details">
+        <Button variant="default" size="sm">
+          Create Startup Resume
+        </Button>
+      </Link>
     </div>
   );
 };
