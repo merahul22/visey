@@ -1,13 +1,13 @@
-'use client';
+"use client";
 
-import React, { useState, useTransition } from 'react';
-import { startupDetailsSchema } from '@/schemas';
+import React, { useState, useTransition } from "react";
+import { startupDetailsSchema } from "@/schemas";
 
-import { zodResolver } from '@hookform/resolvers/zod';
-import { useForm } from 'react-hook-form';
-import * as z from 'zod';
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import * as z from "zod";
 
-import { Button } from '../ui/button';
+import { Button } from "../ui/button";
 import {
   Form,
   FormControl,
@@ -16,52 +16,52 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '../ui/form';
+} from "../ui/form";
 
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from '@/components/ui/popover';
+} from "@/components/ui/popover";
 
-import { Input } from '@/components/ui/input';
-import { Switch } from '@/components/ui/switch';
-import { Combobox } from '../Combobox';
+import { Input } from "@/components/ui/input";
+import { Switch } from "@/components/ui/switch";
+import { Combobox } from "../Combobox";
 import {
   industries as industriesList,
   trlLevels as trlLevelsList,
   locations as locationsList,
   sectors as sectorsList,
-} from '@/constants';
-import Image from 'next/image';
-import { cn } from '@/lib/utils';
-import { CalendarIcon } from 'lucide-react';
-import { Calendar } from '@/components/ui/calendar';
-import { format } from 'date-fns';
-import { Textarea } from '../ui/textarea';
-import { Startup } from '@prisma/client';
-import { completeStartupDetails } from '@/actions/complete-startup-details';
+} from "@/constants";
+import Image from "next/image";
+import { cn } from "@/lib/utils";
+import { CalendarIcon } from "lucide-react";
+import { Calendar } from "@/components/ui/calendar";
+import { format } from "date-fns";
+import { Textarea } from "../ui/textarea";
+import { Startup } from "@prisma/client";
+import { completeStartupDetails } from "@/actions/complete-startup-details";
 
-import { useRouter } from 'next/navigation';
-import { FormError } from './FormError';
-import { FormSuccess } from './FormSuccess';
-import { toast } from 'sonner';
+import { useRouter } from "next/navigation";
+import { FormError } from "./FormError";
+import { FormSuccess } from "./FormSuccess";
+import { toast } from "sonner";
 
 interface StartupDetailsFormProps {
   startup?: Startup;
 }
 
 const StartupDetailsForm = ({ startup }: StartupDetailsFormProps) => {
-  const [error, setError] = useState<string | undefined>('');
-  const [success, setSuccess] = useState<string | undefined>('');
+  const [error, setError] = useState<string | undefined>("");
+  const [success, setSuccess] = useState<string | undefined>("");
   const [loading, startTransition] = useTransition();
 
   const router = useRouter();
 
   const onSubmit = (values: z.infer<typeof startupDetailsSchema>) => {
     console.log(values);
-    setError('');
-    setSuccess('');
+    setError("");
+    setSuccess("");
 
     startTransition(async () => {
       const res = await completeStartupDetails(values);
@@ -99,9 +99,9 @@ const StartupDetailsForm = ({ startup }: StartupDetailsFormProps) => {
       foundersDetail: startup?.foundersDetail as string,
       contactNumber: startup?.contactNumber as string,
       industry: startup?.industry as string,
-      industryOthers: '',
+      industryOthers: "",
       sector: startup?.sector as string,
-      sectorOthers: '',
+      sectorOthers: "",
       location: startup?.location as string,
       trlLevel: startup?.trlLevel as string,
       email: startup?.email as string,
@@ -109,7 +109,7 @@ const StartupDetailsForm = ({ startup }: StartupDetailsFormProps) => {
   });
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-4 max-w-[300px] md:max-w-[600px]">
       <div>
         <h1 className="text-2xl font-semibold">Startup Details</h1>
         <p className="text-sm text-neutrals-700">
@@ -211,16 +211,16 @@ const StartupDetailsForm = ({ startup }: StartupDetailsFormProps) => {
                         <FormControl>
                           <div className="mt-1">
                             <Button
-                              variant={'outline'}
+                              variant={"outline"}
                               type="button"
                               className={cn(
-                                'w-[240px] pl-3 text-left font-normal',
-                                !field.value && 'text-muted-foreground'
+                                "w-[240px] pl-3 text-left font-normal",
+                                !field.value && "text-muted-foreground",
                               )}
                               disabled={loading}
                             >
                               {field.value ? (
-                                format(field.value, 'PPP')
+                                format(field.value, "PPP")
                               ) : (
                                 <span>Pick a date</span>
                               )}
@@ -235,7 +235,7 @@ const StartupDetailsForm = ({ startup }: StartupDetailsFormProps) => {
                           selected={field.value}
                           onSelect={field.onChange}
                           disabled={(date) =>
-                            date > new Date() || date < new Date('1900-01-01')
+                            date > new Date() || date < new Date("1900-01-01")
                           }
                           initialFocus
                         />
@@ -434,6 +434,7 @@ const StartupDetailsForm = ({ startup }: StartupDetailsFormProps) => {
                             data={trlLevelsList}
                             onChange={(value) => field.onChange(value)}
                             disabled={loading}
+                            sizeSmall={300}
                           />
                         </div>
                       </FormControl>

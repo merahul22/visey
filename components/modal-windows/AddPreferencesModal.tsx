@@ -68,14 +68,14 @@ export function AddPreferencesModal({
           Add Preferences
         </Button>
       </DialogTrigger>
-      <DialogContent className="">
+      <DialogContent className="p-4">
         <DialogHeader>
           <DialogTitle>What are you finding?</DialogTitle>
           <DialogDescription>
             Select at least 3 things to continue.
           </DialogDescription>
         </DialogHeader>
-        <div className="flex flex-wrap gap-x-2 space-y-2 items-center justify-center">
+        <div className="max-h-[400px] flex flex-wrap gap-x-2 space-y-2 items-center justify-center overflow-scroll mb-10">
           {preferencesList.map((preference) => (
             <div
               key={preference}
@@ -96,7 +96,7 @@ export function AddPreferencesModal({
           ))}
         </div>
         <DialogFooter>
-          <div className="mt-8">
+          <div className="mt-8 fixed bottom-2 left-0 w-full">
             <Button className="w-full" disabled={loading} onClick={onSubmit}>
               Done
             </Button>

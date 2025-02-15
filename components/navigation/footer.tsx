@@ -109,13 +109,13 @@ function Footer({ className }: { className?: string }) {
             <Link href="https://chat.whatsapp.com/B7qoH1FiKGKKK7rAKAo4nn">
               <WhatsappLogo size={24} />
             </Link>
-            <Link href="#">
+            <Link href="https://youtube.com/@viseyindiaofficial">
               <YoutubeLogo size={24} />
             </Link>
             <Link href="https://www.linkedin.com/company/viseycompany">
               <LinkedinLogo size={24} />
             </Link>
-            <Link href="https://www.instagram.com/visey.co.in?igsh=ZXpnZHZrcXUyenVp">
+            <Link href="https://www.instagram.com/visey.co.in">
               <InstagramLogo size={24} />
             </Link>
           </div>
