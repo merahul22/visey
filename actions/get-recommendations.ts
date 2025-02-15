@@ -18,17 +18,12 @@ export const getRecommendations = async (
   startupDetails: z.infer<typeof recommendationSchema>,
   limit: number = 10, // Default limit set to 10 if not provided
 ) => {
-  console.log("Received startup details for validation:", startupDetails);
-
   // Validate the input fields
   const validatedFields = recommendationSchema.safeParse(startupDetails);
 
   if (!validatedFields.success) {
-    console.error("Validation failed:", validatedFields.error);
     return { error: "Invalid fields!" };
   }
-
-  console.log("Validated fields:", validatedFields.data);
 
   try {
     // Make the API call to get recommendations

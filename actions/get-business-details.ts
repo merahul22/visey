@@ -52,8 +52,8 @@ export async function getBusinessDetails(
     console.error("Missing businessId");
     return { error: "Missing businessId" };
   }
-
   console.log("Fetching business details for businessId:", businessId);
+
   try {
     const business = await prisma.business.findUnique({
       where: { id: businessId },

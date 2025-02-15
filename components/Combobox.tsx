@@ -41,7 +41,7 @@ export function Combobox({
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
-      <PopoverTrigger asChild>
+      <PopoverTrigger className="overflow-scroll" asChild>
         <Button
           disabled={disabled}
           variant="outline"

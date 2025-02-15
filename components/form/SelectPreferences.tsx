@@ -11,8 +11,7 @@ import { useSession } from "next-auth/react";
 import { DEFAULT_LOGIN_REDIRECT } from "@/routes";
 
 const preferencesList = categories.map((category) => category.value);
-
-preferencesList.pop(); // Remove 'Others' from the list
+preferencesList.pop();
 
 const SelectPreferences = () => {
   const [selectedPreferences, setSelectedPreferences] = useState<string[]>([]);
@@ -23,11 +22,10 @@ const SelectPreferences = () => {
   const disabled = selectedPreferences.length < 3;
 
   const handlePreferenceClick = (preference: string) => {
-    setSelectedPreferences(
-      (prev) =>
-        prev.includes(preference)
-          ? prev.filter((item) => item !== preference) // Remove if already selected
-          : [...prev, preference], // Add if not selected
+    setSelectedPreferences((prev) =>
+      prev.includes(preference)
+        ? prev.filter((item) => item !== preference)
+        : [...prev, preference],
     );
   };
 
@@ -58,7 +56,7 @@ const SelectPreferences = () => {
             What are you finding?
           </h1>
           <p className="text-sm text-neutrals-600 text-center">
-            Select atleast 3 things
+            Select at least 3 things
           </p>
         </div>
         <div className="flex flex-wrap gap-x-2 space-y-2 items-center justify-center">

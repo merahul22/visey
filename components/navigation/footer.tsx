@@ -7,6 +7,7 @@ import {
   Phone,
   WhatsappLogo,
   YoutubeLogo,
+  InstagramLogo,
 } from "@phosphor-icons/react/dist/ssr";
 
 import Image from "next/image";
@@ -105,14 +106,17 @@ function Footer({ className }: { className?: string }) {
         <div className="space-y-2">
           <h2 className="font-semibold text-xl">Social Links</h2>
           <div className="flex gap-x-2">
-            <Link href="https://wa.me/917827586754">
+            <Link href="https://chat.whatsapp.com/B7qoH1FiKGKKK7rAKAo4nn">
               <WhatsappLogo size={24} />
             </Link>
-            <Link href="#">
+            <Link href="https://youtube.com/@viseyindiaofficial">
               <YoutubeLogo size={24} />
             </Link>
             <Link href="https://www.linkedin.com/company/viseycompany">
               <LinkedinLogo size={24} />
+            </Link>
+            <Link href="https://www.instagram.com/visey.co.in">
+              <InstagramLogo size={24} />
             </Link>
           </div>
         </div>

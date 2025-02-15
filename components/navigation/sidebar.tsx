@@ -43,7 +43,7 @@ export function Sidebar({ userType }: SidebarProps) {
   const sidebarItems = getSidebarItems(userType);
 
   return (
-    <aside className="hidden h-[calc(100vh-4rem)] pt-16 pb-4 md:flex flex-col justify-between z-10 shrink-0 w-52 border-r fixed bg-base-white px-4">
+    <aside className="hidden h-[calc(100vh-8rem)] md:h-[calc(100vh-4rem)] pt-16 pb-4 md:flex flex-col justify-between z-10 shrink-0 w-52 border-r fixed bg-base-white px-4">
       {/* Top Section */}
       <div className="flex flex-col gap-y-4 flex-grow">
         {sidebarItems.map((item) => {

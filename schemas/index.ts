@@ -100,7 +100,7 @@ export const listBusinessFirstStepSchema = z.object({
   websiteUrl: z
     .string()
     .optional()
-    .refine((val) => !val || /^https?:\/\/[^\s$.?#].\S*$/.test(val), {
+    .refine((val) => !val || /^(https?:\/\/|www\.)[^\s$.?#].\S*$/.test(val), {
       message: "Enter a valid URL",
     }),
   description: z.string(),
@@ -132,7 +132,7 @@ export const basicStartupFirstStepSchema = z.object({
   websiteUrl: z
     .string()
     .optional()
-    .refine((val) => !val || /^https?:\/\/[^\s$.?#].[^\s]*$/.test(val), {
+    .refine((val) => !val || /^(https?:\/\/|www\.)[^\s$.?#].\S*$/.test(val), {
       message: "Enter a valid URL",
     }),
   contactNumber: z
@@ -188,7 +188,7 @@ export const basicStartupDetailsSchema = z.object({
   websiteUrl: z
     .string()
     .optional()
-    .refine((val) => !val || /^https?:\/\/[^\s$.?#].[^\s]*$/.test(val), {
+    .refine((val) => !val || /^(https?:\/\/|www\.)[^\s$.?#].\S*$/.test(val), {
       message: "Enter a valid URL",
     }),
   contactNumber: z
@@ -221,7 +221,7 @@ export const startupDetailsSchema = z
     websiteUrl: z
       .string()
       .optional()
-      .refine((val) => !val || /^https?:\/\/[^\s$.?#].[^\s]*$/.test(val), {
+      .refine((val) => !val || /^(https?:\/\/|www\.)[^\s$.?#].\S*$/.test(val), {
         message: "Enter a valid URL",
       }),
     contactNumber: z
@@ -248,13 +248,13 @@ export const startupDetailsSchema = z
     demoVideoUrl: z
       .string()
       .optional()
-      .refine((val) => !val || /^https?:\/\/[^\s$.?#].[^\s]*$/.test(val), {
+      .refine((val) => !val || /^(https?:\/\/|www\.)[^\s$.?#].\S*$/.test(val), {
         message: "Enter a valid URL",
       }),
     pitchDeckUrl: z
       .string()
       .optional()
-      .refine((val) => !val || /^https?:\/\/[^\s$.?#].[^\s]*$/.test(val), {
+      .refine((val) => !val || /^(https?:\/\/|www\.)[^\s$.?#].\S*$/.test(val), {
         message: "Enter a valid URL",
       }),
     foundersDetail: z.string().min(1, "This field cannot be left empty"),
@@ -335,7 +335,7 @@ export const fundingOpportunityFirstStepSchema = z.object({
   websiteUrl: z
     .string()
     .optional()
-    .refine((val) => !val || /^https?:\/\/[^\s$.?#].[^\s]*$/.test(val), {
+    .refine((val) => !val || /^(https?:\/\/|www\.)[^\s$.?#].\S*$/.test(val), {
       message: "Enter a valid URL",
     }),
   fundingAmount: z
@@ -366,7 +366,7 @@ export const fundingOpportunitySecondStepSchema = z
     registrationFormLink: z
       .string()
       .optional()
-      .refine((val) => !val || /^https?:\/\/[^\s$.?#].[^\s]*$/.test(val), {
+      .refine((val) => !val || /^(https?:\/\/|www\.)[^\s$.?#].\S*$/.test(val), {
         message: "Enter a valid URL",
       }),
   })
@@ -387,7 +387,7 @@ export const fundingOpportunitySchema = z
     websiteUrl: z
       .string()
       .optional()
-      .refine((val) => !val || /^https?:\/\/[^\s$.?#].[^\s]*$/.test(val), {
+      .refine((val) => !val || /^(https?:\/\/|www\.)[^\s$.?#].\S*$/.test(val), {
         message: "Enter a valid URL",
       }),
     fundingAmount: z
@@ -414,7 +414,7 @@ export const fundingOpportunitySchema = z
     registrationFormLink: z
       .string()
       .optional()
-      .refine((val) => !val || /^https?:\/\/[^\s$.?#].[^\s]*$/.test(val), {
+      .refine((val) => !val || /^(https?:\/\/|www\.)[^\s$.?#].\S*$/.test(val), {
         message: "Enter a valid URL",
       }),
   })
@@ -459,7 +459,7 @@ export const editProfileHeaderBusinessSchema = z.object({
   websiteUrl: z
     .string()
     .min(1, "Website URL cannot be left empty")
-    .refine((val) => !val || /^https?:\/\/[^\s$.?#].\S*$/.test(val), {
+    .refine((val) => !val || /^(https?:\/\/|www\.)[^\s$.?#].\S*$/.test(val), {
       message: "Enter a valid URL",
     }),
   email: z.string().refine((value) => /\S+@\S+\.\S+/.test(value), {
