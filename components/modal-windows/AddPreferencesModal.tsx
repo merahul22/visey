@@ -1,25 +1,38 @@
 "use client";
 
-import { useState, useTransition } from "react";
-import { CheckIcon } from "@radix-ui/react-icons";
-import { Button } from "../ui/button";
-import { listPreferences } from "@/actions/list-preferences";
-import { useRouter } from "next/navigation";
-
+import { Button } from "@/components/ui/button";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 import { categories } from "@/constants";
+import { CheckIcon } from "@radix-ui/react-icons";
+import { useState, useTransition } from "react";
 import { useSession } from "next-auth/react";
+import { listPreferences } from "@/actions/list-preferences";
 import { DEFAULT_LOGIN_REDIRECT } from "@/routes";
+import { useRouter } from "next/navigation";
+import { toast } from "sonner";
 
 const preferencesList = categories.map((category) => category.value);
 preferencesList.pop();
 
-const SelectPreferences = () => {
-  const [selectedPreferences, setSelectedPreferences] = useState<string[]>([]);
+export function AddPreferencesModal({
+  userPreferences,
+}: {
+  userPreferences: string[] | undefined;
+}) {
+  const [selectedPreferences, setSelectedPreferences] = useState<string[]>(
+    userPreferences as string[],
+  );
   const [loading, startTransition] = useTransition();
-  const router = useRouter();
   const { update } = useSession();
-
-  const disabled = selectedPreferences.length < 3;
+  const router = useRouter();
 
   const handlePreferenceClick = (preference: string) => {
     setSelectedPreferences((prev) =>
@@ -36,29 +49,32 @@ const SelectPreferences = () => {
     startTransition(async () => {
       const res = await listPreferences(selectedPreferences);
 
-      console.log(res);
-
       if (res.error) {
+        toast.error(res.error);
       }
 
       if (res.success) {
+        toast.success("Preferences added successfully.");
         update();
-        router.push(DEFAULT_LOGIN_REDIRECT);
+        router.refresh();
       }
     });
   };
 
   return (
-    <div className="flex h-full w-full items-center justify-center">
-      <div className="lg:w-[540px] w-[320px]">
-        <div className="mb-8">
-          <h1 className="text-xl font-semibold text-center">
-            What are you finding?
-          </h1>
-          <p className="text-sm text-neutrals-600 text-center">
-            Select at least 3 things
-          </p>
-        </div>
+    <Dialog>
+      <DialogTrigger asChild>
+        <Button size="sm" variant="outline" className="rounded-full">
+          Add Preferences
+        </Button>
+      </DialogTrigger>
+      <DialogContent className="">
+        <DialogHeader>
+          <DialogTitle>What are you finding?</DialogTitle>
+          <DialogDescription>
+            Select at least 3 things to continue.
+          </DialogDescription>
+        </DialogHeader>
         <div className="flex flex-wrap gap-x-2 space-y-2 items-center justify-center">
           {preferencesList.map((preference) => (
             <div
@@ -79,18 +95,14 @@ const SelectPreferences = () => {
             </div>
           ))}
         </div>
-        <div className="mt-8">
-          <Button
-            className="w-full"
-            disabled={disabled || loading}
-            onClick={onSubmit}
-          >
-            Done
-          </Button>
-        </div>
-      </div>
-    </div>
+        <DialogFooter>
+          <div className="mt-8">
+            <Button className="w-full" disabled={loading} onClick={onSubmit}>
+              Done
+            </Button>
+          </div>
+        </DialogFooter>
+      </DialogContent>
+    </Dialog>
   );
-};
-
-export default SelectPreferences;
+}

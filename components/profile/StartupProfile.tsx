@@ -16,10 +16,11 @@ import { Startup } from "@prisma/client";
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
 import { CopyStartupLinkModal } from "@/components/modal-windows/CopyStartupLinkModal";
-import { usePathname } from "next/navigation";
+import { AddPreferencesModal } from "@/components/modal-windows/AddPreferencesModal";
 
 interface StartupProfileProps {
   image: string | null | undefined;
+  id: string | undefined;
   startup: Startup | null;
   email: string;
   phoneNumber: string;
@@ -30,7 +31,6 @@ interface StartupProfileProps {
 
 const StartupProfile = ({ user }: { user: StartupProfileProps }) => {
   const resumeRef = useRef<HTMLDivElement | null>(null);
-  const pathname = usePathname();
 
   const handleDownloadPDF = async () => {
     if (!resumeRef.current) return;
@@ -65,13 +65,15 @@ const StartupProfile = ({ user }: { user: StartupProfileProps }) => {
         >
           Promote
         </Button>
-        <Button
-          className="text-neutrals-1000 hover:bg-neutrals-100 rounded-full"
-          variant="outline"
-          size="sm"
-        >
-          Edit
-        </Button>
+        <Link href="/startup-details">
+          <Button
+            className="text-neutrals-1000 hover:bg-neutrals-100 rounded-full"
+            variant="outline"
+            size="sm"
+          >
+            Edit
+          </Button>
+        </Link>
       </div>
       <div className="mt-8">
         <div className="flex items-center gap-4">
@@ -112,12 +114,9 @@ const StartupProfile = ({ user }: { user: StartupProfileProps }) => {
               {user.preferences.map((preference: string) => (
                 <div
                   key={preference}
-                  className="border rounded-full px-4 py-1 flex items-center gap-2"
+                  className="border rounded-full px-4 py-1 flex items-center gap-2 hover:bg-neutrals-200 cursor-pointer"
                 >
                   <p>{preference}</p>
-                  <div className="cursor-pointer">
-                    <Cross2Icon className="w-4 h-4" />
-                  </div>
                 </div>
               ))}
             </div>
@@ -133,9 +132,7 @@ const StartupProfile = ({ user }: { user: StartupProfileProps }) => {
                 Add Preferences to get personalized recommendations
               </p>
             </div>
-            <Button size="sm" variant="outline" className="rounded-full">
-              Add preferences
-            </Button>
+            <AddPreferencesModal userPreferences={user.preferences} />
           </div>
           <div className="md:hidden cursor-pointer">
             <Cross2Icon className="w-5 h-5" />
