@@ -1,13 +1,13 @@
-import { auth } from '@/auth';
-import Settings from '@/components/settings/Settings';
-import { redirect } from 'next/navigation';
+import { auth } from "@/auth";
+import Settings from "@/components/settings/Settings";
+import { redirect } from "next/navigation";
 
 const ProfilePage = async () => {
   const session = await auth();
   const user = session?.user;
 
   if (!user?.type) {
-    redirect('/account-type');
+    redirect("/account-type");
   }
 
   const userProps = {
@@ -17,9 +17,11 @@ const ProfilePage = async () => {
     hasPassword: user.hasPassword,
   };
 
-  return <div className="mb-20">
-    <Settings user={userProps} />
-  </div>
+  return (
+    <div className="mb-20">
+      <Settings user={userProps} />
+    </div>
+  );
 };
 
 export default ProfilePage;

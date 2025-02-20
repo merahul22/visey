@@ -1,7 +1,10 @@
-import { NextApiRequest, NextApiResponse } from 'next';
-import prisma from '@/lib/db';
+import { NextApiRequest, NextApiResponse } from "next";
+import prisma from "@/lib/db";
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+export default async function handler(
+  req: NextApiRequest,
+  res: NextApiResponse,
+) {
   try {
     const opportunities = await prisma.opportunity.findMany({
       select: {
@@ -23,14 +26,14 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       id: opportunity.id,
       title: opportunity.title,
       endDatetime: opportunity.endDatetime,
-      businessName: opportunity.business.name,
-      avatarUrl: opportunity.business.image,
-      location: opportunity.business.location,
+      businessName: opportunity.business?.name,
+      avatarUrl: opportunity.business?.image,
+      location: opportunity.business?.location,
     }));
 
     res.status(200).json(formattedOpportunities);
   } catch (error) {
-    console.error('Error fetching opportunities:', error);
-    res.status(500).json({ error: 'Failed to fetch opportunities' });
+    console.error("Error fetching opportunities:", error);
+    res.status(500).json({ error: "Failed to fetch opportunities" });
   }
 }

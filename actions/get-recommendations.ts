@@ -16,10 +16,12 @@ const recommendationSchema = z.object({
 // Function to get recommendations
 export const getRecommendations = async (
   startupDetails: z.infer<typeof recommendationSchema>,
-  limit: number = 10, // Default limit set to 10 if not provided
+  limit: number = 10,
 ) => {
   // Validate the input fields
   const validatedFields = recommendationSchema.safeParse(startupDetails);
+
+  console.log(validatedFields);
 
   if (!validatedFields.success) {
     return { error: "Invalid fields!" };
@@ -28,7 +30,7 @@ export const getRecommendations = async (
   try {
     // Make the API call to get recommendations
     const response = await axios.post(
-      `https://viseyreccomendation-23e913815003.herokuapp.com/get_reccomendations/?limit=${limit}`,
+      `https://viseyreccomendation-23e913815003.herokuapp.com/business/get_reccomendations/?limit=${limit}`,
       validatedFields.data,
       {
         headers: {

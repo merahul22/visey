@@ -36,13 +36,7 @@ export default function Opportunities({
           opportunities.map((opportunity) => (
             <FundingCard
               key={opportunity.id}
-              id={opportunity.id}
-              title={opportunity.title}
-              promoted={false}
-              businessName={name}
-              avatarUrl={opportunity.imageUrl as string}
-              applyBy={opportunity.endDatetime}
-              location={location}
+              fundingOpportunity={opportunity}
             />
           ))}
       </div>

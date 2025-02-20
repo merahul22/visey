@@ -4,35 +4,8 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 // import { BusinessCard } from "@/components/cards/business-card";
 import { Separator } from "@/components/ui/separator";
 import { FundingCard } from "@/components/cards/funding-card";
-import { useEffect, useState } from "react";
-
-interface Opportunity {
-  id: string;
-  title: string;
-  endDatetime: string;
-  businessName: string;
-  avatarUrl: string;
-  location: string;
-  promoted: boolean;
-}
-
-const fetchFundingOpportunities = async (): Promise<Opportunity[]> => {
-  const response = await fetch('/api/get-opportunities');
-  const data = await response.json();
-  return data;
-};
 
 const Page = () => {
-  const [fundingOpportunities, setFundingOpportunities] = useState<Opportunity[]>([]);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const data = await fetchFundingOpportunities();
-      setFundingOpportunities(data);
-    };
-    fetchData();
-  }, []);
-
   return (
     <div className="mb-20">
       <h1 className="text-xl font-semibold">Saved</h1>
@@ -55,18 +28,9 @@ const Page = () => {
         </TabsContent>
         <TabsContent value={"opportunities"}>
           <div className="flex flex-col gap-4">
-            {fundingOpportunities.map((opportunity) => (
-              <FundingCard
-                key={opportunity.id}
-                id={opportunity.id}
-                promoted={opportunity.promoted}
-                title={opportunity.title}
-                businessName={opportunity.businessName}
-                avatarUrl={opportunity.avatarUrl}
-                applyBy={new Date(opportunity.endDatetime)}
-                location={opportunity.location}
-              />
-            ))}
+            {/*{fundingOpportunities.map((opportunity) => (*/}
+            {/*  <FundingCard fundingOpportunity={opportunity} />*/}
+            {/*))}*/}
           </div>
         </TabsContent>
       </Tabs>
