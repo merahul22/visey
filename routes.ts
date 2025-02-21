@@ -7,6 +7,7 @@ export const publicRoutes = [
   "/partner-with-us",
   "/blogs",
   "/tnc",
+  "/blogs/your-complete-guide-a-startup-business-plan-template-for-success",
 ];
 
 export const authRoutes = [
