@@ -197,10 +197,10 @@ model Opportunity {
   noOfRegistrations    String?
   questions            Json?
   registration         String?
-  businessId           String
+  businessId           String?
   registrationFormLink String?
 
-  business         Business           @relation(fields: [businessId], references: [id], onDelete: Cascade)
+  business         Business?          @relation(fields: [businessId], references: [id], onDelete: Cascade)
   User             User?              @relation(fields: [userId], references: [id])
   userId           String?
   SavedOpportunity SavedOpportunity[]

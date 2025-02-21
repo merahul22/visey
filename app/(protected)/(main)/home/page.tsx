@@ -5,6 +5,8 @@ import React from "react";
 import BusinessRecommendations from "@/components/businessRecommendations";
 import { auth } from "@/auth";
 import { redirect } from "next/navigation";
+import FundingRecommendations from "@/components/fundingRecommendations";
+import getAllOpportunities from "@/actions/get-all-opportunities";
 
 const categories = [
   { name: "Marketing Tools", imageUrl: "/img/Category Images/Icon 1.png" },
@@ -51,7 +53,7 @@ const HomePage = async () => {
     redirect("/account-type");
   }
 
-  const data =
+  const businessRecommendations =
     user.type === "STARTUP"
       ? {
           id: user.startup?.id,
@@ -71,6 +73,8 @@ const HomePage = async () => {
           trllevel: 0,
           sector: "",
         };
+
+  const opportunities = await getAllOpportunities();
 
   return (
     <div className="space-y-10 mb-20">
@@ -111,42 +115,14 @@ const HomePage = async () => {
             {/*))}*/}
           </div>
         </span>
-        <BusinessRecommendations data={data} />
-        <span className="block text-center">
-          <Button variant="link" className="">
-            View all
-          </Button>
-        </span>
+        <BusinessRecommendations data={businessRecommendations} />
       </section>
 
       <section className="space-y-4">
         <h2 className="text-xl md:text-2xl font-semibold">
           Funding Opportunities
         </h2>
-
-        {/*{opportunitiesError ? (*/}
-        {/*  <p className="text-red-500">{opportunitiesError}</p>*/}
-        {/*) : (*/}
-        {/*  <div className="flex flex-col gap-4">*/}
-        {/*    {opportunities.map((opportunity, idx) => (*/}
-        {/*      <FundingCard*/}
-        {/*        key={idx}*/}
-        {/*        id={opportunity.id}*/}
-        {/*        promoted={opportunity.promoted}*/}
-        {/*        title={opportunity.title}*/}
-        {/*        businessName={opportunity.businessName}*/}
-        {/*        avatarUrl={opportunity.avatarUrl}*/}
-        {/*        applyBy={new Date(opportunity.endDatetime)}*/}
-        {/*        location={opportunity.location}*/}
-        {/*      />*/}
-        {/*    ))}*/}
-        {/*  </div>*/}
-        {/*)}*/}
-        <span className="block text-center">
-          <Button variant="link" className="">
-            View all
-          </Button>
-        </span>
+        <FundingRecommendations opportunities={opportunities} />
       </section>
     </div>
   );
