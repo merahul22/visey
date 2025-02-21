@@ -129,6 +129,8 @@ A pitch deck template sets the foundation, but thoughtful design makes your pres
 
 Good design leads investors through your story using **visual hierarchy** - organizing elements by importance. Just like newspapers use big headlines for major stories, your pitch deck should highlight key points through size, color, and placement. For example, pair an clear headline about your market opportunity with a strong supporting statistic to grab attention instantly.
 
+[[BANNER]]
+
 ### Data Visualization: Making Numbers Memorable
 
 When sharing data, visual formats beat raw numbers every time. Compare scanning a spreadsheet versus glancing at a clear graph - the graph tells the story instantly. Apply this to your pitch deck by choosing simple charts and graphics that help investors quickly grasp financial projections and market data.
