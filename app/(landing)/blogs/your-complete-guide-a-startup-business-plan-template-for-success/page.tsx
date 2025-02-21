@@ -2,6 +2,7 @@ import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { CaretRight, CaretLeft, ArrowUpRight } from "@phosphor-icons/react/dist/ssr";
 import { Metadata } from "next";
+import { ViseyBanner } from "@/components/BlogCTA";
 
 export const metadata: Metadata = {
   title: "Your Complete Guide: A Startup Business Plan Template For Success",
@@ -21,8 +22,8 @@ const Page = () => {
         <Image
           src={"https://api.outrank.so/storage/v1/object/public/article-images/4cbd6bc9-b269-4add-a8fe-31e246005bcd/ai-image-c02e9a20-5905-4bec-81ec-e697a957670d.jpg"}
           alt={"Business Plan Image"}
-          width={328}
-          height={324}
+          width={1000}
+          height={500}
         />
       </div>
       <p className="mt-4">
@@ -35,6 +36,7 @@ const Page = () => {
             A business plan template helps you spell out your company vision and outline specific strategies to achieve it. When you map everything out clearly, you can spot potential issues early and stay focused on what matters most. Just like you wouldn't build a house without blueprints, trying to build a business without a solid plan can lead to wasted time and money.
           </p>
         </div>
+        <ViseyBanner />
         <div>
           <h3 className="font-semibold">Attracting Investors: Speaking the Language of Funding</h3>
           <p>
@@ -82,26 +84,4 @@ const Page = () => {
   );
 };
 
-const ViseyBanner = () => {
-  return (
-    <div className="flex items-center justify-between px-4 py-2 bg-primary-100 mt-4">
-      <div className="flex flex-col gap-2">
-        <h1 className="text-2xl text-[#9D0543]">Visey</h1>
-        <p>
-          Can help you connect with right resources for your startup for free
-        </p>
-      </div>
-      <div>
-        <Button>
-          Start Now
-          <div>
-            <ArrowUpRight />
-          </div>
-        </Button>
-      </div>
-    </div>
-  );
-};
-
 export default Page;
-  
