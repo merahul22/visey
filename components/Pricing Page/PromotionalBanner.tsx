@@ -1,3 +1,5 @@
+import Image from "next/image"; // Import Image from next/image
+
 interface PromotionalBannerProps {
   title: string;
   subtitle: string;
@@ -32,9 +34,11 @@ export const PromotionalBanner = ({
       <div className={`flex flex-wrap gap-3 justify-between items-center px-4 py-1 w-full ${lowerBgColor}`}>
         <div className="flex flex-col justify-center self-stretch py-0.5 pr-2 pl-3 my-auto w-[200px]">
           <div className="flex flex-col justify-center px-1.5 py-1 w-full min-h-[135px]">
-            <img
+            <Image
               src={imageUrl}
               alt=""
+              width={168}
+              height={127}
               className="object-contain flex-1 rounded aspect-[1.32] w-[168px]"
             />
           </div>
@@ -65,9 +69,11 @@ export const PromotionalBanner = ({
               className="flex gap-4 items-center px-3 py-0.5 mt-3 first:mt-0"
             >
               <div className="flex justify-center items-center self-stretch my-auto w-4 min-h-4 rounded-[1000px]">
-                <img
-                  src="https://cdn.builder.io/api/v1/image/assets/TEMP/0beb28b94dd8ea579af86488b2c334113841ce1a8d806a84c49752aac10f35fb?placeholderIfAbsent=true"
+                <Image
+                  src="/img/pricingPage.png"
                   alt=""
+                  width={16}
+                  height={16}
                   className="object-contain self-stretch my-auto w-4 aspect-square"
                 />
               </div>

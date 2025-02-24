@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import Image from "next/image"; // Import Image from next/image
 
 interface FAQItem {
   question: string;
@@ -33,9 +34,11 @@ export const FAQSection = ({ faqs }: FAQSectionProps) => {
                   {faq.question}
                 </span>
                 <div className="flex justify-center items-center self-stretch my-auto w-4 min-h-4 rounded-[1000px]">
-                  <img
-                    src="https://cdn.builder.io/api/v1/image/assets/TEMP/7b6792cee874952ded4aad11d53dcf606f538bdc673a58ee51ad5848aad7315c?placeholderIfAbsent=true"
+                  <Image
+                    src="/img/pricingPage.png"
                     alt={openIndex === index ? "Collapse" : "Expand"}
+                    width={16}
+                    height={16}
                     className="object-contain self-stretch my-auto w-4 aspect-square"
                   />
                 </div>

@@ -6,6 +6,7 @@ import { PricingCard } from "@/components/Pricing Page/PricingCard";
 import { PromotionalBanner } from "@/components/Pricing Page/PromotionalBanner";
 import { FAQSection } from "@/components/Pricing Page/FAQSection";
 import { PricingPlan } from "@/components/Pricing Page/types"; // Import the PricingPlan type
+import Image from "next/image"; // Import Image from next/image
 
 const resourceProviderPlans: PricingPlan[] = [
   {
@@ -142,9 +143,11 @@ const PricingPage = () => {
               ) : (
                 <article className="flex flex-col py-3 leading-tight text-center text-black rounded-2xl">
                   <figure className="self-center">
-                    <img
-                      src="https://cdn.builder.io/api/v1/image/assets/TEMP/85ade60a2b3dfb2d98e1511de49f84b979df07f0b52446d009f0603f03f075a2?placeholderIfAbsent=true&apiKey=0a8470b31f9346658a7b5208415b7acf"
+                    <Image
+                      src="/img/startupPricing.png"
                       alt="No charges illustration"
+                      width={224}
+                      height={224}
                       className="object-contain w-56 max-w-full aspect-square"
                     />
                   </figure>
@@ -153,7 +156,7 @@ const PricingPage = () => {
                       No charges
                     </h2>
                     <p className="text-base max-md:max-w-full">
-                      We don't charge our entrepreneurs. If you're here to find resources for
+                      We don&apos;t charge our entrepreneurs. If you&apos;re here to find resources for
                       your business, Visey is here to support your big dreams.
                     </p>
                   </section>
@@ -166,7 +169,7 @@ const PricingPage = () => {
             title="3 Months Plan"
             subtitle="Generate Leads & Rank Higher"
             features={promoteFeatures}
-            imageUrl="https://cdn.builder.io/api/v1/image/assets/TEMP/84976f49773782b71f586ff76544e114f10499c890b7f7b18e13e4b980093619?placeholderIfAbsent=true"
+            imageUrl="/img/pricingPage.png"
             badgeText="Promote"
             badgeColor="bg-pink-400 bg-opacity-30"
             buttonText="Promote Business for Rs 9/day"
@@ -250,7 +253,7 @@ const PricingPage = () => {
             title="10 Days + 2 Free"
             subtitle="Effectively reach your target audience"
             features={adsFeatures}
-            imageUrl="https://cdn.builder.io/api/v1/image/assets/TEMP/84976f49773782b71f586ff76544e114f10499c890b7f7b18e13e4b980093619?placeholderIfAbsent=true"
+            imageUrl="/img/pricingPage.png"
             badgeText="Ads"
             badgeColor="bg-orange-400 bg-opacity-50"
             buttonText="Run Ad"
