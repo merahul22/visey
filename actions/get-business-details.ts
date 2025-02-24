@@ -49,10 +49,8 @@ export async function getBusinessDetails(
   businessId: string,
 ): Promise<BusinessDetails | ErrorResponse> {
   if (!businessId) {
-    console.error("Missing businessId");
     return { error: "Missing businessId" };
   }
-  console.log("Fetching business details for businessId:", businessId);
 
   try {
     const business = await prisma.business.findUnique({
@@ -65,11 +63,8 @@ export async function getBusinessDetails(
     });
 
     if (!business) {
-      console.log("Business not found for businessId:", businessId);
       return { error: "Business not found" };
     }
-
-    console.log("Business found:", business);
 
     const averageRating = business.reviews.length
       ? business.reviews.reduce(
@@ -78,14 +73,11 @@ export async function getBusinessDetails(
         ) / business.reviews.length
       : 0;
 
-    console.log("Calculated average rating:", averageRating);
-
     const businessDetails: BusinessDetails = {
       ...business,
       averageRating,
     };
 
-    console.log("Fetched business details:", businessDetails);
     return businessDetails;
   } catch (error) {
     console.error("Failed to fetch business details:", error);

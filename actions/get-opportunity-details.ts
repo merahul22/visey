@@ -1,8 +1,8 @@
-import prisma from '@/lib/db';
+import prisma from "@/lib/db";
 
 export const getOpportunityDetails = async (id: string) => {
   try {
-    const opportunity = await prisma.opportunity.findUnique({
+    return await prisma.opportunity.findUnique({
       where: { id },
       select: {
         imageUrl: true,
@@ -25,9 +25,8 @@ export const getOpportunityDetails = async (id: string) => {
         registrationFormLink: true,
       },
     });
-    return opportunity;
   } catch (error) {
-    console.error('Error fetching opportunity details:', error);
+    console.error("Error fetching opportunity details:", error);
     return null;
   }
 };
