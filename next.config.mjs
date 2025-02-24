@@ -39,6 +39,10 @@ const nextConfig = {
         protocol: "https",
         hostname: "drive.google.com",
       },
+      {
+        protocol: "https",
+        hostname: "api.outrank.so",
+      },
     ],
   },
 };
