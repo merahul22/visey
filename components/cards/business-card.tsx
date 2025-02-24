@@ -45,14 +45,16 @@ export function BusinessCard({ business }: { business: Business }) {
           </p>
 
           <div className="flex justify-center pt-3 gap-x-2">
-            {business.services.map((service: { name: string }, idx: number) => (
-              <button
-                key={idx}
-                className="py-0.5 px-2.5 rounded-full border text-sm"
-              >
-                {service.name}
-              </button>
-            ))}
+            {business.services?.map(
+              (service: { name: string }, idx: number) => (
+                <button
+                  key={idx}
+                  className="py-0.5 px-2.5 rounded-full border text-sm"
+                >
+                  {service.name}
+                </button>
+              ),
+            )}
           </div>
         </div>
       </div>
