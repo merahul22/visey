@@ -1,4 +1,3 @@
-import { Button } from "@/components/ui/button";
 import { CategoryCardBig } from "./_components/category-card-big";
 import { CategoryCardSmall } from "./_components/category-card-small";
 import React from "react";
@@ -115,7 +114,14 @@ const HomePage = async () => {
             {/*))}*/}
           </div>
         </span>
-        <BusinessRecommendations data={businessRecommendations} />
+
+        {businessRecommendations.id ? (
+          <BusinessRecommendations data={businessRecommendations} />
+        ) : (
+          <div className="text-sm text-red-500">
+            No recommendation Found! First add your startup/ business.
+          </div>
+        )}
       </section>
 
       <section className="space-y-4">
