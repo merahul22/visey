@@ -1,5 +1,5 @@
 import React from "react";
-//import Image from 'next/image';
+import Image from "next/image"; // Import Image from next/image
 
 interface CategoryCardSmallProps {
   category: string;
@@ -22,9 +22,11 @@ export function CategoryCardSmall({
       onClick={onClick}
     >
       <div className="h-20 w-20 rounded-full bg-gray-500 md:rounded-md md:w-full">
-        <img
+        <Image
           src={imageUrl || defaultImageUrl}
           alt={category}
+          width={80}
+          height={80}
           className="w-full h-full object-cover rounded-md"
         />
       </div>
