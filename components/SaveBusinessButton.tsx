@@ -3,18 +3,18 @@
 import { HeartStraight } from "@phosphor-icons/react/dist/ssr";
 import { useState, useTransition } from "react";
 import { Button } from "@/components/ui/button";
-import removeSavedOpportunity from "@/actions/removeSavedOpportunity";
-import saveOpportunity from "@/actions/save-opportunity";
 import { toast } from "sonner";
+import saveBusiness from "@/actions/save-business";
+import removeSavedBusiness from "@/actions/remove-saved-business";
 
 const SaveOpportunityButton = ({
   isSaved,
   userId,
-  opportunityId,
+  businessId,
 }: {
   isSaved: boolean;
   userId: string;
-  opportunityId: string;
+  businessId: string;
 }) => {
   const [isLiked, setIsLiked] = useState(isSaved);
   const [loading, startTransition] = useTransition();
@@ -23,7 +23,7 @@ const SaveOpportunityButton = ({
     if (isLiked) {
       setIsLiked(false);
       startTransition(async () => {
-        const res = await removeSavedOpportunity(opportunityId, userId);
+        const res = await removeSavedBusiness(businessId, userId);
 
         if (res?.error) {
           setIsLiked(true);
@@ -37,7 +37,7 @@ const SaveOpportunityButton = ({
     } else {
       setIsLiked(true);
       startTransition(async () => {
-        const res = await saveOpportunity(opportunityId, userId);
+        const res = await saveBusiness(businessId, userId);
 
         if (res?.error) {
           setIsLiked(false);

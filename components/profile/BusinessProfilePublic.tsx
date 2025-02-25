@@ -1,19 +1,22 @@
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Separator } from '@/components/ui/separator';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Separator } from "@/components/ui/separator";
 
-import { HeartStraight, ShareFat, Star } from '@phosphor-icons/react/dist/ssr';
-import { Button } from '@/components/ui/button';
+import { ShareFat, Star } from "@phosphor-icons/react/dist/ssr";
+import { Button } from "@/components/ui/button";
 
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import About from '@/components/profile/_components/about';
-import Service from '@/components/profile/_components/services';
-import Achievements from '@/components/profile/_components/achivements';
-import Opportunities from '@/components/profile/_components/opportunities';
-import Gallery from '@/components/profile/_components/gallery';
-import RatingReview from '@/components/profile/_components/rating-review';
-import ContactOverlay from '../ContactDetails';
-import StarRatingConstant from '../StarRatingConstant';
-import { Achievement, Business, Opportunity, Services } from '@prisma/client';
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import About from "@/components/profile/_components/about";
+import Service from "@/components/profile/_components/services";
+import Achievements from "@/components/profile/_components/achivements";
+import Opportunities from "@/components/profile/_components/opportunities";
+import Gallery from "@/components/profile/_components/gallery";
+import RatingReview from "@/components/profile/_components/rating-review";
+import ContactOverlay from "../ContactDetails";
+import StarRatingConstant from "../StarRatingConstant";
+import { Achievement, Business, Opportunity, Services } from "@prisma/client";
+import SaveBusinessButton from "@/components/SaveBusinessButton";
+import isSavedBusiness from "@/actions/isSavedBusiness";
+import { toast } from "sonner";
 
 interface BusinessProfileProps {
   userId: string | undefined;
@@ -24,7 +27,7 @@ interface BusinessProfileProps {
   gallery: string[];
 }
 
-export default function BusinessProfilePublic({
+export default async function BusinessProfilePublic({
   user,
 }: {
   user: BusinessProfileProps;
@@ -38,6 +41,17 @@ export default function BusinessProfilePublic({
       </div>
     );
   }
+
+  const userId = user.userId as string;
+  const businessId = user.business?.id as string;
+
+  const res = await isSavedBusiness(userId, businessId);
+
+  if (res?.error) {
+    toast.error(res?.error);
+  }
+
+  const isSaved = res.success as boolean;
 
   return (
     <section className="flex gap-x-12">
@@ -58,10 +72,10 @@ export default function BusinessProfilePublic({
               </p>
             </div>
             <p className="text-linkBlue text-sm">
-              {business?.registeredName || 'Business Registered Name'}
+              {business?.registeredName || "Business Registered Name"}
             </p>
             <p className="">
-              {business?.description || 'Business Description'}
+              {business?.description || "Business Description"}
             </p>
           </div>
           <div className="flex gap-x-4 items-center">
@@ -79,9 +93,11 @@ export default function BusinessProfilePublic({
             />
 
             <div className="-translate-y-1 flex gap-x-2 items-center">
-              <Button variant="ghost" size="icon">
-                <HeartStraight size={24} />
-              </Button>
+              <SaveBusinessButton
+                userId={user.userId as string}
+                businessId={user.business?.id as string}
+                isSaved={isSaved}
+              />
 
               <Button variant="ghost" size="icon">
                 <ShareFat size={24} />
@@ -109,15 +125,9 @@ export default function BusinessProfilePublic({
                 isPublic={true}
               />
               <Separator />
-              <Service
-                services={user.services}
-                isPublic={true}
-              />
+              <Service services={user.services} isPublic={true} />
               <Separator />
-              <Achievements
-                achievements={user.achievements}
-                isPublic={true}
-              />
+              <Achievements achievements={user.achievements} isPublic={true} />
               <Separator />
               <Opportunities
                 opportunities={user.opportunities}
@@ -126,35 +136,26 @@ export default function BusinessProfilePublic({
                 isPublic={true}
               />
               <Separator />
-              <Gallery
-                gallery={user.gallery}
-                isPublic={true}
-              />
+              <Gallery gallery={user.gallery} isPublic={true} />
               <Separator />
               <RatingReview
-                businessId={ business.id }
-                userId={ user.userId }
+                businessId={business.id}
+                userId={user.userId}
                 isPublic={true}
               />
             </TabsContent>
             <TabsContent value="services">
-              <Service
-                services={user.services}
-                isPublic={true}
-              />
+              <Service services={user.services} isPublic={true} />
             </TabsContent>
             <TabsContent value="reviews">
               <RatingReview
-                businessId={ business.id }
-                userId={ user.userId }
+                businessId={business.id}
+                userId={user.userId}
                 isPublic={true}
               />
             </TabsContent>
             <TabsContent value="gallery">
-              <Gallery
-                gallery={user.gallery}
-                isPublic={true}
-              />
+              <Gallery gallery={user.gallery} isPublic={true} />
             </TabsContent>
           </Tabs>
         </div>
