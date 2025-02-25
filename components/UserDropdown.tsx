@@ -29,6 +29,7 @@ import { useState } from "react";
 
 interface User {
   type?: "BUSINESS" | "STARTUP";
+  id?: string;
   image?: string | null;
   business?: Business;
   startup?: Startup;
@@ -171,7 +172,7 @@ export function UserDropdown({ user }: UserDropdownProps) {
             )}
 
             <DropdownMenuItem className="cursor-pointer rounded-full" asChild>
-              <Link className="flex gap-x-2 items-center" href={"/saved"}>
+              <Link className="flex gap-x-2 items-center" href={`/saved`}>
                 <HeartStraight />
                 <span>Saved</span>
               </Link>

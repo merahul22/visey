@@ -73,12 +73,10 @@ export async function getBusinessDetails(
         ) / business.reviews.length
       : 0;
 
-    const businessDetails: BusinessDetails = {
+    return {
       ...business,
       averageRating,
     };
-
-    return businessDetails;
   } catch (error) {
     console.error("Failed to fetch business details:", error);
     return { error: "Failed to fetch business details" };

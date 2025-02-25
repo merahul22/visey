@@ -1,18 +1,39 @@
-"use client";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
-import { HeartStraight, MapPin } from "@phosphor-icons/react/dist/ssr";
+import { MapPin } from "@phosphor-icons/react/dist/ssr";
 import Image from "next/image";
 import React from "react";
-import { useRouter } from "next/navigation";
 import { Opportunity } from "@prisma/client";
+import Link from "next/link";
+import SaveOpportunityButton from "@/components/SaveOpportunityButton";
+import isSavedOpportunity from "@/actions/isSavedOpportunity";
+import { auth } from "@/auth";
+import { redirect } from "next/navigation";
+import { DEFAULT_LOGIN_REDIRECT } from "@/routes";
+import { toast } from "sonner";
 
-export function FundingCard({
+export async function FundingCard({
   fundingOpportunity,
 }: {
   fundingOpportunity: Opportunity;
 }) {
-  const router = useRouter();
+  const session = await auth();
+  const user = session?.user;
+  if (!user) {
+    redirect(DEFAULT_LOGIN_REDIRECT);
+  }
+
+  const res = await isSavedOpportunity(
+    user?.id as string,
+    fundingOpportunity.id,
+  );
+
+  if (res?.error) {
+    toast.error("Cannot get saved opportunity info");
+  }
+
+  const isSaved = res.success as boolean;
+
   const date = new Date(
     (fundingOpportunity.endDatetime || new Date(Date.now())) as Date,
   );
@@ -20,10 +41,6 @@ export function FundingCard({
   const formattedDate = `${date.getDate()} ${date.toLocaleString("default", {
     month: "long",
   })}, ${date.getFullYear()}`;
-
-  const handleApplyClick = () => {
-    router.push(`/apply-opportunity?id=${fundingOpportunity.id}`);
-  };
 
   return (
     <div className="flex lg:justify-start flex-col gap-4 lg:flex-row lg:items-center lg:gap-10">
@@ -77,12 +94,14 @@ export function FundingCard({
           </div>
         </div>
         <div className="flex gap-4 items-center justify-end">
-          <div className="px-4 cursor-pointer">
-            <HeartStraight className="w-6 h-6" />
-          </div>
-          <Button variant="secondary" onClick={handleApplyClick}>
-            Apply
-          </Button>
+          <SaveOpportunityButton
+            isSaved={isSaved}
+            userId={user.id as string}
+            opportunityId={fundingOpportunity.id}
+          />
+          <Link href={`/apply-opportunity/${fundingOpportunity.id}`}>
+            <Button variant="secondary">Apply</Button>
+          </Link>
         </div>
       </div>
     </div>

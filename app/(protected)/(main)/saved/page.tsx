@@ -1,11 +1,29 @@
-"use client";
-
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 // import { BusinessCard } from "@/components/cards/business-card";
 import { Separator } from "@/components/ui/separator";
 import { FundingCard } from "@/components/cards/funding-card";
+import { auth } from "@/auth";
+import { redirect } from "next/navigation";
+import { DEFAULT_LOGIN_REDIRECT } from "@/routes";
+import getSavedFundingOpportunities from "@/actions/get-saved-funding-opportunities";
+import { toast } from "sonner";
 
-const Page = () => {
+const Page = async () => {
+  const session = await auth();
+  const user = session?.user;
+
+  if (!user) {
+    redirect(DEFAULT_LOGIN_REDIRECT);
+  }
+
+  const res = await getSavedFundingOpportunities(user.id as string);
+
+  if (res.error) {
+    toast.error("Cannot get saved funding opportunities");
+  }
+
+  const savedFundingOpportunities = res.data;
+
   return (
     <div className="mb-20">
       <h1 className="text-xl font-semibold">Saved</h1>
@@ -28,9 +46,12 @@ const Page = () => {
         </TabsContent>
         <TabsContent value={"opportunities"}>
           <div className="flex flex-col gap-4">
-            {/*{fundingOpportunities.map((opportunity) => (*/}
-            {/*  <FundingCard fundingOpportunity={opportunity} />*/}
-            {/*))}*/}
+            {savedFundingOpportunities?.map((op) => (
+              <FundingCard
+                key={op.opportunity.id}
+                fundingOpportunity={op.opportunity}
+              />
+            ))}
           </div>
         </TabsContent>
       </Tabs>

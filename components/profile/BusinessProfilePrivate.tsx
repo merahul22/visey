@@ -89,10 +89,6 @@ export default function BusinessProfilePrivate({
 
             <div className="-translate-y-1 flex gap-x-2 items-center">
               <Button variant="ghost" size="icon">
-                <HeartStraight size={24} />
-              </Button>
-
-              <Button variant="ghost" size="icon">
                 <ShareFat size={24} />
               </Button>
             </div>
