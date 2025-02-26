@@ -21,8 +21,6 @@ export const getRecommendations = async (
   // Validate the input fields
   const validatedFields = recommendationSchema.safeParse(startupDetails);
 
-  console.log(validatedFields);
-
   if (!validatedFields.success) {
     return { error: "Invalid fields!" };
   }
@@ -40,26 +38,22 @@ export const getRecommendations = async (
       },
     );
 
-    console.log("API response:", response.data);
     return response.data;
   } catch (error) {
     if (error instanceof AxiosError) {
       if (error.response) {
         // The request was made and the server responded with a status code
         // that falls out of the range of 2xx
-        console.error("Failed to fetch recommendations:", error.response.data);
         return {
           error: "Failed to fetch recommendations",
           details: error.response.data,
         };
       } else if (error.request) {
         // The request was made but no response was received
-        console.error("No response received:", error.request);
         return { error: "No response received from server" };
       }
     }
     // Something happened in setting up the request that triggered an Error
-    console.error("Error in setting up request:", (error as Error).message);
     return { error: "Error in setting up request" };
   }
 };

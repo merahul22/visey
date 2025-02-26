@@ -15,6 +15,7 @@ export async function Navbar({ className }: { className?: string }) {
 
   const userDropDownProps = {
     type: user?.type as "BUSINESS" | "STARTUP",
+    id: user?.id,
     image: user?.image,
     business: user?.business as Business,
     startup: user?.startup as Startup,

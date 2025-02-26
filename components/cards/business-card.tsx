@@ -8,9 +8,9 @@ interface Business {
   name: string;
   image: string;
   location: string;
-  averageRating: number;
-  promoted: boolean;
-  services: { name: string }[];
+  averageRating?: number;
+  promoted?: boolean;
+  services?: { name: string }[];
 }
 
 export function BusinessCard({ business }: { business: Business }) {
@@ -49,7 +49,7 @@ export function BusinessCard({ business }: { business: Business }) {
             </p>
 
             <div className="flex justify-center pt-3 gap-x-2">
-              {business.services?.map(
+              {business?.services?.map(
                 (service: { name: string }, idx: number) => (
                   <button
                     key={idx}

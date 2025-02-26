@@ -216,6 +216,8 @@ model SavedOpportunity {
 
   user        User        @relation(fields: [userId], references: [id], onDelete: Cascade)
   opportunity Opportunity @relation(fields: [opportunityId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, opportunityId])
 }
 
 model Review {
