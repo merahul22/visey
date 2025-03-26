@@ -34,7 +34,7 @@ export default function LandingPage() {
             className="w-full sm:w-96 text-base-black gap-x-4 py-4"
           >
             <Link href="/login" className="flex items-center gap-4">
-              <span className="text-lg">List Business Now</span>
+              <span className="text-lg">Generate leads now</span>
               <ArrowUpRight size={24} />
             </Link>
           </Button>
