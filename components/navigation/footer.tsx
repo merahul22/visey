@@ -52,7 +52,7 @@ function Footer({ className }: { className?: string }) {
         />
         <p>
           All rights reserved Visey | Designed and built with love - Copyright©
-          2024
+          2025
         </p>
 
         <Separator className="bg-primary mt-6" />
