@@ -12,12 +12,12 @@ import { useState } from "react";
 
 const faqData = [
   {
-    question: "How does Visey reduce my search time for services?",
+    question: "How does Visey reduce my search time for resources?",
     answer:
       "Visey simplifies the search process by offering a curated marketplace of vetted resource providers tailored to the unique needs of Indian startups. Instead of navigating multiple platforms, you can easily filter, compare, and connect with trusted providers for legal, digital marketing, mentorship, and other critical services—all in one place.",
   },
   {
-    question: " What is Visey, and how does it benefit my business?",
+    question: "What is Visey, and how does it benefit resource providers?",
     answer:
       "Visey is India’s first dedicated marketplace designed to connect resource providers with startups, helping you generate targeted leads and establish valuable partnerships. Whether you specialize in financial planning, SEO services, or startup mentorship programs, Visey ensures your expertise reaches the startups that need it.",
   },
@@ -27,7 +27,7 @@ const faqData = [
       "Visey is India’s first dedicated marketplace designed to connect resource providers with startups, helping you generate targeted leads and establish valuable partnerships. Whether you specialize in financial planning, SEO services, or startup mentorship programs, Visey ensures your expertise reaches the startups that need it.",
   },
   {
-    question: "What kind of businesses can join Visey?",
+    question: "Which resource providers can join visey?",
     answer:
       "Visey supports a wide range of resource providers essential to startup success, including legal services, financial consulting, digital marketing, software development, design services, human resources, mentorship programs, and many more. Whether your business specializes in helping startups with company registration or providing tools for scaling operations, Visey connects you directly with your target audience.",
   },
@@ -41,7 +41,7 @@ const faqData = [
     answer:
       "Feedback is essential for maintaining trust and transparency on Visey. Startups can rate and review resource providers after utilizing their services. These reviews help future users make informed decisions and encourage resource providers to maintain high-quality offerings.",
   },
-  
+
   {
     question: "How does Visey promote my business to startups?",
     answer:
