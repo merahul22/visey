@@ -32,7 +32,7 @@ function SignUpSection() {
               We help startups and MSMEs meet their resource needs quickly
             </h2>
             <p className="text-neutrals-700 text-xl">
-              Stay ahead with latest updates you won't want to miss.
+              Stay ahead with latest updates you won&apos;t want to miss.
             </p>
           </div>
 
