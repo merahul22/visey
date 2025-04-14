@@ -15,34 +15,34 @@ import { useInView } from "react-intersection-observer";
 
 const cardData = [
   {
-    title: "Filter & Match",
+    title: "Get your first funding & more",
     description:
-      "Easily filter through resources and find the perfect match for your startup’s requirements.",
+      "Grants, Equity Investments, Founder fellowship and Loans for your business",
   },
   {
-    title: "Data Support",
+    title: "Build your team",
     description:
-      " Build your startup profile and get advanced recommendations.",
+      "CTO, accounting, marketing & more, we’ll help you find the right match in seconds",
   },
   {
-    title: "All Startups",
+    title: "Get investor ready startup resume",
     description:
-      "Explore resource providers across India for every stage and track startup trends.",
+      "Effortless document creation and sharing",
   },
 ];
 
 const features = [
   {
-    title: "Find",
+    title: "Find Free",
     subtitle: "Resources in 3-clicks",
   },
   {
     title: "Connect",
-    subtitle: "With businesses offering what you need",
+    subtitle: "With Resource Providers that offer what you need",
   },
   {
-    title: "Rate",
-    subtitle: "Share your experience",
+    title: "Rate & Review",
+    subtitle: "Your experience",
   },
 ];
 
@@ -87,11 +87,11 @@ function MarketplaceSection() {
     },
     {
       value: 567,
-      subtitle: "Hours saved",
+      subtitle: "Active Users",
     },
     {
       value: 825,
-      subtitle: "Businesses Listed",
+      subtitle: "Resources Providers Listed",
     },
   ];
 
@@ -192,7 +192,7 @@ function MarketplaceSection() {
           {/* Features Section */}
           <div className="flex flex-col items-center">
             <h3 className="font-degular font-semibold text-2xl text-center text-feature md:text-3xl lg:text-heading3">
-              Visey is your one stop digital hub for all startup resource needs
+              Find the right resources in seconds, not hours.
             </h3>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 text-center w-full py-9 md:pt-14 md:pb-12 lg:pt-16">
               {features.map((feat) => (

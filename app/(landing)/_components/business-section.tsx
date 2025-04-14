@@ -93,7 +93,7 @@ function BusinessSection() {
         {/* Features Section */}
         <div className="max-w-screen-xl mx-auto flex flex-col gap-4 md:flex-row md:justify-between py-9 md:py-12 lg:py-16">
           {features.map((feat) => (
-            <div key={feat.title} className="flex-grow text-center">
+            <div key={feat.title} className="flex-grow text-center pb-6"> {/* Added pb-6 for consistent bottom padding */}
               <p className="font-degular text-heading4 text-primary">
                 {feat.title}
               </p>

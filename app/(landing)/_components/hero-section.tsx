@@ -49,7 +49,7 @@ const HeroSection = () => {
                   id="hero-heading"
                   className="font-degular text-heading4 md:text-heading2 xl:text-heading1 leading-tight"
                 >
-                  We help Indian startups & MSMEs meet resource needs quickly
+                  The one-stop place for founders to get unstuck, level-up their startup & MSME journeys
                 </h1>
                 <p className="font-gothic font-medium text-sm md:text-base opacity-90">
                   Visey is an aggregator platform that helps entrepreneurs find
@@ -61,11 +61,11 @@ const HeroSection = () => {
               {/* Call-to-Action */}
               <Button
                 variant="landing"
-                className="py-3 px-10 text-lg text-base-black hover:scale-105 transition-transform"
+                className="py-3 px-10 text-lg text-base-black hover:scale-105 transition-transform font-bold" // Added font-bold
               >
                 <Link href="/login" className="flex items-center gap-4">
-                  <span>Start Now</span>
-                  <ArrowUpRight size={20} />
+                  <span className="font-bold">Find Resources</span> {/* Bold text */}
+                  <ArrowUpRight size={20} className="font-bold" /> {/* Bold icon (if applicable) */}
                 </Link>
               </Button>
             </div>

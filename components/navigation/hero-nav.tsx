@@ -86,29 +86,27 @@ export default function HeroNav({ className }: { className?: string }) {
             ))}
 
             <Link href="/login">
-               <Button
-                 variant="nav"
-                 size="md"
-                 className="white-rounded-border"
-               >
-                 Join as Resource Provider
+              <Button
+                variant="nav"
+                size="md"
+                className="white-rounded-border"
+              >
+                Join as Resource Provider
               </Button>
             </Link>
 
-             {["Join as Startup"].map((text) => (
+            {["Join as Startup"].map((text) => (
               <Link key={text} href="/login">
                 <Button
-                   variant="nav"
-                   size="md"
-                   style={{
-                     backgroundColor: '#BFFF72',
-                     color: 'black',              
-                     borderRadius: '20px',   
-                     padding: '9px 20px',
-                   }}
-                 >
-                   }}
-                 >
+                  variant="nav"
+                  size="md"
+                  style={{
+                    backgroundColor: '#BFFF72',
+                    color: 'black',              
+                    borderRadius: '20px',   
+                    padding: '9px 20px',
+                  }}
+                >
                   {text}
                 </Button>
               </Link>

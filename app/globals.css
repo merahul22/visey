@@ -154,6 +154,12 @@ body {
   --scaler: 8;
 }
 
+
+.white-rounded-border {
+  border: 1.2px solid white;
+  border-radius: 20px; /* Adjust the value for more or less rounding */
+}
+
 .card-stack > .card {
   aspect-ratio: 3/4;
   grid-area: ui / cards;
