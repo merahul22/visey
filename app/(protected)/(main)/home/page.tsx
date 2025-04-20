@@ -22,10 +22,10 @@ const categories = [
 ];
 
 const bigCategories = [
-  { name: "", imageUrl: "/img/Category Images/Category 1- Visey.png" },
-  { name: "", imageUrl: "/img/Category Images/Category 2- Visey.png" },
-  { name: "", imageUrl: "/img/Category Images/Category 3- Visey.png" },
-  { name: "", imageUrl: "/img/Category Images/Category 4- Visey.png" },
+  { name: "Curated Incubators for You", imageUrl: "/img/Category Images/Category 1- Visey.png" },
+  { name: "Funding Opportunities", imageUrl: "/img/Category Images/Category 2- Visey.png" },
+  { name: "On Demand Mentorship Access", imageUrl: "/img/Category Images/Category 3- Visey.png" },
+  { name: "Curated Accelerators for You", imageUrl: "/img/Category Images/Category 4- Visey.png" },
 ];
 
 const trlLevelMapping: Record<string, number> = {
@@ -100,20 +100,7 @@ const HomePage = async () => {
         </div>
       </section>
       <section className="space-y-4">
-        <span className="space-y-3">
-          <h2 className="text-xl md:text-2xl font-semibold">Recommended</h2>
-          <p>Selected Categories:</p>
-          <div className="flex flex-wrap gap-2">
-            {/*{selectedCategories.map((category, idx) => (*/}
-            {/*  <span*/}
-            {/*    key={idx}*/}
-            {/*    className="py-0.5 px-2.5 rounded-full border bg-gray-200"*/}
-            {/*  >*/}
-            {/*    {category}*/}
-            {/*  </span>*/}
-            {/*))}*/}
-          </div>
-        </span>
+        <h2 className="text-xl md:text-2xl font-semibold">Recommended</h2>
 
         {businessRecommendations.id ? (
           <BusinessRecommendations data={businessRecommendations} />
