@@ -206,10 +206,7 @@ export const startupDetailsSchema = z
   .object({
     name: z.string().min(2, "Minimum 2 characters"),
     image: z.string().optional(),
-    description: z
-      .string()
-      .min(1, "This field cannot be left empty")
-      .max(50, "Maximum 50 characters"),
+    description: z.string().min(2, "Minimum 2 characters"),
     registeredName: z
       .string()
       .optional()
@@ -237,12 +234,10 @@ export const startupDetailsSchema = z
     fundingStage: z.string().min(1, "This field cannot be left empty"),
     idea: z
       .string()
-      .min(1, "This field cannot be left empty")
-      .max(150, "Maximum 150 characters"),
+      .min(1, "This field cannot be left empty"),
     problem: z
       .string()
-      .min(1, "This field cannot be left empty")
-      .max(300, "Maximum 300 characters"),
+      .min(1, "This field cannot be left empty"),
     marketSize: z.string().min(1, "This field cannot be left empty"),
     twoMajorCompetitors: z.string().min(1, "This field cannot be left empty"),
     demoVideoUrl: z
@@ -330,8 +325,7 @@ export const fundingOpportunityFirstStepSchema = z.object({
   subtype: z.string().min(1, "This field cannot be left empty"),
   title: z
     .string()
-    .min(2, "Minimum 2 characters")
-    .max(190, "Maximum 190 characters"),
+    .min(2, "Minimum 2 characters"),
   websiteUrl: z
     .string()
     .optional()
@@ -341,8 +335,8 @@ export const fundingOpportunityFirstStepSchema = z.object({
   fundingAmount: z
     .string()
     .regex(/^\d+$/, { message: "Must be a valid number" }),
-  targetIndustry: z.string().min(1, "This field cannot be left empty"),
-  targetSector: z.string().min(1, "This field cannot be left empty"),
+  targetIndustry: z.string().optional(),
+  targetSector: z.string().optional(),
   targetWomenFounder: z.boolean(),
   targetProductStage: z.optional(z.string()),
   targetFundingStage: z.optional(z.string()),
@@ -354,7 +348,7 @@ export const fundingOpportunityFirstStepSchema = z.object({
 
 export const fundingOpportunitySecondStepSchema = z
   .object({
-    startDate: z.date(),
+    startDate: z.date().optional(), // Make start date optional
     endDate: z.date(),
     noOfRegistrationsAllowed: z
       .string()
@@ -370,9 +364,12 @@ export const fundingOpportunitySecondStepSchema = z
         message: "Enter a valid URL",
       }),
   })
-  .refine((data) => data.startDate < data.endDate, {
+  .refine((data) => {
+    // If startDate is provided, ensure endDate is after startDate
+    return !data.startDate || data.startDate < data.endDate;
+  }, {
     message: "Start date must be before the end date",
-    path: ["endDate"], // Optionally specify where the error should be shown
+    path: ["endDate"],
   });
 
 export const fundingOpportunitySchema = z
@@ -382,8 +379,7 @@ export const fundingOpportunitySchema = z
     subtype: z.string().min(1, "This field cannot be left empty"),
     title: z
       .string()
-      .min(2, "Minimum 2 characters")
-      .max(190, "Maximum 190 characters"),
+      .min(2, "Minimum 2 characters"),
     websiteUrl: z
       .string()
       .optional()
@@ -393,8 +389,8 @@ export const fundingOpportunitySchema = z
     fundingAmount: z
       .string()
       .regex(/^\d+$/, { message: "Must be a valid number" }),
-    targetIndustry: z.string().min(1, "This field cannot be left empty"),
-    targetSector: z.string().min(1, "This field cannot be left empty"),
+    targetIndustry: z.string().optional(),
+    targetSector: z.string().optional(),
     targetWomenFounder: z.boolean(),
     targetProductStage: z.optional(z.string()),
     targetFundingStage: z.optional(z.string()),
@@ -402,7 +398,7 @@ export const fundingOpportunitySchema = z
     targetFundingStageList: z.optional(z.array(z.string())),
     description: z.string().min(2, "Minimum 2 characters"),
     eligibilityCriteria: z.string().min(2, "Minimum 2 characters"),
-    startDate: z.date(),
+    startDate: z.date().optional(), // Make startDate optional in combined schema
     endDate: z.date(),
     noOfRegistrationsAllowed: z
       .string()
@@ -418,7 +414,10 @@ export const fundingOpportunitySchema = z
         message: "Enter a valid URL",
       }),
   })
-  .refine((data) => data.startDate < data.endDate, {
+  .refine((data) => {
+    // If startDate is provided, ensure endDate is after startDate
+    return !data.startDate || data.startDate < data.endDate;
+  }, {
     message: "Start date must be before the end date",
     path: ["endDate"], // Optionally specify where the error should be shown
   });

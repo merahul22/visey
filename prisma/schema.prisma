@@ -199,6 +199,7 @@ model Opportunity {
   registration         String?
   businessId           String?
   registrationFormLink String?
+  isDraft              Boolean   @default(false)
 
   business         Business?          @relation(fields: [businessId], references: [id], onDelete: Cascade)
   User             User?              @relation(fields: [userId], references: [id])

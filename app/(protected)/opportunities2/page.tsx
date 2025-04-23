@@ -1,8 +1,18 @@
 import React from "react";
 import { FundingCard } from "@/components/cards/funding-card";
 import getAllOpportunities from "@/actions/get-all-opportunities";
+import { auth } from "@/auth";
+import { redirect } from "next/navigation";
+import { DEFAULT_LOGIN_REDIRECT } from "@/routes";
 
 const OpportunitiesPage = async () => {
+  const session = await auth();
+  const user = session?.user;
+  
+  if (!user) {
+    redirect(DEFAULT_LOGIN_REDIRECT);
+  }
+
   const opportunities = (await getAllOpportunities()) || [];
 
   return (
@@ -18,7 +28,9 @@ const OpportunitiesPage = async () => {
         <section className="space-y-8">
           {opportunities.map((opportunity) => (
             <div key={opportunity.id} className="flex justify-center">
-              <FundingCard key={opportunity.id} fundingOpportunity={opportunity} />
+              <FundingCard 
+                fundingOpportunity={opportunity} 
+              />
             </div>
           ))}
         </section>

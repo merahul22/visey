@@ -1,8 +1,14 @@
 import prisma from "@/lib/db";
+import { Prisma } from "@prisma/client";
 
 async function getAllOpportunities() {
   try {
-    return await prisma.opportunity.findMany();
+    // Only return published opportunities (not drafts)
+    return await prisma.opportunity.findMany({
+      where: {
+        isDraft: false // Only fetch opportunities that aren't drafts
+      } as Prisma.OpportunityWhereInput
+    });
   } catch (error) {
     console.log(error);
   }
