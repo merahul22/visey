@@ -4,9 +4,10 @@ import * as z from 'zod';
 import { fundingOpportunitySchema } from '@/schemas';
 import prisma from '@/lib/db';
 import { auth } from '@/auth';
+import { Prisma } from "@prisma/client";
 
 export const postOpportunityDetails = async (
-  values: z.infer<typeof fundingOpportunitySchema>
+  values: z.infer<typeof fundingOpportunitySchema> & { isDraft?: boolean }
 ) => {
   const session = await auth();
   const user = session?.user;
@@ -43,6 +44,9 @@ export const postOpportunityDetails = async (
     targetProductStageList,
     targetFundingStageList,
   } = validatedFields.data;
+  
+  // Check if this is a draft
+  const isDraft = values.isDraft || false;
 
   try {
     await prisma.opportunity.create({
@@ -66,10 +70,15 @@ export const postOpportunityDetails = async (
         endDatetime: endDate,
         noOfRegistrations: noOfRegistrationsAllowed,
         businessId: business?.id,
-      },
+        isDraft: isDraft, // Add the isDraft field
+      } as Prisma.OpportunityCreateInput,
     });
 
-    return { success: 'Opportunity posted successfully!' };
+    return { 
+      success: isDraft 
+        ? 'Opportunity saved as draft successfully!' 
+        : 'Opportunity posted successfully!' 
+    };
   } catch (err) {
     console.log(err);
     return { error: 'Failed to post opportunity!' };

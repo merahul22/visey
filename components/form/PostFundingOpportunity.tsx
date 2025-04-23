@@ -51,6 +51,7 @@ import { TimePicker } from '../ui/time-picker';
 import PreviewOpportunity from '../PreviewOpportunity';
 import { Business } from '@prisma/client';
 import { toast } from 'sonner';
+import { Textarea } from '@/components/ui/textarea';
 
 const PostFundingOpportunityForm = ({ business }: { business: Business }) => {
   const [error, setError] = useState<string | undefined>('');
@@ -81,11 +82,11 @@ const PostFundingOpportunityForm = ({ business }: { business: Business }) => {
     targetProductStageList: [],
     description: '',
     eligibilityCriteria: '',
-    registration: '',
-    registrationFormLink: '',
+    registration: 'visey', // Set default value matching the state
+    registrationFormLink: '', // Ensure this is an empty string, not undefined
     startDate: new Date(Date.now()),
     endDate: new Date(Date.now()),
-    noOfRegistrationsAllowed: '',
+    noOfRegistrationsAllowed: '', // This needs to be an empty string not undefined
   });
 
   const router = useRouter();
@@ -110,9 +111,11 @@ const PostFundingOpportunityForm = ({ business }: { business: Business }) => {
           eligibilityCriteria: '',
         }
       : {
-          registration: '',
-          registrationFormLink: '',
-          noOfRegistrationsAllowed: '',
+          registration: registrations, // Match the actual state value to prevent uncontrolled to controlled input
+          registrationFormLink: formValues.registrationFormLink || '', // Initialize from formValues or empty string
+          noOfRegistrationsAllowed: formValues.noOfRegistrationsAllowed || '',
+          startDate: formValues.startDate, // Initialize from formValues
+          endDate: formValues.endDate // Initialize from formValues
         };
 
   const schema =
@@ -120,7 +123,12 @@ const PostFundingOpportunityForm = ({ business }: { business: Business }) => {
       ? fundingOpportunityFirstStepSchema
       : fundingOpportunitySecondStepSchema;
 
-  const form = useForm<z.infer<typeof schema>>({
+  // Create a type for the fundingAmountDisplay field that's used in the UI but not part of schema
+  type FundingFormValues = z.infer<typeof schema> & {
+    fundingAmountDisplay?: string;
+  };
+
+  const form = useForm<FundingFormValues>({
     resolver: zodResolver(schema),
     defaultValues: defaultValues,
   });
@@ -170,6 +178,30 @@ const PostFundingOpportunityForm = ({ business }: { business: Business }) => {
 
       if (res.success) {
         toast.success("Opportunity posted successfully.");
+        setSuccess(res.success);
+        router.push(`/profile/business`);
+      }
+    });
+  };
+
+  // Function to handle drafting opportunity
+  const saveDraft = () => {
+    startTransition(async () => {
+      // Add isDraft flag to formValues
+      const draftData = {
+        ...formValues,
+        isDraft: true
+      };
+      
+      const res = await postOpportunityDetails(draftData);
+
+      if (res.error) {
+        toast.error(res.error);
+        setError(res.error);
+      }
+
+      if (res.success) {
+        toast.success("Opportunity saved as draft.");
         setSuccess(res.success);
         router.push(`/profile/business`);
       }
@@ -240,19 +272,81 @@ const PostFundingOpportunityForm = ({ business }: { business: Business }) => {
             </div>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
               <h2 className="font-semibold mt-8 text-neutrals-700 text-sm">
-                Upload Logo*
+                Upload Opportunity Banner
               </h2>
-              <div className="flex justify-center">
-                <div className="border-2 rounded-lg px-14 py-2">
-                  <Image
-                    src="https://res.cloudinary.com/dlriuadjv/image/upload/v1729353205/xbbb0zw6js60dxnq64qj.png"
-                    alt="Startup Logo"
-                    width={150}
-                    height={150}
-                    className="cursor-pointer rounded-full"
-                  />
-                </div>
-              </div>
+              <FormField
+                control={form.control}
+                name="imageUrl"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormControl>
+                      <div className="flex flex-col gap-3">
+                        <div className="flex justify-center">
+                          <label htmlFor="image-upload" className="cursor-pointer block">
+                            <div className="border-2 rounded-lg px-14 py-2 relative">
+                              {field.value ? (
+                                <Image
+                                  src={field.value}
+                                  alt="Opportunity Banner"
+                                  width={250}
+                                  height={150}
+                                  className="rounded-lg"
+                                />
+                              ) : (
+                                <Image
+                                  src="https://res.cloudinary.com/dlriuadjv/image/upload/v1729353205/xbbb0zw6js60dxnq64qj.png"
+                                  alt="Opportunity Banner Placeholder"
+                                  width={250}
+                                  height={150}
+                                  className="rounded-lg"
+                                />
+                              )}
+                              <Input 
+                                id="image-upload"
+                                type="file"
+                                accept="image/*"
+                                className="sr-only"
+                                onChange={async (e) => {
+                                  const file = e.target.files?.[0];
+                                  if (file) {
+                                    try {
+                                      // Use Supabase storage for upload
+                                      const { uploadToSupabase } = await import('@/lib/supabase');
+                                      const imageUrl = await uploadToSupabase(file, 'opportunities', 'banners');
+                                      
+                                      if (imageUrl) {
+                                        field.onChange(imageUrl);
+                                        toast.success('Banner uploaded successfully');
+                                      }
+                                    } catch (error) {
+                                      console.error('Upload error:', error);
+                                      toast.error('Failed to upload banner');
+                                    }
+                                  }
+                                }}
+                              />
+                            </div>
+                          </label>
+                        </div>
+                        
+                        <div className="flex items-center gap-2">
+                          <div className="text-sm text-gray-500">Or use image URL:</div>
+                          <Input
+                            type="text"
+                            placeholder="Paste image URL here"
+                            className="max-w-md"
+                            value={field.value || ''}
+                            onChange={(e) => {
+                              field.onChange(e.target.value);
+                            }}
+                          />
+                        </div>
+                      </div>
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
               <FormField
                 control={form.control}
                 name="type"
@@ -324,6 +418,7 @@ const PostFundingOpportunityForm = ({ business }: { business: Business }) => {
                     <FormControl>
                       <Input
                         className="text-neutrals-700 mt-1"
+                        placeholder="Enter website URL (optional)"
                         {...field}
                         disabled={loading}
                       />
@@ -341,11 +436,42 @@ const PostFundingOpportunityForm = ({ business }: { business: Business }) => {
                       Funding Amount*
                     </FormLabel>
                     <FormControl>
-                      <Input
-                        className="text-neutrals-700 mt-1"
-                        {...field}
-                        disabled={loading}
-                      />
+                      <div className="relative">
+                        <Input
+                          className="text-neutrals-700 mt-1"
+                          {...field}
+                          disabled={loading}
+                          type="number"
+                          onChange={(e) => {
+                            field.onChange(e);
+                            // Update display value
+                            const numValue = parseInt(e.target.value, 10);
+                            if (!isNaN(numValue)) {
+                              const formattedValue = (() => {
+                                if (numValue >= 1000 && numValue < 100000) {
+                                  return `${(numValue / 1000).toFixed(0)} Thousand`;
+                                } else if (numValue >= 100000 && numValue < 10000000) {
+                                  return `${(numValue / 100000).toFixed(1)} Lakh`;
+                                } else if (numValue >= 10000000) {
+                                  return `${(numValue / 10000000).toFixed(1)} Crore`;
+                                } else {
+                                  return e.target.value;
+                                }
+                              })();
+                              
+                              // Using type assertion to tell TypeScript this is valid
+                              (form as any).setValue('fundingAmountDisplay', formattedValue);
+                            } else {
+                              (form as any).setValue('fundingAmountDisplay', '');
+                            }
+                          }}
+                        />
+                        {(form.watch('fundingAmountDisplay') || '') && (
+                          <div className="absolute right-3 top-1/2 transform -translate-y-1/2 text-sm text-neutrals-600 pointer-events-none">
+                            {form.watch('fundingAmountDisplay')}
+                          </div>
+                        )}
+                      </div>
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -551,11 +677,17 @@ const PostFundingOpportunityForm = ({ business }: { business: Business }) => {
                       Description of Opportunity*
                     </FormLabel>
                     <FormControl>
-                      <Input
-                        className="text-neutrals-700 mt-1"
-                        {...field}
-                        disabled={loading}
-                      />
+                      <div className="relative">
+                        <Textarea
+                          className="text-neutrals-700 mt-1 min-h-[120px]"
+                          placeholder="Describe the opportunity in detail"
+                          {...field}
+                          disabled={loading}
+                          onChange={(e) => {
+                            field.onChange(e);
+                          }}
+                        />
+                      </div>
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -570,11 +702,17 @@ const PostFundingOpportunityForm = ({ business }: { business: Business }) => {
                       Eligibility Criteria*
                     </FormLabel>
                     <FormControl>
-                      <Input
-                        className="text-neutrals-700 mt-1"
-                        {...field}
-                        disabled={loading}
-                      />
+                      <div className="relative">
+                        <Textarea
+                          className="text-neutrals-700 mt-1 min-h-[120px]"
+                          placeholder="List eligibility requirements for applicants"
+                          {...field}
+                          disabled={loading}
+                          onChange={(e) => {
+                            field.onChange(e);
+                          }}
+                        />
+                      </div>
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -606,7 +744,7 @@ const PostFundingOpportunityForm = ({ business }: { business: Business }) => {
                           field.onChange(value);
                           setRegistrations(value);
                         }}
-                        defaultValue={registrations}
+                        value={field.value}
                         className="flex md:flex-col space-y-1"
                       >
                         <div className="flex flex-col sm:flex-row gap-4">
@@ -664,7 +802,7 @@ const PostFundingOpportunityForm = ({ business }: { business: Business }) => {
                     render={({ field }) => (
                       <FormItem className="flex flex-col items-start">
                         <FormLabel className="text-neutrals-700">
-                          Registration start date & time*
+                          Registration start date & time (optional)
                         </FormLabel>
                         <Popover>
                           <PopoverTrigger asChild className="mt-1">
@@ -687,8 +825,26 @@ const PostFundingOpportunityForm = ({ business }: { business: Business }) => {
                             <Calendar
                               mode="single"
                               selected={field.value}
-                              onSelect={field.onChange}
-                              disabled={(date) => date > new Date()}
+                              onSelect={(date) => {
+                                // If date is selected but no time, set time to midnight
+                                if (date) {
+                                  const newDate = new Date(date);
+                                  if (field.value) {
+                                    // Keep the time if it was already set
+                                    newDate.setHours(
+                                      field.value.getHours(),
+                                      field.value.getMinutes(),
+                                      field.value.getSeconds()
+                                    );
+                                  } else {
+                                    // Set midnight as default time
+                                    newDate.setHours(0, 0, 0);
+                                  }
+                                  field.onChange(newDate);
+                                } else {
+                                  field.onChange(undefined);
+                                }
+                              }}
                               initialFocus
                             />
                             <div className="p-3 border-t border-border">
@@ -732,8 +888,25 @@ const PostFundingOpportunityForm = ({ business }: { business: Business }) => {
                             <Calendar
                               mode="single"
                               selected={field.value}
-                              onSelect={field.onChange}
-                              disabled={(date) => date > new Date()}
+                              onSelect={(date) => {
+                                if (date) {
+                                  const newDate = new Date(date);
+                                  if (field.value) {
+                                    // Keep the time if it was already set
+                                    newDate.setHours(
+                                      field.value.getHours(),
+                                      field.value.getMinutes(),
+                                      field.value.getSeconds()
+                                    );
+                                  } else {
+                                    // Set midnight as default time
+                                    newDate.setHours(0, 0, 0);
+                                  }
+                                  field.onChange(newDate);
+                                } else {
+                                  field.onChange(undefined);
+                                }
+                              }}
                               initialFocus
                             />
                             <div className="p-3 border-t border-border">
@@ -783,16 +956,18 @@ const PostFundingOpportunityForm = ({ business }: { business: Business }) => {
               <div className="cursor-pointer">
                 <ShareNetwork />
               </div>
-              <Button
+              {/* Promote button disabled for now */}
+              {/* <Button
                 className="bg-secondary-100 text-neutrals-1000 border-2 border-neutrals-200 shadow-none hover:shadow-md hover:bg-secondary-100 rounded-full font-semibold"
                 size="sm"
               >
                 Promote
-              </Button>
+              </Button> */}
               <Button
                 className="text-neutrals-1000 hover:bg-neutrals-100 rounded-full font-semibold"
                 variant="outline"
                 size="sm"
+                onClick={() => setCurrentStep(1)} // Return to step 1 to edit
               >
                 Edit
               </Button>
@@ -801,6 +976,9 @@ const PostFundingOpportunityForm = ({ business }: { business: Business }) => {
             <div className="flex items-center justify-center">
               <Button onClick={onPublish} disabled={loading}>
                 Publish
+              </Button>
+              <Button onClick={saveDraft} disabled={loading} className="ml-4">
+                Save as Draft
               </Button>
             </div>
           </div>

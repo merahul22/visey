@@ -1,8 +1,15 @@
 import prisma from "@/lib/db";
+import { auth } from "@/auth";
+import { Prisma } from "@prisma/client";
 
 export const getOpportunityDetails = async (id: string) => {
   try {
-    return await prisma.opportunity.findUnique({
+    const session = await auth();
+    const user = session?.user;
+    const businessId = user?.business?.id;
+
+    // Get the opportunity with all its details
+    const opportunity = await prisma.opportunity.findUnique({
       where: { id },
       select: {
         imageUrl: true,
@@ -23,8 +30,17 @@ export const getOpportunityDetails = async (id: string) => {
         noOfRegistrations: true,
         registration: true,
         registrationFormLink: true,
-      },
+        isDraft: true,
+        businessId: true,
+      } as Prisma.OpportunitySelect,
     });
+
+    // If opportunity is a draft and not owned by the current user's business, don't return it
+    if (opportunity && 'isDraft' in opportunity && opportunity.isDraft && opportunity.businessId !== businessId) {
+      return null;
+    }
+
+    return opportunity;
   } catch (error) {
     console.error("Error fetching opportunity details:", error);
     return null;

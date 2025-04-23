@@ -43,6 +43,12 @@ const nextConfig = {
         protocol: "https",
         hostname: "api.outrank.so",
       },
+      {
+        // NOTE: Using ImageKit is temporary as it was urgent to implement this image hosting solution.
+        // TODO: Remove in the future and use better CDN options.
+        protocol: "https",
+        hostname: "media-hosting.imagekit.io",
+      },
     ],
   },
 };

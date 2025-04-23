@@ -1,3 +1,5 @@
+'use client';
+
 import React from 'react';
 import { Separator } from '@/components/ui/separator';
 
@@ -16,12 +18,19 @@ import ContactOverlay from '@/components/ContactDetails';
 import * as z from 'zod';
 import { fundingOpportunitySchema } from '@/schemas';
 import { Business } from '@prisma/client';
+import Image from 'next/image';
+import InteractiveButton from '@/components/InteractiveButton';
+
+// Extend the inferred type to include the bannerUrl property
+type OpportunityWithBanner = z.infer<typeof fundingOpportunitySchema> & {
+  bannerUrl?: string | null;
+};
 
 const PreviewOpportunity = ({
   opportunity,
   business,
 }: {
-  opportunity: z.infer<typeof fundingOpportunitySchema>;
+  opportunity: OpportunityWithBanner;
   business: Business;
 }) => {
   const date = new Date(opportunity.endDate);
@@ -30,18 +39,51 @@ const PreviewOpportunity = ({
     month: 'long',
     day: 'numeric',
   });
+  
+  const handleExternalLink = (url: string) => {
+    if (url) {
+      window.open(url, "_blank", "noopener,noreferrer");
+    }
+  };
 
   return (
     <section className="max-w-screen-md mx-auto rounded-lg overflow-hidden">
-      <div className="h-44 bg-neutral-400"></div>
+      <div className="h-44 bg-neutral-400 relative overflow-hidden">
+        {opportunity.bannerUrl ? (
+          <Image
+            src={opportunity.bannerUrl}
+            alt="Opportunity Banner"
+            fill
+            className="object-cover"
+            priority
+          />
+        ) : opportunity.imageUrl ? (
+          <Image
+            src={opportunity.imageUrl}
+            alt="Opportunity Banner"
+            fill
+            className="object-cover"
+            priority
+          />
+        ) : (
+          <Image
+            src="/img/funding-opportunity-placeholder.png"
+            alt="Default Opportunity Banner"
+            fill
+            className="object-cover"
+            priority
+          />
+        )}
+      </div>
       <div className="p-4 space-y-2">
         <div className="flex gap-x-6 justify-between items-start">
           <h2 className="font-semibold text-xl md:text-2xl">
             {opportunity.title}
           </h2>
-          <p className="text-sm px-4 py-0.5 bg-secondary-200 rounded-full">
+          {/* Promoted tag commented out for now */}
+          {/* <p className="text-sm px-4 py-0.5 bg-secondary-200 rounded-full">
             Promoted
-          </p>
+          </p> */}
         </div>
         <div className="flex gap-x-2 items-center">
           <Avatar className="w-8 h-8 rounded-full overflow-hidden">
@@ -61,27 +103,33 @@ const PreviewOpportunity = ({
           </div>
         </div>
         <div className="flex flex-wrap gap-x-3">
-          <Button
-            variant="outline"
-            size="sm"
-            className="rounded-full shadow-none"
-          >
-            Tag 1
-          </Button>
-          <Button
-            variant="outline"
-            size="sm"
-            className="rounded-full shadow-none"
-          >
-            Tag 2
-          </Button>
-          <Button
-            variant="outline"
-            size="sm"
-            className="rounded-full shadow-none"
-          >
-            Tag 3
-          </Button>
+          {opportunity.targetIndustry && (
+            <Button
+              variant="outline"
+              size="sm"
+              className="rounded-full shadow-none"
+            >
+              {opportunity.targetIndustry}
+            </Button>
+          )}
+          {opportunity.targetSector && (
+            <Button
+              variant="outline"
+              size="sm"
+              className="rounded-full shadow-none"
+            >
+              {opportunity.targetSector}
+            </Button>
+          )}
+          {opportunity.targetProductStageList && opportunity.targetProductStageList.length > 0 && (
+            <Button
+              variant="outline"
+              size="sm"
+              className="rounded-full shadow-none"
+            >
+              {opportunity.targetProductStageList[0]}
+            </Button>
+          )}
         </div>
         <Separator />
         <div className="py-3 sm:flex justify-between items-center">
@@ -101,7 +149,15 @@ const PreviewOpportunity = ({
             </Button>
           </div>
           <div className="flex justify-center pt-2 sm:pt-0">
-            <Button disabled={true}>Apply</Button>
+            {opportunity.registrationFormLink ? (
+              <Button onClick={() => handleExternalLink(opportunity.registrationFormLink || '')}>
+                Apply
+              </Button>
+            ) : opportunity.registration === 'visey' ? (
+              <Button>Apply on Visey</Button>
+            ) : (
+              <Button disabled>Apply</Button>
+            )}
           </div>
         </div>
         <Separator />
@@ -182,28 +238,36 @@ const PreviewOpportunity = ({
           </div>
           <div>
             <h2 className="font-semibold text-lg">Preferred Industries</h2>
-            <ul className="list-disc list-inside">
-              <li>Aviation</li>
-              <li>Aviation</li>
-              <li>Aviation</li>
-            </ul>
+            {opportunity.targetIndustry ? (
+              <ul className="list-disc list-inside">
+                <li>{opportunity.targetIndustry}</li>
+              </ul>
+            ) : (
+              <p>No specific industry preference specified</p>
+            )}
           </div>
           <div>
-            <h2 className="font-semibold text-lg">Preferred Industries</h2>
-            <ul className="list-disc list-inside">
-              <li>Aviation</li>
-              <li>Aviation</li>
-              <li>Aviation</li>
-            </ul>
+            <h2 className="font-semibold text-lg">Preferred Sectors</h2>
+            {opportunity.targetSector ? (
+              <ul className="list-disc list-inside">
+                <li>{opportunity.targetSector}</li>
+              </ul>
+            ) : (
+              <p>No specific sector preference specified</p>
+            )}
           </div>
         </div>
         <Separator />
 
         <div className="py-3 space-y-2">
           <h1 className="text-xl md:text-2xl font-semibold">Website</h1>
-          <Link href="www.google.com" className="block text-linkBlue">
-            {business?.websiteUrl || ''}
-          </Link>
+          {business?.websiteUrl ? (
+            <InteractiveButton url={business.websiteUrl}>
+              {business.websiteUrl}
+            </InteractiveButton>
+          ) : (
+            <p>No website available</p>
+          )}
         </div>
 
         <Separator />
@@ -217,14 +281,21 @@ const PreviewOpportunity = ({
               contactNumber={business?.contactNumber || ''}
               websiteUrl={business?.websiteUrl || ''}
             />
-            <Button variant={'secondary'}>Message</Button>
           </div>
         </div>
 
         <Separator />
 
         <div className="py-6 flex justify-center">
-          <Button disabled={true}>Apply</Button>
+          {opportunity.registrationFormLink ? (
+            <Button onClick={() => handleExternalLink(opportunity.registrationFormLink || '')}>
+              Apply
+            </Button>
+          ) : opportunity.registration === 'visey' ? (
+            <Button>Apply on Visey</Button>
+          ) : (
+            <Button disabled>Apply</Button>
+          )}
         </div>
       </div>
     </section>
