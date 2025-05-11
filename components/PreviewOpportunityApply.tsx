@@ -18,10 +18,30 @@ import { fundingOpportunitySchema } from '@/schemas';
 import { Business } from '@prisma/client';
 
 // Extended opportunity interface to handle properties that might come from Prisma model
-interface ExtendedOpportunity extends z.infer<typeof fundingOpportunitySchema> {
+interface ExtendedOpportunity {
   id?: string;
-  bannerUrl?: string | null;
-  imageUrl?: string | null;
+  type: string;
+  subtype: string;
+  title: string;
+  fundingAmount: string;
+  targetWomenFounder: boolean;
+  description: string;
+  eligibilityCriteria: string;
+  registration: string;
+  endDate: Date;
+  startDate?: Date;
+  targetProductStage?: string;
+  targetFundingStage?: string;
+  targetProductStageList?: string[];
+  targetFundingStageList?: string[];
+  targetIndustry?: string;
+  targetSector?: string;
+  websiteUrl?: string;
+  registrationFormLink?: string;
+  noOfRegistrationsAllowed?: string;
+  // Add these properties explicitly with correct types
+  imageUrl: string | null;
+  bannerUrl: string | null;
 }
 
 interface PreviewOpportunityApplyProps {

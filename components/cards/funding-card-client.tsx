@@ -12,9 +12,34 @@ import { z } from "zod";
 import FundingCardActions from "./funding-card-actions";
 
 // Extended interface to handle both Prisma and zod schema properties
-interface ExtendedOpportunity extends Opportunity {
-  endDatetime?: Date | string | null;
-  bannerUrl?: string | null; 
+interface ExtendedOpportunity {
+  id: string;
+  imageUrl: string | null;
+  type: string;
+  subtype: string | null;
+  title: string; 
+  websiteUrl: string | null;
+  fundingAmount: string | null;
+  targetIndustry: string | null;
+  targetSector: string | null;
+  targetWomenFounder: boolean;
+  targetProductStage: string | null;
+  targetFundingStage: string | null;
+  targetProductStageList: string[] | null;
+  targetFundingStageList: string[] | null;
+  description: string | null;
+  eligibilityCriteria: string | null;
+  startDatetime: Date | null;
+  endDatetime: Date | null;
+  endDate?: Date;  // Add this property explicitly 
+  bannerUrl: string | null;  // Corrected type 
+  noOfRegistrations: number | null;
+  questions: string | null;
+  registration: string | null;
+  registrationFormLink: string | null;
+  businessId: string | null;
+  userId: string | null;
+  isDraft: boolean;
 }
 
 interface FundingCardClientProps {
