@@ -24,42 +24,51 @@ const SearchPage = () => {
   const [activeTab, setActiveTab] = useState("businesses");
   const [isLoadingBusinesses, setIsLoadingBusinesses] = useState(false);
   const [isLoadingOpportunities, setIsLoadingOpportunities] = useState(false);
-
+  
+  // Fetch businesses when query changes or on initial load
   useEffect(() => {
-    if (!query) return;
+    if (!query || !session?.user?.id) return;
     
-    setIsLoadingBusinesses(true);
-    // Use promise-based approach instead of async/await
-    fetch(`/api/search-businesses?query=${query}`)
-      .then(res => res.json())
-      .then(data => {
+    const fetchBusinesses = async () => {
+      setIsLoadingBusinesses(true);
+      try {
+        const res = await fetch(`/api/search-businesses?query=${query}`);
+        const data = await res.json();
         setBusinesses(data);
-      })
-      .catch(error => {
+      } catch (error) {
         console.error("Error fetching businesses:", error);
-      })
-      .finally(() => {
+      } finally {
         setIsLoadingBusinesses(false);
-      });
-  }, [query, session, router]);
-
-  useEffect(() => {
-    if (!query || activeTab !== "funding") return;
+      }
+    };
     
-    setIsLoadingOpportunities(true);
-    // Use promise-based approach instead of async/await
-    fetch(`/api/search-opportunities?query=${query}`)
-      .then(res => res.json())
-      .then(data => {
+    fetchBusinesses();
+  }, [query, session?.user?.id]);
+
+  // Fetch opportunities when switching to funding tab or query changes
+  useEffect(() => {
+    if (!query || !session?.user?.id || activeTab !== "funding") return;
+    
+    const fetchOpportunities = async () => {
+      setIsLoadingOpportunities(true);
+      try {
+        const res = await fetch(`/api/search-opportunities?query=${query}`);
+        const data = await res.json();
         setOpportunities(data);
-      })
-      .catch(error => {
+      } catch (error) {
         console.error("Error fetching opportunities:", error);
-      })
-      .finally(() => {
+      } finally {
         setIsLoadingOpportunities(false);
-      });
-  }, [query, activeTab, session, router]);
+      }
+    };
+    
+    fetchOpportunities();
+  }, [query, activeTab, session?.user?.id]);
+  
+  // Handle tab switching
+  const handleTabChange = (tab: string) => {
+    setActiveTab(tab);
+  };
 
   return (
     <div className="p-4 md:p-6">
@@ -71,13 +80,13 @@ const SearchPage = () => {
           <div className="flex space-x-4">
             <Button
               variant={activeTab === "businesses" ? "default" : "outline"}
-              onClick={() => setActiveTab("businesses")}
+              onClick={() => handleTabChange("businesses")}
             >
               Businesses
             </Button>
             <Button
               variant={activeTab === "funding" ? "default" : "outline"}
-              onClick={() => setActiveTab("funding")}
+              onClick={() => handleTabChange("funding")}
             >
               Funding Opportunities
             </Button>
