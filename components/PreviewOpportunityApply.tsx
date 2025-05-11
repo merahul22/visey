@@ -1,6 +1,7 @@
 import React from 'react';
 import { Separator } from '@/components/ui/separator';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import Image from 'next/image';
 import {
   MapPin,
   HeartStraight,
@@ -16,23 +17,74 @@ import * as z from 'zod';
 import { fundingOpportunitySchema } from '@/schemas';
 import { Business } from '@prisma/client';
 
+// Extended opportunity interface to handle properties that might come from Prisma model
+interface ExtendedOpportunity {
+  id?: string;
+  type: string;
+  subtype: string;
+  title: string;
+  fundingAmount: string;
+  targetWomenFounder: boolean;
+  description: string;
+  eligibilityCriteria: string;
+  registration: string;
+  endDate: Date;
+  startDate?: Date;
+  targetProductStage?: string;
+  targetFundingStage?: string;
+  targetProductStageList?: string[];
+  targetFundingStageList?: string[];
+  targetIndustry?: string;
+  targetSector?: string;
+  websiteUrl?: string;
+  registrationFormLink?: string;
+  noOfRegistrationsAllowed?: string;
+  // Add these properties explicitly with correct types
+  imageUrl: string | null;
+  bannerUrl: string | null;
+}
+
+interface PreviewOpportunityApplyProps {
+  opportunity: ExtendedOpportunity;
+  business: Business;
+  isInSheet?: boolean;
+}
+
 const PreviewOpportunityApply = ({
   opportunity,
   business,
-}: {
-  opportunity: z.infer<typeof fundingOpportunitySchema>;
-  business: Business;
-}) => {
-  const date = new Date(opportunity.endDate);
+  isInSheet = false,
+}: PreviewOpportunityApplyProps) => {
+  const date = new Date(opportunity.endDate || new Date());
   const formattedDate = date.toLocaleDateString('en-US', {
     year: 'numeric',
     month: 'long',
     day: 'numeric',
   });
 
+  // Use bannerUrl as the primary image for the card display, fallback to imageUrl or default
+  const bannerImage =
+    opportunity.bannerUrl ||
+    opportunity.imageUrl ||
+    '/img/funding-opportunity-placeholder.png';
+
+  // Handle Apply button click
+  const handleApply = () => {
+    if (opportunity.registrationFormLink) {
+      window.open(opportunity.registrationFormLink, '_blank');
+    }
+  };
+
   return (
     <section className="max-w-screen-md mx-auto rounded-lg overflow-hidden">
-      <div className="h-44 bg-neutral-400"></div>
+      <div className="h-44 bg-neutral-400 relative">
+        <Image
+          src={bannerImage}
+          alt={opportunity.title || 'Funding Opportunity'}
+          fill
+          className="object-cover"
+        />
+      </div>
       <div className="p-4 space-y-2">
         <div className="flex gap-x-6 justify-between items-start">
           <h2 className="font-semibold text-xl md:text-2xl">
@@ -73,7 +125,7 @@ const PreviewOpportunityApply = ({
         </div>
         <Separator />
         <div className="py-3 sm:flex justify-between items-center">
-          <div className="flex items-center justify-between  sm:justify-normal sm:gap-x-4">
+          <div className="flex items-center justify-between sm:justify-normal sm:gap-x-4">
             <ContactOverlay
               email={business?.email || ''}
               contactNumber={business?.contactNumber || ''}
@@ -89,10 +141,14 @@ const PreviewOpportunityApply = ({
             </Button>
           </div>
           <div className="flex justify-center pt-2 sm:pt-0">
-            <Button disabled={true}>Apply</Button>
+            <Button
+              onClick={handleApply}
+              disabled={!opportunity.registrationFormLink}
+            >
+              Apply
+            </Button>
           </div>
         </div>
-        <Separator />
 
         <div className="sm:flex sm:space-y-0 space-y-4 gap-12 py-3 ">
           <div className="flex items-center gap-x-4">
@@ -154,7 +210,10 @@ const PreviewOpportunityApply = ({
               </div>
             </div>
           )}
-          <p>{opportunity.eligibilityCriteria || 'No eligibility criteria available'}</p>
+          <p>
+            {opportunity.eligibilityCriteria ||
+              'No eligibility criteria available'}
+          </p>
 
           <div>
             <h2 className="font-semibold text-lg">Startup Product Stages</h2>
@@ -181,7 +240,10 @@ const PreviewOpportunityApply = ({
 
         <div className="py-3 space-y-2">
           <h1 className="text-xl md:text-2xl font-semibold">Website</h1>
-          <Link href={opportunity.websiteUrl || '#'} className="block text-linkBlue">
+          <Link
+            href={opportunity.websiteUrl || '#'}
+            className="block text-linkBlue"
+          >
             {opportunity.websiteUrl || 'N/A'}
           </Link>
         </div>
@@ -204,7 +266,12 @@ const PreviewOpportunityApply = ({
         <Separator />
 
         <div className="py-6 flex justify-center">
-          <Button disabled={true}>Apply</Button>
+          <Button
+            onClick={handleApply}
+            disabled={!opportunity.registrationFormLink}
+          >
+            Apply
+          </Button>
         </div>
       </div>
     </section>
