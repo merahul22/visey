@@ -79,18 +79,19 @@ function MarketplaceSection() {
 
     return () => clearInterval(interval); // Cleanup on unmount
   }, []);
-
   const stats = [
     {
-      value: daysFromStart, // Dynamically calculate days
+      value: 91, // Static 91 days instead of dynamic calculation
       subtitle: "Days",
     },
     {
-      value: 567,
+      value: 200,
+      suffix: "+",
       subtitle: "Active Users",
     },
     {
-      value: 825,
+      value: 850,
+      suffix: "+",
       subtitle: "Resources Providers Listed",
     },
   ];
@@ -121,8 +122,7 @@ function MarketplaceSection() {
         <div className="relative z-10 space-y-6 text-center sm:flex sm:space-y-0 sm:justify-between">
           {stats.map((stat, index) => (
             <div key={index} className="flex-grow space-y-1">
-              <p className="font-degular text-heading4 lg:text-heading3 xl:text-heading2">
-                {statsInView ? (
+              <p className="font-degular text-heading4 lg:text-heading3 xl:text-heading2">                {statsInView ? (
                   <>
                     <CountUp
                       start={0}
@@ -130,8 +130,7 @@ function MarketplaceSection() {
                       duration={2}
                       separator=","
                     />
-                    {stat.subtitle === "Hours saved" && "h+"}
-                    {stat.subtitle === "Businesses Listed" && "+"}
+                    {stat.suffix && stat.suffix}
                   </>
                 ) : (
                   0
@@ -159,7 +158,7 @@ function MarketplaceSection() {
             <p className="font-gothic font-medium text-lg">
               Discover all business solutions for your startup needs in{" "}
               <span className="font-bold">one trusted destination</span> with
-              visey.
+              Visey.
             </p>
           </div>
 
@@ -169,14 +168,36 @@ function MarketplaceSection() {
               <div
                 key={data.title}
                 className="relative z-10 p-10 rounded-2xl space-y-6 bg-primary-landing-light text-base-white w-10/12 h-[286px] md:h-auto"
-              >
-                <div className="p-2 rounded-full inline-flex justify-center items-center bg-success-landing">
-                  {idx === 0 && <Funnel size={36} className="text-[#709B08]" />}
+              >                <div className="relative w-[58px] h-[58px] rounded-full inline-flex justify-center items-center bg-success-landing">
+                  {idx === 0 && (
+                    <div className="w-11 h-11 relative">
+                      <Image 
+                        src="/currencyinr.svg"
+                        alt="Funding icon"
+                        fill
+                        className="object-contain"
+                      />
+                    </div>
+                  )}
                   {idx === 1 && (
-                    <Aperture size={36} className="text-[#709B08]" />
+                    <div className="w-11 h-11 relative">
+                      <Image 
+                        src="/usersthree.svg"
+                        alt="Team building icon"
+                        fill
+                        className="object-contain"
+                      />
+                    </div>
                   )}
                   {idx === 2 && (
-                    <Command size={36} className="text-[#709B08]" />
+                    <div className="w-11 h-11 relative">
+                      <Image 
+                        src="/files.svg"
+                        alt="Documents icon"
+                        fill
+                        className="object-contain"
+                      />
+                    </div>
                   )}
                 </div>
                 <div className="space-y-2">
@@ -190,33 +211,31 @@ function MarketplaceSection() {
           </div>
 
           {/* Features Section */}
-          <div className="flex flex-col items-center">
-            <h3 className="font-degular font-semibold text-2xl text-center text-feature md:text-3xl lg:text-heading3">
+          <div className="flex flex-col items-center">            <h2 className="mt-[-1.00px] [font-family:'Degular_Display-SemiBold',Helvetica] font-semibold text-[#4a4a4a] text-[40px] text-center tracking-[0] leading-[56px] w-full">
               Find the right resources in seconds, not hours.
-            </h3>
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 text-center w-full py-9 md:pt-14 md:pb-12 lg:pt-16">
+            </h2>
+            <div className="flex flex-wrap items-start justify-center gap-[16px_80px] w-full py-9 md:pt-14 md:pb-12 lg:pt-16">
               {features.map((feat) => (
-                <div key={feat.title} className="flex flex-col items-center">
-                  <p className="font-degular text-heading4 text-primary">
+                <div key={feat.title} className="flex flex-col min-w-[280px] items-center flex-1 grow">
+                  <div className="mt-[-1.00px] [font-family:'Degular_Display-Regular',Helvetica] font-normal text-[#9d0543] text-[40px] text-center tracking-[0] leading-[56px] w-full">
                     {feat.title}
-                  </p>
-                  <p className="font-gothic font-medium text-lg">
+                  </div>
+                  <div className="[font-family:'Gothic_A1',Helvetica] font-medium text-black text-xl text-center tracking-[0] leading-7 w-full">
                     {feat.subtitle}
-                  </p>
+                  </div>
                 </div>
               ))}
-            </div>
-
-            {/* Call-to-Action */}
+            </div>{/* Call-to-Action */}
             <Button
               variant="landing"
-              className="py-2.5 px-10 text-xl relative z-10"
+              className="h-[60px] px-10 py-1 bg-[#d43a63] rounded-[1000px] shadow-[1px_1px_16px_#00000040] relative z-10"
             >
-              <Link href="/login">
-                <span className="flex items-center gap-x-3">
-                  <span>Start Now</span>
-                  <ArrowUpRight weight="bold" />
+              <Link href="/login" className="flex items-center">                <span className="text-white font-visey-UI-3-desktop-body-feature-accent font-[number:var(--visey-UI-3-desktop-body-feature-accent-font-weight)] text-[length:var(--visey-UI-3-desktop-body-feature-accent-font-size)] tracking-[var(--visey-UI-3-desktop-body-feature-accent-letter-spacing)] leading-[var(--visey-UI-3-desktop-body-feature-accent-line-height)] whitespace-nowrap [font-style:var(--visey-UI-3-desktop-body-feature-accent-font-style)]">
+                  Get resource now
                 </span>
+                <div className="inline-flex items-center justify-center p-2 rounded-[1000px]">
+                  <ArrowUpRight size={24} className="text-white" />
+                </div>
               </Link>
             </Button>
           </div>
