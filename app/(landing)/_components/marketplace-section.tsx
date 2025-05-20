@@ -12,6 +12,7 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import CountUp from "react-countup";
 import { useInView } from "react-intersection-observer";
+import TrustedBySection from "./trusted-by-section";
 
 const cardData = [
   {
@@ -117,8 +118,7 @@ function MarketplaceSection() {
       </div>
 
       {/* Content container with max-width */}
-      <div className="relative max-w-screen-xl mx-auto px-4 py-9 md:py-14 lg:py-20">
-        {/* Stats section */}
+      <div className="relative max-w-screen-xl mx-auto px-4 py-9 md:py-14 lg:py-20">        {/* Stats section */}
         <div className="relative z-10 space-y-6 text-center sm:flex sm:space-y-0 sm:justify-between">
           {stats.map((stat, index) => (
             <div key={index} className="flex-grow space-y-1">
@@ -141,6 +141,11 @@ function MarketplaceSection() {
               </p>
             </div>
           ))}
+        </div>
+
+        {/* Trusted By Section */}
+        <div className="relative z-10 mt-16">
+          <TrustedBySection />
         </div>
 
         {/* Main content */}
