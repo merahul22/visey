@@ -21,12 +21,12 @@ export default function HeroNav({ className }: { className?: string }) {
   const [search, setSearch] = useState("");
 
   return (
-    <header className="sticky top-0 bg-primary-landing px-4 py-4 shadow-[0_4px_6px_-1px_rgba(0,0,0,0.1)] w-full transition-all duration-300 z-40">
+    <header className="sticky top-0 bg-[#FFFDFE] px-4 py-4 shadow-[0_4px_6px_-1px_rgba(0,0,0,0.1)] w-full transition-all duration-300 z-40">
       <nav className={cn("flex items-center justify-between", className)}>
         <div className="shrink-0 lg:w-48 cursor-pointer transition-transform duration-300 hover:scale-105">
           <Link href="/">
             <Image
-              src="/logo-white.webp"
+              src="/logo-black.webp"
               width={81}
               height={42}
               alt="visey logo"
@@ -64,14 +64,14 @@ export default function HeroNav({ className }: { className?: string }) {
                   "shrink-0 size-5 cursor-pointer transition-all duration-300",
                   isExpanded
                     ? "mr-4 text-neutrals-600"
-                    : "mr-4 text-base-white hover:scale-110",
+                    : "mr-4 text-black hover:scale-110",
                 )}
               />
             </button>
           </div>
 
-          <div className="hidden lg:flex items-center gap-x-4 xl:gap-x-8">
-            {[
+          <div className="hidden lg:flex items-center gap-x-4 xl:gap-x-8">            {[
+              { name: "Features", link: "/features" },
               { name: "About", link: "/about" },
               { name: "Pricing", link: "/pricing" },
               { name: "Contact Us", link: "/contact-us" },
@@ -79,17 +79,23 @@ export default function HeroNav({ className }: { className?: string }) {
               <Link
                 key={item.name}
                 href={item.link}
-                className="text-sm font-semibold text-base-white transition-all duration-300 hover:opacity-80"
+                className="text-sm font-semibold text-black transition-all duration-300 hover:opacity-80"
               >
                 {item.name}
               </Link>
-            ))}
-
-            <Link href="/login">
-              <Button
+            ))}            <Link href="/login">              <Button
                 variant="nav"
                 size="md"
-                className="white-rounded-border"
+                style={{
+                  background: '#B8F272',
+                  color: 'black',
+                  borderRadius: '20px',
+                  padding: '9px 20px',
+                  position: 'relative',
+                  outline: 'none',
+                  background: 'linear-gradient(#B8F272, #B8F272) padding-box, linear-gradient(90deg, #FF64A3, #CF0E5E) border-box',
+                  border: '2px solid transparent'
+                }}
               >
                 Join as Resource Provider
               </Button>
@@ -99,12 +105,15 @@ export default function HeroNav({ className }: { className?: string }) {
               <Link key={text} href="/login">
                 <Button
                   variant="nav"
-                  size="md"
-                  style={{
-                    backgroundColor: '#BFFF72',
+                  size="md"                  style={{
+                    background: '#B8F272',
                     color: 'black',              
                     borderRadius: '20px',   
                     padding: '9px 20px',
+                    position: 'relative',
+                    outline: 'none',
+                    background: 'linear-gradient(#B8F272, #B8F272) padding-box, linear-gradient(90deg, #FF64A3, #CF0E5E) border-box',
+                    border: '2px solid transparent'
                   }}
                 >
                   {text}
@@ -127,7 +136,13 @@ export default function HeroNav({ className }: { className?: string }) {
                 </div>
               </DropdownMenuTrigger>
               <DropdownMenuContent className="w-[280px] bg-primary-100 flex flex-col gap-2 pt-2 pb-2 mr-4 ring-8 ring-[#f3f3f35a] text-base">
-                <div className="px-4 flex flex-col gap-2">
+                <div className="px-4 flex flex-col gap-2">                  <DropdownMenuItem className="cursor-pointer">
+                    <span className="flex gap-x-2 items-center">
+                      <Link href={"/features"}>
+                        <span>Features</span>
+                      </Link>
+                    </span>
+                  </DropdownMenuItem>
                   <DropdownMenuItem className="cursor-pointer">
                     <span className="flex gap-x-2 items-center">
                       <Link href={"/about"}>
