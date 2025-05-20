@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useRef } from "react";
+import React from "react";
 
 // Define recognition items
 const recognitionImages = [
@@ -16,55 +16,7 @@ const recognitionImages = [
   { src: "/recognitions/image-22.png", height: "h-[49px]", alt: "Recognition" },
 ];
 
-// Triple the items to create a seamless loop effect with plenty of content
-const allImages = [...recognitionImages, ...recognitionImages, ...recognitionImages];
-
 export function RecognitionsList() {
-  const scrollRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const scrollContainer = scrollRef.current;
-    if (!scrollContainer) return;
-
-    let animationFrameId: number;
-    const speed = 20; // pixels per second - slow but visible
-    let lastTime: number | null = null;
-
-    const animate = (currentTime: number) => {
-      if (lastTime === null) {
-        lastTime = currentTime;
-        animationFrameId = requestAnimationFrame(animate);
-        return;
-      }
-
-      const timeElapsed = currentTime - lastTime; // time in ms
-      const scrollAmount = (speed * timeElapsed) / 1000;
-      
-      // Move scroll position and loop when needed
-      if (scrollContainer.scrollLeft + scrollAmount >= scrollContainer.scrollWidth / 3) {
-        // If we've scrolled through the first set, jump back to beginning
-        scrollContainer.scrollLeft = 0;
-      } else {
-        scrollContainer.scrollLeft += scrollAmount;
-      }
-      
-      lastTime = currentTime;
-      animationFrameId = requestAnimationFrame(animate);
-    };
-
-    // Initial scroll position at 0
-    scrollContainer.scrollLeft = 0;
-    
-    // Start animation
-    animationFrameId = requestAnimationFrame(animate);
-    
-    return () => {
-      if (animationFrameId) {
-        cancelAnimationFrame(animationFrameId);
-      }
-    };
-  }, []);
-
   return (
     <div className="relative w-full py-8 bg-white shadow-[0px_0px_40.1px_#00000029]">
       <h3 className="text-center [font-family:'Degular_Display-SemiBold',Helvetica] font-semibold text-[#1e1e1e] text-[32px] tracking-[-0.70px] leading-[38.4px] mb-8">
@@ -72,16 +24,32 @@ export function RecognitionsList() {
       </h3>
       
       <div className="relative w-full overflow-hidden">
-        <div 
-          ref={scrollRef}
-          className="flex items-center py-4 overflow-hidden whitespace-nowrap"
-        >
-          {allImages.map((img, index) => (
-            <div key={index} className="flex-shrink-0 mx-8">
+        <style jsx>{`
+          @keyframes scroll {
+            0% {
+              transform: translateX(0);
+            }
+            100% {
+              transform: translateX(calc(-200px * ${recognitionImages.length}));
+            }
+          }
+          .animate-scroll {
+            animation: scroll 40s linear infinite;
+          }
+          .animate-scroll:hover {
+            animation-play-state: paused;
+          }
+        `}</style>
+        <div className="flex animate-scroll items-center">
+          {[...recognitionImages, ...recognitionImages].map((img, index) => (
+            <div key={index} className="relative flex items-center justify-center shrink-0 mx-8">
               <img
-                className={`${img.height} object-contain`}
+                className={`${img.height} w-auto object-contain opacity-80 hover:opacity-100 transition-all transform hover:scale-105 duration-300`}
                 alt={img.alt}
                 src={img.src}
+                style={{
+                  maxWidth: '180px'
+                }}
               />
             </div>
           ))}
