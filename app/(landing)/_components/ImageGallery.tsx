@@ -7,7 +7,7 @@ interface ImageGalleryProps {
   images: string[];
 }
 
-function ImageGallery({ images }: { images: string[] }) {
+export function ImageGallery({ images }: { images: string[] }) {
   return (
     <div className="flex justify-center gap-4">
       {images.slice(0, 4).map((src, index) => (

@@ -87,12 +87,9 @@ export default function HeroNav({ className }: { className?: string }) {
                 variant="nav"
                 size="md"
                 style={{
-                  background: '#B8F272',
                   color: 'black',
                   borderRadius: '20px',
                   padding: '9px 20px',
-                  position: 'relative',
-                  outline: 'none',
                   background: 'linear-gradient(#B8F272, #B8F272) padding-box, linear-gradient(90deg, #FF64A3, #CF0E5E) border-box',
                   border: '2px solid transparent'
                 }}
@@ -106,12 +103,9 @@ export default function HeroNav({ className }: { className?: string }) {
                 <Button
                   variant="nav"
                   size="md"                  style={{
-                    background: '#B8F272',
                     color: 'black',              
                     borderRadius: '20px',   
                     padding: '9px 20px',
-                    position: 'relative',
-                    outline: 'none',
                     background: 'linear-gradient(#B8F272, #B8F272) padding-box, linear-gradient(90deg, #FF64A3, #CF0E5E) border-box',
                     border: '2px solid transparent'
                   }}
