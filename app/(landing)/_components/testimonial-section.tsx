@@ -1,38 +1,5 @@
 import Image from 'next/image';
-import { EmblaOptionsType } from 'embla-carousel';
-import EmblaCarousel from '@/components/EmblaCarousel';
-import EmblaCarouselLarge from '@/components/EmblaCarouselLarge';
-import StackCardCarousel from '@/components/StackCardCarousel';
-
-interface Testimonial {
-  image: string;
-  content: string;
-}
-
-const OPTIONS: EmblaOptionsType = { loop: true };
-const SLIDES: Testimonial[] = [
-  {
-    image: '/img/testimonial2.jpg',
-    content: '"Visey made it quick to find trusted resource providers for my startup. With its support, we were able to scale faster"',
-  },
-  {
-    image: '/img/testimonial1.png',
-    content: '"For our MSME, Visey helped us find reliable partners in marketing and tech. I find the marketplace a perfect place to find quality business solutions."',
-  },
-  {
-    image: '/img/testimonial3.jpg',
-    content: "It's a game-changer for startups! We easily found the right legal and financial services for our startup at zero cost, saving us time, effort and money.",
-  },
-  {
-    image: '/img/testimonial4.jpg',
-    content: "Thanks to Visey, we could connect with every resource provider needed to grow our early-stage MSME. It’s an invaluable resource for finding tools and services."
-,
-  },
-  {
-    image: '/img/testimonial1.png',
-    content: "We found the perfect tech partners and were able to streamline our growth. It’s a must-have platform for entrepreneur support.",
-  },
-];
+import TestimonialsCarousel from './testimonials-carousel';
 
 function TestimonialSection() {
   return (
@@ -65,23 +32,10 @@ function TestimonialSection() {
         <p className="text-lg font-gothic font-medium">
           &quot;This is the most helpful resource for my startup&quot;
         </p>
+      </div>      {/* Carousel Section */}
+      <div className="py-24">
+        <TestimonialsCarousel />
       </div>
-
-      {/* Carousel Section */}
-      <div className="py-24 flex items-center justify-center">
-        <div className="sm:hidden">
-          <EmblaCarousel slides={SLIDES} options={OPTIONS} />
-        </div>
-
-        <div className="hidden sm:block lg:hidden">
-          <EmblaCarouselLarge slides={SLIDES} options={OPTIONS} />
-        </div>
-        
-        <div className="hidden lg:block">
-          <StackCardCarousel />
-        </div>
-      </div>
-
 
       {/* Decorative Bottom Triangle */}
       <div

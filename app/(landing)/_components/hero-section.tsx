@@ -49,34 +49,26 @@ const HeroSection = () => {
                   id="hero-heading"
                   className="font-degular text-heading4 md:text-heading2 xl:text-heading1 leading-tight"
                 >
-                  The one-stop place for founders to get unstuck, level-up their startup & MSME journeys
+                  The one-stop place for founders to get unstuck, level-up their startup &amp; MSME journeys
                 </h1>
-                <p className="font-gothic font-medium text-sm md:text-base opacity-90">
-                  Visey is an aggregator platform that helps entrepreneurs find
-                  the best resource providers for their startup’s needs in just
-                  three clicks. And resource providers can generate more revenue
-                  by getting leads on the platform.
-                </p>
               </div>
               {/* Call-to-Action */}
               <Button
                 variant="landing"
-                className="py-3 px-10 text-lg text-base-black hover:scale-105 transition-transform font-bold" // Added font-bold
+                className="py-3 px-10 text-lg text-base-black hover:scale-105 transition-transform font-bold"
               >
                 <Link href="/login" className="flex items-center gap-4">
-                  <span className="font-bold">Find Resources</span> {/* Bold text */}
-                  <ArrowUpRight size={20} className="font-bold" /> {/* Bold icon (if applicable) */}
+                  <span className="font-bold">Find Resources</span>
+                  <ArrowUpRight size={20} className="font-bold" />
                 </Link>
               </Button>
             </div>
-          </div>
-
-          {/* Right Image Section */}
+          </div>          {/* Right Image Section */}
           <div className="relative w-full">
             {/* Main Image */}
-            <div className="relative aspect-[4080/2864] w-full h-96 md:h-full">
+            <div className="relative w-[786px] h-[572px]">
               <Image
-                src="/img/hero-img.webp"
+                src="/new-hero-img.png"
                 alt="Entrepreneur analyzing resources for their startup"
                 fill
                 className="object-cover"
