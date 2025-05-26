@@ -52,6 +52,7 @@ import PreviewOpportunity from '../PreviewOpportunity';
 import { Business } from '@prisma/client';
 import { toast } from 'sonner';
 import { Textarea } from '@/components/ui/textarea';
+import { uploadFile } from '@/lib/uploadUtils';
 
 const PostFundingOpportunityForm = ({ business }: { business: Business }) => {
   const [error, setError] = useState<string | undefined>('');
@@ -307,13 +308,8 @@ const PostFundingOpportunityForm = ({ business }: { business: Business }) => {
                                 accept="image/*"
                                 className="sr-only"
                                 onChange={async (e) => {
-                                  const file = e.target.files?.[0];
-                                  if (file) {
-                                    try {
-                                      // Use Supabase storage for upload
-                                      const { uploadToSupabase } = await import('@/lib/supabase');
-                                      const imageUrl = await uploadToSupabase(file, 'opportunities', 'banners');
-                                      
+                                  const file = e.target.files?.[0];                                  if (file) {                                    try {
+                                      const imageUrl = await uploadFile(file, 'banners');
                                       if (imageUrl) {
                                         field.onChange(imageUrl);
                                         toast.success('Banner uploaded successfully');
