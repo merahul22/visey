@@ -2,12 +2,23 @@ import { auth } from '@/auth';
 import { redirect } from 'next/navigation';
 import { getOpportunityDetails } from '@/actions/get-opportunity-details';
 import OpportunityForm from '@/components/forms/opportunity-form';
+import { Metadata } from 'next';
 
-export default async function EditOpportunityPage({
-  params
-}: {
-  params: { opportunityId: string }
-}) {
+type Props = {
+  params: Promise<{ opportunityId: string }>;
+  searchParams?: Promise<{ [key: string]: string | string[] | undefined }>;
+}
+
+export const metadata: Metadata = {
+  title: 'Edit Funding Opportunity',
+  description: 'Edit your funding opportunity details',
+}
+
+export default async function EditOpportunityPage({ params, searchParams }: Props) {
+  const [resolvedParams, resolvedSearchParams] = await Promise.all([
+    params,
+    searchParams
+  ]);
   const session = await auth();
   const user = session?.user;
 
@@ -15,7 +26,7 @@ export default async function EditOpportunityPage({
     redirect('/list-business');
   }
 
-  const opportunity = await getOpportunityDetails(params.opportunityId);
+  const opportunity = await getOpportunityDetails(resolvedParams.opportunityId);
 
   if (!opportunity) {
     redirect('/opportunities');

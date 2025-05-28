@@ -11,7 +11,12 @@ import { redirect } from 'next/navigation';
 import { isDateAfterToday, isDateBeforeToday } from "@/lib/dates";
 import ManageOpportunityActions from '@/components/manage-opportunity-actions';
 
-const Opportunities = async ({ searchParams }: { searchParams: { q?: string } }) => {
+type OpportunitiesPageProps = {
+  searchParams: Promise<{ q?: string }>;
+};
+
+const Opportunities = async ({ searchParams }: OpportunitiesPageProps) => {
+  const resolvedSearchParams = await searchParams;
   const session = await auth();
   const user = session?.user;
 
@@ -29,9 +34,9 @@ const Opportunities = async ({ searchParams }: { searchParams: { q?: string } })
   const opportunities = await getBusinessOpportunities(user.business.id);
   // Filter opportunities based on search query
   const filteredOpportunities = opportunities.filter(opp => {
-    if (!searchParams.q) return true;
+    if (!resolvedSearchParams.q) return true;
     
-    const query = searchParams.q.toLowerCase();
+    const query = resolvedSearchParams.q.toLowerCase();
     return (opp.title?.toLowerCase().includes(query) || 
             opp.description?.toLowerCase().includes(query));
   });
