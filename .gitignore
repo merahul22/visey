@@ -41,3 +41,12 @@ next-env.d.ts
 
 # webstorm
 .idea
+
+
+#temporary
+/docs
+CHANGELOG-isPromoted.md
+CHANGELOG-PROJECT-CHANGES.md
+CHANGES.md
+# components\PreviewOpportunityApply.tsx
+# actions\promote-opportunity.ts
