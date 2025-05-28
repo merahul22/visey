@@ -7,76 +7,75 @@ import {
   MapPin,
 } from '@phosphor-icons/react/dist/ssr';
 import { Button } from '../ui/button';
+import { Opportunity } from '@prisma/client';
 
 interface Props {
-  isPromoted: boolean;
+  opportunity: Opportunity & {
+    business?: {
+      name: string;
+      image: string | null;
+      location: string;
+    } | null;
+  };
+  isPromoted?: boolean; // Temporarily commented out but kept in interface for future reintegration
   underReview: boolean;
 }
 
-const FundingOpportunityCardApplications = ({ isPromoted, underReview }: Props) => {
+const FundingOpportunityCardApplications = ({ opportunity, underReview, isPromoted = false }: Props) => {
+  const endDate = opportunity.endDatetime ? new Date(opportunity.endDatetime) : null;
+  const formattedEndDate = endDate ? endDate.toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  }) : 'No end date';
+
   return (
     <div className="flex items-center justify-center lg:justify-start flex-col gap-4 lg:flex-row lg:items-center lg:gap-10">
       <div className="border-2 rounded-xl px-4 py-4 space-y-2 max-w-fit">
         <div className="space-y-2 lg:flex gap-2">
-          <div className="w-[300px] h-[135px] flex items-center">
+          <div className="w-[300px] h-[135px] flex items-center relative overflow-hidden rounded-md">
             <Image
-              src="/img/image-placeholder.png"
-              width={300}
-              height={135}
-              alt="Funding Opportunity Image"
+              src={opportunity.imageUrl || "/img/image-placeholder.png"}
+              alt={opportunity.title}
+              fill
+              className="object-cover"
             />
           </div>
-          <div className="space-y-2">
-            <div className="flex gap-1">
-              <h1 className="text-lg max-w-[160px]">
-                New media studies in business
-              </h1>
+          <div className="space-y-2">            <div className="flex gap-1">              <h1 className="text-lg font-medium">{opportunity.title}</h1>
+              {/* Temporarily commented out for future reintegration
               {isPromoted && (
-                <div className="max-w-[100px]">
-                  <Button
-                    size="sm"
-                    className="bg-base-secondary text-base-black font-normal shadow-none border-2 px-4 py-0 hover:bg-base-secondary"
-                  >
-                    <p>Promoted</p>
-                  </Button>
+                <div className="bg-yellow-100 px-2 py-0.5 rounded-full text-xs inline-flex items-center">
+                  Promoted
                 </div>
               )}
+              */}
               {underReview && (
-                <div className="max-w-[100px]">
-                  <p className="font-semibold text-lg">Under Review</p>
+                <div className="bg-primary-50 px-2 py-0.5 rounded-full text-xs inline-flex items-center">
+                  Under Review
                 </div>
               )}
             </div>
-            <div className="flex gap-2 items-center">
-              <Avatar>
-                <AvatarImage src="" />
-                <AvatarFallback>
-                  <div>
-                    <p>{'B'}</p>
-                  </div>
-                </AvatarFallback>
-              </Avatar>
-              <p>Business Name</p>
+            <div className="flex items-center gap-2 text-sm text-gray-600">
+              <MapPin size={16} />
+              <span>{opportunity.business?.location || "Location not specified"}</span>
             </div>
-            <div>
-              <p>Apply By: 21 December 2024</p>
+            <div className="flex items-center gap-2 text-sm text-gray-600">
+              <span>Ends: {formattedEndDate}</span>
             </div>
-            <div className="flex gap-2 items-center">
-              <MapPin />
-              <p>Delhi, India</p>
+            <div className="flex flex-wrap gap-2 mt-2">
+              {opportunity.type && (
+                <span className="text-xs px-3 py-1 bg-gray-100 rounded-full">{opportunity.type}</span>
+              )}
+              {opportunity.subtype && (
+                <span className="text-xs px-3 py-1 bg-gray-100 rounded-full">{opportunity.subtype}</span>
+              )}
             </div>
-          </div>
-        </div>
-        <div className="flex gap-4 items-center">
-          <div className="px-4">
-            <HeartStraight className="w-6 h-6" />
-          </div>
-          <div className="flex items-center justify-between border-2 px-6 py-2 flex-1">
-            <p>23 Applications received</p>
-            <CaretRight />
           </div>
         </div>
       </div>
+      <Button variant="ghost" size="icon">
+        <CaretRight size={24} />
+      </Button>
     </div>
   );
 };
