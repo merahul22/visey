@@ -7,6 +7,21 @@ import { Hammer } from '@phosphor-icons/react/dist/ssr';
 import AccountTransactions from '../AccountTransactions';
 import FundingOpportunityCardApplications from '@/components/cards/funding-opportunity-card-applications';
 
+// Mock opportunity for demonstration
+const mockOpportunity = {
+  id: 'mock-id',
+  title: 'Sample Opportunity',
+  type: 'Funding',
+  subtype: 'Grant',
+  imageUrl: '/img/funding-opportunity-placeholder.png',
+  endDatetime: new Date(),
+  business: {
+    name: 'Sample Business',
+    location: 'Sample Location',
+    image: null
+  }
+} as any; // Cast as any to avoid TypeScript errors
+
 const Account = () => {
   return (
     <div className="mt-4">
@@ -36,27 +51,24 @@ const Account = () => {
             <div className="mt-8">
               <h2 className="font-semibold mb-4">Funding Opportunities</h2>
               <div className="flex flex-col gap-4">
-                <div
-                  className="flex items-center justify-center lg:justify-start flex-col gap-4 lg:flex-row lg:items-center lg:gap-10">
-                  <FundingOpportunityCardApplications isPromoted={true} underReview={true} />
+                <div className="flex items-center justify-center lg:justify-start flex-col gap-4 lg:flex-row lg:items-center lg:gap-10">
+                  <FundingOpportunityCardApplications opportunity={mockOpportunity} underReview={true} />
                   <div>
                     <Button className="bg-base-secondary text-base-black shadow-none border-2 hover:bg-base-secondary">
                       Run Ads
                     </Button>
                   </div>
                 </div>
-                <div
-                  className="flex items-center justify-center lg:justify-start flex-col gap-4 lg:flex-row lg:items-center lg:gap-10">
-                  <FundingOpportunityCardApplications isPromoted={true} underReview={true} />
+                <div className="flex items-center justify-center lg:justify-start flex-col gap-4 lg:flex-row lg:items-center lg:gap-10">
+                  <FundingOpportunityCardApplications opportunity={mockOpportunity} underReview={true} />
                   <div>
                     <Button className="bg-base-secondary text-base-black shadow-none border-2 hover:bg-base-secondary">
                       Run Ads
                     </Button>
                   </div>
                 </div>
-                <div
-                  className="flex items-center justify-center lg:justify-start flex-col gap-4 lg:flex-row lg:items-center lg:gap-10">
-                  <FundingOpportunityCardApplications isPromoted={true} underReview={true} />
+                <div className="flex items-center justify-center lg:justify-start flex-col gap-4 lg:flex-row lg:items-center lg:gap-10">
+                  <FundingOpportunityCardApplications opportunity={mockOpportunity} underReview={true} />
                   <div>
                     <Button className="bg-base-secondary text-base-black shadow-none border-2 hover:bg-base-secondary">
                       Run Ads
@@ -104,27 +116,24 @@ const Account = () => {
             <div className="mt-8">
               <h2 className="font-semibold mb-4">Funding Opportunities</h2>
               <div className="flex flex-col gap-4">
-                <div
-                  className="flex items-center justify-center lg:justify-start flex-col gap-4 lg:flex-row lg:items-center lg:gap-10">
-                  <FundingOpportunityCardApplications isPromoted={true} underReview={true} />
+                <div className="flex items-center justify-center lg:justify-start flex-col gap-4 lg:flex-row lg:items-center lg:gap-10">
+                  <FundingOpportunityCardApplications opportunity={mockOpportunity} underReview={true} />
                   <div>
                     <Button className="bg-base-secondary text-base-black shadow-none border-2 hover:bg-base-secondary">
                       Run Ads
                     </Button>
                   </div>
                 </div>
-                <div
-                  className="flex items-center justify-center lg:justify-start flex-col gap-4 lg:flex-row lg:items-center lg:gap-10">
-                  <FundingOpportunityCardApplications isPromoted={true} underReview={true} />
+                <div className="flex items-center justify-center lg:justify-start flex-col gap-4 lg:flex-row lg:items-center lg:gap-10">
+                  <FundingOpportunityCardApplications opportunity={mockOpportunity} underReview={true} />
                   <div>
                     <Button className="bg-base-secondary text-base-black shadow-none border-2 hover:bg-base-secondary">
                       Run Ads
                     </Button>
                   </div>
                 </div>
-                <div
-                  className="flex items-center justify-center lg:justify-start flex-col gap-4 lg:flex-row lg:items-center lg:gap-10">
-                  <FundingOpportunityCardApplications isPromoted={true} underReview={true} />
+                <div className="flex items-center justify-center lg:justify-start flex-col gap-4 lg:flex-row lg:items-center lg:gap-10">
+                  <FundingOpportunityCardApplications opportunity={mockOpportunity} underReview={true} />
                   <div>
                     <Button className="bg-base-secondary text-base-black shadow-none border-2 hover:bg-base-secondary">
                       Run Ads
