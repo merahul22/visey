@@ -45,90 +45,85 @@ function BusinessSection() {
           backgroundImage: "url('/triangle.png')",
           backgroundSize: "100px 100%",
           backgroundPosition: "center",
-        }}
-      ></div>
+        }}      ></div>
 
       {/* Content Section */}
       <div className="relative px-4 pt-9 pb-20 space-y-9 md:space-y-14 xl:space-y-20">
         {/* Heading */}
-        <div className="space-y-2 text-center">
+        <div className="space-y-3 text-center max-w-3xl mx-auto">
           <h2
             id="business-section-heading"
-            className="font-degular font-semibold text-heading4 md:text-heading3 lg:text-heading2 xl:text-heading1 leading-snug"
+            className="font-degular font-semibold text-heading4 md:text-heading3 lg:text-heading2 xl:text-[64px] leading-tight text-[#3f3f3f]"
           >
             Visey for Resource Providers
           </h2>
-          <p className="text-lg font-gothic">
-            Unlock your full potential with our{" "}
+          <p className="text-2xl font-gothic text-[#272727]">
+            <span className="font-medium">Unlock your full potential with our</span>{" "}
             <span className="font-bold">cutting-edge features</span>
           </p>
-        </div>
-
-        {/* Business Features */}
+        </div>        {/* Business Features */}
         <div className="max-w-screen-2xl mx-auto flex flex-col gap-6 md:flex-row">
           {businessSection.map((data, idx) => (
             <div
               key={data.title}
-              className="px-10 pt-10 pb-24 rounded-2xl space-y-6 bg-primary-landing-light text-base-white flex-1"
+              className="flex flex-col min-w-[324px] h-[500px] flex-1 bg-[#ec3982] rounded-2xl border-none shadow-[0px_4px_16px_rgba(0,0,0,0.15)] hover:shadow-[0px_8px_24px_rgba(0,0,0,0.2)] transition-all duration-300"
             >
-              <div className="p-2 rounded-full inline-flex justify-center items-center bg-success-landing">
-                {idx === 0 && (
-                  <ChartLineUp size={36} className="text-[#709B08]" />
-                )}
-                {idx === 1 && (
-                  <UsersThree size={36} className="text-[#709B08]" />
-                )}
-                {idx === 2 && <Eye size={36} className="text-[#709B08]" />}
-              </div>
-              <div className="space-y-4">
-                <h3 className="font-degular font-medium text-hero leading-tight">
-                  {data.title}
-                </h3>
-                <p>{data.description}</p>
+              <div className="flex flex-col h-full items-center justify-between pt-6 pb-3 px-6">
+                <div className="flex flex-col items-start gap-[22px] py-0 self-stretch w-full">
+                  <h3 className="self-stretch font-degular font-medium text-white text-[32px] leading-[44.8px]">
+                    {data.title}
+                  </h3>
+                  <p className="self-stretch font-gothic font-medium text-white text-xl leading-7">
+                    {data.description}
+                  </p>
+                </div>
+                <div className="relative w-full h-52 mt-8">
+                  {idx === 0 && (
+                    <Image
+                      src="/22-viseydev-1.png"
+                      alt="Feature illustration"
+                      className="w-full h-full object-contain"
+                      width={435}
+                      height={200}
+                    />
+                  )}
+                  {idx === 1 && (
+                    <Image
+                      src="/23-viseydev-1.png"
+                      alt="Feature illustration"
+                      className="w-full h-full object-contain"
+                      width={435}
+                      height={200}
+                    />
+                  )}
+                  {idx === 2 && (
+                    <Image
+                      src="/24-viseydev-1.png"
+                      alt="Feature illustration"
+                      className="w-full h-full object-contain"
+                      width={435}
+                      height={200}
+                    />
+                  )}
+                </div>
               </div>
             </div>
           ))}
-        </div>
-
-        {/* Features Section */}
+        </div>        {/* Features Section */}
         <div className="max-w-screen-xl mx-auto flex flex-col gap-4 md:flex-row md:justify-between py-9 md:py-12 lg:py-16">
           {features.map((feat) => (
-            <div key={feat.title} className="flex-grow text-center pb-6"> {/* Added pb-6 for consistent bottom padding */}
-              <p className="font-degular text-heading4 text-primary">
+            <div
+              key={feat.title}
+              className="flex-grow text-center pb-6 hover:transform hover:scale-105 transition-transform duration-300"
+            >
+              <p className="font-degular text-[40px] text-[#9d0543] font-normal">
                 {feat.title}
               </p>
-              <p className="font-medium font-gothic text-lg">{feat.subtitle}</p>
+              <p className="font-medium font-gothic text-xl text-black">
+                {feat.subtitle}
+              </p>
             </div>
-          ))}
-        </div>
-
-        {/* Decorative Background Image */}
-        <div
-          className="absolute z-[-1] opacity-20 left-0 bottom-0 w-full h-[1500px] md:h-[900px]"
-          aria-hidden="true"
-        >
-          <Image
-            src="/business-bg.webp"
-            fill
-            className="object-contain"
-            alt="Abstract business background"
-            loading="lazy"
-          />
-        </div>
-      </div>
-
-      {/* Decorative Bottom Wave */}
-      <div
-        className="absolute inset-x-0 -bottom-6 w-full h-[250px] md:h-[200px] lg:h-[300px] opacity-60 transform scale-x-[-1] -rotate-180"
-        aria-hidden="true"
-      >
-        <Image
-          src="/wave-real-2.png"
-          fill
-          className="object-cover object-left"
-          alt="Wave-shaped decorative background"
-          loading="lazy"
-        />
+          ))}        </div>
       </div>
     </section>
   );

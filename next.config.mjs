@@ -1,5 +1,24 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  webpack: (config) => {
+    config.resolve.fallback = {
+      ...config.resolve.fallback,
+      fs: false,
+      net: false,
+      tls: false,
+      child_process: false,
+      perf_hooks: false,
+    };
+    // Add polyfills for Node.js modules
+    config.resolve.alias = {
+      ...config.resolve.alias,
+      child_process: false,
+      fs: false,
+      os: false,
+      path: false,
+    };
+    return config;
+  },
   async headers() {
     return [
       {
@@ -41,17 +60,8 @@ const nextConfig = {
       },
       {
         protocol: "https",
-        hostname: "api.outrank.so",
-      },
-      {
-        // NOTE: Using ImageKit is temporary as it was urgent to implement this image hosting solution.
-        // TODO: Remove in the future and use better CDN options.
-        protocol: "https",
-        hostname: "media-hosting.imagekit.io",
-      },
-      {
-        protocol: "https",
-        hostname: "imagekit.io",
+        hostname: "storage.googleapis.com",
+        pathname: "/visey-opportunity-banner-uploads/**",
       },
     ],
   },
