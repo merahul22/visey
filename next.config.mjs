@@ -63,6 +63,10 @@ const nextConfig = {
         hostname: "storage.googleapis.com",
         pathname: "/visey-opportunity-banner-uploads/**",
       },
+      {
+        protocol: "https",
+        hostname: "media-hosting.imagekit.io",
+      },
     ],
   },
 };

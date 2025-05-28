@@ -11,7 +11,7 @@ const storage = new Storage({
 
 const bucket = storage.bucket(process.env.GOOGLE_CLOUD_BUCKET_NAME || '');
 
-export async function POST(request: NextRequest) {
+export async function POST(request: NextRequest): Promise<NextResponse<{ url: string } | { error: string }>> {
   try {
     const formData = await request.formData();
     const file = formData.get('file') as File;
@@ -35,7 +35,7 @@ export async function POST(request: NextRequest) {
       // Removed public flag since we're using uniform bucket-level access
     });
 
-    return new Promise((resolve, reject) => {
+    return await new Promise<NextResponse<{ url: string } | { error: string }>>((resolve, reject) => {
       blobStream.on('error', (err) => {
         console.error('Upload error:', err);
         resolve(NextResponse.json(
@@ -58,9 +58,9 @@ export async function POST(request: NextRequest) {
       blobStream.end(buffer);
     });
   } catch (error) {
-    console.error('Error handling upload:', error);
+    console.error('Internal server error:', error);
     return NextResponse.json(
-      { error: 'Upload failed' },
+      { error: 'Internal server error' },
       { status: 500 }
     );
   }

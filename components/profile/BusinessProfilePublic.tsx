@@ -66,10 +66,11 @@ export default async function BusinessProfilePublic({
         <div className="p-4 space-y-4">
           <div className="space-y-0.5">
             <div className="flex gap-x-6 justify-between items-start">
-              <p className="text-xl md:text-2xl">{business?.name}</p>
+              <p className="text-xl md:text-2xl">{business?.name}</p>              {/* Promotion feature temporarily disabled
               <p className="text-sm px-4 py-0.5 bg-secondary-200 rounded-full">
                 Promoted
               </p>
+              */}
             </div>
             <p className="text-linkBlue text-sm">
               {business?.registeredName || "Business Registered Name"}
