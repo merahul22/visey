@@ -8,37 +8,12 @@ import {
   SheetTitle,
   SheetHeader
 } from '@/components/ui/sheet';
-import PreviewOpportunityApply from '@/components/PreviewOpportunityApply';
+import PreviewOpportunityApply, { ExtendedOpportunity } from '@/components/PreviewOpportunityApply';
 import { Business } from '@prisma/client';
 import * as z from 'zod';
 import { fundingOpportunitySchema } from '@/schemas';
 
-// Define a complete interface instead of extending to avoid type conflicts
-interface ExtendedOpportunity {
-  id?: string;
-  type: string;
-  subtype: string;
-  title: string;
-  fundingAmount: string;
-  targetWomenFounder: boolean;
-  description: string;
-  eligibilityCriteria: string;
-  registration: string;
-  endDate: Date;
-  startDate?: Date;
-  targetProductStage?: string;
-  targetFundingStage?: string;
-  targetProductStageList?: string[];
-  targetFundingStageList?: string[];
-  targetIndustry?: string;
-  targetSector?: string;
-  websiteUrl?: string;
-  registrationFormLink?: string;
-  noOfRegistrationsAllowed?: string;
-  // Explicitly define these properties with types compatible with PreviewOpportunityApply
-  imageUrl: string | null;
-  bannerUrl: string | null;
-}
+// Using the imported ExtendedOpportunity interface
 
 interface OpportunitySheetProps {
   opportunity: z.infer<typeof fundingOpportunitySchema> & { id?: string, imageUrl?: string | null };
@@ -59,7 +34,7 @@ const OpportunitySheet = ({
     subtype: opportunity.subtype,
     title: opportunity.title,
     fundingAmount: opportunity.fundingAmount,
-    targetWomenFounder: opportunity.targetWomenFounder,
+    targetWomenFounder: opportunity.targetWomenFounder ?? false,
     description: opportunity.description,
     eligibilityCriteria: opportunity.eligibilityCriteria, 
     registration: opportunity.registration,

@@ -18,7 +18,7 @@ import { fundingOpportunitySchema } from '@/schemas';
 import { Business } from '@prisma/client';
 
 // Extended opportunity interface to handle properties that might come from Prisma model
-interface ExtendedOpportunity {
+export interface ExtendedOpportunity {
   id?: string;
   type: string;
   subtype: string;

@@ -1,19 +1,20 @@
 "use client";
 
 import React from "react";
+import Image from "next/image";
 
 // Define recognition items
 const recognitionImages = [
-  { src: "/recognitions/image-33.png", height: "h-[73px]", alt: "Recognition" },
-  { src: "/recognitions/image-31.png", height: "h-[75px]", alt: "Recognition" },
-  { src: "/recognitions/image-23.png", height: "h-[27px]", alt: "Recognition" },
-  { src: "/whatsapp-image-2025-05-07-at-00-41-49-6045e179-2.png", height: "h-[60px]", alt: "Whatsapp image" },
-  { src: "/recognitions/image-24.png", height: "h-[70px]", alt: "Recognition" },
-  { src: "/recognitions/image-25.png", height: "h-[72px]", alt: "Recognition" },
-  { src: "/recognitions/image-26.png", height: "h-[75px]", alt: "Recognition" },
-  { src: "/recognitions/image-27.png", height: "h-[70px]", alt: "Recognition" },
-  { src: "/recognitions/image-32.png", height: "h-[72px]", alt: "Recognition" },
-  { src: "/recognitions/image-22.png", height: "h-[49px]", alt: "Recognition" },
+  { src: "/recognitions/image-33.png", width: 180, height: 73, alt: "Recognition" },
+  { src: "/recognitions/image-31.png", width: 180, height: 75, alt: "Recognition" },
+  { src: "/recognitions/image-23.png", width: 180, height: 27, alt: "Recognition" },
+  { src: "/whatsapp-image-2025-05-07-at-00-41-49-6045e179-2.png", width: 180, height: 60, alt: "Whatsapp image" },
+  { src: "/recognitions/image-24.png", width: 180, height: 70, alt: "Recognition" },
+  { src: "/recognitions/image-25.png", width: 180, height: 72, alt: "Recognition" },
+  { src: "/recognitions/image-26.png", width: 180, height: 75, alt: "Recognition" },
+  { src: "/recognitions/image-27.png", width: 180, height: 70, alt: "Recognition" },
+  { src: "/recognitions/image-32.png", width: 180, height: 72, alt: "Recognition" },
+  { src: "/recognitions/image-22.png", width: 180, height: 49, alt: "Recognition" },
 ];
 
 export function RecognitionsList() {
@@ -43,13 +44,13 @@ export function RecognitionsList() {
         <div className="flex animate-scroll items-center">
           {[...recognitionImages, ...recognitionImages].map((img, index) => (
             <div key={index} className="relative flex items-center justify-center shrink-0 mx-8">
-              <img
-                className={`${img.height} w-auto object-contain opacity-80 hover:opacity-100 transition-all transform hover:scale-105 duration-300`}
+              <Image
+                className="object-contain opacity-80 hover:opacity-100 transition-all transform hover:scale-105 duration-300"
                 alt={img.alt}
                 src={img.src}
-                style={{
-                  maxWidth: '180px'
-                }}
+                width={img.width}
+                height={img.height}
+                priority={index < 5} // Prioritize loading first few images
               />
             </div>
           ))}
@@ -70,10 +71,13 @@ export function RecognitionsListStatic() {
       <div className="flex flex-wrap justify-center items-center gap-4 px-4 overflow-hidden">
         {recognitionImages.map((img, index) => (
           <div key={index} className="flex-shrink-0 mx-4">
-            <img
-              className={`${img.height} object-contain`}
+            <Image
+              className="object-contain"
               alt={img.alt}
               src={img.src}
+              width={img.width}
+              height={img.height}
+              priority={index < 5} // Prioritize loading first few images
             />
           </div>
         ))}

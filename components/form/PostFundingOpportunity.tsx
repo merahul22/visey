@@ -54,7 +54,13 @@ import { toast } from 'sonner';
 import { Textarea } from '@/components/ui/textarea';
 import { uploadFile } from '@/lib/uploadUtils';
 
-const PostFundingOpportunityForm = ({ business }: { business: Business }) => {
+const PostFundingOpportunityForm = ({ 
+  business, 
+  initialData 
+}: { 
+  business: Business,
+  initialData?: any
+}) => {
   const [error, setError] = useState<string | undefined>('');
   const [success, setSuccess] = useState<string | undefined>('');
   const [loading, startTransition] = useTransition();
@@ -91,10 +97,9 @@ const PostFundingOpportunityForm = ({ business }: { business: Business }) => {
   });
 
   const router = useRouter();
-
   const defaultValues =
     currentStep === 1
-      ? {
+      ? initialData || {
           imageUrl: '',
           type: '',
           subtype: '',
@@ -175,12 +180,10 @@ const PostFundingOpportunityForm = ({ business }: { business: Business }) => {
       if (res.error) {
         toast.error(res.error);
         setError(res.error);
-      }
-
-      if (res.success) {
-        toast.success("Opportunity posted successfully.");
+      }      if (res.success) {
+        toast.success(initialData ? "Opportunity updated successfully." : "Opportunity posted successfully.");
         setSuccess(res.success);
-        router.push(`/profile/business`);
+        router.push(`/opportunities`);
       }
     });
   };
