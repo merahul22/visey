@@ -2,7 +2,6 @@
 
 import React from 'react';
 import { Separator } from '@/components/ui/separator';
-
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import {
   MapPin,
@@ -20,6 +19,7 @@ import { fundingOpportunitySchema } from '@/schemas';
 import { Business } from '@prisma/client';
 import Image from 'next/image';
 import InteractiveButton from '@/components/InteractiveButton';
+import { getImageKitUrl } from '@/lib/image-utils';
 
 // Extend the inferred type to include the bannerUrl property
 type OpportunityWithBanner = z.infer<typeof fundingOpportunitySchema> & {
@@ -51,7 +51,7 @@ const PreviewOpportunity = ({
       <div className="h-44 bg-neutral-400 relative overflow-hidden">
         {opportunity.bannerUrl ? (
           <Image
-            src={opportunity.bannerUrl}
+            src={getImageKitUrl(opportunity.bannerUrl)}
             alt="Opportunity Banner"
             fill
             className="object-cover"
@@ -59,7 +59,7 @@ const PreviewOpportunity = ({
           />
         ) : opportunity.imageUrl ? (
           <Image
-            src={opportunity.imageUrl}
+            src={getImageKitUrl(opportunity.imageUrl)}
             alt="Opportunity Banner"
             fill
             className="object-cover"
@@ -87,7 +87,7 @@ const PreviewOpportunity = ({
         </div>
         <div className="flex gap-x-2 items-center">
           <Avatar className="w-8 h-8 rounded-full overflow-hidden">
-            <AvatarImage src="https://picsum.photos/100" />
+            <AvatarImage src={getImageKitUrl(business?.image)} />
             <AvatarFallback>CN</AvatarFallback>
           </Avatar>
           <p className="text-sm">{business?.name}</p>
