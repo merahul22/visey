@@ -10,6 +10,7 @@ import OpportunitySheet from "@/components/OpportunitySheet";
 import { fundingOpportunitySchema } from "@/schemas";
 import { z } from "zod";
 import FundingCardActions from "./funding-card-actions";
+import { getImageKitUrl } from "../../lib/image-utils";
 
 // Extended interface to handle both Prisma and zod schema properties
 interface ExtendedOpportunity {
@@ -65,10 +66,10 @@ export const FundingCardClient = ({
   })}, ${date.getFullYear()}`;
 
   // Use bannerUrl as the primary image for the card display, fallback to imageUrl or default
-  const cardImage = fundingOpportunity.bannerUrl || fundingOpportunity.imageUrl || "/img/funding-opportunity-placeholder.png";
+  const cardImage = getImageKitUrl(fundingOpportunity.bannerUrl) || getImageKitUrl(fundingOpportunity.imageUrl) || "/img/funding-opportunity-placeholder.png";
   
   // Use imageUrl for the avatar/icon, fallback to businessData image or default
-  const avatarImage = business?.image || fundingOpportunity.imageUrl || "";
+  const avatarImage = getImageKitUrl(business?.image) || getImageKitUrl(fundingOpportunity.imageUrl) || "/img/funding-opportunity-placeholder.png";
   
   // Content part of the card that will be wrapped by the sheet
   const CardContent = React.forwardRef<HTMLDivElement, React.HTMLProps<HTMLDivElement>>((props, ref) => (

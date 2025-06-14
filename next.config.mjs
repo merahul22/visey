@@ -65,7 +65,7 @@ const nextConfig = {
       },
       {
         protocol: "https",
-        hostname: "media-hosting.imagekit.io",
+        hostname: "**.imagekit.io",
       },
     ],
   },
