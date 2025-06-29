@@ -45,11 +45,11 @@ function RecommendedCategories() {
   return (
     <section className="py-10">
       <div className="container mx-auto px-4">
-        {/* Big category cards */}
-        <div className="hidden overflow-x-auto md:flex justify-center gap-4 mb-8">
+        {/* Big category cards - Scrollable on mobile, grid on desktop */}
+        <div className="flex overflow-x-auto pb-4 mb-8 snap-x snap-mandatory -mx-4 px-4 md:mx-0 md:grid md:grid-cols-2 lg:grid-cols-4 md:gap-4">
           {bigCategories.slice(0, 4).map((category, idx) => (
-            <Link key={idx} href={category.href || '#'} passHref>
-              <article className="shrink-0 border rounded-md w-64 p-1.5 space-y-2 cursor-pointer">
+            <Link key={idx} href={category.href || '#'} passHref className="snap-center">
+              <article className="shrink-0 border rounded-md w-[280px] md:w-full p-1.5 space-y-2 cursor-pointer">
                 <div className="relative w-full" style={{ paddingBottom: '65.76%' }}>
                   <Image
                     src={category.imageUrl}
@@ -63,23 +63,21 @@ function RecommendedCategories() {
           ))}
         </div>
         
-        {/* Small category cards */}
-        <div className="flex justify-center gap-4">
+        {/* Small category cards - Grid layout */}
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 px-2">
           {categories.slice(0, 4).map((category, idx) => (
             <Link key={idx} href={category.href || '#'} passHref>
-              <article className="flex flex-col shrink-0 gap-y-2 items-center justify-center w-32 p-4 border rounded-md md:w-52 md:flex-row md:p-1.5">
-                <div className="h-16 w-16 rounded-full bg-gray-50 md:rounded-md md:w-full">
+              <article className="flex flex-col items-center p-2 border rounded-md w-full">
+                <div className="h-12 w-12 sm:h-14 sm:w-14 rounded-full bg-gray-50">
                   <Image
                     src={category.imageUrl}
                     alt={category.name}
                     width={64}
                     height={64}
-                    className="w-full h-full object-cover rounded-md"
+                    className="w-full h-full object-cover rounded-full"
                   />
                 </div>
-                <div className="w-full">
-                  <p className="text-center text-sm md:text-left md:w-1/2 md:ml-4">{category.name}</p>
-                </div>
+                <p className="text-center text-xs sm:text-sm mt-2 line-clamp-2">{category.name}</p>
               </article>
             </Link>
           ))}

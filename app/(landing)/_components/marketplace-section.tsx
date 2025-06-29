@@ -168,11 +168,11 @@ function MarketplaceSection() {
           </div>
 
           {/* Cards Section */}
-          <div className="flex flex-col items-center gap-6 md:flex-row md:items-stretch">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 px-2 sm:px-4">
             {cardData.map((data, idx) => (
               <div
                 key={data.title}
-                className="relative z-10 p-10 rounded-2xl space-y-6 bg-primary-landing-light text-base-white w-10/12 h-[286px] md:h-auto"
+                className="relative z-10 p-6 sm:p-8 md:p-10 rounded-2xl space-y-4 bg-primary-landing-light text-base-white w-full"
               >                <div className="relative w-[58px] h-[58px] rounded-full inline-flex justify-center items-center bg-success-landing">
                   {idx === 0 && (
                     <div className="w-11 h-11 relative">
@@ -216,16 +216,17 @@ function MarketplaceSection() {
           </div>
 
           {/* Features Section */}
-          <div className="flex flex-col items-center">            <h2 className="mt-[-1.00px] [font-family:'Degular_Display-SemiBold',Helvetica] font-semibold text-[#4a4a4a] text-[40px] text-center tracking-[0] leading-[56px] w-full">
+          <div className="flex flex-col items-center px-4">
+            <h2 className="font-degular font-semibold text-[#4a4a4a] text-2xl sm:text-3xl md:text-4xl text-center leading-tight mb-8">
               Find the right resources in seconds, not hours.
             </h2>
-            <div className="flex flex-wrap items-start justify-center gap-[16px_80px] w-full py-9 md:pt-14 md:pb-12 lg:pt-16">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 w-full py-6 md:py-10">
               {features.map((feat) => (
-                <div key={feat.title} className="flex flex-col min-w-[280px] items-center flex-1 grow">
-                  <div className="mt-[-1.00px] [font-family:'Degular_Display-Regular',Helvetica] font-normal text-[#9d0543] text-[40px] text-center tracking-[0] leading-[56px] w-full">
+                <div key={feat.title} className="flex flex-col items-center text-center">
+                  <div className="font-degular font-normal text-[#9d0543] text-2xl sm:text-3xl mb-2">
                     {feat.title}
                   </div>
-                  <div className="[font-family:'Gothic_A1',Helvetica] font-medium text-black text-xl text-center tracking-[0] leading-7 w-full">
+                  <div className="font-gothic font-medium text-black text-base sm:text-lg">
                     {feat.subtitle}
                   </div>
                 </div>
