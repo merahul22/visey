@@ -771,26 +771,173 @@ const PostFundingOpportunityForm = ({
                 )}
               />
               {registrations === 'other' && (
-                <FormField
-                  control={form.control}
-                  name="registrationFormLink"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel className="text-neutrals-700">
-                        Registration form link*
-                      </FormLabel>
-                      <FormControl>
-                        <Input
-                          className="text-neutrals-700 mt-1"
-                          placeholder=""
-                          {...field}
-                          disabled={loading}
-                        />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
+                <div className="space-y-4">
+                  <FormField
+                    control={form.control}
+                    name="registrationFormLink"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel className="text-neutrals-700">
+                          Registration form link*
+                        </FormLabel>
+                        <FormControl>
+                          <Input
+                            className="text-neutrals-700 mt-1"
+                            placeholder=""
+                            {...field}
+                            disabled={loading}
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <FormField
+                    control={form.control}
+                    name="startDate"
+                    render={({ field }) => (
+                      <FormItem className="flex flex-col items-start">
+                        <FormLabel className="text-neutrals-700">
+                          Registration start date & time (optional)
+                        </FormLabel>
+                        <Popover>
+                          <PopoverTrigger asChild className="mt-1">
+                            <Button
+                              variant={'outline'}
+                              className={cn(
+                                'w-full justify-start text-left font-normal rounded-lg pl-4',
+                                !field.value && 'text-muted-foreground'
+                              )}
+                            >
+                              <CalendarIcon className="mr-2 h-4 w-4" />
+                              {field.value ? (
+                                format(field.value, 'PPP HH:mm:ss')
+                              ) : (
+                                <span>Pick a date and time</span>
+                              )}
+                            </Button>
+                          </PopoverTrigger>
+                          <PopoverContent className="w-auto p-0">
+                            <Calendar
+                              mode="single"
+                              selected={field.value}
+                              onSelect={(date) => {
+                                // If date is selected but no time, set time to midnight
+                                if (date) {
+                                  const newDate = new Date(date);
+                                  if (field.value) {
+                                    // Keep the time if it was already set
+                                    newDate.setHours(
+                                      field.value.getHours(),
+                                      field.value.getMinutes(),
+                                      field.value.getSeconds()
+                                    );
+                                  } else {
+                                    // Set midnight as default time
+                                    newDate.setHours(0, 0, 0);
+                                  }
+                                  field.onChange(newDate);
+                                } else {
+                                  field.onChange(undefined);
+                                }
+                              }}
+                              initialFocus
+                            />
+                            <div className="p-3 border-t border-border">
+                              <TimePicker
+                                setDate={field.onChange}
+                                date={field.value}
+                              />
+                            </div>
+                          </PopoverContent>
+                        </Popover>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <FormField
+                    control={form.control}
+                    name="endDate"
+                    render={({ field }) => (
+                      <FormItem className="flex flex-col items-start">
+                        <FormLabel className="text-neutrals-700">
+                          Registration end date & time*
+                        </FormLabel>
+                        <Popover>
+                          <PopoverTrigger asChild className="mt-1">
+                            <Button
+                              variant={'outline'}
+                              className={cn(
+                                'w-full justify-start text-left font-normal rounded-lg pl-4',
+                                !field.value && 'text-muted-foreground'
+                              )}
+                            >
+                              <CalendarIcon className="mr-2 h-4 w-4" />
+                              {field.value ? (
+                                format(field.value, 'PPP HH:mm:ss')
+                              ) : (
+                                <span>Pick a date and time</span>
+                              )}
+                            </Button>
+                          </PopoverTrigger>
+                          <PopoverContent className="w-auto p-0">
+                            <Calendar
+                              mode="single"
+                              selected={field.value}
+                              onSelect={(date) => {
+                                if (date) {
+                                  const newDate = new Date(date);
+                                  if (field.value) {
+                                    // Keep the time if it was already set
+                                    newDate.setHours(
+                                      field.value.getHours(),
+                                      field.value.getMinutes(),
+                                      field.value.getSeconds()
+                                    );
+                                  } else {
+                                    // Set midnight as default time
+                                    newDate.setHours(0, 0, 0);
+                                  }
+                                  field.onChange(newDate);
+                                } else {
+                                  field.onChange(undefined);
+                                }
+                              }}
+                              initialFocus
+                            />
+                            <div className="p-3 border-t border-border">
+                              <TimePicker
+                                setDate={field.onChange}
+                                date={field.value}
+                              />
+                            </div>
+                          </PopoverContent>
+                        </Popover>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <FormField
+                    control={form.control}
+                    name="noOfRegistrationsAllowed"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel className="text-neutrals-700">
+                          Number of registrations allowed
+                        </FormLabel>
+                        <FormControl>
+                          <Input
+                            className="text-neutrals-700 mt-1"
+                            placeholder="Enter the count if cap on max participants"
+                            {...field}
+                            disabled={loading}
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                </div>
               )}
 
               {registrations === 'visey' && (
