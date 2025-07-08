@@ -7,7 +7,10 @@ async function getAllOpportunities() {
     return await prisma.opportunity.findMany({
       where: {
         isDraft: false // Only fetch opportunities that aren't drafts
-      } as Prisma.OpportunityWhereInput
+      } as Prisma.OpportunityWhereInput,
+      orderBy: {
+        id: 'desc' // Most recent first (UUIDs are time-ordered)
+      }
     });
   } catch (error) {
     console.log(error);
