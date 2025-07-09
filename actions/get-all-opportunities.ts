@@ -8,9 +8,17 @@ async function getAllOpportunities() {
       where: {
         isDraft: false // Only fetch opportunities that aren't drafts
       } as Prisma.OpportunityWhereInput,
-      orderBy: {
-        id: 'desc' // Most recent first (UUIDs are time-ordered)
-      }
+      include: {
+        business: true, // Include business information for display
+      },
+      orderBy: [
+        {
+          endDatetime: 'asc' // Sort by deadline (earliest first) - most urgent opportunities first
+        },
+        {
+          id: 'desc' // Fallback to id for same deadline
+        }
+      ]
     });
   } catch (error) {
     console.log(error);
