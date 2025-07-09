@@ -58,11 +58,8 @@ declare module 'next-auth' {
   }
 }
 
-declare module '@auth/core/adapters' {
-  interface AdapterUser {
-    type?: 'BUSINESS' | 'STARTUP' | null;
-  }
-}
+// For NextAuth v5, we may not need to augment AdapterUser separately
+// The type should be handled through the User interface above
 
 const prisma = new PrismaClient();
 
