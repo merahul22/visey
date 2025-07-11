@@ -45,13 +45,25 @@ export const postOpportunityDetails = async (
     targetFundingStageList,
   } = validatedFields.data;
   
+  // Check if the image URL is a blob URL and reject it
+  const isInvalidImageUrl = imageUrl && (
+    imageUrl.startsWith('blob:') || 
+    imageUrl.startsWith('data:')
+  );
+  
+  if (isInvalidImageUrl) {
+    console.error('Invalid image URL detected:', imageUrl?.substring(0, 30));
+    return { error: 'Cannot save blob or data URLs. Please upload images properly.' };
+  }
+  
   // Check if this is a draft
   const isDraft = values.isDraft || false;
 
   try {
     await prisma.opportunity.create({
       data: {
-        imageUrl,
+        imageUrl, // Main image URL
+        bannerUrl: imageUrl, // Also use the same URL for the banner to ensure it's set
         type,
         subtype,
         title,

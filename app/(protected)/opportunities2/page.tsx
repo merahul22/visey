@@ -1,9 +1,11 @@
 import React from "react";
-import { FundingCard } from "@/components/cards/funding-card";
 import getAllOpportunities from "@/actions/get-all-opportunities";
 import { auth } from "@/auth";
 import { redirect } from "next/navigation";
 import { DEFAULT_LOGIN_REDIRECT } from "@/routes";
+import OpportunitiesSortFilter from "@/components/OpportunitiesSortFilter";
+import isSavedOpportunity from "@/actions/isSavedOpportunity";
+import { getBusinessById } from "@/actions/get-business-by-id";
 
 const OpportunitiesPage = async () => {
   const session = await auth();
@@ -15,30 +17,36 @@ const OpportunitiesPage = async () => {
 
   const opportunities = (await getAllOpportunities()) || [];
 
+  // Pre-fetch saved opportunities data and business data for each opportunity
+  const opportunitiesWithData = await Promise.all(
+    opportunities.map(async (opportunity) => {
+      // Check if opportunity is saved
+      const savedRes = await isSavedOpportunity(
+        user?.id as string,
+        opportunity.id,
+      );
+      const isSaved = savedRes?.success as boolean;
+
+      // Fetch business information if business ID exists
+      let businessData = null;
+      if (opportunity.businessId) {
+        const businessRes = await getBusinessById(opportunity.businessId);
+        if (businessRes.success) {
+          businessData = businessRes.business;
+        }
+      }
+
+      return {
+        ...opportunity,
+        isSaved,
+        business: businessData,
+      };
+    })
+  );
+
   return (
     <main className="container mx-auto px-4 py-8">
-      <header className="mb-6">
-        <h1 className="text-3xl font-bold text-center">Funding Opportunities</h1>
-        <p className="text-center text-gray-600">
-          Explore the latest funding opportunities tailored for your needs.
-        </p>
-      </header>
-
-      {opportunities.length > 0 ? (
-        <section className="space-y-8">
-          {opportunities.map((opportunity) => (
-            <div key={opportunity.id} className="flex justify-center">
-              <FundingCard 
-                fundingOpportunity={opportunity} 
-              />
-            </div>
-          ))}
-        </section>
-      ) : (
-        <section className="text-center py-10">
-          <p className="text-lg text-gray-500">No funding opportunities available at the moment.</p>
-        </section>
-      )}
+      <OpportunitiesSortFilter opportunities={opportunitiesWithData} userId={user.id as string} />
     </main>
   );
 };

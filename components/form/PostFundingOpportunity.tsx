@@ -53,10 +53,11 @@ import { Business } from '@prisma/client';
 import { toast } from 'sonner';
 import { Textarea } from '@/components/ui/textarea';
 import { uploadFile } from '@/lib/uploadUtils';
+import ImageCropper from '../ImageCropper';
 
 const PostFundingOpportunityForm = ({ 
   business, 
-  initialData 
+  initialData = null // Explicitly set default value to null
 }: { 
   business: Business,
   initialData?: any
@@ -66,62 +67,118 @@ const PostFundingOpportunityForm = ({
   const [loading, startTransition] = useTransition();
   const [currentStep, setCurrentStep] = useState(1);
 
-  const [registrations, setRegistrations] = useState('visey');
+  // Initialize registrations state from initialData.registration if available, or default to 'visey'
+  const [registrations, setRegistrations] = useState(() => {
+    return initialData?.registration || 'visey';
+  });
 
-  const [productStage, setProductStage] = useState<string[]>([]);
-  const [fundingStage, setFundingStage] = useState<string[]>([]);
+  const [productStage, setProductStage] = useState<string[]>(() => {
+    if (initialData?.targetProductStage && Array.isArray(initialData.targetProductStage)) {
+      return initialData.targetProductStage;
+    }
+    if (initialData?.targetProductStageList && Array.isArray(initialData.targetProductStageList)) {
+      return initialData.targetProductStageList;
+    }
+    return [];
+  });
+  
+  const [fundingStage, setFundingStage] = useState<string[]>(() => {
+    if (initialData?.targetFundingStage && Array.isArray(initialData.targetFundingStage)) {
+      return initialData.targetFundingStage;
+    }
+    if (initialData?.targetFundingStageList && Array.isArray(initialData.targetFundingStageList)) {
+      return initialData.targetFundingStageList;
+    }
+    return [];
+  });
+  const [showCropper, setShowCropper] = useState(false);
+  const [imageToCrop, setImageToCrop] = useState<string>('');
+  const [imageUrlInput, setImageUrlInput] = useState<string>('');
+  const [imageError, setImageError] = useState<boolean>(false);
 
   const [formValues, setFormValues] = useState<
     z.infer<typeof fundingOpportunitySchema>
-  >({
-    imageUrl: '',
-    type: '',
-    subtype: '',
-    title: '',
-    websiteUrl: '',
-    fundingAmount: '',
-    targetIndustry: '',
-    targetSector: '',
-    targetWomenFounder: false,
-    targetProductStage: '',
-    targetFundingStage: '',
-    targetFundingStageList: [],
-    targetProductStageList: [],
-    description: '',
-    eligibilityCriteria: '',
-    registration: 'visey', // Set default value matching the state
-    registrationFormLink: '', // Ensure this is an empty string, not undefined
-    startDate: new Date(Date.now()),
-    endDate: new Date(Date.now()),
-    noOfRegistrationsAllowed: '', // This needs to be an empty string not undefined
+  >(() => {
+    // Create a safe default object first
+    const defaults = {
+      imageUrl: '',
+      type: 'Funding',
+      subtype: '',
+      title: '',
+      websiteUrl: '',
+      fundingAmount: '',
+      targetIndustry: '',
+      targetSector: '',
+      targetWomenFounder: false,
+      targetProductStage: '',
+      targetFundingStage: '',
+      targetFundingStageList: [],
+      targetProductStageList: [],
+      description: '',
+      eligibilityCriteria: '',
+      registration: 'visey',
+      registrationFormLink: '',
+      startDate: new Date(Date.now()),
+      endDate: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
+      noOfRegistrationsAllowed: ''
+    };
+
+    // If initialData exists, merge it with defaults
+    if (initialData) {
+      return {
+        ...defaults,
+        imageUrl: initialData.imageUrl || '',
+        type: initialData.type || 'Funding',
+        subtype: initialData.subtype || '',
+        title: initialData.title || '',
+        websiteUrl: initialData.websiteUrl || '',
+        fundingAmount: initialData.fundingAmount || '',
+        targetIndustry: initialData.targetIndustry || '',
+        targetSector: initialData.targetSector || '',
+        targetWomenFounder: initialData.targetWomenFounder || false,
+        targetProductStage: '', // Keep as empty string for form compatibility
+        targetFundingStage: '', // Keep as empty string for form compatibility
+        targetFundingStageList: Array.isArray(initialData.targetFundingStage) ? initialData.targetFundingStage : (initialData.targetFundingStageList || []),
+        targetProductStageList: Array.isArray(initialData.targetProductStage) ? initialData.targetProductStage : (initialData.targetProductStageList || []),
+        description: initialData.description || '',
+        eligibilityCriteria: initialData.eligibilityCriteria || '',
+        registration: initialData.registration || 'visey',
+        registrationFormLink: initialData.registrationFormLink || '',
+        startDate: initialData.startDatetime ? new Date(initialData.startDatetime) : new Date(Date.now()),
+        endDate: initialData.endDatetime ? new Date(initialData.endDatetime) : new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
+        noOfRegistrationsAllowed: initialData.noOfRegistrations || ''
+      };
+    }
+
+    return defaults;
   });
 
   const router = useRouter();
   const defaultValues =
     currentStep === 1
-      ? initialData || {
-          imageUrl: '',
-          type: '',
-          subtype: '',
-          title: '',
-          websiteUrl: '',
-          fundingAmount: '',
-          targetIndustry: '',
-          targetSector: '',
-          targetWomenFounder: false,
-          targetProductStage: '',
-          targetFundingStage: '',
-          targetFundingStageList: [],
-          targetProductStageList: [],
-          description: '',
-          eligibilityCriteria: '',
+      ? {
+          imageUrl: formValues.imageUrl,
+          type: formValues.type,
+          subtype: formValues.subtype,
+          title: formValues.title,
+          websiteUrl: formValues.websiteUrl,
+          fundingAmount: formValues.fundingAmount,
+          targetIndustry: formValues.targetIndustry,
+          targetSector: formValues.targetSector,
+          targetWomenFounder: formValues.targetWomenFounder,
+          targetProductStage: formValues.targetProductStage,
+          targetFundingStage: formValues.targetFundingStage,
+          targetFundingStageList: formValues.targetFundingStageList,
+          targetProductStageList: formValues.targetProductStageList,
+          description: formValues.description,
+          eligibilityCriteria: formValues.eligibilityCriteria,
         }
       : {
-          registration: registrations, // Match the actual state value to prevent uncontrolled to controlled input
-          registrationFormLink: formValues.registrationFormLink || '', // Initialize from formValues or empty string
-          noOfRegistrationsAllowed: formValues.noOfRegistrationsAllowed || '',
-          startDate: formValues.startDate, // Initialize from formValues
-          endDate: formValues.endDate // Initialize from formValues
+          registration: formValues.registration,
+          registrationFormLink: formValues.registrationFormLink,
+          noOfRegistrationsAllowed: formValues.noOfRegistrationsAllowed,
+          startDate: formValues.startDate,
+          endDate: formValues.endDate
         };
 
   const schema =
@@ -236,6 +293,154 @@ const PostFundingOpportunityForm = ({
     );
   };
 
+  const handleImageUpload = async (file: File) => {
+    try {
+      const imageUrl = await uploadFile(file, 'banners');
+      if (imageUrl) {
+        setImageToCrop(imageUrl);
+        setShowCropper(true);
+      }
+    } catch (error) {
+      console.error('Upload error:', error);
+      toast.error('Failed to upload image');
+    }
+  };
+
+  const handleImageUrlChange = async (url: string) => {
+    if (!url || !url.trim()) {
+      toast.error('Please enter a valid image URL');
+      setImageError(true);
+      return;
+    }
+    
+    try {
+      // Reset error state
+      setImageError(false);
+      
+      // Start loading
+      const loadingToast = toast.loading('Loading image...');
+      
+      // For external URLs, we'll use our proxy API
+      // First, check if it's already a data URL or blob URL
+      if (url.startsWith('data:') || url.startsWith('blob:')) {
+        setImageToCrop(url);
+        setShowCropper(true);
+        setImageUrlInput(''); // Reset input field
+        toast.dismiss(loadingToast);
+        return;
+      }
+      
+      // Validate URL format
+      try {
+        new URL(url);
+      } catch (e) {
+        toast.dismiss(loadingToast);
+        toast.error('Please enter a valid URL');
+        setImageError(true);
+        return;
+      }
+      
+      // For external URLs, use our proxy API to avoid CORS issues
+      const proxyUrl = `/api/proxy-image?url=${encodeURIComponent(url)}`;
+      
+      // Convert to data URL to ensure we don't have CORS issues
+      const response = await fetch(proxyUrl);
+      if (!response.ok) {
+        toast.dismiss(loadingToast);
+        toast.error(`Failed to load image: ${response.statusText}`);
+        setImageError(true);
+        return;
+      }
+      
+      const blob = await response.blob();
+      
+      // Check if it's actually an image
+      if (!blob.type.startsWith('image/')) {
+        toast.dismiss(loadingToast);
+        toast.error('The URL does not point to a valid image');
+        setImageError(true);
+        return;
+      }
+      
+      const reader = new FileReader();
+      reader.onload = () => {
+        const dataUrl = reader.result as string;
+        toast.dismiss(loadingToast);
+        setImageToCrop(dataUrl);
+        setShowCropper(true);
+        setImageUrlInput(''); // Reset input field
+      };
+      reader.onerror = () => {
+        toast.dismiss(loadingToast);
+        toast.error('Failed to process the image');
+        setImageError(true);
+      };
+      reader.readAsDataURL(blob);
+    } catch (error) {
+      toast.dismiss();
+      console.error('Error loading image URL:', error);
+      toast.error('Failed to load image from URL. Try uploading the image file instead.');
+      setImageError(true);
+    }
+  };
+
+  const handleCropComplete = async (croppedImageUrl: string, field: any) => {
+    try {
+      // Check if we're getting a blob URL
+      console.log('Cropped image URL type:', croppedImageUrl.substring(0, 30));
+      
+      // Show loading toast
+      toast.loading('Uploading cropped image...');
+      
+      // Convert the blob URL to a file object for upload
+      const response = await fetch(croppedImageUrl);
+      const blob = await response.blob();
+      console.log('Blob type:', blob.type);
+      
+      const file = new File([blob], `cropped-image-${Date.now()}.jpg`, { type: 'image/jpeg' });
+      
+      // Upload the file to Google Storage
+      console.log('Starting upload to Google Storage...');
+      const uploadedUrl = await uploadFile(file, 'banners');
+      console.log('Upload complete. URL:', uploadedUrl);
+      
+      if (!uploadedUrl || typeof uploadedUrl !== 'string') {
+        throw new Error('Failed to get a valid URL from upload');
+      }
+      
+      // Update the form field with the Google Storage URL
+      field.onChange(uploadedUrl);
+      
+      // Also update the formValues state
+      setFormValues(prev => ({
+        ...prev,
+        imageUrl: uploadedUrl,
+        // Also set bannerUrl to ensure both fields are updated
+        bannerUrl: uploadedUrl
+      }));
+      
+      toast.dismiss();
+      toast.success('Image cropped and uploaded successfully');
+    } catch (error) {
+      console.error('Error processing cropped image:', error);
+      toast.dismiss();
+      toast.error('Failed to process cropped image: ' + (error instanceof Error ? error.message : 'Unknown error'));
+      
+      // Don't use blob URLs as fallback in production, they won't persist
+      // Instead, use a default image or placeholder
+      const fallbackUrl = '/img/funding-opportunity-placeholder.png';
+      field.onChange(fallbackUrl);
+      setFormValues(prev => ({
+        ...prev,
+        imageUrl: fallbackUrl,
+        bannerUrl: fallbackUrl
+      }));
+    } finally {
+      setShowCropper(false);
+      setImageToCrop('');
+    }
+  };
+
   return (
     <div className="space-y-4">
       <div className="mt-2 mb-8">
@@ -288,7 +493,7 @@ const PostFundingOpportunityForm = ({
                         <div className="flex justify-center">
                           <label htmlFor="image-upload" className="cursor-pointer block">
                             <div className="border-2 rounded-lg px-14 py-2 relative">
-                              {field.value ? (
+                              {field.value && field.value.trim() ? (
                                 <Image
                                   src={field.value}
                                   alt="Opportunity Banner"
@@ -311,16 +516,9 @@ const PostFundingOpportunityForm = ({
                                 accept="image/*"
                                 className="sr-only"
                                 onChange={async (e) => {
-                                  const file = e.target.files?.[0];                                  if (file) {                                    try {
-                                      const imageUrl = await uploadFile(file, 'banners');
-                                      if (imageUrl) {
-                                        field.onChange(imageUrl);
-                                        toast.success('Banner uploaded successfully');
-                                      }
-                                    } catch (error) {
-                                      console.error('Upload error:', error);
-                                      toast.error('Failed to upload banner');
-                                    }
+                                  const file = e.target.files?.[0];
+                                  if (file) {
+                                    await handleImageUpload(file);
                                   }
                                 }}
                               />
@@ -334,15 +532,38 @@ const PostFundingOpportunityForm = ({
                             type="text"
                             placeholder="Paste image URL here"
                             className="max-w-md"
-                            value={field.value || ''}
-                            onChange={(e) => {
-                              field.onChange(e.target.value);
+                            value={imageUrlInput} 
+                            onChange={(e) => setImageUrlInput(e.target.value)}
+                            onKeyDown={(e) => {
+                              if (e.key === 'Enter') {
+                                e.preventDefault();
+                                if (imageUrlInput && imageUrlInput.trim()) {
+                                  handleImageUrlChange(imageUrlInput);
+                                }
+                              }
+                            }}
+                            onBlur={() => {
+                              if (imageUrlInput && imageUrlInput.trim()) {
+                                handleImageUrlChange(imageUrlInput);
+                              }
                             }}
                           />
                         </div>
                       </div>
                     </FormControl>
                     <FormMessage />
+                    {imageToCrop && (
+                      <ImageCropper
+                        isOpen={showCropper}
+                        onClose={() => {
+                          setShowCropper(false);
+                          setImageToCrop('');
+                        }}
+                        imageSrc={imageToCrop}
+                        onCropComplete={(croppedUrl) => handleCropComplete(croppedUrl, field)}
+                        aspectRatio={5 / 3} // Banner aspect ratio
+                      />
+                    )}
                   </FormItem>
                 )}
               />
@@ -356,10 +577,11 @@ const PostFundingOpportunityForm = ({
                     </FormLabel>
                     <FormControl>
                       <Input
-                        className="text-neutrals-700 mt-1"
-                        placeholder=""
+                        className="text-neutrals-700 mt-1 bg-gray-50"
                         {...field}
-                        disabled={loading}
+                        value="Funding"
+                        disabled={true}
+                        readOnly
                       />
                     </FormControl>
                     <FormMessage />
@@ -375,12 +597,20 @@ const PostFundingOpportunityForm = ({
                       Opportunity Sub-type*
                     </FormLabel>
                     <FormControl>
-                      <Input
-                        className="text-neutrals-700 mt-1"
-                        placeholder=""
-                        {...field}
+                      <select
+                        className="text-neutrals-700 mt-1 border rounded px-3 py-2 w-full"
+                        value={field.value || ''}
+                        onChange={(e) => field.onChange(e.target.value)}
                         disabled={loading}
-                      />
+                        required
+                      >
+                        <option value="" disabled>
+                          Select Sub-type
+                        </option>
+                        <option value="Equity">Equity</option>
+                        <option value="Grant">Grant</option>
+                        <option value="Loan">Loan</option>
+                      </select>
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -465,7 +695,7 @@ const PostFundingOpportunityForm = ({
                             }
                           }}
                         />
-                        {(form.watch('fundingAmountDisplay') || '') && (
+                        {(form.watch('fundingAmountDisplay')) && (
                           <div className="absolute right-3 top-1/2 transform -translate-y-1/2 text-sm text-neutrals-600 pointer-events-none">
                             {form.watch('fundingAmountDisplay')}
                           </div>
@@ -740,10 +970,11 @@ const PostFundingOpportunityForm = ({
                     <FormControl>
                       <RadioGroup
                         onValueChange={(value) => {
+                          // Synchronously update both form field and state
                           field.onChange(value);
                           setRegistrations(value);
                         }}
-                        value={field.value}
+                        value={field.value || registrations} // Ensure it always has a value
                         className="flex md:flex-col space-y-1"
                       >
                         <div className="flex flex-col sm:flex-row gap-4">
@@ -771,26 +1002,173 @@ const PostFundingOpportunityForm = ({
                 )}
               />
               {registrations === 'other' && (
-                <FormField
-                  control={form.control}
-                  name="registrationFormLink"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel className="text-neutrals-700">
-                        Registration form link*
-                      </FormLabel>
-                      <FormControl>
-                        <Input
-                          className="text-neutrals-700 mt-1"
-                          placeholder=""
-                          {...field}
-                          disabled={loading}
-                        />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
+                <div className="space-y-4">
+                  <FormField
+                    control={form.control}
+                    name="registrationFormLink"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel className="text-neutrals-700">
+                          Registration form link*
+                        </FormLabel>
+                        <FormControl>
+                          <Input
+                            className="text-neutrals-700 mt-1"
+                            placeholder=""
+                            {...field}
+                            disabled={loading}
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <FormField
+                    control={form.control}
+                    name="startDate"
+                    render={({ field }) => (
+                      <FormItem className="flex flex-col items-start">
+                        <FormLabel className="text-neutrals-700">
+                          Registration start date & time (optional)
+                        </FormLabel>
+                        <Popover>
+                          <PopoverTrigger asChild className="mt-1">
+                            <Button
+                              variant={'outline'}
+                              className={cn(
+                                'w-full justify-start text-left font-normal rounded-lg pl-4',
+                                !field.value && 'text-muted-foreground'
+                              )}
+                            >
+                              <CalendarIcon className="mr-2 h-4 w-4" />
+                              {field.value ? (
+                                format(field.value, 'PPP HH:mm:ss')
+                              ) : (
+                                <span>Pick a date and time</span>
+                              )}
+                            </Button>
+                          </PopoverTrigger>
+                          <PopoverContent className="w-auto p-0">
+                            <Calendar
+                              mode="single"
+                              selected={field.value}
+                              onSelect={(date) => {
+                                // If date is selected but no time, set time to midnight
+                                if (date) {
+                                  const newDate = new Date(date);
+                                  if (field.value) {
+                                    // Keep the time if it was already set
+                                    newDate.setHours(
+                                      field.value.getHours(),
+                                      field.value.getMinutes(),
+                                      field.value.getSeconds()
+                                    );
+                                  } else {
+                                    // Set midnight as default time
+                                    newDate.setHours(0, 0, 0);
+                                  }
+                                  field.onChange(newDate);
+                                } else {
+                                  field.onChange(undefined);
+                                }
+                              }}
+                              initialFocus
+                            />
+                            <div className="p-3 border-t border-border">
+                              <TimePicker
+                                setDate={field.onChange}
+                                date={field.value}
+                              />
+                            </div>
+                          </PopoverContent>
+                        </Popover>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <FormField
+                    control={form.control}
+                    name="endDate"
+                    render={({ field }) => (
+                      <FormItem className="flex flex-col items-start">
+                        <FormLabel className="text-neutrals-700">
+                          Registration end date & time*
+                        </FormLabel>
+                        <Popover>
+                          <PopoverTrigger asChild className="mt-1">
+                            <Button
+                              variant={'outline'}
+                              className={cn(
+                                'w-full justify-start text-left font-normal rounded-lg pl-4',
+                                !field.value && 'text-muted-foreground'
+                              )}
+                            >
+                              <CalendarIcon className="mr-2 h-4 w-4" />
+                              {field.value ? (
+                                format(field.value, 'PPP HH:mm:ss')
+                              ) : (
+                                <span>Pick a date and time</span>
+                              )}
+                            </Button>
+                          </PopoverTrigger>
+                          <PopoverContent className="w-auto p-0">
+                            <Calendar
+                              mode="single"
+                              selected={field.value}
+                              onSelect={(date) => {
+                                if (date) {
+                                  const newDate = new Date(date);
+                                  if (field.value) {
+                                    // Keep the time if it was already set
+                                    newDate.setHours(
+                                      field.value.getHours(),
+                                      field.value.getMinutes(),
+                                      field.value.getSeconds()
+                                    );
+                                  } else {
+                                    // Set midnight as default time
+                                    newDate.setHours(0, 0, 0);
+                                  }
+                                  field.onChange(newDate);
+                                } else {
+                                  field.onChange(undefined);
+                                }
+                              }}
+                              initialFocus
+                            />
+                            <div className="p-3 border-t border-border">
+                              <TimePicker
+                                setDate={field.onChange}
+                                date={field.value}
+                              />
+                            </div>
+                          </PopoverContent>
+                        </Popover>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <FormField
+                    control={form.control}
+                    name="noOfRegistrationsAllowed"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel className="text-neutrals-700">
+                          Number of registrations allowed
+                        </FormLabel>
+                        <FormControl>
+                          <Input
+                            className="text-neutrals-700 mt-1"
+                            placeholder="Enter the count if cap on max participants"
+                            {...field}
+                            disabled={loading}
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                </div>
               )}
 
               {registrations === 'visey' && (
