@@ -25,7 +25,7 @@ import ShareOpportunity from '@/components/ShareOpportunity';
 
 // Extend the inferred type to include the bannerUrl property
 type OpportunityWithBanner = z.infer<typeof fundingOpportunitySchema> & {
-  id: string;
+  id?: string; // Made optional to support form previews
   bannerUrl?: string | null;
 };
 
@@ -149,10 +149,16 @@ const PreviewOpportunity = ({
               <HeartStraight size={24} />
             </Button>
 
-            <ShareOpportunity 
-              opportunityId={opportunity.id} 
-              opportunityTitle={opportunity.title}
-            />
+            {opportunity.id ? (
+              <ShareOpportunity 
+                opportunityId={opportunity.id} 
+                opportunityTitle={opportunity.title}
+              />
+            ) : (
+              <Button variant="ghost" size="icon">
+                <ShareFat size={24} />
+              </Button>
+            )}
           </div>
           <div className="flex justify-center pt-2 sm:pt-0">
             {opportunity.registrationFormLink ? (
